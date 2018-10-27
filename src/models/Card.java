@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Card {
     private int hp;
-    Random rand = new Random();
+    private Random rand = new Random();
 
     public Card() {
         this.hp = randomizeHp();
@@ -20,6 +20,9 @@ public class Card {
         return rand.nextInt(max) + min;
     }
 
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
 
     public int getHp() {
         return hp;
@@ -30,7 +33,8 @@ public class Card {
      * @param amount of attack
      * @return healthPoints after attack
      */
-    public int removeHp(int hpToRemove) {
-        return hp -= hpToRemove;
+    public void removeHp(int hpToRemove) {
+        System.out.println(hpToRemove);
+         hp -= hpToRemove;
     }
 }
