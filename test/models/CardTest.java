@@ -11,20 +11,12 @@ class CardTest {
 
     @RepeatedTest(1000)
     void randomizeHealthPoint() {
-        int min = 1;
-        int max = 20;
-        assertThat(card.randomizeHp()).isBetween(min, max);
+        assertThat(card.randomizeHp()).isBetween(1, 20);
     }
 
-    @Test
+    @RepeatedTest(100)
     void removeHealthPoints(){
-        card.setHp(20);
-        int hpToRemove = 10;
-        int expected = card.getHp() - hpToRemove;
-        assertEquals(expected, 10, "test with 20 hp and 10 dmg");
-
-        card.setHp(10);
-        int expected2 = card.getHp() - hpToRemove;
-        assertEquals(expected2, 0, "test with 10 hp and 10 dmg");
+        card.removeHp(10);
+        assertEquals(card.getHp() - 10, card.getHp());
     }
 }

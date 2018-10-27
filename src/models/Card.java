@@ -15,13 +15,7 @@ public class Card {
      * @return random nr between 1-20
      */
     public int randomizeHp() {
-        int min = 1;
-        int max = 20;
-        return rand.nextInt(max) + min;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
+        return rand.nextInt(20) + 1;
     }
 
     public int getHp() {
@@ -34,7 +28,6 @@ public class Card {
      * @return healthPoints after attack
      */
     public void removeHp(int hpToRemove) {
-        System.out.println(hpToRemove);
          hp -= hpToRemove;
     }
 }
