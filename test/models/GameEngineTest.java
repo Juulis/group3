@@ -39,7 +39,7 @@ class GameEngineTest {
         gameEngine.initPlayer();
         verify(p1Mock, times(1)).setCurrentDeck(gameCardsMock);
         verify(p2Mock, times(1)).setCurrentDeck(gameCardsMock);
-        verify(p1Mock, times(1)).setPlayerHand();
-        verify(p2Mock,times(1)).setPlayerHand();
+        verify(p1Mock, times(5)).pickupCard();
+        verify(p2Mock, times(5)).pickupCard();
     }
 }

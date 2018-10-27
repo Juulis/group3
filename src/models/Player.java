@@ -8,7 +8,7 @@ public class Player {
 
     }
 
-    public void setPlayerHand(){
+    public void pickupCard(){
 
     }
 }

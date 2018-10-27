@@ -34,8 +34,7 @@ public class GameEngine {
     public void initPlayer(){
 
         p1.setCurrentDeck(gameCards);
-        p1.setPlayerHand();
         p2.setCurrentDeck(gameCards);
-        p2.setPlayerHand();
+
     }
 }
