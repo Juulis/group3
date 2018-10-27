@@ -13,30 +13,33 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class PlayerTest {
 
-    @Mock
-    Player p1 = new Player();
+    Player p1 = mock(Player.class);
+
 
     ArrayList<Card> mockHandList;
+    ArrayList<Card> mockHandList2;
     ArrayList<Card> mockTableList;
 
     @BeforeEach
     void setup(){
-        mockHandList = new ArrayList<>(Arrays.asList(new Card(), new Card(), new Card(), new Card(),new Card()));
-        when(p1.getPlayerHand()).thenReturn(mockHandList);
+        mockHandList = new ArrayList<>(Arrays.asList(new Card(), new Card(), new Card(),new Card()));
+        mockHandList2 = new ArrayList<>();
         mockTableList = new ArrayList<>();
-        when(p1.getTableCards()).thenReturn(mockTableList);
+        mockTableList.add(mockHandList.get(1));
     }
 
     @Test
     void playCard() {
         int playCardNr = 1;
+
+        when(p1.getPlayerHand()).thenReturn(mockHandList).thenReturn(mockHandList).thenReturn(mockHandList2);
+        when(p1.getTableCards()).thenReturn(mockTableList);
+
         Card playCard = (Card)p1.getPlayerHand().get(playCardNr);
 
         p1.playCard(playCardNr);
