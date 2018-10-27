@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad3c69a7-e385-4221-a1c8-f58355084aa2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/group3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/group3.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/models/CardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/models/CardTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -114,12 +113,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="2836" />
+          <entry key="java" value="3004" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="2836" />
+          <entry key="JAVA" value="3004" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -154,8 +153,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/models/Card.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="19" column="39" lean-forward="true" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
+            <state relative-caret-position="306">
+              <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
               <folding>
                 <element signature="e#134#135#0" expanded="true" />
                 <element signature="e#173#174#0" expanded="true" />
@@ -171,8 +170,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/models/CardTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="20" lean-forward="true" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+            <state relative-caret-position="238">
+              <caret line="14" column="21" lean-forward="true" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -273,7 +272,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540596950172" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540597823613" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_opened_file_path" value="C:/Program/Java/byte-buddy-agent-1.9.2.jar!/" />
@@ -392,29 +391,11 @@
       <workItem from="1540466845121" duration="135000" />
       <workItem from="1540485390704" duration="2588000" />
       <workItem from="1540539354714" duration="1788000" />
-      <workItem from="1540567798508" duration="16124000" />
+      <workItem from="1540567798508" duration="17774000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="CardTest - 2018.10.27 at 01h 14m 16s.xml">
-      <configuration name="CardTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CardTest - 2018.10.27 at 01h 15m 03s.xml">
-      <configuration name="CardTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CardTest - 2018.10.27 at 01h 15m 45s.xml">
-      <configuration name="CardTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CardTest - 2018.10.27 at 01h 17m 02s.xml">
-      <configuration name="CardTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CardTest - 2018.10.27 at 01h 17m 54s.xml">
-      <configuration name="CardTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CardTest - 2018.10.27 at 01h 21m 31s.xml">
-      <configuration name="CardTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="CardTest - 2018.10.27 at 01h 22m 54s.xml">
       <configuration name="CardTest" configurationId="JUnit" />
     </history-entry>
@@ -427,9 +408,27 @@
     <history-entry file="CardTest - 2018.10.27 at 01h 30m 40s.xml">
       <configuration name="CardTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="CardTest - 2018.10.27 at 01h 33m 39s.xml">
+      <configuration name="CardTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CardTest - 2018.10.27 at 01h 35m 25s.xml">
+      <configuration name="CardTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CardTest - 2018.10.27 at 01h 35m 57s.xml">
+      <configuration name="CardTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CardTest - 2018.10.27 at 01h 42m 15s.xml">
+      <configuration name="CardTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CardTest - 2018.10.27 at 01h 42m 28s.xml">
+      <configuration name="CardTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="CardTest - 2018.10.27 at 01h 45m 45s.xml">
+      <configuration name="CardTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20635000" />
+    <option name="totallyTimeSpent" value="22285000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -531,8 +530,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/models/CardTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="20" lean-forward="true" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+        <state relative-caret-position="238">
+          <caret line="14" column="21" lean-forward="true" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -541,8 +540,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models/Card.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="19" column="39" lean-forward="true" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
+        <state relative-caret-position="306">
+          <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
           <folding>
             <element signature="e#134#135#0" expanded="true" />
             <element signature="e#173#174#0" expanded="true" />
