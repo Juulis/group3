@@ -28,10 +28,14 @@ public class GameEngine {
     }
 
     /**
-     * creates two player objects and
-     * sets the players decks and cards in hands
+     * initializes the players by
+     * setting the players decks and cards in hands
      */
     public void initPlayer(){
 
+        p1.setCurrentDeck(gameCards);
+        p1.setPlayerHand();
+        p2.setCurrentDeck(gameCards);
+        p2.setPlayerHand();
     }
 }
