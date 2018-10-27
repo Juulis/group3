@@ -22,5 +22,6 @@
     </orderEntry>
     <orderEntry type="library" name="assertj-core-3.5.2-javadoc" level="project" />
     <orderEntry type="library" scope="TEST" name="org.mockito:mockito-all:1.10.19" level="project" />
+    <orderEntry type="library" name="mockito-core-2.23.0" level="application" />
   </component>
 </module>
