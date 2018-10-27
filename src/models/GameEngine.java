@@ -35,6 +35,9 @@ public class GameEngine {
 
         p1.setCurrentDeck(gameCards);
         p2.setCurrentDeck(gameCards);
-
+        for (int i = 0; i <5 ; i++) {
+            p1.pickupCard();
+            p2.pickupCard();
+        }
     }
 }
