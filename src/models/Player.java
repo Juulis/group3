@@ -27,5 +27,8 @@ public class Player {
      */
     public void pickupCard(){
 
+        int index=currentDeck.size()-1;
+        Card card=currentDeck.remove(index);
+        playerHand.add(card);
     }
 }

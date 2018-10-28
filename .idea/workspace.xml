@@ -106,12 +106,12 @@
     <session id="2116368338">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="1078" />
+          <entry key="java" value="1119" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1078" />
+          <entry key="JAVA" value="1119" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -156,8 +156,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/models/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-122">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
+            <state relative-caret-position="227">
+              <caret line="31" column="29" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -165,8 +165,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/models/PlayerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="24" column="48" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
+            <state relative-caret-position="190">
+              <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -216,8 +216,8 @@
         <option value="$PROJECT_DIR$/src/sample/Main.java" />
         <option value="$PROJECT_DIR$/test/models/GameEngineTest.java" />
         <option value="$PROJECT_DIR$/src/models/GameEngine.java" />
-        <option value="$PROJECT_DIR$/src/models/Player.java" />
         <option value="$PROJECT_DIR$/test/models/PlayerTest.java" />
+        <option value="$PROJECT_DIR$/src/models/Player.java" />
       </list>
     </option>
   </component>
@@ -292,7 +292,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540725495552" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540725753672" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_opened_file_path" value="G:/2018-10-16/objenesis-2.6.jar!/" />
@@ -384,15 +384,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="PlayerTest_pickupCard - 2018.10.28 at 11h 38m 14s.xml">
-      <configuration name="PlayerTest.pickupCard" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="PlayerTest_pickupCard - 2018.10.28 at 11h 39m 46s.xml">
-      <configuration name="PlayerTest.pickupCard" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="PlayerTest_pickupCard - 2018.10.28 at 11h 41m 12s.xml">
-      <configuration name="PlayerTest.pickupCard" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="PlayerTest_pickupCard - 2018.10.28 at 11h 41m 50s.xml">
       <configuration name="PlayerTest.pickupCard" configurationId="JUnit" />
     </history-entry>
@@ -414,9 +405,18 @@
     <history-entry file="PlayerTest_pickupCard - 2018.10.28 at 12h 17m 23s.xml">
       <configuration name="PlayerTest.pickupCard" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="PlayerTest_pickupCard - 2018.10.28 at 12h 18m 19s.xml">
+      <configuration name="PlayerTest.pickupCard" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="PlayerTest_pickupCard - 2018.10.28 at 12h 20m 51s.xml">
+      <configuration name="PlayerTest.pickupCard" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="PlayerTest_pickupCard - 2018.10.28 at 12h 22m 15s.xml">
+      <configuration name="PlayerTest.pickupCard" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22126000" />
+    <option name="totallyTimeSpent" value="22372000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -542,15 +542,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-122">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        <state relative-caret-position="227">
+          <caret line="31" column="29" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/models/PlayerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="24" column="48" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
+        <state relative-caret-position="190">
+          <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
