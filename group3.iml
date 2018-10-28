@@ -21,6 +21,12 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="assertj-core-3.5.2-javadoc" level="project" />
-    <orderEntry type="library" scope="TEST" name="org.mockito:mockito-all:1.10.19" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="org.mockito:mockito-all:1.10.19" level="project" />
+    <orderEntry type="library" name="mockito-junit-jupiter-2.23.0" level="project" />
+    <orderEntry type="library" name="objenesis-2.6" level="project" />
+    <orderEntry type="library" name="assertj-core-3.5.2" level="project" />
+    <orderEntry type="library" name="mockito-core-2.21.0" level="project" />
+    <orderEntry type="library" name="byte-buddy-1.9.2" level="project" />
+    <orderEntry type="library" name="byte-buddy-agent-1.9.2" level="project" />
   </component>
 </module>
