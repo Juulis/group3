@@ -1,7 +1,5 @@
-package models;
-
+import models.*;
 import org.junit.jupiter.api.*;
-
 import static org.assertj.core.api.AssertionsForInterfaceTypes.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +13,7 @@ class CardTest {
     }
 
     @RepeatedTest(1000)
-    void removeHealthPoints(){
+    void removeHealthPoints() {
         int currentHp = card.getHp();
         int hpToRemove = 10;
         card.removeHp(hpToRemove);

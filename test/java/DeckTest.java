@@ -1,18 +1,13 @@
-package models;
-
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
+import models.*;
+import org.junit.jupiter.api.*;
 import java.util.ArrayList;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.isA;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+
 class DeckTest {
-    public  Deck deck;
+    public Deck deck;
 
     @BeforeEach
     void setUp() {
