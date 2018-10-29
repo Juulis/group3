@@ -3,6 +3,14 @@ package models;
 import java.util.ArrayList;
 
 public class Player {
+    private int health;
+
+    public Player() {
+        this.health = 10;
+    }
+
+    public int getHealth() {
+        return health;
 
     private ArrayList<Card> currentDeck=new ArrayList<>();
     private ArrayList<Card> playerHand=new ArrayList<>();
