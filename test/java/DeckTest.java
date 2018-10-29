@@ -1,3 +1,4 @@
+package java;
 import models.*;
 import org.junit.jupiter.api.*;
 import java.util.ArrayList;
@@ -7,11 +8,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 class DeckTest {
-    public Deck deck;
+    public models.Deck deck;
 
     @BeforeEach
     void setUp() {
-        deck=new Deck();
+        deck=new models.Deck();
         deck.createFullDeck();
     }
     @DisplayName("testing deck cards not empty ")
