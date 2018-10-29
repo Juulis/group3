@@ -14,9 +14,12 @@ class CardTest {
         assertThat(card.randomizeHp()).isBetween(1, 20);
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(1000)
     void removeHealthPoints(){
-        card.removeHp(10);
-        assertEquals(card.getHp() - 10, card.getHp());
+        int currentHp = card.getHp();
+        int hpToRemove = 10;
+        card.removeHp(hpToRemove);
+        int expected = currentHp - hpToRemove;
+        assertEquals(expected, card.getHp());
     }
 }
