@@ -40,4 +40,13 @@ public class GameEngine {
             p2.pickupCard();
         }
     }
+
+    /**
+     * checks if the card hp is 0
+     * @param card
+     * @return true if hp is 0
+     */
+    public boolean isCardKilled(Card card){
+        return false;
+    }
 }
