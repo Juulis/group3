@@ -47,6 +47,9 @@ public class GameEngine {
      * @return true if hp is 0
      */
     public boolean isCardKilled(Card card){
+
+        if(card.getHp()==0)
+            return true;
         return false;
     }
 }
