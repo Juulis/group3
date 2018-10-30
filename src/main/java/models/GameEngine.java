@@ -40,4 +40,10 @@ public class GameEngine {
             p2.pickupCard();
         }
     }
+
+    public void attack (){
+
+
+    }
+
 }

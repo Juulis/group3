@@ -39,4 +39,13 @@ public class Player {
         Card card=currentDeck.remove(index);
         playerHand.add(card);
     }
+    /**
+     * When a player gets attacked, remove the amount of attack from the health
+     * @param amount of attack
+     */
+    public void removeHp(int healthToRemove) {
+     this.health-=healthToRemove;
+    }
+
+
 }

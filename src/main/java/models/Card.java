@@ -30,4 +30,9 @@ public class Card {
     public void removeHp(int hpToRemove) {
          hp -= hpToRemove;
     }
+
+    public int attack(){
+
+        return  rand.nextInt(6)+1;
+    }
 }
