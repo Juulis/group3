@@ -1,36 +1,64 @@
-
 import models.*;
+
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.extension.*;
 import org.mockito.*;
 import org.mockito.junit.jupiter.*;
 
-
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.regex.Matcher;
 
+import static org.assertj.core.api.AssertionsForClassTypes.*;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class GameEngineTest {
 
     private GameEngine gameEngine;
 
-    @Mock
-    Player p1Mock, p2Mock;
+    Player p1Mock;
+    Player p2Mock;
     @Mock
     ArrayList<Card> gameCardsMock;
+    int currentPlayer;
+
 
     @BeforeEach
     void setUp() {
 
-        gameEngine=new GameEngine();
+        gameEngine = new GameEngine();
+        Random rand = new Random();
+        currentPlayer = rand.nextInt(2) + 1;
+    }
+
+    @Test
+    void endTurn() {
+
+    }
+
+
+    @RepeatedTest(1000)
+    void getStartingPlayer_testThatRandomIsBetween1Or2() {
+        assertThat(currentPlayer).isBetween(1, 2);
+    }
+
+    @RepeatedTest(100)
+    void getStartingPlayer_testRealMethod(){
+        Player p1 = gameEngine.getP1();
+        Player p2 = gameEngine.getP2();
+        Player actual = gameEngine.getStartingPlayer();
+        assertEquals(p1, actual);
+        assertEquals(p2, actual);
     }
 
     @Test
     void initPlayer() {
-
         gameEngine.setP1(p1Mock);
         gameEngine.setP2(p2Mock);
         assertNotNull(gameEngine.getP1());

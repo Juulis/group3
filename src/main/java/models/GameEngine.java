@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 public class GameEngine {
 
-    private Player p1, p2;
+    private Player p1 = new Player();
+    private Player p2 = new Player();
     private ArrayList<Card> gameCards;
+    private Player currentPlayer = new Player();
 
     public void setP1(Player p){
         this.p1=p;
@@ -40,4 +42,9 @@ public class GameEngine {
             p2.pickupCard();
         }
     }
+
+    public Player getStartingPlayer() {
+        return p1;
+    }
+
 }
