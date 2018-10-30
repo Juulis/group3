@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 public class Player {
     private int health;
-    private ArrayList<Card> currentDeck=new ArrayList<Card>();
-    private ArrayList<Card> playerHand=new ArrayList<Card>();
+    private ArrayList<Card> currentDeck=new ArrayList<>();
+    private ArrayList<Card> playerHand=new ArrayList<>();
+    private ArrayList<Card> tableCards=new ArrayList<>();
 
     public Player() {
         this.health = 10;
@@ -39,4 +40,18 @@ public class Player {
         Card card=currentDeck.remove(index);
         playerHand.add(card);
     }
+
+    /**
+     * @param playCard
+     * takes an int showing what card to play
+     * play the chosen card:
+     * remove it from hand
+     * add it to table
+     */
+    void playCard(int playCardNr) {
+        int correctedPlayCardNr = playCardNr-1;
+        tableCards.add(playerHand.get(correctedPlayCardNr));
+        playerHand.remove((correctedPlayCardNr));
+    }
+
 }
