@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class GameEngineTest {
@@ -21,6 +22,8 @@ class GameEngineTest {
     Player p1Mock, p2Mock;
     @Mock
     ArrayList<Card> gameCardsMock;
+    @Mock
+    Card cardMock;
 
     @BeforeEach
     void setUp() {
@@ -41,5 +44,13 @@ class GameEngineTest {
         verify(p2Mock, times(1)).setCurrentDeck(gameCardsMock);
         verify(p1Mock, times(5)).pickupCard();
         verify(p2Mock, times(5)).pickupCard();
+    }
+
+    @Test
+    void isCardKilled() {
+
+        when(cardMock.getHp()).thenReturn(0).thenReturn(2);
+        assertTrue(gameEngine.isCardKilled(cardMock));
+        assertFalse(gameEngine.isCardKilled(cardMock));
     }
 }

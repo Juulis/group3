@@ -42,6 +42,18 @@ public class GameEngine {
         }
     }
 
+    /**
+     * checks if the card hp is 0
+     * @param card
+     * @return true if hp is 0
+     */
+    public boolean isCardKilled(Card card) {
+
+        if (card.getHp() <= 0)
+            return true;
+        return false;
+    }
+
     public void startGame() {
         playerInput(p1);
     }
@@ -67,5 +79,6 @@ public class GameEngine {
             case 4:
                 break;
         }
+
     }
 }

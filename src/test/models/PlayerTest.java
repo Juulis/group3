@@ -2,6 +2,7 @@ package models;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
@@ -16,21 +17,20 @@ class PlayerTest {
 
     private Player player;
     Player p1 = mock(Player.class);
-
-    @BeforeEach
-    void setUp() {
-
-        player=new Player();
-    }
     ArrayList<Card> mockHandList;
     ArrayList<Card> mockHandList2;
     ArrayList<Card> mockTableList;
 
+    @Mock
+    Card cardMock;
+
     @BeforeEach
     void setup(){
-        mockHandList = new ArrayList<>(Arrays.asList(new Card(), new Card(), new Card(),new Card()));
-        mockHandList2 = new ArrayList<>();
-        mockTableList = new ArrayList<>();
+
+        player=new Player();
+        mockHandList = new ArrayList<Card>(Arrays.asList(new Card(), new Card(), new Card(),new Card()));
+        mockHandList2 = new ArrayList<Card>();
+        mockTableList = new ArrayList<Card>();
         mockTableList.add(mockHandList.get(1));
     }
 
@@ -50,6 +50,7 @@ class PlayerTest {
         assertFalse(p1.getPlayerHand().contains(playCard));
         assertTrue(p1.getTableCards().contains(playCard));
     }
+
     @Test
     void pickupCard() {
 
@@ -64,6 +65,20 @@ class PlayerTest {
         assertEquals(phSize+1, player.getPlayerHand().size());
     }
 
+    @Test
+    void sendToGraveyard() {
+
+        player.getTableCards().add(cardMock);
+        int size=player.getTableCards().size();
+
+        assertTrue(player.getTableCards().contains(cardMock));
+
+        player.sendToGraveyard(cardMock);
+
+        assertEquals(size-1, player.getTableCards().size());
+        assertFalse(player.getTableCards().contains(cardMock));
+    }
+
     @DisplayName("testing remove player health ")
     @Test
     void testRemovePlayerHealth() {
@@ -73,6 +88,4 @@ class PlayerTest {
         assertEquals(expected,player.getHealth());
 
     }
-
-
 }
