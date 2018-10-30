@@ -4,10 +4,12 @@ import java.util.Random;
 
 public class Card {
     private int hp;
+    private boolean tapped;
     private Random rand = new Random();
 
     public Card() {
         this.hp = randomizeHp();
+        this.tapped = false;
     }
 
     /**
@@ -29,5 +31,17 @@ public class Card {
      */
     public void removeHp(int hpToRemove) {
          hp -= hpToRemove;
+    }
+
+    public void tap() {
+        this.tapped = true;
+    }
+
+    public void unTap() {
+        this.tapped = false;
+    };
+
+    public boolean getTapped() {
+        return this.tapped;
     }
 }
