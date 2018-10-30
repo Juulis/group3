@@ -47,10 +47,15 @@ public class GameEngine {
 
     /**
      * Determines if p1 or p1 is going to start
+     *
      * @param randomNr
      */
     public void getStartingPlayer(int randomNr) {
-
+        if (randomNr == 1) {
+            currentPlayer = p1;
+        } else {
+            currentPlayer = p2;
+        }
     }
 
     public Player getCurrentPlayer() {
