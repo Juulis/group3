@@ -8,6 +8,13 @@ public class GameEngine {
 
     private Player p1, p2;
     private ArrayList<Card> gameCards;
+    private Deck deck;
+
+    public GameEngine(){
+        p1=new Player();
+        p2=new Player();
+        deck=new Deck();
+    }
 
     public void setP1(Player p) {
         this.p1 = p;
