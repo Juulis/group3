@@ -71,4 +71,12 @@ public class Player {
         tableCards.add(playerHand.get(correctedPlayCardNr));
         playerHand.remove((correctedPlayCardNr));
     }
+
+    /**
+     * When a player gets attacked, remove the amount of attack from the health
+     * @param healthToRemove of attack
+     */
+    public void removeHp(int healthToRemove) {
+     this.health-=healthToRemove;
+    }
 }

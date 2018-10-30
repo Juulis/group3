@@ -78,4 +78,14 @@ class PlayerTest {
         assertEquals(size-1, player.getTableCards().size());
         assertFalse(player.getTableCards().contains(cardMock));
     }
+
+    @DisplayName("testing remove player health ")
+    @Test
+    void testRemovePlayerHealth() {
+        int healthToremove=2;
+        int expected=player.getHealth()-healthToremove;
+        player.removeHp(2);
+        assertEquals(expected,player.getHealth());
+
+    }
 }
