@@ -39,4 +39,8 @@ public class Player {
         Card card=currentDeck.remove(index);
         playerHand.add(card);
     }
+
+    public void newRound() {
+
+    }
 }

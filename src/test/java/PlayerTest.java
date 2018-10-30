@@ -28,4 +28,19 @@ class PlayerTest {
         assertEquals(cdSize-1, player.getCurrentDeck().size());
         assertEquals(phSize+1, player.getPlayerHand().size());
     }
+    /*
+    * Repeats the test the test 50 times to check if player
+    * gets a new card on each round*/
+    @RepeatedTest(50)
+    void pickUpOnEachRoundTest(){
+
+        player.getCurrentDeck().add(new Card());
+
+        int playerHand = player.getPlayerHand().size();
+
+
+        player.pickupCard();
+
+        assertEquals(playerHand+1,player.getPlayerHand().size());
+    }
 }
