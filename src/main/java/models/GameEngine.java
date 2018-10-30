@@ -68,10 +68,4 @@ public class GameEngine {
                 break;
         }
     }
-
-    public void attack (){
-
-
-    }
-
 }
