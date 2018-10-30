@@ -2,12 +2,24 @@ package models;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Scanner;
 
 public class GameEngine {
 
+    public GameEngine(){
+        p1 = new Player();
+        p2 = new Player();
+        game = true;
+        playing = true;
+        deck = new Deck();
+    }
+
     private Player p1, p2;
     private ArrayList<Card> gameCards;
+    private Player currentPlayer;
+    private Player opponent;
+    private Deck deck;
+    private boolean game;
+    private boolean playing;
 
     public void setP1(Player p) {
         this.p1 = p;
@@ -29,6 +41,22 @@ public class GameEngine {
         return p2;
     }
 
+    public void startGame() {
+        while (game) {
+            initGame();
+            while (playing) {
+                //TODO: implement some checks here, firstRun etc
+                playerMenu();
+                //TODO: implement turnchange here, playerToggle
+            }
+        }
+    }
+
+    public void initGame() {
+        deck.createFullDeck();
+        initPlayer();
+    }
+
     /**
      * initializes the players by
      * setting the players decks and cards in hands
@@ -44,6 +72,7 @@ public class GameEngine {
 
     /**
      * checks if the card hp is 0
+     *
      * @param card
      * @return true if hp is 0
      */
@@ -54,11 +83,7 @@ public class GameEngine {
         return false;
     }
 
-    public void startGame() {
-        playerInput(p1);
-    }
-
-    private void playerInput(Player p) {
+    private void playerMenu() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Here is your choices: \n" +
                 "1. Show table \n" +
@@ -72,7 +97,7 @@ public class GameEngine {
             case 2:
                 System.out.println("what card do you want to play out?");
                 int playCard = sc.nextInt();
-                p.playCard(playCard);
+                currentPlayer.playCard(playCard);
                 break;
             case 3:
                 break;
