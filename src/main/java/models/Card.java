@@ -24,7 +24,7 @@ public class Card {
 
     /**
      * When a card gets attacked, remove the amount of attack from the card
-     * @param amount of attack
+     * @param hpToRemove of attack
      * @return healthPoints after attack
      */
     public void removeHp(int hpToRemove) {
