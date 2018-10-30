@@ -39,5 +39,48 @@ public class GameEngine {
             p1.pickupCard();
             p2.pickupCard();
         }
+
+        endGame();
+    }
+
+    public void endGame(){
+        if (p1.getCurrentDeck().size() == 0) {
+            System.out.println("Congratulations!" + p1 + " is the Winner");
+            try{
+                Thread.sleep(3000);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            System.exit(0);
+
+        }else if (p2.getCurrentDeck().size() == 0){
+            System.out.println("Congratulations!" + p2 + " is the Winner");
+            try{
+                Thread.sleep(3000);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            System.exit(0);
+        }
+
+        if (p1.getHealth() == 0) {
+            System.out.println("Congratulations!" + p1 + " is the Winner");
+            try{
+                Thread.sleep(3000);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            System.exit(0);
+
+        }else if (p2.getHealth() == 0){
+            System.out.println("Congratulations!" + p2 + " is the Winner");
+            try{
+                Thread.sleep(3000);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            System.exit(0);
+        }
+
     }
 }
