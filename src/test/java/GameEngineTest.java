@@ -22,8 +22,11 @@ class GameEngineTest {
 
     private GameEngine gameEngine;
 
+    @Mock
     Player p1Mock;
+    @Mock
     Player p2Mock;
+
     @Mock
     ArrayList<Card> gameCardsMock;
     int currentPlayer;
@@ -42,19 +45,21 @@ class GameEngineTest {
 
     }
 
-
-    @RepeatedTest(1000)
+    @RepeatedTest(100)
     void getStartingPlayer_testThatRandomIsBetween1Or2() {
         assertThat(currentPlayer).isBetween(1, 2);
     }
 
-    @RepeatedTest(100)
-    void getStartingPlayer_testRealMethod(){
-        Player p1 = gameEngine.getP1();
-        Player p2 = gameEngine.getP2();
-        Player actual = gameEngine.getStartingPlayer();
-        assertEquals(p1, actual);
-        assertEquals(p2, actual);
+    @Test
+    void testSetCurrentPlayerSetToPlayer1() {
+        gameEngine.getStartingPlayer(1);
+        assertEquals(gameEngine.getP1(), gameEngine.getCurrentPlayer());
+    }
+
+    @Test
+    void testSetCurrentPlayerSetToPlayer2() {
+        gameEngine.getStartingPlayer(2);
+        assertEquals(gameEngine.getP2(), gameEngine.getCurrentPlayer());
     }
 
     @Test
