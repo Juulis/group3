@@ -44,4 +44,9 @@ public class Card {
     public boolean getTapped() {
         return this.tapped;
     }
+
+    public int attack(){
+
+        return  rand.nextInt(6)+1;
+    }
 }

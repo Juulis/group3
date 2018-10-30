@@ -63,4 +63,16 @@ class PlayerTest {
         assertEquals(cdSize-1, player.getCurrentDeck().size());
         assertEquals(phSize+1, player.getPlayerHand().size());
     }
+
+    @DisplayName("testing remove player health ")
+    @Test
+    void testRemovePlayerHealth() {
+        int healthToremove=2;
+        int expected=player.getHealth()-healthToremove;
+        player.removeHp(2);
+        assertEquals(expected,player.getHealth());
+
+    }
+
+
 }
