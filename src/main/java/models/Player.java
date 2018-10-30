@@ -57,6 +57,6 @@ public class Player {
      */
     public void sendToGraveyard(Card card){
 
-
+        tableCards.remove(card);
     }
 }
