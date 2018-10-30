@@ -40,7 +40,6 @@ public class GameEngine {
             p2.pickupCard();
         }
 
-        endGame();
     }
 
     public void endGame(){
