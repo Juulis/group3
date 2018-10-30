@@ -16,8 +16,11 @@ package sample;//import javafx.application.Application;
 //        primaryStage.show();
 //    }
 
+import models.GameEngine;
+
 public class Main {
     public static void main(String[] args) {
-        //  launch(args);
+        GameEngine game = new GameEngine();
+        game.startGame();
     }
 }
