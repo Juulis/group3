@@ -46,12 +46,6 @@ public class Player {
         playerHand.add(card);
     }
 
-    public void newRound() {
-
-
-
-    }
-
     /**
      * @param playCardNr takes an int showing what card to play
      *                   play the chosen card:
