@@ -46,4 +46,12 @@ public class Deck {
     public ArrayList<Card> getCards() {
         return cards;
     }
+    
+    public ArrayList<Card> getPlayerOneDeck() {
+        return playerOneDeck;
+    }
+    
+    public ArrayList<Card> getPlayerTwoDeck() {
+        return playerTwoDeck;
+    }
 }
