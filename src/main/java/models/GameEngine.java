@@ -98,6 +98,7 @@ public class GameEngine {
         int input = sc.nextInt();
         switch (input) {
             case 1:
+                showTable();
                 break;
             case 2:
                 System.out.println("what card do you want to play out?");
