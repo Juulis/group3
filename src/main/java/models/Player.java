@@ -3,13 +3,19 @@ package models;
 import java.util.ArrayList;
 
 public class Player {
+
     private int health;
-    private ArrayList<Card> currentDeck = new ArrayList<>();
-    private ArrayList<Card> playerHand = new ArrayList<>();
-    private ArrayList<Card> tableCards = new ArrayList<>();
+
+    private ArrayList<Card> currentDeck;
+    private ArrayList<Card> playerHand;
+    private ArrayList<Card> tableCards;
 
     public Player() {
+
         this.health = 10;
+        this.currentDeck=new ArrayList<Card>();
+        this.playerHand=new ArrayList<Card>();
+        this.tableCards=new ArrayList<Card>();
     }
 
     public int getHealth() {
@@ -20,11 +26,6 @@ public class Player {
 
     }
 
-    public ArrayList<Card> getTableCards() {
-
-        return tableCards;
-    }
-
     public ArrayList<Card> getCurrentDeck() {
 
         return currentDeck;
@@ -33,6 +34,11 @@ public class Player {
     public ArrayList<Card> getPlayerHand() {
 
         return playerHand;
+    }
+
+    public ArrayList<Card> getTableCards(){
+
+        return tableCards;
     }
 
     /**
@@ -46,6 +52,14 @@ public class Player {
         playerHand.add(card);
     }
 
+    /**
+     * removes the card from tableCards
+     * @param card
+     */
+    public void sendToGraveyard(Card card){
+
+        tableCards.remove(card);
+    }
     /**
      * @param playCardNr takes an int showing what card to play
      *                   play the chosen card:
@@ -65,6 +79,4 @@ public class Player {
     public void removeHp(int healthToRemove) {
      this.health-=healthToRemove;
     }
-
-
 }

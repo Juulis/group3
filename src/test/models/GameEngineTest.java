@@ -1,3 +1,4 @@
+package models;
 
 import models.*;
 import org.junit.Before;
@@ -16,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class GameEngineTest {
@@ -26,6 +28,8 @@ class GameEngineTest {
     Player p1Mock, p2Mock;
     @Mock
     ArrayList<Card> gameCardsMock;
+    @Mock
+    Card cardMock;
 
     @Spy
     ArrayList<Card> gameCardsSpy = spy(new ArrayList<Card>());
@@ -81,5 +85,13 @@ class GameEngineTest {
     void checkPlayerHpNotNull() {
         assertThat(players.getHealth(),is(equalTo(10)));
         assertEquals(10,players.getHealth());
+    }
+
+    @Test
+    void isCardKilled() {
+
+        when(cardMock.getHp()).thenReturn(0).thenReturn(2);
+        assertTrue(gameEngine.isCardKilled(cardMock));
+        assertFalse(gameEngine.isCardKilled(cardMock));
     }
 }
