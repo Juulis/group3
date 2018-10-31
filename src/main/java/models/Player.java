@@ -22,7 +22,7 @@ public class Player {
     }
 
     public void setCurrentDeck(ArrayList<Card> gameCards) {
-
+        this.currentDeck = gameCards;
     }
 
     public ArrayList<Card> getCurrentDeck() {
