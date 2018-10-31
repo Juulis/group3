@@ -55,7 +55,28 @@ public class GameEngine {
     }
 
     public void gameEnginAttack(Card currentPlayerCard, Card opponentsCard){
+        int currentPlayerAttack=currentPlayerCard.attack();
+        int opponentPlayerAttack=opponentsCard.attack();
 
+        int damage=currentPlayerAttack-opponentPlayerAttack;
+        damage=Math.abs(damage);
+
+        if (currentPlayerAttack>opponentPlayerAttack){
+            opponentsCard.removeHp(damage);
+            if (isCardKilled(opponentsCard))
+            {
+                p2.sendToGraveyard(opponentsCard);
+                opponentsCard.tap();
+            }
+
+        }else if (currentPlayerAttack<opponentPlayerAttack)
+
+            currentPlayerCard.removeHp(damage);
+        if (isCardKilled(currentPlayerCard))
+        {
+            p1.sendToGraveyard(currentPlayerCard);
+            currentPlayerCard.tap();
+        }
     }
 
 
