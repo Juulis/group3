@@ -29,8 +29,8 @@ public class GameEngine {
         this.p2 = p;
     }
 
-    public void setDeck(Deck deck){
-        this.deck=deck;
+    public void setDeck(Deck deck) {
+        this.deck = deck;
     }
 
     public Player getP1() {
@@ -65,13 +65,38 @@ public class GameEngine {
 
         ArrayList<Card> playerOneDeck, playerTwoDeck;
         deck.playerDeck();
-        playerOneDeck=deck.getPlayerOneDeck();
-        playerTwoDeck=deck.getPlayerTwoDeck();
+        playerOneDeck = deck.getPlayerOneDeck();
+        playerTwoDeck = deck.getPlayerTwoDeck();
         p1.setCurrentDeck(playerOneDeck);
         p2.setCurrentDeck(playerTwoDeck);
         for (int i = 0; i < 5; i++) {
             p1.pickupCard();
             p2.pickupCard();
+        }
+    }
+
+    /**
+     * Determines if p1 or p2 is going to start
+     *
+     * @param randomNr
+     */
+    public void getPlayerToStart(int randomNr) {
+        if (randomNr == 1) {
+            currentPlayer = p1;
+        } else {
+            currentPlayer = p2;
+        }
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void endTurn() {
+        if (currentPlayer == p1) {
+            currentPlayer = p2;
+        } else {
+            currentPlayer = p1;
         }
     }
 

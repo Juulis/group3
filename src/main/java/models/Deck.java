@@ -12,17 +12,17 @@ public class Deck {
     private int totalCards;
 
     public Deck() {
-        cards=new ArrayList<Card>();
-        totalCards=50;
-        playerOneDeck=new ArrayList<Card>();
-        playerTwoDeck=new ArrayList<Card>();
+        cards = new ArrayList<Card>();
+        totalCards = 50;
+        playerOneDeck = new ArrayList<Card>();
+        playerTwoDeck = new ArrayList<Card>();
     }
 
     /**
-     *      create array of deck cards with 50 cards
+     * create array of deck cards with 50 cards
      */
-    public  void createFullDeck(){
-        for (int i=0;i<totalCards;i++){
+    public void createFullDeck() {
+        for (int i = 0; i < totalCards; i++) {
             cards.add(new Card());
         }
     }
@@ -40,17 +40,16 @@ public class Deck {
     }
 
     /**
-     *
-     * @return  Deck Array of cards
+     * @return Deck Array of cards
      */
     public ArrayList<Card> getCards() {
         return cards;
     }
-    
+
     public ArrayList<Card> getPlayerOneDeck() {
         return playerOneDeck;
     }
-    
+
     public ArrayList<Card> getPlayerTwoDeck() {
         return playerTwoDeck;
     }

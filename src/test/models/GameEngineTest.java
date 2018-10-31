@@ -1,5 +1,4 @@
-package models;
-
+import models.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
@@ -7,7 +6,9 @@ import org.mockito.junit.jupiter.*;
 
 
 import java.util.ArrayList;
+import java.util.Random;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.times;
@@ -27,13 +28,16 @@ class GameEngineTest {
     Card cardMock;
     @Mock
     Deck deckMock;
+    int currentPlayer;
     @Mock
     ArrayList<Card> p1TableCardsMock, p2TableCardsMock;
 
     @BeforeEach
     void setUp() {
 
-        gameEngine=new GameEngine();
+        gameEngine = new GameEngine();
+        Random rand = new Random();
+        currentPlayer = rand.nextInt(2) + 1;
     }
 
     @Test
@@ -65,6 +69,38 @@ class GameEngineTest {
         when(cardMock.getHp()).thenReturn(0).thenReturn(2);
         assertTrue(gameEngine.isCardKilled(cardMock));
         assertFalse(gameEngine.isCardKilled(cardMock));
+    }
+
+    @RepeatedTest(1000)
+    void endTurn_testThatCurrentPlayerTogglesAfterEachRound() {
+        gameEngine.getPlayerToStart(1); // Set player one to start
+        assertEquals(gameEngine.getP1(), gameEngine.getCurrentPlayer());
+
+        gameEngine.endTurn();
+        assertEquals(gameEngine.getP2(), gameEngine.getCurrentPlayer());
+
+        gameEngine.endTurn();
+        assertEquals(gameEngine.getP1(), gameEngine.getCurrentPlayer());
+
+        gameEngine.endTurn();
+        assertEquals(gameEngine.getP2(), gameEngine.getCurrentPlayer());
+    }
+
+    @RepeatedTest(1000)
+    void getStartingPlayer_testThatRandomIsBetween1Or2() {
+        assertThat(currentPlayer).isBetween(1, 2);
+    }
+
+    @Test
+    void testSetCurrentPlayerSetToPlayer1() {
+        gameEngine.getPlayerToStart(1);
+        assertEquals(gameEngine.getP1(), gameEngine.getCurrentPlayer());
+    }
+
+    @Test
+    void testSetCurrentPlayerSetToPlayer2() {
+        gameEngine.getPlayerToStart(2);
+        assertEquals(gameEngine.getP2(), gameEngine.getCurrentPlayer());
     }
 
     @Test
