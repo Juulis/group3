@@ -54,7 +54,7 @@ public class GameEngine {
     }
 
     /**
-     * Determines if p1 or p1 is going to start
+     * Determines if p1 or p2 is going to start
      *
      * @param randomNr
      */
