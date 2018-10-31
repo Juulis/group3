@@ -29,8 +29,8 @@ public class GameEngine {
         this.p2 = p;
     }
 
-    public void setGameCards(ArrayList<Card> gameCards) {
-        this.gameCards = gameCards;
+    public void setDeck(Deck deck){
+        this.deck=deck;
     }
 
     public Player getP1() {
@@ -62,8 +62,13 @@ public class GameEngine {
      * setting the players decks and cards in hands
      */
     public void initPlayer() {
-        p1.setCurrentDeck(gameCards);
-        p2.setCurrentDeck(gameCards);
+
+        ArrayList<Card> playerOneDeck, playerTwoDeck;
+        deck.playerDeck();
+        playerOneDeck=deck.getPlayerOneDeck();
+        playerTwoDeck=deck.getPlayerTwoDeck();
+        p1.setCurrentDeck(playerOneDeck);
+        p2.setCurrentDeck(playerTwoDeck);
         for (int i = 0; i < 5; i++) {
             p1.pickupCard();
             p2.pickupCard();
