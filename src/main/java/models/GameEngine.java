@@ -58,7 +58,7 @@ public class GameEngine {
      *
      * @param randomNr
      */
-    public void getStartingPlayer(int randomNr) {
+    public void getPlayerToStart(int randomNr) {
         if (randomNr == 1) {
             currentPlayer = p1;
         } else {
@@ -71,6 +71,11 @@ public class GameEngine {
     }
 
     public void endTurn() {
+        if (currentPlayer == p1) {
+            currentPlayer = p2;
+        } else {
+            currentPlayer = p1;
+        }
     }
 
     /**
