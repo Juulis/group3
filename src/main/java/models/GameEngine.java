@@ -91,4 +91,12 @@ public class GameEngine {
         }
 
     }
+
+    /**
+     * prints the cards on the table,
+     * presented with hp values
+     */
+    public void showTable(){
+
+    }
 }
