@@ -11,7 +11,6 @@ public class Player {
     private ArrayList<Card> tableCards;
 
     public Player() {
-
         this.health = 10;
         this.currentDeck=new ArrayList<Card>();
         this.playerHand=new ArrayList<Card>();
@@ -23,7 +22,7 @@ public class Player {
     }
 
     public void setCurrentDeck(ArrayList<Card> gameCards) {
-
+        this.currentDeck = gameCards;
     }
 
     public ArrayList<Card> getCurrentDeck() {
