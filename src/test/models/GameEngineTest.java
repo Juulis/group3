@@ -10,6 +10,7 @@ import java.util.Random;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -28,6 +29,8 @@ class GameEngineTest {
     @Mock
     Deck deckMock;
     int currentPlayer;
+    @Mock
+    ArrayList<Card> p1TableCardsMock, p2TableCardsMock;
 
     @BeforeEach
     void setUp() {
@@ -51,7 +54,7 @@ class GameEngineTest {
 
         gameEngine.initPlayer();
 
-        verify(deckMock, times(1)).playerDeck();
+        verify(deckMock,times(1)).playerDeck();
         verify(deckMock, times(1)).getPlayerOneDeck();
         verify(deckMock, times(1)).getPlayerTwoDeck();
         verify(p1Mock, times(1)).setCurrentDeck(playerOneDeckMock);
@@ -98,5 +101,27 @@ class GameEngineTest {
     void testSetCurrentPlayerSetToPlayer2() {
         gameEngine.getPlayerToStart(2);
         assertEquals(gameEngine.getP2(), gameEngine.getCurrentPlayer());
+    }
+
+    @Test
+    void showTable() {
+
+        int size1=2;
+        int size2=3;
+        gameEngine.setP1(p1Mock);
+        gameEngine.setP2(p2Mock);
+        when(p1Mock.getTableCards()).thenReturn(p1TableCardsMock);
+        when(p2Mock.getTableCards()).thenReturn(p2TableCardsMock);
+        when(p1TableCardsMock.size()).thenReturn(size1);
+        when(p2TableCardsMock.size()).thenReturn(size2);
+        when(p1TableCardsMock.get(anyInt())).thenReturn(cardMock);
+        when(p2TableCardsMock.get(anyInt())).thenReturn(cardMock);
+        gameEngine.showTable();
+        verify(p1Mock, times(1)).getTableCards();
+        verify(p2Mock, times(1)).getTableCards();
+        verify(p1TableCardsMock, times(size1)).get(anyInt());
+        verify(p2TableCardsMock, times(size2)).get(anyInt());
+        verify(cardMock, times(size1+size2)).getHp();
+
     }
 }
