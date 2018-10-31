@@ -66,7 +66,6 @@ public class GameEngine {
             if (isCardKilled(opponentsCard))
             {
                 p2.sendToGraveyard(opponentsCard);
-                opponentsCard.tap();
             }
 
         }else if (currentPlayerAttack<opponentPlayerAttack)
@@ -75,8 +74,9 @@ public class GameEngine {
         if (isCardKilled(currentPlayerCard))
         {
             p1.sendToGraveyard(currentPlayerCard);
-            currentPlayerCard.tap();
+
         }
+        currentPlayerCard.tap();
     }
 
 
