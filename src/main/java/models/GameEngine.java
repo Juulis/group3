@@ -54,9 +54,15 @@ public class GameEngine {
         return false;
     }
 
+    public void gameEnginAttack(Card currentPlayerCard, Card opponentsCard){
+
+    }
+
+
     public void startGame() {
         playerInput(p1);
     }
+
 
     private void playerInput(Player p) {
         Scanner sc = new Scanner(System.in);
