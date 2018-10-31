@@ -54,7 +54,7 @@ public class GameEngine {
         return false;
     }
 
-    public void gameEnginAttack(Card currentPlayerCard, Card opponentsCard){
+    public void attack(Card currentPlayerCard, Card opponentsCard){
         int currentPlayerAttack=currentPlayerCard.attack();
         int opponentPlayerAttack=opponentsCard.attack();
 
