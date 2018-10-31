@@ -24,6 +24,10 @@ public class GameEngine {
         this.p2 = p;
     }
 
+    public void setDeck(Deck deck){
+        this.deck=deck;
+    }
+
     public void setGameCards(ArrayList<Card> gameCards) {
         this.gameCards = gameCards;
     }

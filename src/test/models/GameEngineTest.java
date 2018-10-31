@@ -21,7 +21,7 @@ class GameEngineTest {
     @Mock
     Player p1Mock, p2Mock;
     @Mock
-    ArrayList<Card> playerDeck1, playerDeck2;
+    ArrayList<Card> playerOneDeckMock, playerTwoDeckMock;
     @Mock
     Card cardMock;
     @Mock
@@ -38,16 +38,20 @@ class GameEngineTest {
 
         gameEngine.setP1(p1Mock);
         gameEngine.setP2(p2Mock);
+        gameEngine.setDeck(deckMock);
         assertNotNull(gameEngine.getP1());
         assertNotNull(gameEngine.getP2());
+
+        when(deckMock.getPlayerOneDeck()).thenReturn(playerOneDeckMock);
+        when(deckMock.getPlayerTwoDeck()).thenReturn(playerTwoDeckMock);
 
         gameEngine.initPlayer();
 
         verify(deckMock,times(1)).playerDeck();
         verify(deckMock, times(1)).getPlayerOneDeck();
         verify(deckMock, times(1)).getPlayerTwoDeck();
-        verify(p1Mock, times(1)).setCurrentDeck(playerDeck1);
-        verify(p2Mock, times(1)).setCurrentDeck(playerDeck2);
+        verify(p1Mock, times(1)).setCurrentDeck(playerOneDeckMock);
+        verify(p2Mock, times(1)).setCurrentDeck(playerTwoDeckMock);
         verify(p1Mock, times(5)).pickupCard();
         verify(p2Mock, times(5)).pickupCard();
     }
