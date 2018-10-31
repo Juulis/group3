@@ -98,6 +98,7 @@ public class GameEngine {
         int input = sc.nextInt();
         switch (input) {
             case 1:
+                showTable();
                 break;
             case 2:
                 System.out.println("what card do you want to play out?");
@@ -109,6 +110,34 @@ public class GameEngine {
             case 4:
                 break;
         }
+
+    }
+
+    /**
+     * prints the cards on the table,
+     * presented with hp values
+     */
+    public void showTable(){
+
+        ArrayList<Card> tableCards1=p1.getTableCards();
+        ArrayList<Card> tableCards2=p2.getTableCards();
+        int[] cards1=new int[tableCards1.size()];
+        int[] cards2=new int[tableCards2.size()];
+        System.out.print("Player1: ");
+        for (int i = 0; i <tableCards1.size() ; i++) {
+
+            cards1[i]=tableCards1.get(i).getHp();
+            System.out.print(cards1[i]+" ");
+        }
+        System.out.println();
+        System.out.println();
+        System.out.print("Player2: ");
+        for (int j=0; j<tableCards2.size(); j++){
+
+            cards2[j]=tableCards2.get(j).getHp();
+            System.out.print(cards2[j]+" ");
+        }
+        System.out.println();
 
     }
 }
