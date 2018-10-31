@@ -5,8 +5,6 @@ import java.util.Collections;
 
 public class Deck {
 
-    private Card card;
-    private int getTotalCards;
     private ArrayList<Card> cards;
     private ArrayList<Card> playerOneDeck;
     private ArrayList<Card> playerTwoDeck;
@@ -16,6 +14,8 @@ public class Deck {
     public Deck() {
         cards=new ArrayList<Card>();
         totalCards=50;
+        playerOneDeck=new ArrayList<Card>();
+        playerTwoDeck=new ArrayList<Card>();
     }
 
     /**
@@ -32,8 +32,8 @@ public class Deck {
 
         playerDeckSize = 25;
 
-        playerOneDeck.addAll(cards.subList(0, cards.size() / 2 - 1));
-        playerTwoDeck.addAll(cards.subList(cards.size() / 2, cards.size()-1));
+        playerOneDeck.addAll(cards.subList(0, cards.size() / 2));
+        playerTwoDeck.addAll(cards.subList(cards.size() / 2, cards.size()));
 
         Collections.shuffle(playerOneDeck);
         Collections.shuffle(playerTwoDeck);
