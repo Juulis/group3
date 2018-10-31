@@ -68,9 +68,19 @@ class GameEngineTest {
         assertFalse(gameEngine.isCardKilled(cardMock));
     }
 
-    @Test
-    void endTurn() {
+    @RepeatedTest(100)
+    void endTurn_testThatCurrentPlayerTogglesAfterEachRound() {
+        gameEngine.getStartingPlayer(1); // Set player one to start
+        assertEquals(gameEngine.getP1(), gameEngine.getCurrentPlayer());
 
+        gameEngine.endTurn();
+        assertEquals(gameEngine.getP2(), gameEngine.getCurrentPlayer());
+
+        gameEngine.endTurn();
+        assertEquals(gameEngine.getP1(), gameEngine.getCurrentPlayer());
+
+        gameEngine.endTurn();
+        assertEquals(gameEngine.getP2(), gameEngine.getCurrentPlayer());
     }
 
     @RepeatedTest(100)

@@ -70,6 +70,9 @@ public class GameEngine {
         return currentPlayer;
     }
 
+    public void endTurn() {
+    }
+
     /**
      * checks if the card hp is 0
      *
