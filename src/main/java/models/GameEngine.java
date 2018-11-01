@@ -43,7 +43,7 @@ public class GameEngine {
 
     }
 
-    public void endGame(){
+    public checkCardsLeft () {
         if (p1.getCurrentDeck().size() == 0) {
             System.out.println("Congratulations!" + p1 + " is the Winner");
             try{
@@ -51,6 +51,7 @@ public class GameEngine {
             }catch(Exception e){
                 e.printStackTrace();
             }
+            playing = false;
             System.exit(0);
 
         }else if (p2.getCurrentDeck().size() == 0){
@@ -60,9 +61,13 @@ public class GameEngine {
             }catch(Exception e){
                 e.printStackTrace();
             }
+            playing = false;
             System.exit(0);
         }
 
+    }
+
+    public checkPlayerHealth(){
         if (p1.getHealth() == 0) {
             System.out.println("Congratulations!" + p1 + " is the Winner");
             try{
@@ -70,6 +75,7 @@ public class GameEngine {
             }catch(Exception e){
                 e.printStackTrace();
             }
+            playing = false;
             System.exit(0);
 
         }else if (p2.getHealth() == 0){
@@ -79,6 +85,7 @@ public class GameEngine {
             }catch(Exception e){
                 e.printStackTrace();
             }
+            playing = false;
             System.exit(0);
         }
 
