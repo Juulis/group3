@@ -17,7 +17,7 @@ public class GameEngine {
     private Player p1, p2;
     private ArrayList<Card> gameCards;
     private Player currentPlayer;
-    private Player opponent;
+    private Player opponentPlayer;
     private Deck deck;
     private boolean game;
     private boolean playing;
@@ -51,7 +51,6 @@ public class GameEngine {
                 //TODO: implement some checks here, firstRun etc
                 playerMenu();
                 //TODO: implement turnchange here, playerToggle
-
             }
         }
     }
@@ -117,6 +116,36 @@ public class GameEngine {
         return false;
     }
 
+    public void attack(Card currentPlayerCard, Card opponentsCard){
+        int currentPlayerAttack=currentPlayerCard.attack();
+        int opponentPlayerAttack=opponentsCard.attack();
+
+        int damage=currentPlayerAttack-opponentPlayerAttack;
+        damage=Math.abs(damage);
+
+        if (currentPlayerAttack>opponentPlayerAttack){
+            opponentsCard.removeHp(damage);
+            if (isCardKilled(opponentsCard))
+            {
+                opponentPlayer.sendToGraveyard(opponentsCard);
+            }
+
+        }else if (currentPlayerAttack<opponentPlayerAttack)
+
+            currentPlayerCard.removeHp(damage);
+        if (isCardKilled(currentPlayerCard))
+        {
+            currentPlayer.sendToGraveyard(currentPlayerCard);
+
+        }
+        currentPlayerCard.tap();
+    }
+
+
+
+
+
+
     private void playerMenu() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Here is your choices: \n" +
@@ -135,13 +164,16 @@ public class GameEngine {
                 currentPlayer.playCard(playCard);
                 break;
             case 3:
-                if(turn > 2){
-                    //TODO: place attack() here
-                }
-                else{
+                if(turn > 2) {
+                    System.out.println("what card you like to attack with");
+                    int attackCard = sc.nextInt();
+
+                    System.out.println("what card do you want to attack?");
+                    int cardToAttack = sc.nextInt();
+                    attack(currentPlayer.getTableCards().get(attackCard), opponentPlayer.getTableCards().get(cardToAttack));
+                } else{
                     System.out.println("You can't attack the first round!");
                 }
-                break;
             case 4:
                 break;
         }
@@ -174,9 +206,5 @@ public class GameEngine {
         }
         System.out.println();
 
-    }
-
-    public boolean firstRoundCheck() {
-        return false;
     }
 }
