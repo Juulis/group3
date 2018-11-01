@@ -107,9 +107,9 @@ class GameEngineTest {
     @Test
     void showTable() {
 
-        int size1=2;
-        int size2=3;
-        int size3=4;
+        int size1 = 2;
+        int size2 = 3;
+        int size3 = 4;
         gameEngine.setP1(p1Mock);
         gameEngine.setP2(p2Mock);
         when(p1Mock.getTableCards()).thenReturn(currentTableCardsMock);
@@ -121,6 +121,7 @@ class GameEngineTest {
         when(currentTableCardsMock.get(anyInt())).thenReturn(cardMock);
         when(currentHandCardsMock.get(anyInt())).thenReturn(cardMock);
         when(opponentTableCardsMock.get(anyInt())).thenReturn(cardMock);
+        gameEngine.getPlayerToStart(1);
         gameEngine.showTable();
         verify(p1Mock, times(1)).getTableCards();
         verify(p1Mock, times(1)).getPlayerHand();
