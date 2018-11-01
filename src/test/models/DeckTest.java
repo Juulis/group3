@@ -1,7 +1,10 @@
-package models;
 
+
+import models.*;
 import org.junit.jupiter.api.*;
+
 import java.util.ArrayList;
+
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,9 +15,10 @@ class DeckTest {
 
     @BeforeEach
     void setUp() {
-        deck=new Deck();
+        deck = new Deck();
         deck.createFullDeck();
     }
+
     @DisplayName("testing deck cards not empty ")
     @Test
     void testCreateFullDeck() {
@@ -25,15 +29,16 @@ class DeckTest {
     @DisplayName("testing deck cards size")
     @Test
     void testSize() {
-        assertEquals(50,deck.getCards().size());
+        assertEquals(50, deck.getCards().size());
 
 
     }
+
     @DisplayName("test if cards is of type ArrayList and has elements of type Card")
     @Test
-    void testElementTypeOfdeck(){
-        assertThat(deck.getCards().get(5),isA(Card.class));
-        assertThat(deck.getCards(),isA(ArrayList.class));
+    void testElementTypeOfdeck() {
+        assertThat(deck.getCards().get(5), isA(Card.class));
+        assertThat(deck.getCards(), isA(ArrayList.class));
     }
 
     ArrayList<String> playerOneDeck;
@@ -68,8 +73,8 @@ class DeckTest {
     @DisplayName("Check Size")
     @Test
     void checkSize() {
-        assertThat(playerOneDeck.size(),is(equalTo(2)));
-        assertThat(playerTwoDeck.size(),is(equalTo(2)));
+        assertThat(playerOneDeck.size(), is(equalTo(2)));
+        assertThat(playerTwoDeck.size(), is(equalTo(2)));
     }
 
     @DisplayName("Check If Player 1 Contains")
