@@ -138,6 +138,9 @@ public class GameEngine {
     }
 
     public void endTurn() {
+        checkPlayerHealth();
+        checkCardsLeft();
+        
         if (currentPlayer == p1) {
             currentPlayer = p2;
         } else {
