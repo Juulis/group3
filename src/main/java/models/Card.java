@@ -14,6 +14,7 @@ public class Card {
 
     /**
      * Determines hp of card
+     *
      * @return random nr between 1-20
      */
     public int randomizeHp() {
@@ -26,11 +27,12 @@ public class Card {
 
     /**
      * When a card gets attacked, remove the amount of attack from the card
+     *
      * @param hpToRemove of attack
      * @return healthPoints after attack
      */
     public void removeHp(int hpToRemove) {
-         hp -= hpToRemove;
+        hp -= hpToRemove;
     }
 
     public void tap() {
@@ -39,14 +41,16 @@ public class Card {
 
     public void unTap() {
         this.tapped = false;
-    };
+    }
+
+    ;
 
     public boolean getTapped() {
         return this.tapped;
     }
 
-    public int attack(){
+    public int attack() {
 
-        return  rand.nextInt(6)+1;
+        return rand.nextInt(6) + 1;
     }
 }

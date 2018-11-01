@@ -1,5 +1,4 @@
-package models;
-
+import models.*;
 import org.junit.jupiter.api.*;
 
 import java.util.Random;
@@ -21,7 +20,7 @@ class CardTest {
         assertThat(card.randomizeHp()).isBetween(1, 20);
     }
 
-    @RepeatedTest(1000)
+    @Test
     void removeHealthPoints() {
         int currentHp = card.getHp();
         int hpToRemove = 10;

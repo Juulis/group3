@@ -11,11 +11,10 @@ public class Player {
     private ArrayList<Card> tableCards;
 
     public Player() {
-
         this.health = 10;
-        this.currentDeck=new ArrayList<Card>();
-        this.playerHand=new ArrayList<Card>();
-        this.tableCards=new ArrayList<Card>();
+        this.currentDeck = new ArrayList<Card>();
+        this.playerHand = new ArrayList<Card>();
+        this.tableCards = new ArrayList<Card>();
     }
 
     public int getHealth() {
@@ -23,7 +22,7 @@ public class Player {
     }
 
     public void setCurrentDeck(ArrayList<Card> gameCards) {
-
+        this.currentDeck = gameCards;
     }
 
     public ArrayList<Card> getCurrentDeck() {
@@ -36,7 +35,7 @@ public class Player {
         return playerHand;
     }
 
-    public ArrayList<Card> getTableCards(){
+    public ArrayList<Card> getTableCards() {
 
         return tableCards;
     }
@@ -54,19 +53,21 @@ public class Player {
 
     /**
      * removes the card from tableCards
+     *
      * @param card
      */
-    public void sendToGraveyard(Card card){
+    public void sendToGraveyard(Card card) {
 
         tableCards.remove(card);
     }
+
     /**
      * @param playCardNr takes an int showing what card to play
      *                   play the chosen card:
      *                   remove it from hand
      *                   add it to table
      */
-    void playCard(int playCardNr) {
+    public void playCard(int playCardNr) {
         int correctedPlayCardNr = playCardNr - 1;
         tableCards.add(playerHand.get(correctedPlayCardNr));
         playerHand.remove((correctedPlayCardNr));
@@ -74,9 +75,10 @@ public class Player {
 
     /**
      * When a player gets attacked, remove the amount of attack from the health
+     *
      * @param healthToRemove of attack
      */
     public void removeHp(int healthToRemove) {
-     this.health-=healthToRemove;
+        this.health -= healthToRemove;
     }
 }
