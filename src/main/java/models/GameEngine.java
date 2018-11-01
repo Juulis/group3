@@ -67,4 +67,8 @@ public class GameEngine {
                 break;
         }
     }
+
+    public boolean firstRoundCheck() {
+        return false;
+    }
 }

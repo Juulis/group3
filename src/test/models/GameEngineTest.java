@@ -24,8 +24,14 @@ class GameEngineTest {
 
     @BeforeEach
     void setUp() {
+        gameEngine = new GameEngine();
+    }
 
-        gameEngine=new GameEngine();
+    @Test
+    void firstRound() {
+        assertTrue(gameEngine.firstRoundCheck());
+        gameEngine.startGame();
+        assertTrue(gameEngine.firstRoundCheck());
     }
 
     @Test
