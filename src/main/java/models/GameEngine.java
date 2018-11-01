@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class GameEngine {
@@ -11,6 +12,7 @@ public class GameEngine {
         game = true;
         playing = true;
         deck = new Deck();
+        rand = new Random();
     }
 
     private Player p1, p2;
@@ -20,6 +22,7 @@ public class GameEngine {
     private Deck deck;
     private boolean game;
     private boolean playing;
+    private Random rand;
 
     public void setP1(Player p) {
         this.p1 = p;
@@ -77,10 +80,9 @@ public class GameEngine {
 
     /**
      * Determines if p1 or p2 is going to start
-     *
-     * @param randomNr
      */
-    public void getPlayerToStart(int randomNr) {
+    public void getPlayerToStart() {
+        int randomNr = rand.nextInt(2) + 1;
         if (randomNr == 1) {
             currentPlayer = p1;
             opponentPlayer = p2;

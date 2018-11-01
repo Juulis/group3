@@ -71,9 +71,9 @@ class GameEngineTest {
         assertFalse(gameEngine.isCardKilled(cardMock));
     }
 
-    @RepeatedTest(1000)
+    @Test
     void endTurn_testThatCurrentPlayerTogglesAfterEachRound() {
-        gameEngine.getPlayerToStart(1); // Set player one to start
+        gameEngine.getPlayerToStart(); // Set player one to start
         assertEquals(gameEngine.getP1(), gameEngine.getCurrentPlayer());
         assertEquals(gameEngine.getP2(), gameEngine.getOpponentPlayer());
 
@@ -97,13 +97,13 @@ class GameEngineTest {
 
     @Test
     void testSetCurrentPlayerSetToPlayer1() {
-        gameEngine.getPlayerToStart(1);
+        gameEngine.getPlayerToStart();
         assertEquals(gameEngine.getP1(), gameEngine.getCurrentPlayer());
     }
 
     @Test
     void testSetCurrentPlayerSetToPlayer2() {
-        gameEngine.getPlayerToStart(2);
+        gameEngine.getPlayerToStart();
         assertEquals(gameEngine.getP2(), gameEngine.getCurrentPlayer());
     }
 
