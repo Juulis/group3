@@ -1,13 +1,12 @@
-<<<<<<< HEAD
+
 
 package models;
 import models.Card;
 import models.Deck;
 import models.GameEngine;
 import models.Player;
-=======
-package models;
->>>>>>> 5d7c495a7331a13f2cf95de70e38b4ff19801ddf
+
+
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
@@ -30,7 +29,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class GameEngineTest {
-   Card currentCard;
+    Card currentCard;
     Card opponentCard;
     Player p1;
     Player p2;
@@ -50,14 +49,13 @@ class GameEngineTest {
     ArrayList<Card> p1TableCardsMock, p2TableCardsMock;
 
 
-
     @BeforeEach
     void setUp() {
-        gameEngine=new GameEngine();
-        currentCard=new Card();
-        opponentCard=new Card();
-        p1=new Player();
-        p2=new Player();
+        gameEngine = new GameEngine();
+        currentCard = new Card();
+        opponentCard = new Card();
+        p1 = new Player();
+        p2 = new Player();
 
 
         gameEngine = new GameEngine();
@@ -79,7 +77,7 @@ class GameEngineTest {
 
         gameEngine.initPlayer();
 
-        verify(deckMock,times(1)).playerDeck();
+        verify(deckMock, times(1)).playerDeck();
         verify(deckMock, times(1)).getPlayerOneDeck();
         verify(deckMock, times(1)).getPlayerTwoDeck();
         verify(p1Mock, times(1)).setCurrentDeck(playerOneDeckMock);
@@ -131,8 +129,8 @@ class GameEngineTest {
     @Test
     void showTable() {
 
-        int size1=2;
-        int size2=3;
+        int size1 = 2;
+        int size2 = 3;
         gameEngine.setP1(p1Mock);
         gameEngine.setP2(p2Mock);
         when(p1Mock.getTableCards()).thenReturn(p1TableCardsMock);
@@ -146,13 +144,13 @@ class GameEngineTest {
         verify(p2Mock, times(1)).getTableCards();
         verify(p1TableCardsMock, times(size1)).get(anyInt());
         verify(p2TableCardsMock, times(size2)).get(anyInt());
-        verify(cardMock, times(size1+size2)).getHp();
+        verify(cardMock, times(size1 + size2)).getHp();
 
     }
 
-<<<<<<< HEAD
+
     @Test
-    void newTurnNewCard(){
+    void newTurnNewCard() {
         gameEngine.getPlayerToStart(1);
         Player player1 = gameEngine.getCurrentPlayer();
         player1.getCurrentDeck().add(new Card());
@@ -192,49 +190,47 @@ class GameEngineTest {
 
         player2.pickupCard();
         assertEquals(3, player2.getPlayerHand().size());
-=======
-
-    @RepeatedTest(100)
-    void testplayerEnginAttack() {
-        Card spyCurrentCard=Mockito.spy(currentCard);
-        Card spyOpponentCard=Mockito.spy(opponentCard);
-        Player spyCurrentPlayer=Mockito.spy(p1);
-        Player spyOpponentPlayer=Mockito.spy(p2);
-        assertNotNull(spyCurrentCard);
-        assertNotNull(spyOpponentCard);
-
-        assertNotNull(spyCurrentPlayer);
-        assertNotNull(spyOpponentPlayer);
-
-        gameEngine.setP1(spyCurrentPlayer);
-        gameEngine.setP2(spyOpponentPlayer);
-
-        verify(spyOpponentCard, atMost(100)).attack();
-        verify(spyCurrentCard, atMost(100)).attack();
-
-        int currentPlayerAttack= spyCurrentCard.attack();
-        int opponentPlayerAttack= spyOpponentCard.attack();
-
-        assertThat(currentPlayerAttack).isBetween(1, 6);
-        assertThat(opponentPlayerAttack).isBetween(1, 6);
-
-        int damage=currentPlayerAttack-opponentPlayerAttack;
-        assertTrue(Math.abs(damage)>=0);
-        assertFalse(Math.abs(damage)<0);
-
-        verify(spyCurrentCard, atMost(100)).removeHp(damage);
-        verify(spyOpponentCard, atMost(100)).removeHp(damage);
-        verify(spyCurrentCard, atMost(100)).tap();
-        verify(spyOpponentCard, atMost(100)).tap();
-        verify(spyCurrentPlayer, atMost(100)).sendToGraveyard(spyCurrentCard);
-        verify(spyOpponentPlayer, atMost(100)).sendToGraveyard(spyOpponentCard);
-
-
-        gameEngine.attack(spyCurrentCard,spyOpponentCard);
-
-
->>>>>>> 5d7c495a7331a13f2cf95de70e38b4ff19801ddf
 
     }
+        @RepeatedTest(100)
+        void testplayerEnginAttack(){
+            Card spyCurrentCard = Mockito.spy(currentCard);
+            Card spyOpponentCard = Mockito.spy(opponentCard);
+            Player spyCurrentPlayer = Mockito.spy(p1);
+            Player spyOpponentPlayer = Mockito.spy(p2);
+            assertNotNull(spyCurrentCard);
+            assertNotNull(spyOpponentCard);
 
-}
+            assertNotNull(spyCurrentPlayer);
+            assertNotNull(spyOpponentPlayer);
+
+            gameEngine.setP1(spyCurrentPlayer);
+            gameEngine.setP2(spyOpponentPlayer);
+
+            verify(spyOpponentCard, atMost(100)).attack();
+            verify(spyCurrentCard, atMost(100)).attack();
+
+            int currentPlayerAttack = spyCurrentCard.attack();
+            int opponentPlayerAttack = spyOpponentCard.attack();
+
+            assertThat(currentPlayerAttack).isBetween(1, 6);
+            assertThat(opponentPlayerAttack).isBetween(1, 6);
+
+            int damage = currentPlayerAttack - opponentPlayerAttack;
+            assertTrue(Math.abs(damage) >= 0);
+            assertFalse(Math.abs(damage) < 0);
+
+            verify(spyCurrentCard, atMost(100)).removeHp(damage);
+            verify(spyOpponentCard, atMost(100)).removeHp(damage);
+            verify(spyCurrentCard, atMost(100)).tap();
+            verify(spyOpponentCard, atMost(100)).tap();
+            verify(spyCurrentPlayer, atMost(100)).sendToGraveyard(spyCurrentCard);
+            verify(spyOpponentPlayer, atMost(100)).sendToGraveyard(spyOpponentCard);
+
+
+            gameEngine.attack(spyCurrentCard, spyOpponentCard);
+
+
+        }
+
+    }
