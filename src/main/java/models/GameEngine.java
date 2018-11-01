@@ -83,8 +83,10 @@ public class GameEngine {
     public void getPlayerToStart(int randomNr) {
         if (randomNr == 1) {
             currentPlayer = p1;
+            opponentPlayer = p2;
         } else {
             currentPlayer = p2;
+            opponentPlayer = p1;
         }
     }
 
@@ -99,10 +101,10 @@ public class GameEngine {
     public void endTurn() {
         if (currentPlayer == p1) {
             currentPlayer = p2;
-            
+            opponentPlayer = p1;
         } else {
             currentPlayer = p1;
-
+            opponentPlayer = p2;
         }
     }
 
