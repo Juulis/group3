@@ -47,9 +47,11 @@ public class GameEngine {
         while (game) {
             initGame();
             while (playing) {
+                turn++;
                 //TODO: implement some checks here, firstRun etc
                 playerMenu();
                 //TODO: implement turnchange here, playerToggle
+
             }
         }
     }
