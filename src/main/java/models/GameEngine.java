@@ -16,7 +16,7 @@ public class GameEngine {
     private Player p1, p2;
     private ArrayList<Card> gameCards;
     private Player currentPlayer;
-    private Player opponent;
+    private Player opponentPlayer;
     private Deck deck;
     private boolean game;
     private boolean playing;
@@ -88,6 +88,10 @@ public class GameEngine {
         }
     }
 
+    public Player getOpponentPlayer(){
+        return opponentPlayer;
+    }
+
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
@@ -95,8 +99,10 @@ public class GameEngine {
     public void endTurn() {
         if (currentPlayer == p1) {
             currentPlayer = p2;
+            
         } else {
             currentPlayer = p1;
+
         }
     }
 

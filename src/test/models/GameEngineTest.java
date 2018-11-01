@@ -75,15 +75,19 @@ class GameEngineTest {
     void endTurn_testThatCurrentPlayerTogglesAfterEachRound() {
         gameEngine.getPlayerToStart(1); // Set player one to start
         assertEquals(gameEngine.getP1(), gameEngine.getCurrentPlayer());
+        assertEquals(gameEngine.getP2(), gameEngine.getOpponentPlayer());
 
         gameEngine.endTurn();
         assertEquals(gameEngine.getP2(), gameEngine.getCurrentPlayer());
+        assertEquals(gameEngine.getP1(), gameEngine.getOpponentPlayer());
 
         gameEngine.endTurn();
         assertEquals(gameEngine.getP1(), gameEngine.getCurrentPlayer());
+        assertEquals(gameEngine.getP2(), gameEngine.getOpponentPlayer());
 
         gameEngine.endTurn();
         assertEquals(gameEngine.getP2(), gameEngine.getCurrentPlayer());
+        assertEquals(gameEngine.getP1(), gameEngine.getOpponentPlayer());
     }
 
     @RepeatedTest(1000)
