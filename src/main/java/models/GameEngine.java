@@ -79,20 +79,12 @@ public class GameEngine {
     public void checkCardsLeft () {
         if (p1.getCurrentDeck().size() == 0) {
             System.out.println("Congratulations!" + p1 + " is the Winner");
-            try{
-                Thread.sleep(3000);
-            }catch(Exception e){
-                e.printStackTrace();
-            }
+
             playing = false;
 
         }else if (p2.getCurrentDeck().size() == 0){
             System.out.println("Congratulations!" + p2 + " is the Winner");
-            try{
-                Thread.sleep(3000);
-            }catch(Exception e){
-                e.printStackTrace();
-            }
+
             playing = false;
         }
 
@@ -101,20 +93,12 @@ public class GameEngine {
     public void checkPlayerHealth(){
         if (p1.getHealth() == 0) {
             System.out.println("Congratulations!" + p1 + " is the Winner");
-            try{
-                Thread.sleep(3000);
-            }catch(Exception e){
-                e.printStackTrace();
-            }
+
             playing = false;
 
         }else if (p2.getHealth() == 0){
             System.out.println("Congratulations!" + p2 + " is the Winner");
-            try{
-                Thread.sleep(3000);
-            }catch(Exception e){
-                e.printStackTrace();
-            }
+
             playing = false;
         }
 
@@ -140,7 +124,7 @@ public class GameEngine {
     public void endTurn() {
         checkPlayerHealth();
         checkCardsLeft();
-        
+
         if (currentPlayer == p1) {
             currentPlayer = p2;
         } else {
