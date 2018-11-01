@@ -16,7 +16,7 @@ public class GameEngine {
     private Player p1, p2;
     private ArrayList<Card> gameCards;
     private Player currentPlayer;
-    private Player opponent;
+    private Player opponentPlayer;
     private Deck deck;
     private boolean game;
     private boolean playing;
@@ -124,7 +124,7 @@ public class GameEngine {
             opponentsCard.removeHp(damage);
             if (isCardKilled(opponentsCard))
             {
-                p2.sendToGraveyard(opponentsCard);
+                opponentPlayer.sendToGraveyard(opponentsCard);
             }
 
         }else if (currentPlayerAttack<opponentPlayerAttack)
@@ -132,7 +132,7 @@ public class GameEngine {
             currentPlayerCard.removeHp(damage);
         if (isCardKilled(currentPlayerCard))
         {
-            p1.sendToGraveyard(currentPlayerCard);
+            currentPlayer.sendToGraveyard(currentPlayerCard);
 
         }
         currentPlayerCard.tap();
@@ -161,7 +161,13 @@ public class GameEngine {
                 currentPlayer.playCard(playCard);
                 break;
             case 3:
-                break;
+                System.out.println("what card you like to attack with");
+                int attackCard=sc.nextInt();
+
+                System.out.println("what card do you want to attack?");
+                int cardToAttack=sc.nextInt();
+                attack(currentPlayer.getTableCards().get(attackCard),opponentPlayer.getTableCards().get(cardToAttack));
+               
             case 4:
                 break;
         }
