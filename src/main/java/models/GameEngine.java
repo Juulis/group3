@@ -11,6 +11,7 @@ public class GameEngine {
         game = true;
         playing = true;
         deck = new Deck();
+        turn = 0;
     }
 
     private Player p1, p2;
@@ -20,6 +21,7 @@ public class GameEngine {
     private Deck deck;
     private boolean game;
     private boolean playing;
+    private int turn;
 
     public void setP1(Player p) {
         this.p1 = p;
@@ -131,6 +133,12 @@ public class GameEngine {
                 currentPlayer.playCard(playCard);
                 break;
             case 3:
+                if(turn > 2){
+                    //TODO: place attack() here
+                }
+                else{
+                    System.out.println("You can't attack the first round!");
+                }
                 break;
             case 4:
                 break;
