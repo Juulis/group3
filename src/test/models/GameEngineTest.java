@@ -151,13 +151,13 @@ class GameEngineTest {
         assertNotNull(spyCurrentCard);
         assertNotNull(spyOpponentCard);
 
-        assertNotNull(spyOpponentPlayer);
+        assertNotNull(spyCurrentPlayer);
         assertNotNull(spyOpponentPlayer);
 
         gameEngine.setP1(spyCurrentPlayer);
-        gameEngine.setP2(spyCurrentPlayer);
+        gameEngine.setP2(spyOpponentPlayer);
 
-        verify(spyCurrentCard, atMost(100)).attack();
+        verify(spyOpponentCard, atMost(100)).attack();
         verify(spyCurrentCard, atMost(100)).attack();
 
         int currentPlayerAttack= spyCurrentCard.attack();
