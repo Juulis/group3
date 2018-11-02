@@ -157,7 +157,7 @@ class GameEngineTest {
         assertEquals(gameEngineSpy.getCurrentPlayer(), gameEngineSpy.getP1());
     }
 
-    @RepeatedTest(100)
+    @Test
     void testSetCurrentPlayer_SetToPlayer2() {
         when(gameEngineSpy.makeRandom()).thenReturn(randMock);
         when(randMock.nextBoolean()).thenReturn(false);
