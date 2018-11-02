@@ -146,28 +146,37 @@ public class GameEngine {
     }
 
     public void attack(Card currentPlayerCard, Card opponentsCard){
-        int currentPlayerAttack=currentPlayerCard.attack();
-        int opponentPlayerAttack=opponentsCard.attack();
+        int currentPlayerAttack = currentPlayerCard.attack();
+        if (opponentsCard==null){
+            opponentPlayer.removeHp(currentPlayerAttack);
 
-        int damage=currentPlayerAttack-opponentPlayerAttack;
-        damage=Math.abs(damage);
+        }else {
+            int opponentPlayerAttack = opponentsCard.attack();
+            int damage=currentPlayerAttack-opponentPlayerAttack;
+            damage=Math.abs(damage);
 
-        if (currentPlayerAttack>opponentPlayerAttack){
-            opponentsCard.removeHp(damage);
-            if (isCardKilled(opponentsCard))
+            if (currentPlayerAttack>opponentPlayerAttack){
+
+                opponentsCard.removeHp(damage);
+                if (isCardKilled(opponentsCard))
+                {
+                    opponentPlayer.sendToGraveyard(opponentsCard);
+                }
+
+            }else if (currentPlayerAttack<opponentPlayerAttack)
+
+                currentPlayerCard.removeHp(damage);
+            if (isCardKilled(currentPlayerCard))
             {
-                opponentPlayer.sendToGraveyard(opponentsCard);
+                currentPlayer.sendToGraveyard(currentPlayerCard);
+
             }
 
-        }else if (currentPlayerAttack<opponentPlayerAttack)
-
-            currentPlayerCard.removeHp(damage);
-        if (isCardKilled(currentPlayerCard))
-        {
-            currentPlayer.sendToGraveyard(currentPlayerCard);
-
         }
+
         currentPlayerCard.tap();
+
+
     }
 
 
@@ -195,10 +204,14 @@ public class GameEngine {
             case 3:
                 System.out.println("what card you like to attack with");
                 int attackCard=sc.nextInt();
-
                 System.out.println("what card do you want to attack?");
                 int cardToAttack=sc.nextInt();
-                attack(currentPlayer.getTableCards().get(attackCard),opponentPlayer.getTableCards().get(cardToAttack));
+                if (opponentPlayer.getTableCards().isEmpty()){
+                    attack(currentPlayer.getTableCards().get(attackCard-1),null);
+                }else {
+                    attack(currentPlayer.getTableCards().get(attackCard-1),opponentPlayer.getTableCards().get(cardToAttack-1));
+                }
+
                
             case 4:
                 break;

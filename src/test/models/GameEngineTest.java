@@ -186,6 +186,9 @@ class GameEngineTest {
 
     @RepeatedTest(100)
     void testplayerEnginAttack() {
+        when(p2TableCardsMock.isEmpty()).thenReturn(true);
+        assertTrue(p2TableCardsMock.isEmpty());
+
         Card spyCurrentCard=Mockito.spy(currentCard);
         Card spyOpponentCard=Mockito.spy(opponentCard);
         Player spyCurrentPlayer=Mockito.spy(p1);
