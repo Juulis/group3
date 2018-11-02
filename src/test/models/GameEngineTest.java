@@ -9,7 +9,6 @@ import org.mockito.junit.jupiter.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -21,12 +20,11 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class GameEngineTest {
-   Card currentCard;
+    Card currentCard;
     Card opponentCard;
     Player p1;
     Player p2;
@@ -43,9 +41,7 @@ class GameEngineTest {
     Deck deckMock;
     int currentPlayer;
     @Mock
-    ArrayList<Card> p1TableCardsMock, p2TableCardsMock;
-
-
+    ArrayList<Card> currentTableCardsMock, currentHandCardsMock, opponentTableCardsMock;
 
     @Spy
     ArrayList<Card> gameCardsSpy = spy(new ArrayList<Card>());
@@ -55,13 +51,10 @@ class GameEngineTest {
 
     @BeforeEach
     void setUp() {
-        gameEngine=new GameEngine();
         currentCard=new Card();
         opponentCard=new Card();
         p1=new Player();
         p2=new Player();
-
-
         gameEngine = new GameEngine();
         Random rand = new Random();
         currentPlayer = rand.nextInt(2) + 1;
@@ -162,22 +155,31 @@ class GameEngineTest {
     @Test
     void showTable() {
 
-        int size1=2;
-        int size2=3;
+        int size1 = 2;
+        int size2 = 3;
+        int size3 = 4;
         gameEngine.setP1(p1Mock);
         gameEngine.setP2(p2Mock);
-        when(p1Mock.getTableCards()).thenReturn(p1TableCardsMock);
-        when(p2Mock.getTableCards()).thenReturn(p2TableCardsMock);
-        when(p1TableCardsMock.size()).thenReturn(size1);
-        when(p2TableCardsMock.size()).thenReturn(size2);
-        when(p1TableCardsMock.get(anyInt())).thenReturn(cardMock);
-        when(p2TableCardsMock.get(anyInt())).thenReturn(cardMock);
+        when(p1Mock.getTableCards()).thenReturn(currentTableCardsMock);
+        when(p1Mock.getPlayerHand()).thenReturn(currentHandCardsMock);
+        when(p2Mock.getTableCards()).thenReturn(opponentTableCardsMock);
+        when(currentTableCardsMock.size()).thenReturn(size1);
+        when(currentHandCardsMock.size()).thenReturn(size3);
+        when(opponentTableCardsMock.size()).thenReturn(size2);
+        when(currentTableCardsMock.get(anyInt())).thenReturn(cardMock);
+        when(currentHandCardsMock.get(anyInt())).thenReturn(cardMock);
+        when(opponentTableCardsMock.get(anyInt())).thenReturn(cardMock);
+        gameEngine.getPlayerToStart(1);
         gameEngine.showTable();
+        verify(p1Mock,times(1)).getHealth();
+        verify(p2Mock, times(1)).getHealth();
         verify(p1Mock, times(1)).getTableCards();
+        verify(p1Mock, times(1)).getPlayerHand();
         verify(p2Mock, times(1)).getTableCards();
-        verify(p1TableCardsMock, times(size1)).get(anyInt());
-        verify(p2TableCardsMock, times(size2)).get(anyInt());
-        verify(cardMock, times(size1+size2)).getHp();
+        verify(currentTableCardsMock, times(size1)).get(anyInt());
+        verify(currentHandCardsMock, times(size3)).get(anyInt());
+        verify(opponentTableCardsMock, times(size2)).get(anyInt());
+        verify(cardMock, times(size1+size2+size3)).getHp();
 
     }
 
