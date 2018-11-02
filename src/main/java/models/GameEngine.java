@@ -12,7 +12,6 @@ public class GameEngine {
         playing = true;
         deck = new Deck();
     }
-    int roundCounter = 1;
     private Player p1, p2;
     private ArrayList<Card> gameCards;
     private Player currentPlayer;
