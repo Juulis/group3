@@ -171,6 +171,8 @@ class GameEngineTest {
         when(opponentTableCardsMock.get(anyInt())).thenReturn(cardMock);
         gameEngine.getPlayerToStart(1);
         gameEngine.showTable();
+        verify(p1Mock,times(1)).getHealth();
+        verify(p2Mock, times(1)).getHealth();
         verify(p1Mock, times(1)).getTableCards();
         verify(p1Mock, times(1)).getPlayerHand();
         verify(p2Mock, times(1)).getTableCards();
