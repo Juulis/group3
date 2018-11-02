@@ -167,7 +167,7 @@ public class GameEngine {
                 System.out.println("what card do you want to attack?");
                 int cardToAttack=sc.nextInt();
                 attack(currentPlayer.getTableCards().get(attackCard),opponentPlayer.getTableCards().get(cardToAttack));
-               
+
             case 4:
                 break;
         }
