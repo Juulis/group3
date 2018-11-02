@@ -1,5 +1,7 @@
 package models;
 
+import models.*;
+
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -9,8 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class PlayerTest {
@@ -20,6 +21,7 @@ class PlayerTest {
     ArrayList<Card> mockHandList;
     ArrayList<Card> mockHandList2;
     ArrayList<Card> mockTableList;
+    GameEngine gameEngine;
 
     @Mock
     Card cardMock;
@@ -32,6 +34,7 @@ class PlayerTest {
         mockHandList2 = new ArrayList<Card>();
         mockTableList = new ArrayList<Card>();
         mockTableList.add(mockHandList.get(1));
+        gameEngine = new GameEngine();
     }
 
     @Test
@@ -88,4 +91,5 @@ class PlayerTest {
         assertEquals(expected, player.getHealth());
 
     }
+
 }
