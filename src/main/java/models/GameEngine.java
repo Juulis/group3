@@ -12,7 +12,6 @@ public class GameEngine {
         playing = true;
         deck = new Deck();
     }
-
     private Player p1, p2;
     private ArrayList<Card> gameCards;
     private Player currentPlayer;
@@ -130,6 +129,7 @@ public class GameEngine {
         } else {
             currentPlayer = p1;
         }
+        currentPlayer.pickupCard();
     }
 
     /**
@@ -265,4 +265,6 @@ public class GameEngine {
         System.out.println();
 
     }
+
+
 }
