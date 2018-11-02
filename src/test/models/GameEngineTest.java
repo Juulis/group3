@@ -28,6 +28,11 @@ class GameEngineTest {
 
     private GameEngine gameEngine;
 
+    @Spy
+    GameEngine gameEngineSpy;
+    @Mock
+    Random randMock;
+
     @Mock
     Player p1Mock, p2Mock;
     @Mock
@@ -89,38 +94,42 @@ class GameEngineTest {
 
     @Test
     void endTurn_testThatCurrentPlayerTogglesAfterEachRound() {
-        gameEngine.getPlayerToStart(); // Set player one to start
-        assertEquals(gameEngine.getP1(), gameEngine.getCurrentPlayer());
-        assertEquals(gameEngine.getP2(), gameEngine.getOpponentPlayer());
+        when(gameEngineSpy.makeRandom()).thenReturn(randMock);
+        when(randMock.nextInt()).thenReturn(1);
 
-        gameEngine.endTurn();
-        assertEquals(gameEngine.getP2(), gameEngine.getCurrentPlayer());
-        assertEquals(gameEngine.getP1(), gameEngine.getOpponentPlayer());
+        assertNull(gameEngineSpy.getCurrentPlayer());
+        assertNull(gameEngineSpy.getOpponentPlayer());
 
-        gameEngine.endTurn();
-        assertEquals(gameEngine.getP1(), gameEngine.getCurrentPlayer());
-        assertEquals(gameEngine.getP2(), gameEngine.getOpponentPlayer());
+        gameEngineSpy.getPlayerToStart();
+        assertEquals(gameEngineSpy.getCurrentPlayer(), gameEngineSpy.getP1());
+        assertEquals(gameEngineSpy.getOpponentPlayer(), gameEngineSpy.getP2());
 
-        gameEngine.endTurn();
-        assertEquals(gameEngine.getP2(), gameEngine.getCurrentPlayer());
-        assertEquals(gameEngine.getP1(), gameEngine.getOpponentPlayer());
+        gameEngineSpy.endTurn();
+        verify(gameEngineSpy, times(1)).endTurn();
+        assertEquals(gameEngineSpy.getCurrentPlayer(), gameEngineSpy.getP2());
+        assertEquals(gameEngineSpy.getOpponentPlayer(), gameEngineSpy.getP1());
     }
 
-    @RepeatedTest(1000)
+    @RepeatedTest(100)
     void getStartingPlayer_testThatRandomIsBetween1Or2() {
-        assertThat(currentPlayer).isBetween(1, 2);
+        when(randMock.nextInt()).thenReturn(1, 2);
+        assertThat(randMock.nextInt()).isBetween(1,2);
     }
 
     @Test
-    void testSetCurrentPlayerSetToPlayer1() {
-        gameEngine.getPlayerToStart();
-        assertEquals(gameEngine.getP1(), gameEngine.getCurrentPlayer());
+    void testSetCurrentPlayer_SetToPlayer1() {
+        when(gameEngineSpy.makeRandom()).thenReturn(randMock);
+        when(randMock.nextInt()).thenReturn(1);
+        gameEngineSpy.getPlayerToStart();
+        assertEquals(gameEngineSpy.getCurrentPlayer(), gameEngineSpy.getP1());
     }
 
     @Test
-    void testSetCurrentPlayerSetToPlayer2() {
-        gameEngine.getPlayerToStart();
-        assertEquals(gameEngine.getP2(), gameEngine.getCurrentPlayer());
+    void testSetCurrentPlayer_SetToPlayer2() {
+        when(gameEngineSpy.makeRandom()).thenReturn(randMock);
+        when(randMock.nextInt()).thenReturn(2);
+        gameEngineSpy.getPlayerToStart();
+        assertEquals(gameEngineSpy.getCurrentPlayer(), gameEngineSpy.getP2());
     }
 
     @Test
