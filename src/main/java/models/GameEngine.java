@@ -218,6 +218,11 @@ public class GameEngine {
         int[] currentTable = new int[currentTableCards.size()];
         int[] opponentTable = new int[opponentTableCards.size()];
         int[] currentHand = new int[currentHandCards.size()];
+        int currentHealth = currentPlayer.getHealth();
+        int opponentHealth = opponentPlayer.getHealth();
+        System.out.print("Your health: " + currentHealth + " hp");
+        System.out.println();
+        System.out.println();
         System.out.print("Your hand: ");
         for (int i = 0; i < currentHandCards.size(); i++) {
 
@@ -241,6 +246,9 @@ public class GameEngine {
             opponentTable[j] = opponentTableCards.get(j).getHp();
             System.out.print(j+1+": "+opponentTable[j]+" hp  ");
         }
+        System.out.println();
+        System.out.println();
+        System.out.print("Opponents health: " + opponentHealth + " hp");
         System.out.println();
 
     }
