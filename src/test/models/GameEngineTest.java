@@ -272,7 +272,42 @@ class GameEngineTest {
 
             gameEngine.attack(spyCurrentCard, spyOpponentCard);
 
+    }
 
-        }
+    @Test
+    void checkIfTapped(){
+        gameEngine.getPlayerToStart(1);
+        Player player1 = gameEngine.getCurrentPlayer();
+        player1.getCurrentDeck().add(new Card());
+        player1.getCurrentDeck().add(new Card());
+        player1.getCurrentDeck().add(new Card());
+        player1.getCurrentDeck().add(new Card());
+        player1.pickupCard();
+        player1.pickupCard();
+
+        assertEquals(2, player1.getPlayerHand().size());
+        gameEngine.getPlayerToStart(2);
+        Player player2 = gameEngine.getCurrentPlayer();
+        player2.getCurrentDeck().add(new Card());
+        player2.getCurrentDeck().add(new Card());
+        player2.getCurrentDeck().add(new Card());
+        player2.getCurrentDeck().add(new Card());
+
+        player2.pickupCard();
+        player2.pickupCard();
+
+        assertEquals(2, player2.getPlayerHand().size());
+
+        player1.playCard(1);
+        player2.playCard(1);
+
+        assertEquals(1, player1.getPlayerHand().size());
+        assertEquals(1, player2.getPlayerHand().size());
+        gameEngine.attack(player1.getTableCards().get(0),player2.getTableCards().get(0));
+
+        gameEngine.checkIfTapped(player1.getTableCards().get(0));
+
+        assertTrue( player1.getTableCards().get(0).getTapped());
+    }
 
     }
