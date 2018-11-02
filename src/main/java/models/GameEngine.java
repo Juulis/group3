@@ -11,7 +11,7 @@ public class GameEngine {
         game = true;
         playing = true;
         deck = new Deck();
-        turn = 0;
+        turn = 1;
     }
 
     private Player p1, p2;
@@ -47,10 +47,7 @@ public class GameEngine {
         while (game) {
             initGame();
             while (playing) {
-                turn++;
-                //TODO: implement some checks here, firstRun etc
                 playerMenu();
-                //TODO: implement turnchange here, playerToggle
             }
         }
     }
@@ -134,6 +131,7 @@ public class GameEngine {
             currentPlayer = p1;
         }
         currentPlayer.pickupCard();
+        turn++;
     }
 
     /**
