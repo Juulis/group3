@@ -1,4 +1,4 @@
-import models.*;
+package models;
 import org.junit.jupiter.api.*;
 
 import java.util.Random;

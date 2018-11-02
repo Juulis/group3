@@ -81,7 +81,7 @@ public class GameEngine {
      */
     public void getPlayerToStart() {
         Random rand = makeRandom();
-        int randomNr = rand.nextInt();
+        int randomNr = rand.nextInt(2) + 1;
         if (randomNr == 1) {
             currentPlayer = p1;
             opponentPlayer = p2;
