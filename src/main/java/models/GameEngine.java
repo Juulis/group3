@@ -195,6 +195,9 @@ public class GameEngine {
             case 3:
                 System.out.println("what card you like to attack with");
                 int attackCard=sc.nextInt();
+                if(checkIfTapped(currentPlayer.getTableCards().get(attackCard - 1))){
+                    break;
+                }
 
                 System.out.println("what card do you want to attack?");
                 int cardToAttack=sc.nextInt();
@@ -204,6 +207,16 @@ public class GameEngine {
                 break;
         }
 
+    }
+
+
+
+    public boolean checkIfTapped(Card card){
+        if (card.getTapped()){
+            System.out.println("Card is tapped, use another!");
+            return true;
+        }
+        return false;
     }
 
     /**
