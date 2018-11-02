@@ -114,27 +114,41 @@ public class GameEngine {
     }
 
     public void attack(Card currentPlayerCard, Card opponentsCard){
-        int currentPlayerAttack=currentPlayerCard.attack();
-        int opponentPlayerAttack=opponentsCard.attack();
-
+        int currentPlayerAttack = currentPlayerCard.attack();
+        int opponentPlayerAttack =opponentsCard.attack();
         int damage=currentPlayerAttack-opponentPlayerAttack;
         damage=Math.abs(damage);
 
         if (currentPlayerAttack>opponentPlayerAttack){
+
             opponentsCard.removeHp(damage);
+
             if (isCardKilled(opponentsCard))
+
             {
+
                 opponentPlayer.sendToGraveyard(opponentsCard);
+
             }
+
+
 
         }else if (currentPlayerAttack<opponentPlayerAttack)
 
+
+
             currentPlayerCard.removeHp(damage);
+
         if (isCardKilled(currentPlayerCard))
+
         {
+
             currentPlayer.sendToGraveyard(currentPlayerCard);
 
+
+
         }
+
         currentPlayerCard.tap();
     }
 
@@ -162,11 +176,17 @@ public class GameEngine {
                 break;
             case 3:
                 System.out.println("what card you like to attack with");
+
                 int attackCard=sc.nextInt();
 
+
+
                 System.out.println("what card do you want to attack?");
+
                 int cardToAttack=sc.nextInt();
+
                 attack(currentPlayer.getTableCards().get(attackCard),opponentPlayer.getTableCards().get(cardToAttack));
+
                
             case 4:
                 break;
