@@ -1,20 +1,20 @@
 package models;
 
-import models.*;
-
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 public class GameEngine {
 
-    public GameEngine(){
+    public GameEngine() {
         p1 = new Player();
         p2 = new Player();
         game = true;
         playing = true;
         deck = new Deck();
+        turn = 1;
     }
+
     private Player p1, p2;
     private ArrayList<Card> gameCards;
     private Player currentPlayer;
@@ -22,6 +22,7 @@ public class GameEngine {
     private Deck deck;
     private boolean game;
     private boolean playing;
+    private int turn;
 
     public void setP1(Player p) {
         this.p1 = p;
@@ -47,9 +48,7 @@ public class GameEngine {
         while (game) {
             initGame();
             while (playing) {
-                //TODO: implement some checks here, firstRun etc
                 playerMenu();
-                //TODO: implement turnchange here, playerToggle
             }
         }
     }
@@ -64,7 +63,7 @@ public class GameEngine {
      * setting the players decks and cards in hands
      */
     public void initPlayer() {
-
+        
         ArrayList<Card> playerOneDeck, playerTwoDeck;
         deck.playerDeck();
         playerOneDeck = deck.getPlayerOneDeck();
@@ -78,13 +77,13 @@ public class GameEngine {
 
     }
 
-    public void checkCardsLeft () {
+    public void checkCardsLeft() {
         if (p1.getCurrentDeck().size() == 0) {
             System.out.println("Congratulations!" + p2 + " is the Winner");
 
             playing = false;
 
-        }else if (p2.getCurrentDeck().size() == 0){
+        } else if (p2.getCurrentDeck().size() == 0) {
             System.out.println("Congratulations!" + p1 + " is the Winner");
 
             playing = false;
@@ -92,13 +91,13 @@ public class GameEngine {
 
     }
 
-    public void checkPlayerHealth(){
+    public void checkPlayerHealth() {
         if (p1.getHealth() <= 0) {
             System.out.println("Congratulations!" + p2 + " is the Winner");
 
             playing = false;
 
-        }else if (p2.getHealth() <= 0){
+        } else if (p2.getHealth() <= 0) {
             System.out.println("Congratulations!" + p1 + " is the Winner");
 
             playing = false;
@@ -149,6 +148,7 @@ public class GameEngine {
             opponentPlayer = p2;
         }
         currentPlayer.pickupCard();
+        turn++;
     }
 
     /**
@@ -164,44 +164,32 @@ public class GameEngine {
         return false;
     }
 
-    public void attack(Card currentPlayerCard, Card opponentsCard){
+    public void attack(Card currentPlayerCard, Card opponentsCard) {
         int currentPlayerAttack = currentPlayerCard.attack();
-        if (opponentsCard==null){
+        if (opponentsCard == null) {
             opponentPlayer.removeHp(currentPlayerAttack);
 
-        }else {
+        } else {
             int opponentPlayerAttack = opponentsCard.attack();
-            int damage=currentPlayerAttack-opponentPlayerAttack;
-            damage=Math.abs(damage);
+            int damage = currentPlayerAttack - opponentPlayerAttack;
+            damage = Math.abs(damage);
 
-            if (currentPlayerAttack>opponentPlayerAttack){
+            if (currentPlayerAttack > opponentPlayerAttack) {
 
                 opponentsCard.removeHp(damage);
-                if (isCardKilled(opponentsCard))
-                {
+                if (isCardKilled(opponentsCard)) {
                     opponentPlayer.sendToGraveyard(opponentsCard);
                 }
 
-            }else if (currentPlayerAttack<opponentPlayerAttack)
+            } else if (currentPlayerAttack < opponentPlayerAttack)
 
                 currentPlayerCard.removeHp(damage);
-            if (isCardKilled(currentPlayerCard))
-            {
+            if (isCardKilled(currentPlayerCard)) {
                 currentPlayer.sendToGraveyard(currentPlayerCard);
-
             }
-
         }
-
         currentPlayerCard.tap();
-
-
     }
-
-
-
-
-
 
     private void playerMenu() {
         Scanner sc = new Scanner(System.in);
@@ -221,22 +209,24 @@ public class GameEngine {
                 currentPlayer.playCard(playCard);
                 break;
             case 3:
-                System.out.println("what card you like to attack with");
-                int attackCard=sc.nextInt();
+                if (turn > 2) {
+                    System.out.println("what card you like to attack with");
+                    int attackCard = sc.nextInt();
+                    if (checkIfTapped(currentPlayer.getTableCards().get(attackCard - 1))) {
+                        break;
+                    }
 
-                if(checkIfTapped(currentPlayer.getTableCards().get(attackCard - 1))){
-                    break;
+                    System.out.println("what card do you want to attack?");
+                    int cardToAttack = sc.nextInt();
+                    if (opponentPlayer.getTableCards().isEmpty()) {
+                        attack(currentPlayer.getTableCards().get(attackCard), opponentPlayer.getTableCards().get(cardToAttack));
+                    } else {
+                        attack(currentPlayer.getTableCards().get(attackCard - 1), opponentPlayer.getTableCards().get(cardToAttack - 1));
+                    }
+
+                } else {
+                    System.out.println("You can't attack the first round!");
                 }
-
-                System.out.println("what card do you want to attack?");
-                int cardToAttack=sc.nextInt();
-                if (opponentPlayer.getTableCards().isEmpty()){
-                    attack(currentPlayer.getTableCards().get(attackCard-1),null);
-                }else {
-                    attack(currentPlayer.getTableCards().get(attackCard-1),opponentPlayer.getTableCards().get(cardToAttack-1));
-                }
-
-               
             case 4:
                 break;
         }
@@ -244,9 +234,8 @@ public class GameEngine {
     }
 
 
-
-    public boolean checkIfTapped(Card card){
-        if (card.getTapped()){
+    public boolean checkIfTapped(Card card) {
+        if (card.getTapped()) {
             System.out.println("Card is tapped, use another!");
             return true;
         }
@@ -257,7 +246,7 @@ public class GameEngine {
      * prints the cards on the table,
      * presented with hp values
      */
-    public void showTable(){
+    public void showTable() {
 
         ArrayList<Card> currentTableCards = currentPlayer.getTableCards();
         ArrayList<Card> opponentTableCards = opponentPlayer.getTableCards();
@@ -299,6 +288,4 @@ public class GameEngine {
         System.out.println();
 
     }
-
-
 }
