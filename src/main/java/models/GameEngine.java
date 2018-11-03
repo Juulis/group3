@@ -63,7 +63,7 @@ public class GameEngine {
      * setting the players decks and cards in hands
      */
     public void initPlayer() {
-        
+
         ArrayList<Card> playerOneDeck, playerTwoDeck;
         deck.playerDeck();
         playerOneDeck = deck.getPlayerOneDeck();
@@ -128,7 +128,7 @@ public class GameEngine {
         return new Random();
     }
 
-    public Player getOpponentPlayer(){
+    public Player getOpponentPlayer() {
         return opponentPlayer;
     }
 
@@ -193,12 +193,15 @@ public class GameEngine {
 
     private void playerMenu() {
         Scanner sc = new Scanner(System.in);
+        int input = 0;
         System.out.println("Here is your choices: \n" +
                 "1. Show table \n" +
                 "2. Play card on hand \n" +
                 "3. Attack a card \n" +
                 "4. End Turn");
-        int input = sc.nextInt();
+        try {
+            input = sc.nextInt();
+        } catch (Exception e){}
         switch (input) {
             case 1:
                 showTable();
@@ -263,24 +266,24 @@ public class GameEngine {
         for (int i = 0; i < currentHandCards.size(); i++) {
 
             currentHand[i] = currentHandCards.get(i).getHp();
-            System.out.print(i+1+": "+currentHand[i]+" hp  ");
+            System.out.print(i + 1 + ": " + currentHand[i] + " hp  ");
 
         }
         System.out.println();
         System.out.println();
         System.out.print("Your table: ");
-        for (int i = 0; i <currentTableCards.size() ; i++) {
+        for (int i = 0; i < currentTableCards.size(); i++) {
 
             currentTable[i] = currentTableCards.get(i).getHp();
-            System.out.print(i+1+": "+currentTable[i]+" hp  ");
+            System.out.print(i + 1 + ": " + currentTable[i] + " hp  ");
         }
         System.out.println();
         System.out.println();
         System.out.print("Opponents table: ");
-        for (int j = 0; j<opponentTableCards.size(); j++){
+        for (int j = 0; j < opponentTableCards.size(); j++) {
 
             opponentTable[j] = opponentTableCards.get(j).getHp();
-            System.out.print(j+1+": "+opponentTable[j]+" hp  ");
+            System.out.print(j + 1 + ": " + opponentTable[j] + " hp  ");
         }
         System.out.println();
         System.out.println();
