@@ -1,30 +1,26 @@
 package models;
-import models.Card;
-import models.Deck;
-import models.GameEngine;
-import models.Player;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-import models.*;
 import org.junit.jupiter.api.*;
-import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
+import org.mockito.junit.jupiter.*;
+
+
+import java.util.ArrayList;
 import java.util.Random;
+
+import static org.assertj.core.api.AssertionsForClassTypes.failBecauseExceptionWasNotThrown;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.Mockito.spy;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-
+import java.util.ArrayList;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class GameEngineTest {
@@ -34,6 +30,11 @@ class GameEngineTest {
     Player p2;
 
     private GameEngine gameEngine;
+
+    @Spy
+    GameEngine gameEngineSpy;
+    @Mock
+    Random randMock;
 
     @Mock
     Player p1Mock, p2Mock;
@@ -55,13 +56,13 @@ class GameEngineTest {
 
     @BeforeEach
     void setUp() {
-        currentCard = new Card();
-        opponentCard = new Card();
-        p1 = new Player();
-        p2 = new Player();
+        gameEngine=new GameEngine();
+        currentCard=new Card();
+        opponentCard=new Card();
+        p1=new Player();
+        p2=new Player();
         gameEngine = new GameEngine();
-        Random rand = new Random();
-        currentPlayer = rand.nextInt(2) + 1;
+
     }
 
     @Test
@@ -124,36 +125,44 @@ class GameEngineTest {
         assertFalse(gameEngine.isCardKilled(cardMock));
     }
 
-    @RepeatedTest(1000)
+    @RepeatedTest(100)
     void endTurn_testThatCurrentPlayerTogglesAfterEachRound() {
-        gameEngine.getPlayerToStart(1); // Set player one to start
-        assertEquals(gameEngine.getP1(), gameEngine.getCurrentPlayer());
+        when(gameEngineSpy.makeRandom()).thenReturn(randMock);
+        when(randMock.nextBoolean()).thenReturn(true); // Sets currentPlayer to P1
+        gameEngineSpy.determinePlayerToStart();
+        assertEquals(gameEngineSpy.getCurrentPlayer(), gameEngineSpy.getP1());
+        assertEquals(gameEngineSpy.getOpponentPlayer(), gameEngineSpy.getP2());
 
-        gameEngine.endTurn();
-        assertEquals(gameEngine.getP2(), gameEngine.getCurrentPlayer());
+        gameEngineSpy.getCurrentPlayer().getCurrentDeck().add(new Card());
+        gameEngineSpy.getOpponentPlayer().getCurrentDeck().add(new Card());
+        gameEngineSpy.endTurn();
 
-        gameEngine.endTurn();
-        assertEquals(gameEngine.getP1(), gameEngine.getCurrentPlayer());
-
-        gameEngine.endTurn();
-        assertEquals(gameEngine.getP2(), gameEngine.getCurrentPlayer());
-    }
-
-    @RepeatedTest(1000)
-    void getStartingPlayer_testThatRandomIsBetween1Or2() {
-        assertThat(currentPlayer).isBetween(1, 2);
+        assertEquals(gameEngineSpy.getCurrentPlayer(), gameEngineSpy.getP2());
+        assertEquals(gameEngineSpy.getOpponentPlayer(), gameEngineSpy.getP1());
     }
 
     @Test
-    void testSetCurrentPlayerSetToPlayer1() {
-        gameEngine.getPlayerToStart(1);
-        assertEquals(gameEngine.getP1(), gameEngine.getCurrentPlayer());
+    void getStartingPlayer_testThatRandomIsTrueOrFalse() {
+        when(randMock.nextBoolean()).thenReturn(true).thenReturn(false);
+        assertTrue(randMock.nextBoolean());
+        assertFalse(randMock.nextBoolean());
+
     }
 
     @Test
-    void testSetCurrentPlayerSetToPlayer2() {
-        gameEngine.getPlayerToStart(2);
-        assertEquals(gameEngine.getP2(), gameEngine.getCurrentPlayer());
+    void testSetCurrentPlayer_SetToPlayer1() {
+        when(gameEngineSpy.makeRandom()).thenReturn(randMock);
+        when(randMock.nextBoolean()).thenReturn(true);
+        gameEngineSpy.determinePlayerToStart();
+        assertEquals(gameEngineSpy.getCurrentPlayer(), gameEngineSpy.getP1());
+    }
+
+    @Test
+    void testSetCurrentPlayer_SetToPlayer2() {
+        when(gameEngineSpy.makeRandom()).thenReturn(randMock);
+        when(randMock.nextBoolean()).thenReturn(false);
+        gameEngineSpy.determinePlayerToStart();
+        assertEquals(gameEngineSpy.getCurrentPlayer(), gameEngineSpy.getP2());
     }
 
     @Test
@@ -173,7 +182,7 @@ class GameEngineTest {
         when(currentTableCardsMock.get(anyInt())).thenReturn(cardMock);
         when(currentHandCardsMock.get(anyInt())).thenReturn(cardMock);
         when(opponentTableCardsMock.get(anyInt())).thenReturn(cardMock);
-        gameEngine.getPlayerToStart(1);
+        gameEngine.getPlayerToStart(true);
         gameEngine.showTable();
         verify(p1Mock, times(1)).getHealth();
         verify(p2Mock, times(1)).getHealth();
@@ -184,56 +193,55 @@ class GameEngineTest {
         verify(currentHandCardsMock, times(size3)).get(anyInt());
         verify(opponentTableCardsMock, times(size2)).get(anyInt());
         verify(cardMock, times(size1 + size2 + size3)).getHp();
-        verify(cardMock, times(size1 + size2)).getHp();
 
     }
 
 
 
 
-        @Test
-        void newTurnNewCard(){
-            gameEngine.getPlayerToStart(1);
-            Player player1 = gameEngine.getCurrentPlayer();
-            player1.getCurrentDeck().add(new Card());
-            player1.getCurrentDeck().add(new Card());
-            player1.getCurrentDeck().add(new Card());
-            player1.getCurrentDeck().add(new Card());
-            player1.pickupCard();
-            player1.pickupCard();
+    @Test
+    void newTurnNewCard(){
+        gameEngine.getPlayerToStart(true);
+        Player player1 = gameEngine.getCurrentPlayer();
+        player1.getCurrentDeck().add(new Card());
+        player1.getCurrentDeck().add(new Card());
+        player1.getCurrentDeck().add(new Card());
+        player1.getCurrentDeck().add(new Card());
+        player1.pickupCard();
+        player1.pickupCard();
 
-            assertEquals(2, player1.getPlayerHand().size());
-            player1.playCard(1);
-            assertEquals(1, player1.getPlayerHand().size());
+        assertEquals(2, player1.getPlayerHand().size());
+        player1.playCard(1);
+        assertEquals(1, player1.getPlayerHand().size());
 
-            gameEngine.getPlayerToStart(2);
-            Player player2 = gameEngine.getCurrentPlayer();
-            player2.getCurrentDeck().add(new Card());
-            player2.getCurrentDeck().add(new Card());
-            player2.getCurrentDeck().add(new Card());
-            player2.getCurrentDeck().add(new Card());
-            player2.pickupCard();
-            player2.pickupCard();
+        gameEngine.getPlayerToStart(false);
+        Player player2 = gameEngine.getCurrentPlayer();
+        player2.getCurrentDeck().add(new Card());
+        player2.getCurrentDeck().add(new Card());
+        player2.getCurrentDeck().add(new Card());
+        player2.getCurrentDeck().add(new Card());
+        player2.pickupCard();
+        player2.pickupCard();
 
-            assertEquals(2, player2.getPlayerHand().size());
-            player2.playCard(1);
-            assertEquals(1, player2.getPlayerHand().size());
+        assertEquals(2, player2.getPlayerHand().size());
+        player2.playCard(1);
+        assertEquals(1, player2.getPlayerHand().size());
 
-            gameEngine.endTurn();
-            player1.pickupCard();
+        gameEngine.endTurn();
+        player1.pickupCard();
 
-            /*Reason it jumps from 1 card to 3 cards is because endTurn method
-             * calls pickUp method. So it picks up on endTurn method and player1.pickupCard();
-             * same thing applies to player2*/
+        /*Reason it jumps from 1 card to 3 cards is because endTurn method
+         * calls pickUp method. So it picks up on endTurn method and player1.pickupCard();
+         * same thing applies to player2*/
 
-            assertEquals(3, player1.getPlayerHand().size());
+        assertEquals(3, player1.getPlayerHand().size());
 
-            gameEngine.endTurn();
+        gameEngine.endTurn();
 
-            player2.pickupCard();
-            assertEquals(3, player2.getPlayerHand().size());
+        player2.pickupCard();
+        assertEquals(3, player2.getPlayerHand().size());
 
-        }
+    }
         @RepeatedTest(100)
         void testplayerEnginAttack () {
             Card spyCurrentCard = Mockito.spy(currentCard);
@@ -276,7 +284,7 @@ class GameEngineTest {
 
     @Test
     void checkIfTapped(){
-        gameEngine.getPlayerToStart(1);
+        gameEngine.getPlayerToStart(true);
         Player player1 = gameEngine.getCurrentPlayer();
         player1.getCurrentDeck().add(new Card());
         player1.getCurrentDeck().add(new Card());
@@ -286,7 +294,7 @@ class GameEngineTest {
         player1.pickupCard();
 
         assertEquals(2, player1.getPlayerHand().size());
-        gameEngine.getPlayerToStart(2);
+        gameEngine.getPlayerToStart(false);
         Player player2 = gameEngine.getCurrentPlayer();
         player2.getCurrentDeck().add(new Card());
         player2.getCurrentDeck().add(new Card());

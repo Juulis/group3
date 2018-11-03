@@ -1,6 +1,9 @@
 package models;
 
+import models.*;
+
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class GameEngine {
@@ -105,15 +108,29 @@ public class GameEngine {
 
     /**
      * Determines if p1 or p2 is going to start
-     *
-     * @param randomNr
      */
-    public void getPlayerToStart(int randomNr) {
-        if (randomNr == 1) {
+    public void determinePlayerToStart() {
+        Random rand = makeRandom();
+        boolean random = rand.nextBoolean();
+        getPlayerToStart(random);
+    }
+
+    public void getPlayerToStart(boolean random) {
+        if (random) {
             currentPlayer = p1;
+            opponentPlayer = p2;
         } else {
             currentPlayer = p2;
+            opponentPlayer = p1;
         }
+    }
+
+    public Random makeRandom() {
+        return new Random();
+    }
+
+    public Player getOpponentPlayer(){
+        return opponentPlayer;
     }
 
     public Player getCurrentPlayer() {
@@ -126,8 +143,10 @@ public class GameEngine {
 
         if (currentPlayer == p1) {
             currentPlayer = p2;
+            opponentPlayer = p1;
         } else {
             currentPlayer = p1;
+            opponentPlayer = p2;
         }
         currentPlayer.pickupCard();
     }
