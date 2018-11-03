@@ -43,8 +43,6 @@ public class Card {
         this.tapped = false;
     }
 
-    ;
-
     public boolean getTapped() {
         return this.tapped;
     }
