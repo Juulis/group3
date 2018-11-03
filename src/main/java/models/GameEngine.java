@@ -147,7 +147,7 @@ public class GameEngine {
             currentPlayer = p1;
             opponentPlayer = p2;
         }
-        currentPlayer.pickupCard();
+
         turn++;
     }
 
@@ -164,21 +164,32 @@ public class GameEngine {
         return false;
     }
 
-    public void attack(Card currentPlayerCard, Card opponentsCard) {
+    public void attack(Card currentPlayerCard, Card opponentCard) {
         int currentPlayerAttack = currentPlayerCard.attack();
-        if (opponentsCard == null) {
-            opponentPlayer.removeHp(currentPlayerAttack);
-
+        int opponentPlayerAttack = opponentCard.attack();
+        System.out.println("---------------------------DICE ROLLED-------------------------------");
+        System.out.println("You rolled rolled " + currentPlayerAttack);
+        System.out.println("Your opponent rolled " + opponentPlayerAttack);
+        if (currentPlayerAttack > opponentPlayerAttack) {
+            int amountOfAttack = currentPlayerAttack - opponentPlayerAttack;
+            System.out.println("Player 1 gets to attack Player 2 with: " + amountOfAttack + " dmg");
         } else {
-            int opponentPlayerAttack = opponentsCard.attack();
+            int amountOfAttack = opponentPlayerAttack - currentPlayerAttack;
+            System.out.println("Player 2 gets to attack Player 1 with : " + amountOfAttack + " dmg");
+        }
+        System.out.println("---------------------------------------------------------------------");
+        System.out.println();
+        if (opponentCard == null) {
+            opponentPlayer.removeHp(currentPlayerAttack);
+        } else {
             int damage = currentPlayerAttack - opponentPlayerAttack;
             damage = Math.abs(damage);
 
             if (currentPlayerAttack > opponentPlayerAttack) {
 
-                opponentsCard.removeHp(damage);
-                if (isCardKilled(opponentsCard)) {
-                    opponentPlayer.sendToGraveyard(opponentsCard);
+                opponentCard.removeHp(damage);
+                if (isCardKilled(opponentCard)) {
+                    opponentPlayer.sendToGraveyard(opponentCard);
                 }
 
             } else if (currentPlayerAttack < opponentPlayerAttack)

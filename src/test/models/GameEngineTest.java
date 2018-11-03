@@ -139,6 +139,10 @@ class GameEngineTest {
 
         assertEquals(gameEngineSpy.getCurrentPlayer(), gameEngineSpy.getP2());
         assertEquals(gameEngineSpy.getOpponentPlayer(), gameEngineSpy.getP1());
+
+        gameEngineSpy.endTurn();
+        assertEquals(gameEngineSpy.getCurrentPlayer(), gameEngineSpy.getP1());
+        assertEquals(gameEngineSpy.getOpponentPlayer(), gameEngineSpy.getP2());
     }
 
     @Test
