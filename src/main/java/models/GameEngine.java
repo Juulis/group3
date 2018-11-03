@@ -63,7 +63,7 @@ public class GameEngine {
      * setting the players decks and cards in hands
      */
     public void initPlayer() {
-
+        determinePlayerToStart();
         ArrayList<Card> playerOneDeck, playerTwoDeck;
         deck.playerDeck();
         playerOneDeck = deck.getPlayerOneDeck();
@@ -230,7 +230,9 @@ public class GameEngine {
                 } else {
                     System.out.println("You can't attack the first round!");
                 }
+                break;
             case 4:
+                endTurn();
                 break;
         }
 
@@ -250,6 +252,14 @@ public class GameEngine {
      * presented with hp values
      */
     public void showTable() {
+        System.out.println("--------------------------------------------------------------------");
+        if (currentPlayer == p1)
+            System.out.println("Player 1");
+        if (currentPlayer == p2)
+            System.out.println("Player 2");
+        System.out.println("Turn " + turn);
+        System.out.println("----------");
+
 
         ArrayList<Card> currentTableCards = currentPlayer.getTableCards();
         ArrayList<Card> opponentTableCards = opponentPlayer.getTableCards();
@@ -290,5 +300,7 @@ public class GameEngine {
         System.out.print("Opponents health: " + opponentHealth + " hp");
         System.out.println();
 
+
+        System.out.println("--------------------------------------------------------------------");
     }
 }
