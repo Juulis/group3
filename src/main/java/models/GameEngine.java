@@ -16,7 +16,6 @@ public class GameEngine {
     }
 
     private Player p1, p2;
-    private ArrayList<Card> gameCards;
     private Player currentPlayer;
     private Player opponentPlayer;
     private Deck deck;
@@ -194,12 +193,15 @@ public class GameEngine {
 
     private void playerMenu() {
         Scanner sc = new Scanner(System.in);
+        int input = 0;
         System.out.println("Here is your choices: \n" +
                 "1. Show table \n" +
                 "2. Play card on hand \n" +
                 "3. Attack a card \n" +
                 "4. End Turn");
-        int input = sc.nextInt();
+        try {
+            input = sc.nextInt();
+        } catch (Exception e){}
         switch (input) {
             case 1:
                 showTable();
