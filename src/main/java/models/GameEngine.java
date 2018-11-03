@@ -128,7 +128,7 @@ public class GameEngine {
         return new Random();
     }
 
-    public Player getOpponentPlayer(){
+    public Player getOpponentPlayer() {
         return opponentPlayer;
     }
 
@@ -248,6 +248,14 @@ public class GameEngine {
      * presented with hp values
      */
     public void showTable() {
+        System.out.println("--------------------------------------------------------------------");
+        if (currentPlayer == p1)
+            System.out.println("Player 1");
+        if (currentPlayer == p2)
+            System.out.println("Player 2");
+        System.out.println("Turn " + turn);
+        System.out.println("----------");
+
 
         ArrayList<Card> currentTableCards = currentPlayer.getTableCards();
         ArrayList<Card> opponentTableCards = opponentPlayer.getTableCards();
@@ -264,29 +272,31 @@ public class GameEngine {
         for (int i = 0; i < currentHandCards.size(); i++) {
 
             currentHand[i] = currentHandCards.get(i).getHp();
-            System.out.print(i+1+": "+currentHand[i]+" hp  ");
+            System.out.print(i + 1 + ": " + currentHand[i] + " hp  ");
 
         }
         System.out.println();
         System.out.println();
         System.out.print("Your table: ");
-        for (int i = 0; i <currentTableCards.size() ; i++) {
+        for (int i = 0; i < currentTableCards.size(); i++) {
 
             currentTable[i] = currentTableCards.get(i).getHp();
-            System.out.print(i+1+": "+currentTable[i]+" hp  ");
+            System.out.print(i + 1 + ": " + currentTable[i] + " hp  ");
         }
         System.out.println();
         System.out.println();
         System.out.print("Opponents table: ");
-        for (int j = 0; j<opponentTableCards.size(); j++){
+        for (int j = 0; j < opponentTableCards.size(); j++) {
 
             opponentTable[j] = opponentTableCards.get(j).getHp();
-            System.out.print(j+1+": "+opponentTable[j]+" hp  ");
+            System.out.print(j + 1 + ": " + opponentTable[j] + " hp  ");
         }
         System.out.println();
         System.out.println();
         System.out.print("Opponents health: " + opponentHealth + " hp");
         System.out.println();
 
+
+        System.out.println("--------------------------------------------------------------------");
     }
 }
