@@ -323,24 +323,21 @@ class GameEngineTest {
 
         int size=2;
         gameEngine.setP1(p1Mock);
-        gameEngine.setP2(p2Mock);
         when(p1Mock.getTableCards()).thenReturn(currentTableCardsMock);
-        when(p2Mock.getTableCards()).thenReturn(opponentTableCardsMock);
         when(currentTableCardsMock.size()).thenReturn(size);
-        when(opponentTableCardsMock.size()).thenReturn(size);
         when(currentTableCardsMock.get(anyInt())).thenReturn(cardMock);
-        when(opponentTableCardsMock.get(anyInt())).thenReturn(cardMock);
-        when(cardMock.getTapped()).thenReturn(true);
+        when(cardMock.getTapped()).thenReturn(true,false, false, true);
+
+        gameEngine.getPlayerToStart(true);
+        gameEngine.unTap();
+
+        verify(p1Mock,times(1)).getTableCards();
+        verify(currentTableCardsMock,times(size)).get(anyInt());
+        verify(cardMock,times(size)).getTapped();
+        verify(cardMock,times(1)).unTap();
 
         gameEngine.unTap();
 
-        verify(p1Mock,atMost(1)).getTableCards();
-        verify(p2Mock, atMost(1)).getTableCards();
-        verify(currentTableCardsMock,atMost(size)).get(anyInt());
-        verify(opponentTableCardsMock,atMost(size)).get(anyInt());
-        verify(cardMock,times(size)).getTapped();
-        verify(cardMock,times(size)).unTap();
-        when(cardMock.getTapped()).thenReturn(true).thenReturn(false);
-        verify(cardMock,times(1)).unTap();
+        verify(cardMock,times(2)).unTap();
     }
 }
