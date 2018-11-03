@@ -193,7 +193,6 @@ public class GameEngine {
         System.out.println();
 
 
-
         if (!playerAttack && currentPlayerAttack > opponentPlayerAttack) {
             opponentCard.removeHp(damage);
             if (isCardKilled(opponentCard)) {
@@ -221,7 +220,8 @@ public class GameEngine {
                 "4. End Turn");
         try {
             input = sc.nextInt();
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
+            System.out.println("You can only type numbers for menu");
         }
         switch (input) {
             case 1:
