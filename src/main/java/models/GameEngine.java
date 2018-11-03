@@ -147,7 +147,7 @@ public class GameEngine {
             currentPlayer = p1;
             opponentPlayer = p2;
         }
-        currentPlayer.pickupCard();
+
         turn++;
     }
 
@@ -168,8 +168,8 @@ public class GameEngine {
         int currentPlayerAttack = currentPlayerCard.attack();
         int opponentPlayerAttack = opponentCard.attack();
         System.out.println("---------------------------DICE ROLLED-------------------------------");
-        System.out.println("Player 1 rolled " + currentPlayerAttack);
-        System.out.println("Player 2 rolled " + opponentPlayerAttack);
+        System.out.println("You rolled rolled " + currentPlayerAttack);
+        System.out.println("Your opponent rolled " + opponentPlayerAttack);
         if (currentPlayerAttack > opponentPlayerAttack) {
             int amountOfAttack = currentPlayerAttack - opponentPlayerAttack;
             System.out.println("Player 1 gets to attack Player 2 with: " + amountOfAttack + " dmg");
