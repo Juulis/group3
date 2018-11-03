@@ -318,4 +318,26 @@ class GameEngineTest {
         assertTrue( player1.getTableCards().get(0).getTapped());
     }
 
+    @Test
+    void unTap() {
+
+        int size=2;
+        gameEngine.setP1(p1Mock);
+        when(p1Mock.getTableCards()).thenReturn(currentTableCardsMock);
+        when(currentTableCardsMock.size()).thenReturn(size);
+        when(currentTableCardsMock.get(anyInt())).thenReturn(cardMock);
+        when(cardMock.getTapped()).thenReturn(true,false, false, true);
+
+        gameEngine.getPlayerToStart(true);
+        gameEngine.unTap();
+
+        verify(p1Mock,times(1)).getTableCards();
+        verify(currentTableCardsMock,times(size)).get(anyInt());
+        verify(cardMock,times(size)).getTapped();
+        verify(cardMock,times(1)).unTap();
+
+        gameEngine.unTap();
+
+        verify(cardMock,times(2)).unTap();
     }
+}
