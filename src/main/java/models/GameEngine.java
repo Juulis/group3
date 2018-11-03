@@ -1,5 +1,6 @@
 package models;
 
+import java.util.InputMismatchException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -147,6 +148,7 @@ public class GameEngine {
             currentPlayer = p1;
             opponentPlayer = p2;
         }
+        currentPlayer.pickupCard();
         turn++;
     }
 
