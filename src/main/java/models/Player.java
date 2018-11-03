@@ -69,8 +69,12 @@ public class Player {
      */
     public void playCard(int playCardNr) {
         int correctedPlayCardNr = playCardNr - 1;
-        tableCards.add(playerHand.get(correctedPlayCardNr));
-        playerHand.remove((correctedPlayCardNr));
+        try {
+            tableCards.add(playerHand.get(correctedPlayCardNr));
+            playerHand.remove(correctedPlayCardNr);
+        } catch(Exception e){
+            System.out.println("That card does not exist");
+        }
     }
 
     /**
