@@ -1,6 +1,8 @@
 package models;
 
+import java.security.spec.ECField;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -210,18 +212,45 @@ public class GameEngine {
                 break;
             case 3:
                 if (turn > 2) {
+                    int attackCard;
+                    int cardToAttack;
+
+
                     System.out.println("what card you like to attack with");
-                    int attackCard = sc.nextInt();
-                    if (checkIfTapped(currentPlayer.getTableCards().get(attackCard - 1))) {
+                    try {
+                        attackCard = sc.nextInt();
+                    } catch (InputMismatchException e) {
+                        System.out.println("You need to input the number of the card you want to pick, try again");
                         break;
                     }
 
+
+                    try {
+                        if (checkIfTapped(currentPlayer.getTableCards().get(attackCard - 1))) {
+                            break;
+                        }
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("That card does not exist");
+                        break;
+                    }
+
+
                     System.out.println("what card do you want to attack?");
-                    int cardToAttack = sc.nextInt();
-                    if (opponentPlayer.getTableCards().isEmpty()) {
-                        attack(currentPlayer.getTableCards().get(attackCard), opponentPlayer.getTableCards().get(cardToAttack));
-                    } else {
-                        attack(currentPlayer.getTableCards().get(attackCard - 1), opponentPlayer.getTableCards().get(cardToAttack - 1));
+                    try {
+                        cardToAttack = sc.nextInt();
+                    } catch (InputMismatchException e) {
+                        System.out.println("You need to input the number of the card you want to pick, try again");
+                        break;
+                    }
+
+                    try {
+                        if (opponentPlayer.getTableCards().isEmpty()) {
+                            attack(currentPlayer.getTableCards().get(attackCard), opponentPlayer.getTableCards().get(cardToAttack));
+                        } else {
+                            attack(currentPlayer.getTableCards().get(attackCard - 1), opponentPlayer.getTableCards().get(cardToAttack - 1));
+                        }
+                    } catch (IndexOutOfBoundsException e) {
+                            System.out.println("That card does not exist");
                     }
 
                 } else {
