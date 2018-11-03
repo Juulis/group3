@@ -1,6 +1,7 @@
 package models;
 
 import java.security.spec.ECField;
+import java.util.InputMismatchException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Random;
@@ -149,7 +150,7 @@ public class GameEngine {
             currentPlayer = p1;
             opponentPlayer = p2;
         }
-
+        currentPlayer.pickupCard();
         turn++;
     }
 
