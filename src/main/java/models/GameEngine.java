@@ -178,21 +178,21 @@ public class GameEngine {
             opponentPlayerAttack = new Card().attack();
         }
 
+        int damage = currentPlayerAttack - opponentPlayerAttack;
+        damage = Math.abs(damage);
+
         System.out.println("---------------------------DICE ROLLED-------------------------------");
         System.out.println("You rolled rolled " + currentPlayerAttack);
         System.out.println("Your opponent rolled " + opponentPlayerAttack);
         if (currentPlayerAttack > opponentPlayerAttack) {
-            int amountOfAttack = currentPlayerAttack - opponentPlayerAttack;
-            System.out.println("You get to attack the other player with: " + amountOfAttack + " dmg");
+            System.out.println("You get to attack the other player with: " + damage + " dmg");
         } else {
-            int amountOfAttack = opponentPlayerAttack - currentPlayerAttack;
-            System.out.println("you lost and is being attacked with : " + amountOfAttack + " dmg");
+            System.out.println("you lost and is being attacked with : " + damage + " dmg");
         }
         System.out.println("---------------------------------------------------------------------");
         System.out.println();
 
-        int damage = currentPlayerAttack - opponentPlayerAttack;
-        damage = Math.abs(damage);
+
 
         if (!playerAttack && currentPlayerAttack > opponentPlayerAttack) {
             opponentCard.removeHp(damage);
