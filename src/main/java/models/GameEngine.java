@@ -63,7 +63,7 @@ public class GameEngine {
      * setting the players decks and cards in hands
      */
     public void initPlayer() {
-        
+        determinePlayerToStart();
         ArrayList<Card> playerOneDeck, playerTwoDeck;
         deck.playerDeck();
         playerOneDeck = deck.getPlayerOneDeck();
@@ -228,6 +228,7 @@ public class GameEngine {
                     System.out.println("You can't attack the first round!");
                 }
             case 4:
+                endTurn();
                 break;
         }
 
