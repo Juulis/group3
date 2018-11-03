@@ -289,4 +289,8 @@ public class GameEngine {
         System.out.println();
 
     }
+
+    public void unTap(){
+
+    }
 }
