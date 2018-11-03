@@ -16,7 +16,6 @@ public class GameEngine {
     }
 
     private Player p1, p2;
-    private ArrayList<Card> gameCards;
     private Player currentPlayer;
     private Player opponentPlayer;
     private Deck deck;
