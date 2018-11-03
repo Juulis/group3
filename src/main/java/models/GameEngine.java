@@ -227,6 +227,7 @@ public class GameEngine {
                 } else {
                     System.out.println("You can't attack the first round!");
                 }
+                break;
             case 4:
                 endTurn();
                 break;
