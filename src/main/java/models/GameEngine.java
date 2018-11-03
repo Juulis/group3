@@ -138,6 +138,7 @@ public class GameEngine {
     public void endTurn() {
         checkPlayerHealth();
         checkCardsLeft();
+        unTap();
 
         if (currentPlayer == p1) {
             currentPlayer = p2;
@@ -301,5 +302,21 @@ public class GameEngine {
 
 
         System.out.println("--------------------------------------------------------------------");
+    }
+
+    /**
+     * untaps all current players tapped cards
+     */
+    public void unTap(){
+
+        ArrayList<Card> cards = currentPlayer.getTableCards();
+        Card card;
+
+        for (int i = 0; i < cards.size(); i++) {
+
+            card = cards.get(i);
+            if (card.getTapped())
+                card.unTap();
+        }
     }
 }
