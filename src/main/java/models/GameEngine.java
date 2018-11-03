@@ -147,7 +147,6 @@ public class GameEngine {
             currentPlayer = p1;
             opponentPlayer = p2;
         }
-
         turn++;
     }
 
