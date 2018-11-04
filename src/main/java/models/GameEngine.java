@@ -183,12 +183,14 @@ public class GameEngine {
         damage = Math.abs(damage);
 
         System.out.println("---------------------------DICE ROLLED-------------------------------");
-        System.out.println("You rolled rolled " + currentPlayerAttack);
+        System.out.println("You rolled " + currentPlayerAttack);
         System.out.println("Your opponent rolled " + opponentPlayerAttack);
         if (currentPlayerAttack > opponentPlayerAttack) {
-            System.out.println("You get to attack the other player with: " + damage + " dmg");
+            int amountOfAttack = currentPlayerAttack - opponentPlayerAttack;
+            System.out.println("You get to attack your opponent with: " + amountOfAttack + " dmg");
         } else {
-            System.out.println("you lost and is being attacked with : " + damage + " dmg");
+            int amountOfAttack = opponentPlayerAttack - currentPlayerAttack;
+            System.out.println("Your opponent gets to attack you with : " + amountOfAttack + " dmg");
         }
         System.out.println("---------------------------------------------------------------------");
         System.out.println();
@@ -205,6 +207,7 @@ public class GameEngine {
             currentPlayerCard.removeHp(damage);
             if (isCardKilled(currentPlayerCard)) {
                 currentPlayer.sendToGraveyard(currentPlayerCard);
+                System.out.println("You lost one card");
             }
         }
 

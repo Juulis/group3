@@ -1,6 +1,6 @@
 package models;
 
-import models.*;
+
 import org.junit.jupiter.api.*;
 
 import java.util.Random;
@@ -19,7 +19,7 @@ class CardTest {
 
     @RepeatedTest(1000)
     void randomizeHealthPoint() {
-        assertThat(card.randomizeHp()).isBetween(1, 20);
+        assertThat(card.randomizeHp()).isBetween(1, 7);
     }
 
     @Test
