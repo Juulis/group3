@@ -1,4 +1,5 @@
-package sample;//import javafx.application.Application;
+package sample;
+//import javafx.application.Application;
 //import javafx.fxml.FXMLLoader;
 //import javafx.scene.Parent;
 //import javafx.scene.Scene;
@@ -16,7 +17,8 @@ package sample;//import javafx.application.Application;
 //        primaryStage.show();
 //    }
 
-import models.GameEngine;
+
+import models.*;
 
 public class Main {
     public static void main(String[] args) {
