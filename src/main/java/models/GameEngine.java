@@ -191,6 +191,7 @@ public class GameEngine {
                 opponentCard.removeHp(damage);
                 if (isCardKilled(opponentCard)) {
                     opponentPlayer.sendToGraveyard(opponentCard);
+                    System.out.println("Your opponent lost one card");
                 }
 
             } else if (currentPlayerAttack < opponentPlayerAttack)
@@ -198,6 +199,7 @@ public class GameEngine {
                 currentPlayerCard.removeHp(damage);
             if (isCardKilled(currentPlayerCard)) {
                 currentPlayer.sendToGraveyard(currentPlayerCard);
+                System.out.println("You lost one card");
             }
         }
         currentPlayerCard.tap();
