@@ -176,7 +176,7 @@ public class GameEngine {
         } catch (NullPointerException e) {
             System.out.println("Attacking Opponent!");
             playerAttack = true;
-            opponentPlayerAttack = new Card().attack();
+            opponentPlayerAttack = 0;
         }
 
         int damage = currentPlayerAttack - opponentPlayerAttack;
