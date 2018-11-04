@@ -15,10 +15,10 @@ public class Card {
     /**
      * Determines hp of card
      *
-     * @return random nr between 1-20
+     * @return random nr between 1-7
      */
     public int randomizeHp() {
-        return rand.nextInt(20) + 1;
+        return rand.nextInt(7) + 1;
     }
 
     public int getHp() {
