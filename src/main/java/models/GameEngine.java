@@ -169,14 +169,14 @@ public class GameEngine {
         int currentPlayerAttack = currentPlayerCard.attack();
         int opponentPlayerAttack = opponentCard.attack();
         System.out.println("---------------------------DICE ROLLED-------------------------------");
-        System.out.println("You rolled rolled " + currentPlayerAttack);
+        System.out.println("You rolled " + currentPlayerAttack);
         System.out.println("Your opponent rolled " + opponentPlayerAttack);
         if (currentPlayerAttack > opponentPlayerAttack) {
             int amountOfAttack = currentPlayerAttack - opponentPlayerAttack;
-            System.out.println("Player 1 gets to attack Player 2 with: " + amountOfAttack + " dmg");
+            System.out.println("You get to attack your opponent with: " + amountOfAttack + " dmg");
         } else {
             int amountOfAttack = opponentPlayerAttack - currentPlayerAttack;
-            System.out.println("Player 2 gets to attack Player 1 with : " + amountOfAttack + " dmg");
+            System.out.println("Your opponent gets to attack you with : " + amountOfAttack + " dmg");
         }
         System.out.println("---------------------------------------------------------------------");
         System.out.println();
@@ -191,6 +191,7 @@ public class GameEngine {
                 opponentCard.removeHp(damage);
                 if (isCardKilled(opponentCard)) {
                     opponentPlayer.sendToGraveyard(opponentCard);
+                    System.out.println("Your opponent lost one card");
                 }
 
             } else if (currentPlayerAttack < opponentPlayerAttack)
@@ -198,6 +199,7 @@ public class GameEngine {
                 currentPlayerCard.removeHp(damage);
             if (isCardKilled(currentPlayerCard)) {
                 currentPlayer.sendToGraveyard(currentPlayerCard);
+                System.out.println("You lost one card");
             }
         }
         currentPlayerCard.tap();
