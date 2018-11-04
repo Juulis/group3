@@ -1,7 +1,9 @@
 package models;
 
+import java.security.spec.ECField;
 import java.util.InputMismatchException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -166,8 +168,20 @@ public class GameEngine {
     }
 
     public void attack(Card currentPlayerCard, Card opponentCard) {
+        boolean playerAttack = false;
         int currentPlayerAttack = currentPlayerCard.attack();
-        int opponentPlayerAttack = opponentCard.attack();
+        int opponentPlayerAttack;
+        try {
+            opponentPlayerAttack = opponentCard.attack();
+        } catch (NullPointerException e) {
+            System.out.println("Attacking Opponent!");
+            playerAttack = true;
+            opponentPlayerAttack = 0;
+        }
+
+        int damage = currentPlayerAttack - opponentPlayerAttack;
+        damage = Math.abs(damage);
+
         System.out.println("---------------------------DICE ROLLED-------------------------------");
         System.out.println("You rolled " + currentPlayerAttack);
         System.out.println("Your opponent rolled " + opponentPlayerAttack);
@@ -180,28 +194,23 @@ public class GameEngine {
         }
         System.out.println("---------------------------------------------------------------------");
         System.out.println();
-        if (opponentCard == null) {
-            opponentPlayer.removeHp(currentPlayerAttack);
-        } else {
-            int damage = currentPlayerAttack - opponentPlayerAttack;
-            damage = Math.abs(damage);
 
-            if (currentPlayerAttack > opponentPlayerAttack) {
 
-                opponentCard.removeHp(damage);
-                if (isCardKilled(opponentCard)) {
-                    opponentPlayer.sendToGraveyard(opponentCard);
-                    System.out.println("Your opponent lost one card");
-                }
-
-            } else if (currentPlayerAttack < opponentPlayerAttack)
-
-                currentPlayerCard.removeHp(damage);
+        if (!playerAttack && currentPlayerAttack > opponentPlayerAttack) {
+            opponentCard.removeHp(damage);
+            if (isCardKilled(opponentCard)) {
+                opponentPlayer.sendToGraveyard(opponentCard);
+            }
+        } else if (playerAttack && currentPlayerAttack > opponentPlayerAttack) {
+            opponentPlayer.removeHp(damage);
+        } else if (currentPlayerAttack < opponentPlayerAttack) {
+            currentPlayerCard.removeHp(damage);
             if (isCardKilled(currentPlayerCard)) {
                 currentPlayer.sendToGraveyard(currentPlayerCard);
                 System.out.println("You lost one card");
             }
         }
+
         currentPlayerCard.tap();
     }
 
@@ -215,9 +224,9 @@ public class GameEngine {
                 "4. End Turn");
         try {
             input = sc.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("You can only type numbers for menu");
-            }
+        } catch (InputMismatchException e) {
+            System.out.println("You can only type numbers for menu");
+        }
         switch (input) {
             case 1:
                 showTable();
@@ -229,20 +238,42 @@ public class GameEngine {
                 break;
             case 3:
                 if (turn > 2) {
+                    int attackCard;
+                    int cardToAttack;
+
+
                     System.out.println("what card you like to attack with");
-                    int attackCard = sc.nextInt();
-                    if (checkIfTapped(currentPlayer.getTableCards().get(attackCard - 1))) {
+                    try {
+                        attackCard = sc.nextInt();
+                    } catch (InputMismatchException e) {
+                        System.out.println("You need to input the number of the card you want to pick, try again");
                         break;
                     }
 
-                    System.out.println("what card do you want to attack?");
-                    int cardToAttack = sc.nextInt();
-                    if (opponentPlayer.getTableCards().isEmpty()) {
-                        attack(currentPlayer.getTableCards().get(attackCard), opponentPlayer.getTableCards().get(cardToAttack));
-                    } else {
-                        attack(currentPlayer.getTableCards().get(attackCard - 1), opponentPlayer.getTableCards().get(cardToAttack - 1));
+
+                    try {
+                        if (checkIfTapped(currentPlayer.getTableCards().get(attackCard - 1))) {
+                            break;
+                        }
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("That card does not exist");
+                        break;
                     }
 
+                    if (!opponentPlayer.getTableCards().isEmpty()) {
+                        System.out.println("what card do you want to attack?");
+                        try {
+                            cardToAttack = sc.nextInt();
+                            attack(currentPlayer.getTableCards().get(attackCard - 1), opponentPlayer.getTableCards().get(cardToAttack - 1));
+                        } catch (InputMismatchException e) {
+                            System.out.println("You need to input the number of the card you want to pick, try again");
+                            break;
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println("That card does not exist");
+                        }
+                    } else {
+                        attack(currentPlayer.getTableCards().get(attackCard - 1), null);
+                    }
                 } else {
                     System.out.println("You can't attack the first round!");
                 }
@@ -323,7 +354,7 @@ public class GameEngine {
     /**
      * untaps all current players tapped cards
      */
-    public void unTap(){
+    public void unTap() {
 
         ArrayList<Card> cards = currentPlayer.getTableCards();
         Card card;
