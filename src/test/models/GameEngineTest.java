@@ -46,7 +46,7 @@ class GameEngineTest {
     Deck deckMock;
     int currentPlayer;
     @Mock
-    ArrayList<Card> currentTableCardsMock, currentHandCardsMock, opponentTableCardsMock;
+    ArrayList<Card> currentTableCardsMock, currentHandCardsMock, opponentTableCardsMock, opponentHandCardsMock;
 
     @Spy
     ArrayList<Card> gameCardsSpy = spy(new ArrayList<Card>());
@@ -343,5 +343,33 @@ class GameEngineTest {
         gameEngine.unTap();
 
         verify(cardMock,times(2)).unTap();
+    }
+
+    @Test
+    void checkCardsLeft() {
+        gameEngine.setP1(p1Mock);
+        gameEngine.setP2(p2Mock);
+        when(p1Mock.getCurrentDeck()).thenReturn(playerOneDeckMock);
+        when(p2Mock.getCurrentDeck()).thenReturn(playerTwoDeckMock);
+        when(p1Mock.getPlayerHand()).thenReturn(currentHandCardsMock);
+        when(p2Mock.getPlayerHand()).thenReturn(opponentHandCardsMock);
+        when(p1Mock.getTableCards()).thenReturn(currentTableCardsMock);
+        when(p2Mock.getTableCards()).thenReturn(opponentTableCardsMock);
+
+        gameEngine.checkCardsLeft();
+
+        verify(p1Mock, times(1)).getCurrentDeck();
+        verify(p2Mock, times(1)).getCurrentDeck();
+        verify(p1Mock, times(1)).getPlayerHand();
+        verify(p2Mock, times(1)).getPlayerHand();
+        verify(p1Mock, times(1)).getTableCards();
+        verify(p2Mock, times(1)).getTableCards();
+        verify(playerOneDeckMock, times(1)).size();
+        verify(playerTwoDeckMock, times(1)).size();
+        verify(currentHandCardsMock, times(1)).size();
+        verify(opponentHandCardsMock, times(1)).size();
+        verify(currentTableCardsMock, times(1)).size();
+        verify(opponentTableCardsMock, times(1)).size();
+
     }
 }
