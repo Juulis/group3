@@ -81,7 +81,7 @@ public class GameEngine {
 
     public void checkCardsLeft() {
         if (p1.getCurrentDeck().size() == 0) {
-            System.out.println("Congratulations Player2 is the Winner");
+            System.out.println("Congratulations! Player2 is the Winner");
 
             playing = false;
 
