@@ -200,7 +200,8 @@ public class GameEngine {
             opponentCard.removeHp(damage);
             if (isCardKilled(opponentCard)) {
                 opponentPlayer.sendToGraveyard(opponentCard);
-                System.out.println("*** You killed a card***\n");
+                System.out.println("You killed a card\n");
+                System.out.println("---------------------------------------------------------------------");
             }
         } else if (playerAttack && currentPlayerAttack > opponentPlayerAttack) {
             opponentPlayer.removeHp(damage);
@@ -208,7 +209,8 @@ public class GameEngine {
             currentPlayerCard.removeHp(damage);
             if (isCardKilled(currentPlayerCard)) {
                 currentPlayer.sendToGraveyard(currentPlayerCard);
-                System.out.println("*** You lost a card ***\n");
+                System.out.println("You lost a card\n");
+                System.out.println("---------------------------------------------------------------------");
             }
         }
 
