@@ -80,12 +80,13 @@ public class GameEngine {
     }
 
     public void checkCardsLeft() {
-        if (p1.getCurrentDeck().size() == 0) {
+        if (p1.getCurrentDeck().size() == 0 && p1.getPlayerHand().size() == 0 && p1.getTableCards().size() == 0) {
             System.out.println("Congratulations!" + p2 + " is the Winner");
 
             playing = false;
 
-        } else if (p2.getCurrentDeck().size() == 0) {
+        }
+        if (p2.getCurrentDeck().size() == 0 && p2.getPlayerHand().size() == 0 && p2.getTableCards().size() == 0) {
             System.out.println("Congratulations!" + p1 + " is the Winner");
 
             playing = false;
