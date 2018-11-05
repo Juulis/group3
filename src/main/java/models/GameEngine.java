@@ -81,12 +81,12 @@ public class GameEngine {
 
     public void checkCardsLeft() {
         if (p1.getCurrentDeck().size() == 0) {
-            System.out.println("Congratulations!" + p2 + " is the Winner");
+            System.out.println("Congratulations Player2 is the Winner");
 
             playing = false;
 
         } else if (p2.getCurrentDeck().size() == 0) {
-            System.out.println("Congratulations!" + p1 + " is the Winner");
+            System.out.println("Congratulations! Player1 is the Winner");
 
             playing = false;
         }
@@ -200,6 +200,7 @@ public class GameEngine {
             opponentCard.removeHp(damage);
             if (isCardKilled(opponentCard)) {
                 opponentPlayer.sendToGraveyard(opponentCard);
+                System.out.println("*** You killed a card***\n");
             }
         } else if (playerAttack && currentPlayerAttack > opponentPlayerAttack) {
             opponentPlayer.removeHp(damage);
@@ -207,11 +208,12 @@ public class GameEngine {
             currentPlayerCard.removeHp(damage);
             if (isCardKilled(currentPlayerCard)) {
                 currentPlayer.sendToGraveyard(currentPlayerCard);
-                System.out.println("You lost one card");
+                System.out.println("*** You lost a card ***\n");
             }
         }
 
         currentPlayerCard.tap();
+        checkPlayerHealth();
     }
 
     private void playerMenu() {
