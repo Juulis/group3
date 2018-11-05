@@ -215,25 +215,35 @@ public class GameEngine {
     }
 
     private void playerMenu() {
-        Scanner sc = new Scanner(System.in);
-        int input = 0;
-        System.out.println("Here is your choices: \n" +
+        int input;
+        System.out.println(
+                "------------------------------------------------- \n" +
+                (currentPlayer == p1 ? "Player 1 \n" : "Player 2 \n") +
+                "Here are your choices: \n" +
                 "1. Show table \n" +
                 "2. Play card on hand \n" +
                 "3. Attack a card \n" +
-                "4. End Turn");
-        try {
-            input = sc.nextInt();
-        } catch (InputMismatchException e) {
-            System.out.println("You can only type numbers for menu");
-        }
+                "4. End Turn \n" +
+                "-------------------------------------------------");
+        input = getInput();
+
         switch (input) {
+            case 0:
+                playerMenu();
+                break;
             case 1:
                 showTable();
                 break;
             case 2:
-                System.out.println("what card do you want to play out?");
-                int playCard = sc.nextInt();
+                int playCard;
+                System.out.println("what card do you want to play out? (0 to cancel)");
+
+                playCard = getInput();
+                if (playCard == 0) {
+                            playerMenu();
+                            return;
+                }
+
                 currentPlayer.playCard(playCard);
                 break;
             case 3:
@@ -241,15 +251,13 @@ public class GameEngine {
                     int attackCard;
                     int cardToAttack;
 
+                    System.out.println("what card you like to attack with? (0 to cancel)");
 
-                    System.out.println("what card you like to attack with");
-                    try {
-                        attackCard = sc.nextInt();
-                    } catch (InputMismatchException e) {
-                        System.out.println("You need to input the number of the card you want to pick, try again");
-                        break;
+                    attackCard = getInput();
+                    if (attackCard == 0) {
+                            playerMenu();
+                            return;
                     }
-
 
                     try {
                         if (checkIfTapped(currentPlayer.getTableCards().get(attackCard - 1))) {
@@ -263,11 +271,9 @@ public class GameEngine {
                     if (!opponentPlayer.getTableCards().isEmpty()) {
                         System.out.println("what card do you want to attack?");
                         try {
-                            cardToAttack = sc.nextInt();
+                            cardToAttack = getInput();
                             attack(currentPlayer.getTableCards().get(attackCard - 1), opponentPlayer.getTableCards().get(cardToAttack - 1));
-                        } catch (InputMismatchException e) {
-                            System.out.println("You need to input the number of the card you want to pick, try again");
-                            break;
+
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("That card does not exist");
                         }
@@ -285,6 +291,18 @@ public class GameEngine {
 
     }
 
+    public int getInput() {
+        Scanner sc = new Scanner(System.in);
+        int input = 0;
+
+        try {
+            input = sc.nextInt();
+
+        } catch (InputMismatchException e) {
+            System.out.println("You need to enter a number, try again");
+        }
+        return input;
+    }
 
     public boolean checkIfTapped(Card card) {
         if (card.getTapped()) {
