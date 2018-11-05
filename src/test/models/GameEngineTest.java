@@ -281,9 +281,30 @@ class GameEngineTest {
             verify(spyCurrentPlayer, atMost(100)).sendToGraveyard(spyCurrentCard);
             verify(spyOpponentPlayer, atMost(100)).sendToGraveyard(spyOpponentCard);
 
+           boolean expected=false;
+           boolean actual= gameEngine.isCardKilled(spyCurrentCard);
+           assertEquals(expected,actual);
 
-            gameEngine.attack(spyCurrentCard, spyOpponentCard);
+    }
+    @DisplayName("opponent player attack is null")
+    @RepeatedTest(100)
+    public void whenExceptionThrown_thenAssertionSucceeds() {
 
+        assertThrows(NullPointerException.class, () -> {
+            opponentCard=null;
+            int opponentPlayerAttack= opponentCard.attack();
+        });
+    }
+
+    @RepeatedTest(100)
+    void testPlayerHealthAfterAttack() {
+        Player spyCurrentPlayer = Mockito.spy(p1);
+        Player spyOpponentPlayer = Mockito.spy(p2);
+        verify(spyCurrentPlayer, atMost(100)).getHealth();
+        verify(spyOpponentPlayer, atMost(100)).getHealth();
+        int expected=8;
+        int actual=spyCurrentPlayer.getHealth()-2;
+        assertEquals(expected,actual);
     }
 
     @Test
