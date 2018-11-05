@@ -139,7 +139,6 @@ public class GameEngine {
     }
 
     public void endTurn() {
-        checkPlayerHealth();
         checkCardsLeft();
         unTap();
 
