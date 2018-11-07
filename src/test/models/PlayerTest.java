@@ -37,6 +37,13 @@ class PlayerTest {
     }
 
     @Test
+    void testIncreaseHealth() {
+        int expected=20;
+        int actual=player.getHealth();
+        assertEquals(expected,actual);
+    }
+
+    @Test
     void playCard() {
         int playCardNr = 1;
 
