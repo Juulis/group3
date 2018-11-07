@@ -11,7 +11,7 @@ public class Player {
     private ArrayList<Card> tableCards;
 
     public Player() {
-        this.health = 10;
+        this.health = 20;
         this.currentDeck = new ArrayList<Card>();
         this.playerHand = new ArrayList<Card>();
         this.tableCards = new ArrayList<Card>();
