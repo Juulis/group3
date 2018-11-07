@@ -35,5 +35,6 @@ public class CreatureCard extends Card {
 
     public void removeHp( int dmg){
 
+        this.hp -= dmg;
     }
 }
