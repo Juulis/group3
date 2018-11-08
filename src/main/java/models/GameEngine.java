@@ -390,4 +390,9 @@ public class GameEngine {
                 card.unTap();
         }
     }
+
+    public boolean isCardReadyToAttack(){
+        return false;
+
+    }
 }

@@ -47,6 +47,8 @@ class GameEngineTest {
     int currentPlayer;
     @Mock
     ArrayList<Card> currentTableCardsMock, currentHandCardsMock, opponentTableCardsMock, opponentHandCardsMock;
+    @Mock
+    CreatureCard creatureCardMock;
 
     @Spy
     ArrayList<Card> gameCardsSpy = spy(new ArrayList<Card>());
@@ -391,6 +393,17 @@ class GameEngineTest {
         verify(opponentHandCardsMock, times(1)).size();
         verify(currentTableCardsMock, times(1)).size();
         verify(opponentTableCardsMock, times(1)).size();
+
+    }
+
+    @Test
+    void isCardReadyToAttack() {
+
+        int round = 5;
+        when(creatureCardMock.getPlayedOnRound()).thenReturn(2);
+        when(creatureCardMock.getPower()).thenReturn(2).thenReturn(4);
+        assertTrue(gameEngine.isCardReadyToAttack());
+        assertFalse(gameEngine.isCardReadyToAttack());
 
     }
 }
