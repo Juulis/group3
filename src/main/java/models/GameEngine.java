@@ -172,7 +172,7 @@ public class GameEngine {
     }
 
 
-    private void attack(Card selectedCard) {
+    public void attack(Card selectedCard) {
         String attack = selectedCard.getSpecialAttack();
         chooseAttack(attack, selectedCard);
     }
