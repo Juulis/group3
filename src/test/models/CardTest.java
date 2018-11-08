@@ -10,6 +10,5 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CardTest {
 
-    Card card = new Card();
 
 }
