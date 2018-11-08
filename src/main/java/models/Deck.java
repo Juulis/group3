@@ -1,11 +1,18 @@
 package models;
 
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class Deck {
 
-    private ArrayList<Card> cards;
+    private List<Card> cards;
     private ArrayList<Card> playerOneDeck;
     private ArrayList<Card> playerTwoDeck;
     public int playerDeckSize;
@@ -23,7 +30,7 @@ public class Deck {
      */
     public void createFullDeck() {
         for (int i = 0; i < totalCards; i++) {
-            cards.add(new Card( 2, 3, "card", "basic"));
+            cards.add(new Card(2, 3, "card", "basic"));
         }
     }
 
@@ -42,7 +49,11 @@ public class Deck {
     /**
      * @return Deck Array of cards
      */
-    public ArrayList<Card> getCards() {
+    public List<Card> getCards() {
+        for (Card c : cards) {
+            System.out.println(c.toString());
+        }
+        System.out.println("size of CardArray: " + cards.size());
         return cards;
     }
 
@@ -52,5 +63,19 @@ public class Deck {
 
     public ArrayList<Card> getPlayerTwoDeck() {
         return playerTwoDeck;
+    }
+
+    public List<Card> getCardsFromJSON() throws IOException {
+        JsonReader reader = new JsonReader(new FileReader("src/main/java/json/Deck.json"));
+        List<CreatureCard> tempCards = Arrays.asList(new Gson().fromJson(reader, CreatureCard[].class));
+
+        for (int i = 0; i < tempCards.size(); i++) {
+            if (tempCards.get(i).getHp() == 0) {
+                cards.add(new MagicCard(tempCards.get(i).attack, tempCards.get(i).cardEnergy, tempCards.get(i).cardName, tempCards.get(i).specialAttack));
+            } else {
+                cards.add(tempCards.get(i));
+            }
+        }
+        return cards;
     }
 }

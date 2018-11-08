@@ -22,10 +22,12 @@ public class Main extends Application {
 }*/
 
 import models.*;
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
-        GameEngine game = new GameEngine();
-        game.startGame();
+    public static void main(String[] args) throws IOException {
+        Deck deck = new Deck();
+        deck.getCardsFromJSON();
+        deck.getCards();
     }
 }
