@@ -81,6 +81,10 @@ public class GameEngine {
 
     }
 
+    private void attack(){
+
+    }
+
     public void checkCardsLeft() {
 
         if (p1.getCurrentDeck().size() == 0 && p1.getPlayerHand().size() == 0 && p1.getTableCards().size() == 0) {
@@ -171,70 +175,21 @@ public class GameEngine {
         return false;
     }
 
-    public void attack(CreatureCard currentPlayerCard, CreatureCard opponentCard) {
-        boolean playerAttack = false;
-        int currentPlayerAttack = currentPlayerCard.getAttack();
-        int opponentPlayerAttack;
-        try {
-            opponentPlayerAttack = opponentCard.getAttack();
-        } catch (NullPointerException e) {
-            System.out.println("Attacking Opponent!");
-            playerAttack = true;
-            opponentPlayerAttack = 0;
-        }
 
-        int damage = currentPlayerAttack - opponentPlayerAttack;
-        damage = Math.abs(damage);
-
-        System.out.println("---------------------------DICE ROLLED-------------------------------");
-        System.out.println("You rolled " + currentPlayerAttack);
-        System.out.println("Your opponent rolled " + opponentPlayerAttack);
-        if (currentPlayerAttack > opponentPlayerAttack) {
-            int amountOfAttack = currentPlayerAttack - opponentPlayerAttack;
-            System.out.println("You get to attack your opponent with: " + amountOfAttack + " dmg");
-        } else {
-            int amountOfAttack = opponentPlayerAttack - currentPlayerAttack;
-            System.out.println("Your opponent gets to attack you with : " + amountOfAttack + " dmg");
-        }
-        System.out.println("---------------------------------------------------------------------");
-        System.out.println();
-
-
-        if (!playerAttack && currentPlayerAttack > opponentPlayerAttack) {
-            opponentCard.removeHp(damage);
-            if (isCardKilled( opponentCard)) {
-                opponentPlayer.sendToGraveyard(opponentCard);
-                System.out.println("You killed a card\n");
-                System.out.println("---------------------------------------------------------------------");
-            }
-        } else if (playerAttack && currentPlayerAttack > opponentPlayerAttack) {
-            opponentPlayer.removeHp(damage);
-        } else if (currentPlayerAttack < opponentPlayerAttack) {
-            currentPlayerCard.removeHp(damage);
-            if (isCardKilled((CreatureCard) currentPlayerCard)) {
-                currentPlayer.sendToGraveyard(currentPlayerCard);
-                System.out.println("You lost a card\n");
-                System.out.println("---------------------------------------------------------------------");
-            }
-        }
-
-        currentPlayerCard.tap();
-        checkPlayerHealth();
-    }
     public  void chooseAttack(String nameOfAttack){
         nameOfAttack=nameOfAttack.toUpperCase();
         for (AttacksNames attackName : AttacksNames.values()) {
             if (attackName.name().equals(nameOfAttack)) {
                 switch (attackName){
                     case BASIC:
-                      attack.basicAttack();
+                        attack.basicAttack();
                         break;
                     case IGNITE:
-                      attack.ignite();
+                        attack.ignite();
 
 
                     case DUAlATTACK:
-                       attack.dualAttack();
+                        attack.dualAttack();
                         break;
 
                     case PLAYERATTACK:
@@ -245,17 +200,13 @@ public class GameEngine {
                         attack.attackAllMC();
                         break;
 
-                        default:
+                    default:
                         break;
 
 
                 }
             }
         }
-
-
-
-
 
     private void playerMenu() {
         int input;

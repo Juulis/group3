@@ -61,8 +61,8 @@ class GameEngineTest {
     void setUp() {
        attack =new Attack();
         gameEngine=new GameEngine();
-        currentCard=new Card();
-        opponentCard=new Card();
+        currentCard=new Card(24,24,"as","as");
+        opponentCard=new Card(24,24,"as","afgg");
         p1=new Player();
         p2=new Player();
         gameEngine = new GameEngine();
@@ -103,7 +103,7 @@ class GameEngineTest {
     @DisplayName("If player deck is not null")
     @Test
     void checkDeckSizeNotNull() {
-        gameCardsSpy.add(new Card());
+        gameCardsSpy.add(new Card(24,24,"as","55"));
         assertThat(gameCardsSpy.size(), is(equalTo(1)));
         assertNotNull(gameCardsSpy);
     }
@@ -138,8 +138,8 @@ class GameEngineTest {
         assertEquals(gameEngineSpy.getCurrentPlayer(), gameEngineSpy.getP1());
         assertEquals(gameEngineSpy.getOpponentPlayer(), gameEngineSpy.getP2());
 
-        gameEngineSpy.getCurrentPlayer().getCurrentDeck().add(new Card());
-        gameEngineSpy.getOpponentPlayer().getCurrentDeck().add(new Card());
+        gameEngineSpy.getCurrentPlayer().getCurrentDeck().add(new Card(24,24,"as","as"));
+        gameEngineSpy.getOpponentPlayer().getCurrentDeck().add(new Card(24,24,"as","as"));
         gameEngineSpy.endTurn();
 
         assertEquals(gameEngineSpy.getCurrentPlayer(), gameEngineSpy.getP2());
@@ -233,10 +233,10 @@ class GameEngineTest {
     void newTurnNewCard(){
         gameEngine.getPlayerToStart(true);
         Player player1 = gameEngine.getCurrentPlayer();
-        player1.getCurrentDeck().add(new Card());
-        player1.getCurrentDeck().add(new Card());
-        player1.getCurrentDeck().add(new Card());
-        player1.getCurrentDeck().add(new Card());
+        player1.getCurrentDeck().add(new Card(24,24,"as","as"));
+        player1.getCurrentDeck().add(new Card(24,24,"as","as"));
+        player1.getCurrentDeck().add(new Card(24,24,"as","as"));
+        player1.getCurrentDeck().add(new Card(24,24,"as","as"));
         player1.pickupCard();
         player1.pickupCard();
 
