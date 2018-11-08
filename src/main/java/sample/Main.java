@@ -23,8 +23,10 @@ public class Main extends Application {
 
 import models.*;
 
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         GameEngine game = new GameEngine();
         game.startGame();
     }

@@ -177,21 +177,24 @@ public class GameEngine {
         chooseAttack(attack, selectedCard);
     }
 
+    public enum AttacksNames {BASIC, PLAYERATTACK, DUALATTACK, IGNITE, ATTACKALL}
+
     public void chooseAttack(String nameOfAttack, Card selectedCard) {
+
         nameOfAttack = nameOfAttack.toUpperCase();
         for (AttacksNames attackName : AttacksNames.values()) {
             if (attackName.name().equals(nameOfAttack)) {
                 switch (attackName) {
                     case BASIC:
-                        Card attackedCard = new CreatureCard(1,1,"","",1,1,1); //logic för att ta in attackerat kort från JavaFX
-                        attacks.basicAttack(selectedCard, (CreatureCard)attackedCard);
+                        CreatureCard attackedCard = new CreatureCard(1, 1, "", "", 1, 1, 1); //logic för att ta in attackerat kort från JavaFX
+                        attacks.basicAttack(selectedCard, attackedCard);
                         break;
 
                     case IGNITE:
                         attacks.ignite();
                         break;
 
-                    case DUAlATTACK:
+                    case DUALATTACK:
                         attacks.dualAttack();
                         break;
 
@@ -208,9 +211,17 @@ public class GameEngine {
                 }
             }
         }
-        //input some checks here (TODO: figure out where to put isCardKilled!)
-        if(selectedCard.getClass() == CreatureCard.class){
+        for(int i = 0; i < opponentPlayer.getTableCards().size();i++){ //checks all opponent table cards if they died by the attack
+            if(
+            isCardKilled((CreatureCard)opponentPlayer.getTableCards().get(i))){
+                opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
+            }
+        }
+        if (selectedCard.getClass() == CreatureCard.class) {
             ((CreatureCard) selectedCard).tap();
+            if(isCardKilled((CreatureCard) selectedCard)){
+                currentPlayer.sendToGraveyard(selectedCard);
+            }
         }
         checkPlayerHealth();
     }
@@ -273,7 +284,7 @@ public class GameEngine {
                         System.out.println("what card do you want to attacks?");
                         try {
                             cardToAttack = getInput();
-                            attacks.basicAttack(currentPlayer.getTableCards().get(attackCard - 1), (CreatureCard)opponentPlayer.getTableCards().get(cardToAttack - 1));
+                            attacks.basicAttack(currentPlayer.getTableCards().get(attackCard - 1), (CreatureCard) opponentPlayer.getTableCards().get(cardToAttack - 1));
 
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("That card does not exist");
