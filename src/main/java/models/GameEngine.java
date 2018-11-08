@@ -1,5 +1,6 @@
 package models;
 
+import java.io.IOException;
 import java.security.spec.ECField;
 import java.util.InputMismatchException;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class GameEngine {
         return p2;
     }
 
-    public void startGame() {
+    public void startGame() throws IOException {
         while (game) {
             initGame();
             while (playing) {
@@ -56,7 +57,7 @@ public class GameEngine {
         }
     }
 
-    public void initGame() {
+    public void initGame() throws IOException {
         deck.createFullDeck();
         initPlayer();
     }

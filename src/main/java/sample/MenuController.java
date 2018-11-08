@@ -13,9 +13,8 @@ public class MenuController {
         System.out.println("START GAME PRESSED");
     }
 
-    public void viewHighscore() throws IOException {
-        AnchorPane highscorePane = FXMLLoader.load(getClass().getResource("/highscore/highscore.fxml"));
-        menuPane.getChildren().setAll(highscorePane);
+    public void viewHighscore() {
+        System.out.println("VIEW HIGHSCORE PRESSED");
     }
 
     public void quitGame() {

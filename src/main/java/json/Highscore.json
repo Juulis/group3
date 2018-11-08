@@ -1,30 +1,30 @@
 [
   {
-    "cardName": "Micke",
+    "name": "Micke",
     "score": 520
   },
   {
-    "cardName": "Danny",
+    "name": "Danny",
     "score": 440
   },
   {
-    "cardName": "Fatlum",
+    "name": "Fatlum",
     "score": 220
   },
   {
-    "cardName": "Tobias",
+    "name": "Tobias",
     "score": 1500
   },
   {
-    "cardName": "Lidia",
+    "name": "Lidia",
     "score": 75
   },
   {
-    "cardName": "Mohammed",
+    "name": "Mohammed",
     "score": 50
   },
   {
-    "cardName": "Rickard",
+    "name": "Rickard",
     "score": 100
   }
 ]

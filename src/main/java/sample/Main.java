@@ -1,5 +1,4 @@
 package sample;
-/*
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,13 +18,13 @@ public class Main extends Application {
    public static void main(String[] args) {
         launch(args);
     }
-}*/
+}
 
-import models.*;
+/*import models.*;
 
 public class Main {
     public static void main(String[] args) {
         GameEngine game = new GameEngine();
         game.startGame();
     }
-}
+}*/
