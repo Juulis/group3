@@ -241,7 +241,7 @@ public class GameEngine {
                 showTable();
                 break;
             case 2:
-                int playCard;
+                int playCard, round;
                 System.out.println("what card do you want to play out? (0 to cancel)");
 
                 playCard = getInput();
@@ -249,8 +249,8 @@ public class GameEngine {
                             playerMenu();
                             return;
                 }
-
-                currentPlayer.playCard(playCard);
+                round = turn+1/2;
+                currentPlayer.playCard(playCard , round);
                 break;
             case 3:
                 if (turn > 2) {
