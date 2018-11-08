@@ -50,9 +50,6 @@ public class Deck {
      * @return Deck Array of cards
      */
     public List<Card> getCards() {
-        for (Card c : cards) {
-            System.out.println(c.toString());
-        }
         System.out.println("size of CardArray: " + cards.size());
         return cards;
     }

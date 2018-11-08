@@ -5,7 +5,7 @@
     "attack": 5,
     "defence": 1,
     "power": 0,
-    "manaCost": 2,
+    "cardEnergy": 2,
     "specialAttack": "dualAttack",
     "magicCard": 0
   },
@@ -15,7 +15,7 @@
     "attack": 5,
     "defence": 1,
     "power": 0,
-    "manaCost": 2,
+    "cardEnergy": 2,
     "specialAttack": "dualAttack",
     "magicCard": 0
   },
@@ -25,7 +25,7 @@
     "attack": 5,
     "defence": 1,
     "power": 0,
-    "manaCost": 2,
+    "cardEnergy": 2,
     "specialAttack": "dualAttack",
     "magicCard": 0
   },
@@ -35,7 +35,7 @@
     "attack": 5,
     "defence": 1,
     "power": 0,
-    "manaCost": 2,
+    "cardEnergy": 2,
     "specialAttack": "dualAttack",
     "magicCard": 0
   },
@@ -45,7 +45,7 @@
     "attack": 5,
     "defence": 1,
     "power": 0,
-    "manaCost": 2,
+    "cardEnergy": 2,
     "specialAttack": "dualAttack",
     "magicCard": 0
   },
@@ -55,7 +55,7 @@
     "attack": 5,
     "defence": 1,
     "power": 0,
-    "manaCost": 2,
+    "cardEnergy": 2,
     "specialAttack": "dualAttack",
     "magicCard": 0
   },
@@ -65,7 +65,7 @@
     "attack": 5,
     "defence": 1,
     "power": 0,
-    "manaCost": 2,
+    "cardEnergy": 2,
     "specialAttack": "dualAttack",
     "magicCard": 0
   },
@@ -75,7 +75,7 @@
     "attack": 5,
     "defence": 1,
     "power": 0,
-    "manaCost": 2,
+    "cardEnergy": 2,
     "specialAttack": "dualAttack",
     "magicCard": 0
   },
@@ -83,7 +83,7 @@
     "cardName": "Nightscream",
     "hp": 10,
     "attack": 5,
-    "manaCost": 2,
+    "cardEnergy": 2,
     "specialAttack": "dualAttack",
     "magicCard": 0
   },
@@ -93,7 +93,7 @@
     "attack": 5,
     "defence": 1,
     "power": 0,
-    "manaCost": 2,
+    "cardEnergy": 2,
     "specialAttack": "dualAttack",
     "magicCard": 0
   },
@@ -103,7 +103,7 @@
     "attack": 3,
     "defence": 2,
     "power": 0,
-    "manaCost": 1,
+    "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -113,7 +113,7 @@
     "attack": 3,
     "defence": 2,
     "power": 0,
-    "manaCost": 1,
+    "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -123,7 +123,7 @@
     "attack": 3,
     "defence": 2,
     "power": 0,
-    "manaCost": 1,
+    "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -133,7 +133,7 @@
     "attack": 3,
     "defence": 2,
     "power": 0,
-    "manaCost": 1,
+    "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -143,7 +143,7 @@
     "attack": 3,
     "defence": 2,
     "power": 0,
-    "manaCost": 1,
+    "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -153,7 +153,7 @@
     "attack": 3,
     "defence": 2,
     "power": 0,
-    "manaCost": 1,
+    "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -163,7 +163,7 @@
     "attack": 3,
     "defence": 2,
     "power": 0,
-    "manaCost": 1,
+    "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -173,7 +173,7 @@
     "attack": 3,
     "defence": 2,
     "power": 0,
-    "manaCost": 1,
+    "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -183,7 +183,7 @@
     "attack": 3,
     "defence": 2,
     "power": 0,
-    "manaCost": 1,
+    "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -193,7 +193,7 @@
     "attack": 3,
     "defence": 2,
     "power": 0,
-    "manaCost": 1,
+    "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -203,7 +203,7 @@
     "attack": 5,
     "defence": 0,
     "power": 0,
-    "manaCost": 5,
+    "cardEnergy": 5,
     "specialAttack": "playerAttack",
     "magicCard": 1
   },
@@ -213,7 +213,7 @@
     "attack": 5,
     "defence": 0,
     "power": 0,
-    "manaCost": 5,
+    "cardEnergy": 5,
     "specialAttack": "playerAttack",
     "magicCard": 1
   },
@@ -223,7 +223,7 @@
     "attack": 5,
     "defence": 0,
     "power": 0,
-    "manaCost": 5,
+    "cardEnergy": 5,
     "specialAttack": "playerAttack",
     "magicCard": 1
   },
@@ -233,7 +233,7 @@
     "attack": 5,
     "defence": 0,
     "power": 0,
-    "manaCost": 5,
+    "cardEnergy": 5,
     "specialAttack": "playerAttack",
     "magicCard": 1
   },
@@ -243,7 +243,7 @@
     "attack": 5,
     "defence": 0,
     "power": 0,
-    "manaCost": 5,
+    "cardEnergy": 5,
     "specialAttack": "playerAttack",
     "magicCard": 1
   },
@@ -253,7 +253,7 @@
     "attack": 5,
     "defence": 0,
     "power": 0,
-    "manaCost": 5,
+    "cardEnergy": 5,
     "specialAttack": "playerAttack",
     "magicCard": 1
   },
@@ -263,7 +263,7 @@
     "attack": 5,
     "defence": 0,
     "power": 0,
-    "manaCost": 5,
+    "cardEnergy": 5,
     "specialAttack": "playerAttack",
     "magicCard": 1
   },
@@ -273,7 +273,7 @@
     "attack": 5,
     "defence": 0,
     "power": 0,
-    "manaCost": 5,
+    "cardEnergy": 5,
     "specialAttack": "playerAttack",
     "magicCard": 1
   },
@@ -283,7 +283,7 @@
     "attack": 5,
     "defence": 0,
     "power": 0,
-    "manaCost": 5,
+    "cardEnergy": 5,
     "specialAttack": "playerAttack",
     "magicCard": 1
   },
@@ -293,7 +293,7 @@
     "attack": 5,
     "defence": 0,
     "power": 0,
-    "manaCost": 5,
+    "cardEnergy": 5,
     "specialAttack": "playerAttack",
     "magicCard": 1
   },
@@ -303,17 +303,7 @@
     "attack": 3,
     "defence": 3,
     "power": 0,
-    "manaCost": 1,
-    "specialAttack": "basic",
-    "magicCard": 0
-  },
-  {
-    "cardName": "Vilestrike",
-    "hp": 5,
-    "attack": 3,
-    "defence": 3,
-    "power": 0,
-    "manaCost": 1,
+    "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -323,7 +313,7 @@
     "attack": 3,
     "defence": 3,
     "power": 0,
-    "manaCost": 1,
+    "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -333,7 +323,7 @@
     "attack": 3,
     "defence": 3,
     "power": 0,
-    "manaCost": 1,
+    "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -343,7 +333,7 @@
     "attack": 3,
     "defence": 3,
     "power": 0,
-    "manaCost": 1,
+    "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -353,7 +343,7 @@
     "attack": 3,
     "defence": 3,
     "power": 0,
-    "manaCost": 1,
+    "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -363,7 +353,7 @@
     "attack": 3,
     "defence": 3,
     "power": 0,
-    "manaCost": 1,
+    "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -373,7 +363,7 @@
     "attack": 3,
     "defence": 3,
     "power": 0,
-    "manaCost": 1,
+    "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -383,7 +373,7 @@
     "attack": 3,
     "defence": 3,
     "power": 0,
-    "manaCost": 1,
+    "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -393,7 +383,17 @@
     "attack": 3,
     "defence": 3,
     "power": 0,
-    "manaCost": 1,
+    "cardEnergy": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "cardName": "Vilestrike",
+    "hp": 5,
+    "attack": 3,
+    "defence": 3,
+    "power": 0,
+    "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -403,7 +403,7 @@
     "attack": 4,
     "defence": 4,
     "power": 0,
-    "manaCost": 2,
+    "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -413,7 +413,7 @@
     "attack": 4,
     "defence": 4,
     "power": 0,
-    "manaCost": 2,
+    "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -423,7 +423,7 @@
     "attack": 4,
     "defence": 4,
     "power": 0,
-    "manaCost": 2,
+    "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -433,7 +433,7 @@
     "attack": 4,
     "defence": 4,
     "power": 0,
-    "manaCost": 2,
+    "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -443,7 +443,7 @@
     "attack": 4,
     "defence": 4,
     "power": 0,
-    "manaCost": 2,
+    "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -453,7 +453,7 @@
     "attack": 4,
     "defence": 4,
     "power": 0,
-    "manaCost": 2,
+    "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -463,7 +463,7 @@
     "attack": 4,
     "defence": 4,
     "power": 0,
-    "manaCost": 2,
+    "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -473,7 +473,7 @@
     "attack": 4,
     "defence": 4,
     "power": 0,
-    "manaCost": 2,
+    "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -483,7 +483,7 @@
     "attack": 4,
     "defence": 4,
     "power": 0,
-    "manaCost": 2,
+    "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0
   },
@@ -493,7 +493,7 @@
     "attack": 4,
     "defence": 4,
     "power": 0,
-    "manaCost": 2,
+    "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0
   }
