@@ -3,52 +3,52 @@ package models;
 import java.util.Random;
 
 public class Card {
-    private int hp;
-    private boolean tapped;
-    private Random rand = new Random();
 
-    public Card() {
-        this.hp = randomizeHp();
-        this.tapped = false;
+    String cardName;
+    int cardEnergy;
+    int attack;
+    String specialAttack;
+
+
+    public Card(int attack, int cardEnergy, String cardName, String specialAttack) {
+
+        this.attack = attack;
+        this.cardEnergy = cardEnergy;
+        this.cardName = cardName;
+        this.specialAttack = specialAttack;
     }
 
-    /**
-     * Determines hp of card
-     *
-     * @return random nr between 1-7
-     */
-    public int randomizeHp() {
-        return rand.nextInt(7) + 1;
+
+    public String getCardName() {
+        return cardName;
     }
 
-    public int getHp() {
-        return hp;
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
     }
 
-    /**
-     * When a card gets attacked, remove the amount of attack from the card
-     *
-     * @param hpToRemove of attack
-     * @return healthPoints after attack
-     */
-    public void removeHp(int hpToRemove) {
-        hp -= hpToRemove;
+    public int getCardEnergy() {
+        return cardEnergy;
     }
 
-    public void tap() {
-        this.tapped = true;
+    public void setCardEnergy(int cardEnergy) {
+        this.cardEnergy = cardEnergy;
     }
 
-    public void unTap() {
-        this.tapped = false;
+    public int getAttack() {
+        return attack;
     }
 
-    public boolean getTapped() {
-        return this.tapped;
+    public void setAttack(int attack) {
+        this.attack = attack;
     }
 
-    public int attack() {
-
-        return rand.nextInt(6) + 1;
+    public String getSpecialAttack() {
+        return specialAttack;
     }
+
+    public void setSpecialAttack(String specialAttack) {
+        this.specialAttack = specialAttack;
+    }
+
 }
