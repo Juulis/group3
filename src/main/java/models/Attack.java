@@ -13,7 +13,7 @@ public class Attack {
 
     }
 
-    public void AttackPlayer(){
+    public void attackPlayer(){
 
     }
 
