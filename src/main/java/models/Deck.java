@@ -28,10 +28,8 @@ public class Deck {
     /**
      * create array of deck cards with 50 cards
      */
-    public void createFullDeck() {
-        for (int i = 0; i < totalCards; i++) {
-            cards.add(new Card(2, 3, "card", "basic"));
-        }
+    public void createFullDeck() throws IOException {
+        getCardsFromJSON();
     }
 
     public void playerDeck() { // Shuffle game cards and split them into two player decks
