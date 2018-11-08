@@ -1,8 +1,10 @@
 package models;
 
 public class Attack {
+    Player player;
 
     public Attack() {
+
     }
 
     public void basicAttack(){

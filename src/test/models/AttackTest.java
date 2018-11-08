@@ -21,7 +21,6 @@ public class AttackTest {
     }
 
     @Test
-
     void playerAttackTest(){
 
         player.getHealth();
