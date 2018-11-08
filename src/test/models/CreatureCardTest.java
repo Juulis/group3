@@ -12,7 +12,7 @@ class CreatureCardTest {
     @BeforeEach
     void setUp() {
 
-        creatureCard = new CreatureCard(5,2,3,2);
+        creatureCard = new CreatureCard(5,2,"card","basic",4, 3, 2);
     }
 
     @Test

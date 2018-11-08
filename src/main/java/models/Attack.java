@@ -1,20 +1,19 @@
 package models;
 
 public class Attack {
-    private static Attack ourInstance = new Attack();
 
-    public static Attack getInstance() {
-        return ourInstance;
+    public Attack() {
     }
 
-    private Attack() {
+    public void basicAttack(){
+
     }
 
     public void dualAttack(){
 
     }
 
-    public void creatureAttackPlayer(){
+    public void attackPlayer(){
 
     }
 
@@ -23,10 +22,6 @@ public class Attack {
     }
 
     public void attackAllMC(){
-
-    }
-
-    public void mGAttackPlayer(){
 
     }
 
