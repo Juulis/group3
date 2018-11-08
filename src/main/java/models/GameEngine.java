@@ -16,6 +16,7 @@ public class GameEngine {
         playing = true;
         deck = new Deck();
         turn = 1;
+        attacks = new Attack();
     }
 
     private Player p1, p2;
@@ -25,7 +26,7 @@ public class GameEngine {
     private boolean game;
     private boolean playing;
     private int turn;
-    private Attack attacks = new Attack();
+    private Attack attacks ;
 
     public void setP1(Player p) {
         this.p1 = p;
@@ -220,6 +221,11 @@ public class GameEngine {
         currentPlayerCard.tap();
         checkPlayerHealth();
     }
+
+
+   
+
+
 
     private void playerMenu() {
         int input;
