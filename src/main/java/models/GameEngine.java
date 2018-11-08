@@ -56,7 +56,7 @@ public class GameEngine {
         }
     }
 
-    public void initGame() throws IOException, IOException {
+    public void initGame() throws IOException {
         deck.createFullDeck();
         initPlayer();
     }
