@@ -10,7 +10,7 @@ public class Card {
     String specialAttack;
 
 
-    public Card() {
+    public Card(int attack, int cardEnergy, String cardName, String specialAttack) {
 
         this.attack = attack;
         this.cardEnergy = cardEnergy;
