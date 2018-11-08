@@ -1,0 +1,500 @@
+[
+  {
+    "name": "Nightscream",
+    "hp": 10,
+    "attack": 5,
+    "defence": 1,
+    "power": 0,
+    "manaCost": 2,
+    "specialAttack": "dualAttack",
+    "magicCard": 0
+  },
+  {
+    "name": "Nightscream",
+    "hp": 10,
+    "attack": 5,
+    "defence": 1,
+    "power": 0,
+    "manaCost": 2,
+    "specialAttack": "dualAttack",
+    "magicCard": 0
+  },
+  {
+    "name": "Nightscream",
+    "hp": 10,
+    "attack": 5,
+    "defence": 1,
+    "power": 0,
+    "manaCost": 2,
+    "specialAttack": "dualAttack",
+    "magicCard": 0
+  },
+  {
+    "name": "Nightscream",
+    "hp": 10,
+    "attack": 5,
+    "defence": 1,
+    "power": 0,
+    "manaCost": 2,
+    "specialAttack": "dualAttack",
+    "magicCard": 0
+  },
+  {
+    "name": "Nightscream",
+    "hp": 10,
+    "attack": 5,
+    "defence": 1,
+    "power": 0,
+    "manaCost": 2,
+    "specialAttack": "dualAttack",
+    "magicCard": 0
+  },
+  {
+    "name": "Nightscream",
+    "hp": 10,
+    "attack": 5,
+    "defence": 1,
+    "power": 0,
+    "manaCost": 2,
+    "specialAttack": "dualAttack",
+    "magicCard": 0
+  },
+  {
+    "name": "Nightscream",
+    "hp": 10,
+    "attack": 5,
+    "defence": 1,
+    "power": 0,
+    "manaCost": 2,
+    "specialAttack": "dualAttack",
+    "magicCard": 0
+  },
+  {
+    "name": "Nightscream",
+    "hp": 10,
+    "attack": 5,
+    "defence": 1,
+    "power": 0,
+    "manaCost": 2,
+    "specialAttack": "dualAttack",
+    "magicCard": 0
+  },
+  {
+    "name": "Nightscream",
+    "hp": 10,
+    "attack": 5,
+    "manaCost": 2,
+    "specialAttack": "dualAttack",
+    "magicCard": 0
+  },
+  {
+    "name": "Nightscream",
+    "hp": 10,
+    "attack": 5,
+    "defence": 1,
+    "power": 0,
+    "manaCost": 2,
+    "specialAttack": "dualAttack",
+    "magicCard": 0
+  },
+  {
+    "name": "Soulspawn",
+    "hp": 7,
+    "attack": 3,
+    "defence": 2,
+    "power": 0,
+    "manaCost": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Soulspawn",
+    "hp": 7,
+    "attack": 3,
+    "defence": 2,
+    "power": 0,
+    "manaCost": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Soulspawn",
+    "hp": 7,
+    "attack": 3,
+    "defence": 2,
+    "power": 0,
+    "manaCost": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Soulspawn",
+    "hp": 7,
+    "attack": 3,
+    "defence": 2,
+    "power": 0,
+    "manaCost": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Soulspawn",
+    "hp": 7,
+    "attack": 3,
+    "defence": 2,
+    "power": 0,
+    "manaCost": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Soulspawn",
+    "hp": 7,
+    "attack": 3,
+    "defence": 2,
+    "power": 0,
+    "manaCost": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Soulspawn",
+    "hp": 7,
+    "attack": 3,
+    "defence": 2,
+    "power": 0,
+    "manaCost": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Soulspawn",
+    "hp": 7,
+    "attack": 3,
+    "defence": 2,
+    "power": 0,
+    "manaCost": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Soulspawn",
+    "hp": 7,
+    "attack": 3,
+    "defence": 2,
+    "power": 0,
+    "manaCost": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Soulspawn",
+    "hp": 7,
+    "attack": 3,
+    "defence": 2,
+    "power": 0,
+    "manaCost": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Rusthand",
+    "hp": 12,
+    "attack": 5,
+    "defence": 0,
+    "power": 0,
+    "manaCost": 5,
+    "specialAttack": "playerAttack",
+    "magicCard": 1
+  },
+  {
+    "name": "Rusthand",
+    "hp": 12,
+    "attack": 5,
+    "defence": 0,
+    "power": 0,
+    "manaCost": 5,
+    "specialAttack": "playerAttack",
+    "magicCard": 1
+  },
+  {
+    "name": "Rusthand",
+    "hp": 12,
+    "attack": 5,
+    "defence": 0,
+    "power": 0,
+    "manaCost": 5,
+    "specialAttack": "playerAttack",
+    "magicCard": 1
+  },
+  {
+    "name": "Rusthand",
+    "hp": 12,
+    "attack": 5,
+    "defence": 0,
+    "power": 0,
+    "manaCost": 5,
+    "specialAttack": "playerAttack",
+    "magicCard": 1
+  },
+  {
+    "name": "Rusthand",
+    "hp": 12,
+    "attack": 5,
+    "defence": 0,
+    "power": 0,
+    "manaCost": 5,
+    "specialAttack": "playerAttack",
+    "magicCard": 1
+  },
+  {
+    "name": "Rusthand",
+    "hp": 12,
+    "attack": 5,
+    "defence": 0,
+    "power": 0,
+    "manaCost": 5,
+    "specialAttack": "playerAttack",
+    "magicCard": 1
+  },
+  {
+    "name": "Rusthand",
+    "hp": 12,
+    "attack": 5,
+    "defence": 0,
+    "power": 0,
+    "manaCost": 5,
+    "specialAttack": "playerAttack",
+    "magicCard": 1
+  },
+  {
+    "name": "Rusthand",
+    "hp": 12,
+    "attack": 5,
+    "defence": 0,
+    "power": 0,
+    "manaCost": 5,
+    "specialAttack": "playerAttack",
+    "magicCard": 1
+  },
+  {
+    "name": "Rusthand",
+    "hp": 12,
+    "attack": 5,
+    "defence": 0,
+    "power": 0,
+    "manaCost": 5,
+    "specialAttack": "playerAttack",
+    "magicCard": 1
+  },
+  {
+    "name": "Rusthand",
+    "hp": 12,
+    "attack": 5,
+    "defence": 0,
+    "power": 0,
+    "manaCost": 5,
+    "specialAttack": "playerAttack",
+    "magicCard": 1
+  },
+  {
+    "name": "Vilestrike",
+    "hp": 5,
+    "attack": 3,
+    "defence": 3,
+    "power": 0,
+    "manaCost": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Vilestrike",
+    "hp": 5,
+    "attack": 3,
+    "defence": 3,
+    "power": 0,
+    "manaCost": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Vilestrike",
+    "hp": 5,
+    "attack": 3,
+    "defence": 3,
+    "power": 0,
+    "manaCost": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Vilestrike",
+    "hp": 5,
+    "attack": 3,
+    "defence": 3,
+    "power": 0,
+    "manaCost": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Vilestrike",
+    "hp": 5,
+    "attack": 3,
+    "defence": 3,
+    "power": 0,
+    "manaCost": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Vilestrike",
+    "hp": 5,
+    "attack": 3,
+    "defence": 3,
+    "power": 0,
+    "manaCost": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Vilestrike",
+    "hp": 5,
+    "attack": 3,
+    "defence": 3,
+    "power": 0,
+    "manaCost": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Vilestrike",
+    "hp": 5,
+    "attack": 3,
+    "defence": 3,
+    "power": 0,
+    "manaCost": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Vilestrike",
+    "hp": 5,
+    "attack": 3,
+    "defence": 3,
+    "power": 0,
+    "manaCost": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Vilestrike",
+    "hp": 5,
+    "attack": 3,
+    "defence": 3,
+    "power": 0,
+    "manaCost": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Frostbeing",
+    "hp": 6,
+    "attack": 4,
+    "defence": 4,
+    "power": 0,
+    "manaCost": 2,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Frostbeing",
+    "hp": 6,
+    "attack": 4,
+    "defence": 4,
+    "power": 0,
+    "manaCost": 2,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Frostbeing",
+    "hp": 6,
+    "attack": 4,
+    "defence": 4,
+    "power": 0,
+    "manaCost": 2,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Frostbeing",
+    "hp": 6,
+    "attack": 4,
+    "defence": 4,
+    "power": 0,
+    "manaCost": 2,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Frostbeing",
+    "hp": 6,
+    "attack": 4,
+    "defence": 4,
+    "power": 0,
+    "manaCost": 2,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Frostbeing",
+    "hp": 6,
+    "attack": 4,
+    "defence": 4,
+    "power": 0,
+    "manaCost": 2,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Frostbeing",
+    "hp": 6,
+    "attack": 4,
+    "defence": 4,
+    "power": 0,
+    "manaCost": 2,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Frostbeing",
+    "hp": 6,
+    "attack": 4,
+    "defence": 4,
+    "power": 0,
+    "manaCost": 2,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Frostbeing",
+    "hp": 6,
+    "attack": 4,
+    "defence": 4,
+    "power": 0,
+    "manaCost": 2,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
+    "name": "Frostbeing",
+    "hp": 6,
+    "attack": 4,
+    "defence": 4,
+    "power": 0,
+    "manaCost": 2,
+    "specialAttack": "basic",
+    "magicCard": 0
+  }
+]
