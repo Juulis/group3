@@ -25,6 +25,7 @@ public class GameEngine {
     private boolean game;
     private boolean playing;
     private int turn;
+    private Attack attacks = new Attack();
 
     public void setP1(Player p) {
         this.p1 = p;
