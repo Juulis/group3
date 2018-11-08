@@ -249,7 +249,7 @@ public class GameEngine {
                             playerMenu();
                             return;
                 }
-                round = turn+1/2;
+                round = (turn+1)/2;
                 currentPlayer.playCard(playCard , round);
                 break;
             case 3:
@@ -391,8 +391,10 @@ public class GameEngine {
         }
     }
 
-    public boolean isCardReadyToAttack(){
+    public boolean isCardReadyToAttack(CreatureCard creatureCard){
+        int round = (turn+1)/2;
+        if((creatureCard.getPlayedOnRound()+creatureCard.getPower()) <= round)
+            return true;
         return false;
-
     }
 }

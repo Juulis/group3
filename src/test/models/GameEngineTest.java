@@ -402,8 +402,8 @@ class GameEngineTest {
         int round = 5;
         when(creatureCardMock.getPlayedOnRound()).thenReturn(2);
         when(creatureCardMock.getPower()).thenReturn(2).thenReturn(4);
-        assertTrue(gameEngine.isCardReadyToAttack());
-        assertFalse(gameEngine.isCardReadyToAttack());
+        assertTrue(gameEngine.isCardReadyToAttack(creatureCardMock));
+        assertFalse(gameEngine.isCardReadyToAttack(creatureCardMock));
 
     }
 }
