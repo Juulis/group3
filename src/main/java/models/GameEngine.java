@@ -1,10 +1,8 @@
 package models;
 
 import java.io.IOException;
-import java.security.spec.ECField;
 import java.util.InputMismatchException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -17,6 +15,7 @@ public class GameEngine {
         playing = true;
         deck = new Deck();
         turn = 1;
+        attacks = new Attack();
     }
 
     private Player p1, p2;
@@ -26,7 +25,7 @@ public class GameEngine {
     private boolean game;
     private boolean playing;
     private int turn;
-    private Attack attacks = new Attack();
+    private Attack attacks;
 
     public void setP1(Player p) {
         this.p1 = p;
@@ -57,7 +56,7 @@ public class GameEngine {
         }
     }
 
-    public void initGame() throws IOException {
+    public void initGame() throws IOException, IOException {
         deck.createFullDeck();
         initPlayer();
     }
@@ -80,6 +79,7 @@ public class GameEngine {
         }
 
     }
+
 
     public void checkCardsLeft() {
 
@@ -171,54 +171,58 @@ public class GameEngine {
         return false;
     }
 
-    public void attack(CreatureCard currentPlayerCard, CreatureCard opponentCard) {
-        boolean playerAttack = false;
-        int currentPlayerAttack = currentPlayerCard.getAttack();
-        int opponentPlayerAttack;
-        try {
-            opponentPlayerAttack = opponentCard.getAttack();
-        } catch (NullPointerException e) {
-            System.out.println("Attacking Opponent!");
-            playerAttack = true;
-            opponentPlayerAttack = 0;
-        }
 
-        int damage = currentPlayerAttack - opponentPlayerAttack;
-        damage = Math.abs(damage);
+    public void attack(Card selectedCard) {
+        String attack = selectedCard.getSpecialAttack();
+        chooseAttack(attack, selectedCard);
+    }
 
-        System.out.println("---------------------------DICE ROLLED-------------------------------");
-        System.out.println("You rolled " + currentPlayerAttack);
-        System.out.println("Your opponent rolled " + opponentPlayerAttack);
-        if (currentPlayerAttack > opponentPlayerAttack) {
-            int amountOfAttack = currentPlayerAttack - opponentPlayerAttack;
-            System.out.println("You get to attack your opponent with: " + amountOfAttack + " dmg");
-        } else {
-            int amountOfAttack = opponentPlayerAttack - currentPlayerAttack;
-            System.out.println("Your opponent gets to attack you with : " + amountOfAttack + " dmg");
-        }
-        System.out.println("---------------------------------------------------------------------");
-        System.out.println();
+    public enum AttackNames {BASIC, PLAYERATTACK, DUALATTACK, IGNITE, ATTACKALL}
 
+    public void chooseAttack(String nameOfAttack, Card selectedCard) {
 
-        if (!playerAttack && currentPlayerAttack > opponentPlayerAttack) {
-            opponentCard.removeHp(damage);
-            if (isCardKilled( opponentCard)) {
-                opponentPlayer.sendToGraveyard(opponentCard);
-                System.out.println("You killed a card\n");
-                System.out.println("---------------------------------------------------------------------");
-            }
-        } else if (playerAttack && currentPlayerAttack > opponentPlayerAttack) {
-            opponentPlayer.removeHp(damage);
-        } else if (currentPlayerAttack < opponentPlayerAttack) {
-            currentPlayerCard.removeHp(damage);
-            if (isCardKilled((CreatureCard) currentPlayerCard)) {
-                currentPlayer.sendToGraveyard(currentPlayerCard);
-                System.out.println("You lost a card\n");
-                System.out.println("---------------------------------------------------------------------");
+        nameOfAttack = nameOfAttack.toUpperCase();
+        for (AttackNames attackName : AttackNames.values()) {
+            if (attackName.name().equals(nameOfAttack)) {
+                switch (attackName) {
+                    case BASIC:
+                        CreatureCard attackedCard = new CreatureCard(1, 1, "", "", 1, 1, 1); //logic för att ta in attackerat kort från JavaFX
+                        attacks.basicAttack(selectedCard, attackedCard);
+                        break;
+
+                    case IGNITE:
+                        attacks.ignite();
+                        break;
+
+                    case DUALATTACK:
+                        attacks.dualAttack();
+                        break;
+
+                    case PLAYERATTACK:
+                        attacks.attackPlayer();
+                        break;
+
+                    case ATTACKALL:
+                        attacks.attackAll();
+                        break;
+
+                    default:
+                        break;
+                }
             }
         }
-
-        currentPlayerCard.tap();
+        for(int i = 0; i < opponentPlayer.getTableCards().size();i++){ //checks all opponent table cards if they died by the attack
+            if(
+            isCardKilled((CreatureCard)opponentPlayer.getTableCards().get(i))){
+                opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
+            }
+        }
+        if (selectedCard.getClass() == CreatureCard.class) {
+            ((CreatureCard) selectedCard).tap();
+            if(isCardKilled((CreatureCard) selectedCard)){
+                currentPlayer.sendToGraveyard(selectedCard);
+            }
+        }
         checkPlayerHealth();
     }
 
@@ -226,13 +230,13 @@ public class GameEngine {
         int input;
         System.out.println(
                 "------------------------------------------------- \n" +
-                (currentPlayer == p1 ? "Player 1 \n" : "Player 2 \n") +
-                "Here are your choices: \n" +
-                "1. Show table \n" +
-                "2. Play card on hand \n" +
-                "3. Attack a card \n" +
-                "4. End Turn \n" +
-                "-------------------------------------------------");
+                        (currentPlayer == p1 ? "Player 1 \n" : "Player 2 \n") +
+                        "Here are your choices: \n" +
+                        "1. Show table \n" +
+                        "2. Play card on hand \n" +
+                        "3. Attack a card \n" +
+                        "4. End Turn \n" +
+                        "-------------------------------------------------");
         input = getInput();
 
         switch (input) {
@@ -248,8 +252,8 @@ public class GameEngine {
 
                 playCard = getInput();
                 if (playCard == 0) {
-                            playerMenu();
-                            return;
+                    playerMenu();
+                    return;
                 }
 
                 currentPlayer.playCard(playCard);
@@ -259,12 +263,12 @@ public class GameEngine {
                     int attackCard;
                     int cardToAttack;
 
-                    System.out.println("what card you like to attack with? (0 to cancel)");
+                    System.out.println("what card you like to attacks with? (0 to cancel)");
 
                     attackCard = getInput();
                     if (attackCard == 0) {
-                            playerMenu();
-                            return;
+                        playerMenu();
+                        return;
                     }
 
                     try {
@@ -277,25 +281,26 @@ public class GameEngine {
                     }
 
                     if (!opponentPlayer.getTableCards().isEmpty()) {
-                        System.out.println("what card do you want to attack?");
+                        System.out.println("what card do you want to attacks?");
                         try {
                             cardToAttack = getInput();
-                            attack((CreatureCard) currentPlayer.getTableCards().get(attackCard - 1), (CreatureCard) opponentPlayer.getTableCards().get(cardToAttack - 1));
+                            attacks.basicAttack(currentPlayer.getTableCards().get(attackCard - 1), (CreatureCard) opponentPlayer.getTableCards().get(cardToAttack - 1));
 
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("That card does not exist");
                         }
                     } else {
-                        attack((CreatureCard) currentPlayer.getTableCards().get(attackCard - 1), null);
+                        attacks.basicAttack(currentPlayer.getTableCards().get(attackCard - 1), null);
                     }
                 } else {
-                    System.out.println("You can't attack the first round!");
+                    System.out.println("You can't attacks the first round!");
                 }
                 break;
             case 4:
                 endTurn();
                 break;
         }
+
 
     }
 
@@ -348,7 +353,7 @@ public class GameEngine {
         System.out.print("Your hand: ");
         for (int i = 0; i < currentHandCards.size(); i++) {
             Card card = currentHandCards.get(i);
-            if( card instanceof CreatureCard)
+            if (card instanceof CreatureCard)
 
                 currentHand[i] = ((CreatureCard) card).getHp();
             System.out.print(i + 1 + ": " + currentHand[i] + " hp  ");
