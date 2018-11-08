@@ -8,7 +8,6 @@ import org.mockito.junit.jupiter.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static org.assertj.core.api.AssertionsForClassTypes.failBecauseExceptionWasNotThrown;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -21,7 +20,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -223,11 +221,11 @@ class GameEngineTest {
 
     @Test
     void name() {
-        assertThat(GameEngine.AttacksNames.valueOf("PLAYERATTACK"), is(notNullValue()));
-        assertThat(GameEngine.AttacksNames.valueOf("DUAlATTACK"), is(notNullValue()));
-        assertThat(GameEngine.AttacksNames.valueOf("IGNITE"), is(notNullValue()));
-        assertThat(GameEngine.AttacksNames.valueOf("ATTACKALL"), is(notNullValue()));
-        assertThat(GameEngine.AttacksNames.valueOf("BASIC"), is(notNullValue()));
+        assertThat(GameEngine.AttackNames.valueOf("PLAYERATTACK"), is(notNullValue()));
+        assertThat(GameEngine.AttackNames.valueOf("DUAlATTACK"), is(notNullValue()));
+        assertThat(GameEngine.AttackNames.valueOf("IGNITE"), is(notNullValue()));
+        assertThat(GameEngine.AttackNames.valueOf("ATTACKALL"), is(notNullValue()));
+        assertThat(GameEngine.AttackNames.valueOf("BASIC"), is(notNullValue()));
 
 
     }
