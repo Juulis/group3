@@ -9,12 +9,16 @@ public class Attack {
 
     private Attack() {
     }
+    
+    public void basicAttack(){
+
+    }
 
     public void dualAttack(){
 
     }
 
-    public void creatureAttackPlayer(){
+    public void AttackPlayer(){
 
     }
 
@@ -23,10 +27,6 @@ public class Attack {
     }
 
     public void attackAllMC(){
-
-    }
-
-    public void mGAttackPlayer(){
 
     }
 
