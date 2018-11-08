@@ -72,7 +72,7 @@ public class Player {
         try {
             tableCards.add(playerHand.get(correctedPlayCardNr));
             playerHand.remove(correctedPlayCardNr);
-            tableCards.get(tableCards.size()-1).tap();
+            ((CreatureCard)tableCards.get(tableCards.size()-1)).tap();
         } catch(Exception e){
             System.out.println("That card does not exist");
         }
