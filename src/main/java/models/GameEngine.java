@@ -172,17 +172,17 @@ public class GameEngine {
     }
 
 
-    private void attack(Card selectedCard) {
+    public void attack(Card selectedCard) {
         String attack = selectedCard.getSpecialAttack();
         chooseAttack(attack, selectedCard);
     }
 
-    public enum AttacksNames {BASIC, PLAYERATTACK, DUALATTACK, IGNITE, ATTACKALL}
+    public enum AttackNames {BASIC, PLAYERATTACK, DUALATTACK, IGNITE, ATTACKALL}
 
     public void chooseAttack(String nameOfAttack, Card selectedCard) {
 
         nameOfAttack = nameOfAttack.toUpperCase();
-        for (AttacksNames attackName : AttacksNames.values()) {
+        for (AttackNames attackName : AttackNames.values()) {
             if (attackName.name().equals(nameOfAttack)) {
                 switch (attackName) {
                     case BASIC:

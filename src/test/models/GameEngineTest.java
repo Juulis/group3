@@ -8,7 +8,6 @@ import org.mockito.junit.jupiter.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static org.assertj.core.api.AssertionsForClassTypes.failBecauseExceptionWasNotThrown;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -21,7 +20,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -213,9 +211,9 @@ class GameEngineTest {
     void testSwitchAttack() {
 
         assertThat(attack, isA(Attack.class));
-        verify(mockAttack, times(1)).attackAllMC();
+        verify(mockAttack, times(1)).attackAll();
         verify(mockAttack, times(1)).attackPlayer();
-        verify(mockAttack, times(1)).basicAttack();
+        verify(mockAttack, times(1)).basicAttack(currentCard,opponentCard);
         verify(mockAttack, times(1)).dualAttack();
         verify(mockAttack, times(1)).ignite();
 
@@ -223,11 +221,11 @@ class GameEngineTest {
 
     @Test
     void name() {
-        assertThat(AttacksNames.valueOf("PLAYERATTACK"), is(notNullValue()));
-        assertThat(AttacksNames.valueOf("DUAlATTACK"), is(notNullValue()));
-        assertThat(AttacksNames.valueOf("IGNITE"), is(notNullValue()));
-        assertThat(AttacksNames.valueOf("ATTACKALL"), is(notNullValue()));
-        assertThat(AttacksNames.valueOf("BASIC"), is(notNullValue()));
+        assertThat(GameEngine.AttackNames.valueOf("PLAYERATTACK"), is(notNullValue()));
+        assertThat(GameEngine.AttackNames.valueOf("DUAlATTACK"), is(notNullValue()));
+        assertThat(GameEngine.AttackNames.valueOf("IGNITE"), is(notNullValue()));
+        assertThat(GameEngine.AttackNames.valueOf("ATTACKALL"), is(notNullValue()));
+        assertThat(GameEngine.AttackNames.valueOf("BASIC"), is(notNullValue()));
 
 
     }
@@ -311,7 +309,7 @@ class GameEngineTest {
             verify(spyOpponentPlayer, atMost(100)).sendToGraveyard(spyOpponentCard);
 
            boolean expected=false;
-           boolean actual= gameEngine.isCardKilled((CreatureCard) spyCurrentCard);
+           boolean actual= gameEngine.isCardKilled(spyCurrentCard);
            assertEquals(expected,actual);
 
     }
@@ -365,7 +363,7 @@ class GameEngineTest {
 
         assertEquals(1, player1.getPlayerHand().size());
         assertEquals(1, player2.getPlayerHand().size());
-        gameEngine.attack((CreatureCard) player1.getTableCards().get(0),(CreatureCard) player2.getTableCards().get(0));
+        attack.basicAttack(player1.getTableCards().get(0),(CreatureCard) player2.getTableCards().get(0));
 
         gameEngine.checkIfTapped((CreatureCard) player1.getTableCards().get(0));
 
