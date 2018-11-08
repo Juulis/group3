@@ -16,6 +16,7 @@ public class GameEngine {
         playing = true;
         deck = new Deck();
         turn = 1;
+        attack = new Attack();
     }
 
     private Player p1, p2;
@@ -25,7 +26,7 @@ public class GameEngine {
     private boolean game;
     private boolean playing;
     private int turn;
-    private Attack attacks = new Attack();
+    private Attack attack ;
 
     public void setP1(Player p) {
         this.p1 = p;
@@ -220,6 +221,41 @@ public class GameEngine {
         currentPlayerCard.tap();
         checkPlayerHealth();
     }
+    public  void chooseAttack(String nameOfAttack){
+        nameOfAttack=nameOfAttack.toUpperCase();
+        for (AttacksNames attackName : AttacksNames.values()) {
+            if (attackName.name().equals(nameOfAttack)) {
+                switch (attackName){
+                    case BASIC:
+                      attack.basicAttack();
+                        break;
+                    case IGNITE:
+                      attack.ignite();
+
+
+                    case DUAlATTACK:
+                       attack.dualAttack();
+                        break;
+
+                    case PLAYERATTACK:
+                        attack.attackPlayer();
+                        break;
+
+                    case ATTACKALL:
+                        attack.attackAllMC();
+                        break;
+
+                        default:
+                        break;
+
+
+                }
+            }
+        }
+
+
+
+
 
     private void playerMenu() {
         int input;

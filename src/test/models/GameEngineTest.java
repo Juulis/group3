@@ -13,6 +13,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.hamcrest.Matchers.isA;
+import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.times;
@@ -28,9 +30,10 @@ class GameEngineTest {
     Card opponentCard;
     Player p1;
     Player p2;
-
+    Attack attack;
     private GameEngine gameEngine;
-
+    @Mock
+    Attack mockAttack;
     @Spy
     GameEngine gameEngineSpy;
     @Mock
@@ -56,12 +59,14 @@ class GameEngineTest {
 
     @BeforeEach
     void setUp() {
+       attack =new Attack();
         gameEngine=new GameEngine();
         currentCard=new Card();
         opponentCard=new Card();
         p1=new Player();
         p2=new Player();
         gameEngine = new GameEngine();
+        mockAttack=new Attack();
 
     }
 
@@ -200,8 +205,29 @@ class GameEngineTest {
 
     }
 
+    @DisplayName("test switch Attack method")
+    @Test
+    void testSwitchAttack() {
+
+        assertThat(attack, isA(Attack.class));
+        verify(mockAttack, times(1)).attackAllMC();
+        verify(mockAttack, times(1)).attackPlayer();
+        verify(mockAttack, times(1)).basicAttack();
+        verify(mockAttack, times(1)).dualAttack();
+        verify(mockAttack, times(1)).ignite();
+
+    }
+
+    @Test
+    void name() {
+        assertThat(AttacksNames.valueOf("PLAYERATTACK"), is(notNullValue()));
+        assertThat(AttacksNames.valueOf("DUAlATTACK"), is(notNullValue()));
+        assertThat(AttacksNames.valueOf("IGNITE"), is(notNullValue()));
+        assertThat(AttacksNames.valueOf("ATTACKALL"), is(notNullValue()));
+        assertThat(AttacksNames.valueOf("BASIC"), is(notNullValue()));
 
 
+    }
 
     @Test
     void newTurnNewCard(){
