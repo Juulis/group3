@@ -26,8 +26,8 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class GameEngineTest {
-    Card currentCard;
-    Card opponentCard;
+    CreatureCard currentCard;
+    CreatureCard opponentCard;
     Player p1;
     Player p2;
     Attack attack;
@@ -47,9 +47,12 @@ class GameEngineTest {
     Card cardMock;
     @Mock
     Deck deckMock;
-    int currentPlayer;
+
     @Mock
     ArrayList<Card> currentTableCardsMock, currentHandCardsMock, opponentTableCardsMock, opponentHandCardsMock;
+
+    @Mock
+    CreatureCard creatureCardMock;
 
     @Spy
     ArrayList<Card> gameCardsSpy = spy(new ArrayList<Card>());
@@ -61,8 +64,8 @@ class GameEngineTest {
     void setUp() {
        attack =new Attack();
         gameEngine=new GameEngine();
-        currentCard=new Card(24,24,"as","as");
-        opponentCard=new Card(24,24,"as","afgg");
+        currentCard=new CreatureCard(3,2,"c4", "basic", 3, 3, 2);
+        opponentCard=new CreatureCard(2,2,"c3", "basic", 2, 3, 1);
         p1=new Player();
         p2=new Player();
         gameEngine = new GameEngine();
@@ -103,7 +106,7 @@ class GameEngineTest {
     @DisplayName("If player deck is not null")
     @Test
     void checkDeckSizeNotNull() {
-        gameCardsSpy.add(new Card(24,24,"as","55"));
+        gameCardsSpy.add(new Card(3,2,"c4", "basic"));
         assertThat(gameCardsSpy.size(), is(equalTo(1)));
         assertNotNull(gameCardsSpy);
     }
@@ -112,22 +115,22 @@ class GameEngineTest {
     @Test
     void checkPlayerHpIsNull() {
         assertNotNull(players);
-        assertThat(players.getHealth(), is(equalTo(10)));
+        assertThat(players.getHealth(), is(equalTo(20)));
     }
 
     @DisplayName("If player Hp is not null")
     @Test
     void checkPlayerHpNotNull() {
-        assertThat(players.getHealth(), is(equalTo(10)));
-        assertEquals(10, players.getHealth());
+        assertThat(players.getHealth(), is(equalTo(20)));
+        assertEquals(20, players.getHealth());
     }
 
     @Test
     void isCardKilled() {
 
-        when(cardMock.getHp()).thenReturn(0).thenReturn(2);
-        assertTrue(gameEngine.isCardKilled(cardMock));
-        assertFalse(gameEngine.isCardKilled(cardMock));
+        when(creatureCardMock.getHp()).thenReturn(0).thenReturn(2);
+        assertTrue(gameEngine.isCardKilled(creatureCardMock));
+        assertFalse(gameEngine.isCardKilled(creatureCardMock));
     }
 
     @RepeatedTest(100)
@@ -138,8 +141,8 @@ class GameEngineTest {
         assertEquals(gameEngineSpy.getCurrentPlayer(), gameEngineSpy.getP1());
         assertEquals(gameEngineSpy.getOpponentPlayer(), gameEngineSpy.getP2());
 
-        gameEngineSpy.getCurrentPlayer().getCurrentDeck().add(new Card(24,24,"as","as"));
-        gameEngineSpy.getOpponentPlayer().getCurrentDeck().add(new Card(24,24,"as","as"));
+        gameEngineSpy.getCurrentPlayer().getCurrentDeck().add(new Card(3,2,"c4", "basic"));
+        gameEngineSpy.getOpponentPlayer().getCurrentDeck().add(new Card(3,1,"c5", "basic"));
         gameEngineSpy.endTurn();
 
         assertEquals(gameEngineSpy.getCurrentPlayer(), gameEngineSpy.getP2());
@@ -188,9 +191,9 @@ class GameEngineTest {
         when(currentTableCardsMock.size()).thenReturn(size1);
         when(currentHandCardsMock.size()).thenReturn(size3);
         when(opponentTableCardsMock.size()).thenReturn(size2);
-        when(currentTableCardsMock.get(anyInt())).thenReturn(cardMock);
-        when(currentHandCardsMock.get(anyInt())).thenReturn(cardMock);
-        when(opponentTableCardsMock.get(anyInt())).thenReturn(cardMock);
+        when(currentTableCardsMock.get(anyInt())).thenReturn(creatureCardMock);
+        when(currentHandCardsMock.get(anyInt())).thenReturn(creatureCardMock);
+        when(opponentTableCardsMock.get(anyInt())).thenReturn(creatureCardMock);
         gameEngine.getPlayerToStart(true);
         gameEngine.showTable();
         verify(p1Mock, times(1)).getHealth();
@@ -201,7 +204,7 @@ class GameEngineTest {
         verify(currentTableCardsMock, times(size1)).get(anyInt());
         verify(currentHandCardsMock, times(size3)).get(anyInt());
         verify(opponentTableCardsMock, times(size2)).get(anyInt());
-        verify(cardMock, times(size1 + size2 + size3)).getHp();
+        verify(creatureCardMock, times(size1 + size2 + size3)).getHp();
 
     }
 
@@ -233,10 +236,10 @@ class GameEngineTest {
     void newTurnNewCard(){
         gameEngine.getPlayerToStart(true);
         Player player1 = gameEngine.getCurrentPlayer();
-        player1.getCurrentDeck().add(new Card(24,24,"as","as"));
-        player1.getCurrentDeck().add(new Card(24,24,"as","as"));
-        player1.getCurrentDeck().add(new Card(24,24,"as","as"));
-        player1.getCurrentDeck().add(new Card(24,24,"as","as"));
+        player1.getCurrentDeck().add(new CreatureCard(1,2,"c1", "basic", 2, 3, 2));
+        player1.getCurrentDeck().add(new CreatureCard(2,2,"c2","basic", 1, 3, 3));
+        player1.getCurrentDeck().add(new CreatureCard(2,3,"c3","basic", 3,1,2));
+        player1.getCurrentDeck().add(new CreatureCard(3,2,"c4", "basic", 2,2,3));
         player1.pickupCard();
         player1.pickupCard();
 
@@ -246,10 +249,10 @@ class GameEngineTest {
 
         gameEngine.getPlayerToStart(false);
         Player player2 = gameEngine.getCurrentPlayer();
-        player2.getCurrentDeck().add(new Card());
-        player2.getCurrentDeck().add(new Card());
-        player2.getCurrentDeck().add(new Card());
-        player2.getCurrentDeck().add(new Card());
+        player2.getCurrentDeck().add(new CreatureCard(1,2,"c1", "basic",1,2,1));
+        player2.getCurrentDeck().add(new CreatureCard(2,2,"c2","basic",2,2,2));
+        player2.getCurrentDeck().add(new CreatureCard(2,3,"c3","basic",3,2,1));
+        player2.getCurrentDeck().add(new CreatureCard(3,2,"c4", "basic", 2,1,3));
         player2.pickupCard();
         player2.pickupCard();
 
@@ -274,8 +277,8 @@ class GameEngineTest {
     }
         @RepeatedTest(100)
         void testplayerEnginAttack () {
-            Card spyCurrentCard = Mockito.spy(currentCard);
-            Card spyOpponentCard = Mockito.spy(opponentCard);
+            CreatureCard spyCurrentCard = Mockito.spy(currentCard);
+            CreatureCard spyOpponentCard = Mockito.spy(opponentCard);
             Player spyCurrentPlayer = Mockito.spy(p1);
             Player spyOpponentPlayer = Mockito.spy(p2);
             assertNotNull(spyCurrentCard);
@@ -287,11 +290,11 @@ class GameEngineTest {
             gameEngine.setP1(spyCurrentPlayer);
             gameEngine.setP2(spyOpponentPlayer);
 
-            verify(spyOpponentCard, atMost(100)).attack();
-            verify(spyCurrentCard, atMost(100)).attack();
+            verify(spyOpponentCard, atMost(100)).getAttack();
+            verify(spyCurrentCard, atMost(100)).getAttack();
 
-            int currentPlayerAttack = spyCurrentCard.attack();
-            int opponentPlayerAttack = spyOpponentCard.attack();
+            int currentPlayerAttack = spyCurrentCard.getAttack();
+            int opponentPlayerAttack = spyOpponentCard.getAttack();
 
             assertThat(currentPlayerAttack).isBetween(1, 6);
             assertThat(opponentPlayerAttack).isBetween(1, 6);
@@ -308,7 +311,7 @@ class GameEngineTest {
             verify(spyOpponentPlayer, atMost(100)).sendToGraveyard(spyOpponentCard);
 
            boolean expected=false;
-           boolean actual= gameEngine.isCardKilled(spyCurrentCard);
+           boolean actual= gameEngine.isCardKilled((CreatureCard) spyCurrentCard);
            assertEquals(expected,actual);
 
     }
@@ -318,7 +321,7 @@ class GameEngineTest {
 
         assertThrows(NullPointerException.class, () -> {
             opponentCard=null;
-            int opponentPlayerAttack= opponentCard.attack();
+            int opponentPlayerAttack= opponentCard.getAttack();
         });
     }
 
@@ -328,7 +331,7 @@ class GameEngineTest {
         Player spyOpponentPlayer = Mockito.spy(p2);
         verify(spyCurrentPlayer, atMost(100)).getHealth();
         verify(spyOpponentPlayer, atMost(100)).getHealth();
-        int expected=8;
+        int expected=18;
         int actual=spyCurrentPlayer.getHealth()-2;
         assertEquals(expected,actual);
     }
@@ -337,20 +340,20 @@ class GameEngineTest {
     void checkIfTapped(){
         gameEngine.getPlayerToStart(true);
         Player player1 = gameEngine.getCurrentPlayer();
-        player1.getCurrentDeck().add(new Card());
-        player1.getCurrentDeck().add(new Card());
-        player1.getCurrentDeck().add(new Card());
-        player1.getCurrentDeck().add(new Card());
+        player1.getCurrentDeck().add(new CreatureCard(1,2,"c1", "basic", 2, 3, 2));
+        player1.getCurrentDeck().add(new CreatureCard(2,2,"c2","basic", 1, 3, 3));
+        player1.getCurrentDeck().add(new CreatureCard(2,3,"c3","basic", 3,1,2));
+        player1.getCurrentDeck().add(new CreatureCard(3,2,"c4", "basic", 2,2,3));
         player1.pickupCard();
         player1.pickupCard();
 
         assertEquals(2, player1.getPlayerHand().size());
         gameEngine.getPlayerToStart(false);
         Player player2 = gameEngine.getCurrentPlayer();
-        player2.getCurrentDeck().add(new Card());
-        player2.getCurrentDeck().add(new Card());
-        player2.getCurrentDeck().add(new Card());
-        player2.getCurrentDeck().add(new Card());
+        player2.getCurrentDeck().add(new CreatureCard(1,2,"c1", "basic",1,2,1));
+        player2.getCurrentDeck().add(new CreatureCard(2,2,"c2","basic",2,2,2));
+        player2.getCurrentDeck().add(new CreatureCard(2,3,"c3","basic",3,2,1));
+        player2.getCurrentDeck().add(new CreatureCard(3,2,"c4", "basic", 2,1,3));
 
         player2.pickupCard();
         player2.pickupCard();
@@ -362,11 +365,11 @@ class GameEngineTest {
 
         assertEquals(1, player1.getPlayerHand().size());
         assertEquals(1, player2.getPlayerHand().size());
-        gameEngine.attack(player1.getTableCards().get(0),player2.getTableCards().get(0));
+        gameEngine.attack((CreatureCard) player1.getTableCards().get(0),(CreatureCard) player2.getTableCards().get(0));
 
-        gameEngine.checkIfTapped(player1.getTableCards().get(0));
+        gameEngine.checkIfTapped((CreatureCard) player1.getTableCards().get(0));
 
-        assertTrue( player1.getTableCards().get(0).getTapped());
+        assertTrue( ((CreatureCard)player1.getTableCards().get(0)).isTapped());
     }
 
     @Test
@@ -376,20 +379,20 @@ class GameEngineTest {
         gameEngine.setP1(p1Mock);
         when(p1Mock.getTableCards()).thenReturn(currentTableCardsMock);
         when(currentTableCardsMock.size()).thenReturn(size);
-        when(currentTableCardsMock.get(anyInt())).thenReturn(cardMock);
-        when(cardMock.getTapped()).thenReturn(true,false, false, true);
+        when(currentTableCardsMock.get(anyInt())).thenReturn(creatureCardMock);
+        when(creatureCardMock.isTapped()).thenReturn(true,false, false, true);
 
         gameEngine.getPlayerToStart(true);
         gameEngine.unTap();
 
         verify(p1Mock,times(1)).getTableCards();
         verify(currentTableCardsMock,times(size)).get(anyInt());
-        verify(cardMock,times(size)).getTapped();
-        verify(cardMock,times(1)).unTap();
+        verify(creatureCardMock,times(size)).isTapped();
+        verify(creatureCardMock,times(1)).unTap();
 
         gameEngine.unTap();
 
-        verify(cardMock,times(2)).unTap();
+        verify(creatureCardMock,times(2)).unTap();
     }
 
     @Test

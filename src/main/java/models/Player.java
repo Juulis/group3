@@ -70,9 +70,11 @@ public class Player {
     public void playCard(int playCardNr) {
         int correctedPlayCardNr = playCardNr - 1;
         try {
-            tableCards.add(playerHand.get(correctedPlayCardNr));
+            Card card = playerHand.get(correctedPlayCardNr);
+            tableCards.add(card);
             playerHand.remove(correctedPlayCardNr);
-            ((CreatureCard)tableCards.get(tableCards.size()-1)).tap();
+            if( card instanceof CreatureCard)
+                ((CreatureCard)card).tap();
         } catch(Exception e){
             System.out.println("That card does not exist");
         }
