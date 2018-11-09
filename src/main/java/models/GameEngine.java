@@ -203,7 +203,7 @@ public class GameEngine {
                         break;
 
                     case ATTACKALL:
-                        attacks.attackAll();
+                        attacks.attackAll(selectedCard,opponentPlayer.getTableCards());
                         break;
 
                     default:

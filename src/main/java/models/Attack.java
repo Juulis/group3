@@ -1,5 +1,7 @@
 package models;
 
+import java.util.ArrayList;
+
 public class Attack {
 
     public Attack() {
@@ -26,7 +28,7 @@ public class Attack {
 
     }
 
-    public void attackAll() {
+    public void attackAll(Card selectedCard, ArrayList<Card> tableCards) {
 
     }
 
