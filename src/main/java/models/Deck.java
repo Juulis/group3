@@ -16,11 +16,9 @@ public class Deck {
     private ArrayList<Card> playerOneDeck;
     private ArrayList<Card> playerTwoDeck;
     public int playerDeckSize;
-    private int totalCards;
 
     public Deck() {
         cards = new ArrayList<Card>();
-        totalCards = 50;
         playerOneDeck = new ArrayList<Card>();
         playerTwoDeck = new ArrayList<Card>();
     }
