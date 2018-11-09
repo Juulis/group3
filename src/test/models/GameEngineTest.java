@@ -222,7 +222,7 @@ class GameEngineTest {
     @Test
     void name() {
         assertThat(GameEngine.AttackNames.valueOf("PLAYERATTACK"), is(notNullValue()));
-        assertThat(GameEngine.AttackNames.valueOf("DUAlATTACK"), is(notNullValue()));
+        assertThat(GameEngine.AttackNames.valueOf("DUALATTACK"), is(notNullValue()));
         assertThat(GameEngine.AttackNames.valueOf("IGNITE"), is(notNullValue()));
         assertThat(GameEngine.AttackNames.valueOf("ATTACKALL"), is(notNullValue()));
         assertThat(GameEngine.AttackNames.valueOf("BASIC"), is(notNullValue()));
