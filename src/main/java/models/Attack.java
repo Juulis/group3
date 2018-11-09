@@ -29,7 +29,9 @@ public class Attack {
     }
 
     public void attackAll(Card selectedCard, ArrayList<Card> tableCards) {
-
+        int dmg = selectedCard.getAttack();
+        for(Card card : tableCards){
+            ((CreatureCard) card).removeHp(dmg);
+        }
     }
-
 }

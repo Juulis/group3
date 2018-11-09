@@ -225,21 +225,27 @@ class GameEngineTest {
 
     }
 
+    /**
+     * @throws IOException
+     *
+     * After attacking opponents full tableCard list
+     * check if all cards lost correct amount hp
+     */
     @DisplayName("test attackAll method")
     @Test
     void testAttackAll() throws IOException {
         //Attack opponents full tableCard list
         //check if all cards lost correct amount hp
-        gameEngine.startGame();
+        gameEngine.initGame();
         Player opponentPlayer = gameEngine.getOpponentPlayer();
         currentCard.setAttack(1);
 
-        opponentPlayer.playCard(1);
-        opponentPlayer.playCard(1);
-        opponentPlayer.playCard(1);
-        opponentPlayer.playCard(1);
-        opponentPlayer.playCard(1);
+        //fill tableCard list
+        for(int i = 0;i<5;i++){
+            opponentPlayer.playCard(1);
+        }
 
+        //get hp from cards before attack
         ArrayList<Card> cards = opponentPlayer.getTableCards();
         List<Integer> hp = new ArrayList<>();
         for (Card card : cards) {
@@ -250,6 +256,8 @@ class GameEngineTest {
         }
 
         attack.attackAll(currentCard, opponentPlayer.getTableCards());
+
+        //check hp from cards after attack
         if (!cards.isEmpty()) {
             for (int i = 0; i < cards.size(); i++) {
                 CreatureCard cCard = (CreatureCard) cards.get(i);
