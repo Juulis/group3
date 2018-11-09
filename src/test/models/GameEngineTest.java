@@ -1,7 +1,9 @@
 package models;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.*;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.*;
 
 
@@ -30,8 +32,7 @@ class GameEngineTest {
     Player p2;
     Attack attack;
     private GameEngine gameEngine;
-    @Mock
-    Attack mockAttack;
+
     @Spy
     GameEngine gameEngineSpy;
     @Mock
@@ -57,7 +58,10 @@ class GameEngineTest {
 
     @Spy
     Player players = spy(new Player());
-
+    @Mock
+    Attack mockAttack;
+    @Spy
+    Attack spyAttacks=spy(new Attack());
     @BeforeEach
     void setUp() {
        attack =new Attack();
@@ -67,7 +71,7 @@ class GameEngineTest {
         p1=new Player();
         p2=new Player();
         gameEngine = new GameEngine();
-        mockAttack=new Attack();
+
 
     }
 
@@ -210,19 +214,22 @@ class GameEngineTest {
     @Test
     void testSwitchAttack() {
 
+       doNothing().when(spyAttacks).ignite();
+        doNothing().when(spyAttacks).attackPlayer();
+        doNothing().when(spyAttacks).basicAttack(currentCard,opponentCard);
+        doNothing().when(spyAttacks).dualAttack();
+        doNothing().when(spyAttacks).attackAll();
         assertThat(attack, isA(Attack.class));
-        verify(mockAttack, times(1)).attackAll();
-        verify(mockAttack, times(1)).attackPlayer();
-        verify(mockAttack, times(1)).basicAttack(currentCard,opponentCard);
-        verify(mockAttack, times(1)).dualAttack();
-        verify(mockAttack, times(1)).ignite();
+
 
     }
+
+
 
     @Test
     void name() {
         assertThat(GameEngine.AttackNames.valueOf("PLAYERATTACK"), is(notNullValue()));
-        assertThat(GameEngine.AttackNames.valueOf("DUAlATTACK"), is(notNullValue()));
+        assertThat(GameEngine.AttackNames.valueOf("DUALATTACK"), is(notNullValue()));
         assertThat(GameEngine.AttackNames.valueOf("IGNITE"), is(notNullValue()));
         assertThat(GameEngine.AttackNames.valueOf("ATTACKALL"), is(notNullValue()));
         assertThat(GameEngine.AttackNames.valueOf("BASIC"), is(notNullValue()));
