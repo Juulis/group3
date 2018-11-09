@@ -1,32 +1,32 @@
 package models;
 
 public class Attack {
-    private static Attack ourInstance = new Attack();
 
-    public static Attack getInstance() {
-        return ourInstance;
+    public Attack() {
     }
 
-    private Attack() {
+    public void basicAttack(Card currentPlayerCard, CreatureCard opponentCard) {
+        int giveDmg = currentPlayerCard.getAttack();
+        int takeDmg = opponentCard.getAttack();
+        opponentCard.removeHp(giveDmg);
+        if(currentPlayerCard.getClass() == CreatureCard.class){
+            ((CreatureCard)currentPlayerCard).removeHp(takeDmg);
+        }
     }
 
-    public void dualAttack(){
-
-    }
-
-    public void creatureAttackPlayer(){
-
-    }
-
-    public void ignite(){
+    public void dualAttack() {
 
     }
 
-    public void attackAllMC(){
+    public void attackPlayer() {
 
     }
 
-    public void mGAttackPlayer(){
+    public void ignite() {
+
+    }
+
+    public void attackAll() {
 
     }
 

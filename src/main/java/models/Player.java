@@ -73,11 +73,11 @@ public class Player {
             Card card = playerHand.get(correctedPlayCardNr);
             tableCards.add(card);
             playerHand.remove(correctedPlayCardNr);
+
             if( card instanceof CreatureCard){
                 ((CreatureCard) card).tap();
                 ((CreatureCard) card).setPlayedOnRound(round);
             }
-
         } catch(Exception e){
             System.out.println("That card does not exist");
         }
