@@ -1,11 +1,16 @@
 package sample;
+
+import models.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/*public class Main extends Application {
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -15,18 +20,15 @@ import javafx.stage.Stage;
         primaryStage.show();
     }
 
-   public static void main(String[] args) {
-        launch(args);
-    }
-}*/
-
-import models.*;
-
-import java.io.IOException;
-
-public class Main {
     public static void main(String[] args) throws IOException {
-        GameEngine game = new GameEngine();
-        game.startGame();
+        System.out.println("1. for FX\n2. for Console");
+        Scanner sc = new Scanner(System.in);
+        int choice = sc.nextInt();
+        if (choice == 1) {
+            launch(args);
+        } else if (choice == 2) {
+            GameEngine game = new GameEngine();
+            game.startGame();
+        }
     }
 }
