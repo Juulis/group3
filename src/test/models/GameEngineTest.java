@@ -230,16 +230,16 @@ class GameEngineTest {
      *
      * After attacking opponents full tableCard list
      * check if all cards lost correct amount hp
+     *
+     * repeated because of the random cards on table
      */
     @DisplayName("test attackAll method")
-    @Test
+    @RepeatedTest(30)
     void testAttackAll() throws IOException {
-        //Attack opponents full tableCard list
-        //check if all cards lost correct amount hp
+        //prep game
         gameEngine.initGame();
         Player opponentPlayer = gameEngine.getOpponentPlayer();
         currentCard.setAttack(1);
-
         //fill tableCard list
         for(int i = 0;i<5;i++){
             opponentPlayer.playCard(1);
