@@ -263,7 +263,7 @@ public class GameEngine {
                     int attackCard;
                     int cardToAttack;
 
-                    System.out.println("what card you like to attacks with? (0 to cancel)");
+                    System.out.println("what card do you like to attack with? (0 to cancel)");
 
                     attackCard = getInput();
                     if (attackCard == 0) {
@@ -275,17 +275,23 @@ public class GameEngine {
                         if (checkIfTapped((CreatureCard) currentPlayer.getTableCards().get(attackCard - 1))) {
                             break;
                         }
+                        if(!isCardReadyToAttack((CreatureCard) currentPlayer.getTableCards().get(attackCard - 1))){
+                            System.out.println("Card is not ready for attack!");
+                            break;
+                        }
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("That card does not exist");
                         break;
                     }
 
                     if (!opponentPlayer.getTableCards().isEmpty()) {
-                        System.out.println("what card do you want to attacks?");
+                        System.out.println("What card do you want to attack?");
                         try {
                             cardToAttack = getInput();
                             attacks.basicAttack(currentPlayer.getTableCards().get(attackCard - 1), (CreatureCard) opponentPlayer.getTableCards().get(cardToAttack - 1));
-
+                            if(isCardKilled((CreatureCard)opponentPlayer.getTableCards().get(cardToAttack-1))){
+                                opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(cardToAttack-1));
+                            }
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("That card does not exist");
                         }
