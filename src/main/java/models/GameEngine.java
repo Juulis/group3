@@ -203,7 +203,7 @@ public class GameEngine {
                         break;
 
                     case ATTACKALL:
-                        attacks.attackAll();
+                        attacks.attackAll(selectedCard, opponentPlayer.getTableCards());
                         break;
 
                     default:
@@ -211,15 +211,15 @@ public class GameEngine {
                 }
             }
         }
-        for(int i = 0; i < opponentPlayer.getTableCards().size();i++){ //checks all opponent table cards if they died by the attack
-            if(
-            isCardKilled((CreatureCard)opponentPlayer.getTableCards().get(i))){
+        for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
+            if (
+                    isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
                 opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
             }
         }
         if (selectedCard.getClass() == CreatureCard.class) {
             ((CreatureCard) selectedCard).tap();
-            if(isCardKilled((CreatureCard) selectedCard)){
+            if (isCardKilled((CreatureCard) selectedCard)) {
                 currentPlayer.sendToGraveyard(selectedCard);
             }
         }
@@ -247,7 +247,7 @@ public class GameEngine {
                 showTable();
                 break;
             case 2:
-                int playCard;
+                int playCard, round;
                 System.out.println("what card do you want to play out? (0 to cancel)");
 
                 playCard = getInput();
@@ -255,15 +255,15 @@ public class GameEngine {
                     playerMenu();
                     return;
                 }
-
-                currentPlayer.playCard(playCard);
+                round = (turn+1)/2;
+                currentPlayer.playCard(playCard , round);
                 break;
             case 3:
                 if (turn > 2) {
                     int attackCard;
                     int cardToAttack;
 
-                    System.out.println("what card you like to attacks with? (0 to cancel)");
+                    System.out.println("what card do you like to attack with? (0 to cancel)");
 
                     attackCard = getInput();
                     if (attackCard == 0) {
@@ -275,17 +275,23 @@ public class GameEngine {
                         if (checkIfTapped((CreatureCard) currentPlayer.getTableCards().get(attackCard - 1))) {
                             break;
                         }
+                        if(!isCardReadyToAttack((CreatureCard) currentPlayer.getTableCards().get(attackCard - 1))){
+                            System.out.println("Card is not ready for attack!");
+                            break;
+                        }
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("That card does not exist");
                         break;
                     }
 
                     if (!opponentPlayer.getTableCards().isEmpty()) {
-                        System.out.println("what card do you want to attacks?");
+                        System.out.println("What card do you want to attack?");
                         try {
                             cardToAttack = getInput();
                             attacks.basicAttack(currentPlayer.getTableCards().get(attackCard - 1), (CreatureCard) opponentPlayer.getTableCards().get(cardToAttack - 1));
-
+                            if(isCardKilled((CreatureCard)opponentPlayer.getTableCards().get(cardToAttack-1))){
+                                opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(cardToAttack-1));
+                            }
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("That card does not exist");
                         }
@@ -398,5 +404,12 @@ public class GameEngine {
             if (creatureCard.isTapped())
                 creatureCard.unTap();
         }
+    }
+
+    public boolean isCardReadyToAttack(CreatureCard creatureCard){
+        int round = (turn+1)/2;
+        if((creatureCard.getPlayedOnRound()+creatureCard.getPower()) < round)
+            return true;
+        return false;
     }
 }
