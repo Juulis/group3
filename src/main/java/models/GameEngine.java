@@ -408,7 +408,7 @@ public class GameEngine {
 
     public boolean isCardReadyToAttack(CreatureCard creatureCard){
         int round = (turn+1)/2;
-        if((creatureCard.getPlayedOnRound()+creatureCard.getPower()) <= round)
+        if((creatureCard.getPlayedOnRound()+creatureCard.getPower()) < round)
             return true;
         return false;
     }

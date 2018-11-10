@@ -430,7 +430,7 @@ class GameEngineTest {
     @Test
     void isCardReadyToAttack() {
 
-        when(creatureCardMock.getPlayedOnRound()).thenReturn(1);
+        when(creatureCardMock.getPlayedOnRound()).thenReturn(0);
         when(creatureCardMock.getPower()).thenReturn(0).thenReturn(4);
         assertTrue(gameEngine.isCardReadyToAttack(creatureCardMock));
         assertFalse(gameEngine.isCardReadyToAttack(creatureCardMock));
