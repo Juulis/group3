@@ -241,7 +241,7 @@ class GameEngineTest {
         currentCard.setAttack(1);
         //fill tableCard list
         for(int i = 0;i<5;i++){
-            opponentPlayer.playCard(1);
+            opponentPlayer.playCard(1,2);
         }
 
         //get hp from cards before attack
