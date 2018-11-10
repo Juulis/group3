@@ -55,7 +55,7 @@ class PlayerTest {
 
         Card playCard = (Card) p1.getPlayerHand().get(playCardNr);
 
-        p1.playCard(playCardNr);
+        p1.playCard(playCardNr,1);
 
         assertEquals(4, p1.getPlayerHand().size());
         assertEquals(1, p1.getTableCards().size());

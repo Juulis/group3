@@ -4,7 +4,7 @@
     "hp": 10,
     "attack": 5,
     "defence": 1,
-    "power": 0,
+    "power": 2,
     "cardEnergy": 2,
     "specialAttack": "dualAttack",
     "magicCard": 0
@@ -14,7 +14,7 @@
     "hp": 10,
     "attack": 5,
     "defence": 1,
-    "power": 0,
+    "power": 2,
     "cardEnergy": 2,
     "specialAttack": "dualAttack",
     "magicCard": 0
@@ -24,7 +24,7 @@
     "hp": 10,
     "attack": 5,
     "defence": 1,
-    "power": 0,
+    "power": 2,
     "cardEnergy": 2,
     "specialAttack": "dualAttack",
     "magicCard": 0
@@ -34,7 +34,7 @@
     "hp": 10,
     "attack": 5,
     "defence": 1,
-    "power": 0,
+    "power": 2,
     "cardEnergy": 2,
     "specialAttack": "dualAttack",
     "magicCard": 0
@@ -44,7 +44,7 @@
     "hp": 10,
     "attack": 5,
     "defence": 1,
-    "power": 0,
+    "power": 2,
     "cardEnergy": 2,
     "specialAttack": "dualAttack",
     "magicCard": 0
@@ -54,7 +54,7 @@
     "hp": 10,
     "attack": 5,
     "defence": 1,
-    "power": 0,
+    "power": 2,
     "cardEnergy": 2,
     "specialAttack": "dualAttack",
     "magicCard": 0
@@ -64,7 +64,7 @@
     "hp": 10,
     "attack": 5,
     "defence": 1,
-    "power": 0,
+    "power": 2,
     "cardEnergy": 2,
     "specialAttack": "dualAttack",
     "magicCard": 0
@@ -74,15 +74,7 @@
     "hp": 10,
     "attack": 5,
     "defence": 1,
-    "power": 0,
-    "cardEnergy": 2,
-    "specialAttack": "dualAttack",
-    "magicCard": 0
-  },
-  {
-    "name": "Nightscream",
-    "hp": 10,
-    "attack": 5,
+    "power": 2,
     "cardEnergy": 2,
     "specialAttack": "dualAttack",
     "magicCard": 0
@@ -92,7 +84,17 @@
     "hp": 10,
     "attack": 5,
     "defence": 1,
-    "power": 0,
+    "power": 2,
+    "cardEnergy": 2,
+    "specialAttack": "dualAttack",
+    "magicCard": 0
+  },
+  {
+    "name": "Nightscream",
+    "hp": 10,
+    "attack": 5,
+    "defence": 1,
+    "power": 2,
     "cardEnergy": 2,
     "specialAttack": "dualAttack",
     "magicCard": 0
@@ -299,16 +301,6 @@
   },
   {
     "name": "Vilestrike",
-    "hp": 0,
-    "attack": 3,
-    "defence": 3,
-    "power": 0,
-    "cardEnergy": 1,
-    "specialAttack": "basic",
-    "magicCard": 0
-  },
-  {
-    "name": "Vilestrike",
     "hp": 5,
     "attack": 3,
     "defence": 3,
@@ -398,11 +390,21 @@
     "magicCard": 0
   },
   {
+    "name": "Vilestrike",
+    "hp": 5,
+    "attack": 3,
+    "defence": 3,
+    "power": 0,
+    "cardEnergy": 1,
+    "specialAttack": "basic",
+    "magicCard": 0
+  },
+  {
     "name": "Frostbeing",
     "hp": 6,
     "attack": 4,
     "defence": 4,
-    "power": 0,
+    "power": 1,
     "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0
@@ -412,7 +414,7 @@
     "hp": 6,
     "attack": 4,
     "defence": 4,
-    "power": 0,
+    "power": 1,
     "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0
@@ -422,7 +424,7 @@
     "hp": 6,
     "attack": 4,
     "defence": 4,
-    "power": 0,
+    "power": 1,
     "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0
@@ -432,7 +434,7 @@
     "hp": 6,
     "attack": 4,
     "defence": 4,
-    "power": 0,
+    "power": 1,
     "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0
@@ -442,7 +444,7 @@
     "hp": 6,
     "attack": 4,
     "defence": 4,
-    "power": 0,
+    "power": 1,
     "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0
@@ -452,7 +454,7 @@
     "hp": 6,
     "attack": 4,
     "defence": 4,
-    "power": 0,
+    "power": 1,
     "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0
@@ -462,7 +464,7 @@
     "hp": 6,
     "attack": 4,
     "defence": 4,
-    "power": 0,
+    "power": 1,
     "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0
@@ -472,7 +474,7 @@
     "hp": 6,
     "attack": 4,
     "defence": 4,
-    "power": 0,
+    "power": 1,
     "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0
@@ -482,7 +484,7 @@
     "hp": 6,
     "attack": 4,
     "defence": 4,
-    "power": 0,
+    "power": 1,
     "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0
@@ -492,7 +494,7 @@
     "hp": 6,
     "attack": 4,
     "defence": 4,
-    "power": 0,
+    "power": 1,
     "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0

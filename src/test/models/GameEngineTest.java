@@ -49,7 +49,6 @@ class GameEngineTest {
 
     @Mock
     ArrayList<Card> currentTableCardsMock, currentHandCardsMock, opponentTableCardsMock, opponentHandCardsMock;
-
     @Mock
     CreatureCard creatureCardMock;
 
@@ -249,7 +248,7 @@ class GameEngineTest {
         player1.pickupCard();
 
         assertEquals(2, player1.getPlayerHand().size());
-        player1.playCard(1);
+        player1.playCard(1,1);
         assertEquals(1, player1.getPlayerHand().size());
 
         gameEngine.getPlayerToStart(false);
@@ -262,7 +261,7 @@ class GameEngineTest {
         player2.pickupCard();
 
         assertEquals(2, player2.getPlayerHand().size());
-        player2.playCard(1);
+        player2.playCard(1,1);
         assertEquals(1, player2.getPlayerHand().size());
 
         gameEngine.endTurn();
@@ -365,8 +364,8 @@ class GameEngineTest {
 
         assertEquals(2, player2.getPlayerHand().size());
 
-        player1.playCard(1);
-        player2.playCard(1);
+        player1.playCard(1,1);
+        player2.playCard(1,1);
 
         assertEquals(1, player1.getPlayerHand().size());
         assertEquals(1, player2.getPlayerHand().size());
@@ -426,5 +425,14 @@ class GameEngineTest {
         verify(currentTableCardsMock, times(1)).size();
         verify(opponentTableCardsMock, times(1)).size();
 
+    }
+
+    @Test
+    void isCardReadyToAttack() {
+
+        when(creatureCardMock.getPlayedOnRound()).thenReturn(0);
+        when(creatureCardMock.getPower()).thenReturn(0).thenReturn(4);
+        assertTrue(gameEngine.isCardReadyToAttack(creatureCardMock));
+        assertFalse(gameEngine.isCardReadyToAttack(creatureCardMock));
     }
 }
