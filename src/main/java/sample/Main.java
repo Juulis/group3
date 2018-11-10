@@ -5,7 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/*public class Main extends Application {
+public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -18,9 +18,9 @@ import javafx.stage.Stage;
    public static void main(String[] args) {
         launch(args);
     }
-}*/
+}
 
-import models.*;
+/*import models.*;
 
 import java.io.IOException;
 
@@ -29,4 +29,4 @@ public class Main {
         GameEngine game = new GameEngine();
         game.startGame();
     }
-}
+}*/
