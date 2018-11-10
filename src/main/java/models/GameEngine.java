@@ -191,7 +191,7 @@ public class GameEngine {
                         break;
 
                     case IGNITE:
-                        attacks.ignite();
+                     
                         break;
 
                     case DUALATTACK:

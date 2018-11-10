@@ -36,6 +36,7 @@ class GameEngineTest {
     Attack attack;
     private GameEngine gameEngine;
 
+
     @Spy
     GameEngine gameEngineSpy;
     @Mock
@@ -73,6 +74,7 @@ class GameEngineTest {
         opponentCard = new CreatureCard(2, 2, "c3", "basic", 2, 3, 1);
         p1 = new Player();
         p2 = new Player();
+
     }
 
     @Test
@@ -214,7 +216,7 @@ class GameEngineTest {
     @Test
     void testSwitchAttack() {
 
-        doNothing().when(spyAttacks).ignite();
+    //    doNothing().when(spyAttacks).ignite();
         doNothing().when(spyAttacks).attackPlayer();
         doNothing().when(spyAttacks).basicAttack(currentCard, opponentCard);
         doNothing().when(spyAttacks).dualAttack();
@@ -478,4 +480,13 @@ class GameEngineTest {
         assertTrue(gameEngine.isCardReadyToAttack(creatureCardMock));
         assertFalse(gameEngine.isCardReadyToAttack(creatureCardMock));
     }
+
+    @Test
+    void testCallIgniteMethod() {
+
+        verify(spyAttacks, atMost(2)).ignite(currentCard,opponentCard);
+
+
+    }
+
 }
