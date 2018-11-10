@@ -35,7 +35,8 @@ class GameEngineTest {
     Player p2;
     Attack attack;
     private GameEngine gameEngine;
-
+    CreatureCard spyCurrentCard ;
+    CreatureCard spyOpponentCard ;
 
     @Spy
     GameEngine gameEngineSpy;
@@ -65,6 +66,7 @@ class GameEngineTest {
     Attack mockAttack;
     @Spy
     Attack spyAttacks = spy(new Attack());
+    CreatureCard spyCreature;
 
     @BeforeEach
     void setUp() {
@@ -74,7 +76,9 @@ class GameEngineTest {
         opponentCard = new CreatureCard(2, 2, "c3", "basic", 2, 3, 1);
         p1 = new Player();
         p2 = new Player();
-
+         spyCreature=spy(opponentCard);
+        spyCurrentCard = Mockito.spy(currentCard);
+        spyOpponentCard = Mockito.spy(opponentCard);
     }
 
     @Test
@@ -325,8 +329,7 @@ class GameEngineTest {
 
     @RepeatedTest(100)
     void testplayerEnginAttack() {
-        CreatureCard spyCurrentCard = Mockito.spy(currentCard);
-        CreatureCard spyOpponentCard = Mockito.spy(opponentCard);
+
         Player spyCurrentPlayer = Mockito.spy(p1);
         Player spyOpponentPlayer = Mockito.spy(p2);
         assertNotNull(spyCurrentCard);
@@ -486,7 +489,19 @@ class GameEngineTest {
 
         verify(spyAttacks, atMost(2)).ignite(currentCard,opponentCard);
 
-
     }
 
+    @Test
+    void testIncreaseIgnCounter() {
+        assertNotNull(spyCurrentCard);
+        assertNotNull(opponentCard);
+        verify(spyCreature, atMost(2)).increaseIgnRoundCounter();
+        verify(spyCreature, atMost(2)).getHp();
+        verify(spyCreature, atMost(2)).removeHp(2);
+        verify(spyCreature, atMost(2)).getIgnRoundCounter();
+        assertThat(opponentCard, isA(CreatureCard.class));
+
+
+
+    }
 }
