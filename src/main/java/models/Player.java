@@ -71,14 +71,13 @@ public class Player {
         int correctedPlayCardNr = playCardNr - 1;
         try {
             Card card = playerHand.get(correctedPlayCardNr);
-            tableCards.add(card);
-            playerHand.remove(correctedPlayCardNr);
-
-            if( card instanceof CreatureCard){
+            if (card.getClass() == CreatureCard.class) {
+                tableCards.add(card);
+                playerHand.remove(correctedPlayCardNr);
                 ((CreatureCard) card).tap();
                 ((CreatureCard) card).setPlayedOnRound(round);
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             System.out.println("That card does not exist");
         }
     }

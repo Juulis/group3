@@ -203,7 +203,7 @@ public class GameEngine {
                         break;
 
                     case ATTACKALL:
-                        attacks.attackAll();
+                        attacks.attackAll(selectedCard, opponentPlayer.getTableCards());
                         break;
 
                     default:
@@ -211,15 +211,15 @@ public class GameEngine {
                 }
             }
         }
-        for(int i = 0; i < opponentPlayer.getTableCards().size();i++){ //checks all opponent table cards if they died by the attack
-            if(
-            isCardKilled((CreatureCard)opponentPlayer.getTableCards().get(i))){
+        for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
+            if (
+                    isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
                 opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
             }
         }
         if (selectedCard.getClass() == CreatureCard.class) {
             ((CreatureCard) selectedCard).tap();
-            if(isCardKilled((CreatureCard) selectedCard)){
+            if (isCardKilled((CreatureCard) selectedCard)) {
                 currentPlayer.sendToGraveyard(selectedCard);
             }
         }
