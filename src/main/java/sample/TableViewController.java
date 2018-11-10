@@ -1,12 +1,17 @@
-import java.awt.*;
-import java.net.URL;
-import java.util.ResourceBundle;
+package sample;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
-public class tableViewController {
+
+public class TableViewController {
 
     @FXML
     private Line playerOneEnergy;
@@ -50,44 +55,6 @@ public class tableViewController {
     private Button endTurn;
 
     @FXML
-    private Line playerOneEnergy;
-
-    @FXML
-    private Rectangle playerOneDeck;
-
-    @FXML
-    private Circle playerOneGraveyard;
-
-    @FXML
-    private Label playerOneHp;
-
-    @FXML
-    private Rectangle playerOneHandOne;
-    @FXML
-    private Rectangle playerOneHandTwo;
-    @FXML
-    private Rectangle playerOneHandThree;
-    @FXML
-    private Rectangle playerOneHandFour;
-    @FXML
-    private Rectangle playerOneHandFive;
-
-    @FXML
-    private Rectangle playerOneTableOne;
-    @FXML
-    private Rectangle playerOneTableTwo;
-    @FXML
-    private Rectangle playerOneTableThree;
-    @FXML
-    private Rectangle playerOneTableFour;
-    @FXML
-    private Rectangle playerOneTableFive;
-    @FXML
-    private Rectangle playerOneTableSix;
-    @FXML
-    private Rectangle playerOneTableSeven;
-
-    @FXML
     private Line playerTwoEnergy;
 
     @FXML
@@ -124,12 +91,14 @@ public class tableViewController {
     private Rectangle playerTwoTableSix;
     @FXML
     private Rectangle playerTwoTableSeven;
-
-    public tableViewController() {
-    }
+    @FXML
+    private Pane tableViewPane;
 
     @FXML
-    private void initialize() {
+    public ImageView tableImageView;
+
+    public void initialize() {
+
     }
 
 }
