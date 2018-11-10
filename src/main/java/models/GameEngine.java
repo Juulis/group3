@@ -156,8 +156,25 @@ public class GameEngine {
         }
         currentPlayer.pickupCard();
         turn++;
+        increaseIgnCounter(currentPlayer.getTableCards());
+        increaseIgnCounter(opponentPlayer.getTableCards());
     }
+    public void increaseIgnCounter(ArrayList<Card>playerTableCards){
+        //increase ignited card counter for new round and take damage automatically
+        for (Card card: playerTableCards   ) {
+            if (card instanceof CreatureCard){
+                if (((CreatureCard) card).getIgnRoundCounter()>=1&&((CreatureCard) card).getIgnRoundCounter()<3){
+                    ((CreatureCard) card).increaseIgnRoundCounter();
+                    if (((CreatureCard) card).getHp()>=2){
+                        ((CreatureCard) card).removeHp(2);
+                    }
 
+                }else if (((CreatureCard) card).getIgnRoundCounter()==3){
+                    ((CreatureCard) card).setIgnRoundCounter(0);
+                }
+            }
+        }
+    }
     /**
      * checks if the card hp is 0
      *
