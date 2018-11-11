@@ -483,7 +483,8 @@ class GameEngineTest {
     void isScoreAHighscore() {
 
         gameEngine.setP1(p1Mock);
-        when(p1Mock.getScore()).thenReturn(49).thenReturn(51);
+        int min = gameEngine.readHighscoresFromJSON().get(gameEngine.readHighscoresFromJSON().size()-1).getScore();
+        when(p1Mock.getScore()).thenReturn(min-1).thenReturn(min+1);
         assertFalse(gameEngine.isScoreAHighscore(p1Mock));
         assertTrue(gameEngine.isScoreAHighscore(p1Mock));
     }
