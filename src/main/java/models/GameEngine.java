@@ -425,14 +425,15 @@ public class GameEngine {
         }
         Collections.sort(highscores, (Highscore h1, Highscore h2) -> h1.getScore()-h2.getScore());
         Collections.reverse(highscores);
-        for (int i = 0; i < 5; i++) {
-            System.out.println(highscores.get(i).getName()+" - "+highscores.get(i).getScore());
-        }
         return highscores;
     }
 
     public boolean isScoreAHighscore( Player p){
-
+        int score = p.getScore();
+        readHighscoresFromJSON();
+        int minHighscore = highscores.get(highscores.size()-1).getScore();
+        if( score > minHighscore)
+            return true;
         return false;
     }
 }
