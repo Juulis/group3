@@ -488,6 +488,7 @@ class GameEngineTest {
         p1.getPlayerHand().add(magicCard);
         assertEquals(1, p1.getPlayerHand().size());
         p1.playCard(p1.getPlayerHand().indexOf(magicCard), 4);
+        p1.sendToGraveyard(magicCard);
         assertEquals(0, p1.getPlayerHand().size());
 
 
