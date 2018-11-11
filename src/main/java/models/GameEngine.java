@@ -430,4 +430,9 @@ public class GameEngine {
         }
         return highscores;
     }
+
+    public boolean isScoreAHighscore( Player p){
+
+        return false;
+    }
 }

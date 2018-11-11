@@ -478,4 +478,14 @@ class GameEngineTest {
         assertTrue(gameEngine.isCardReadyToAttack(creatureCardMock));
         assertFalse(gameEngine.isCardReadyToAttack(creatureCardMock));
     }
+
+    @Test
+    void isScoreAHighscore() {
+
+        gameEngine.setP1(p1Mock);
+        int minHighscore=gameEngine.readHighscoresFromJSON().get(gameEngine.readHighscoresFromJSON().size()-1).getScore();
+        when(p1Mock.getScore()).thenReturn(99).thenReturn(101);
+        assertFalse(gameEngine.isScoreAHighscore(p1Mock));
+        assertTrue(gameEngine.isScoreAHighscore(p1Mock));
+    }
 }
