@@ -57,7 +57,6 @@ public class Player {
      * @param card
      */
     public void sendToGraveyard(Card card) {
-
         tableCards.remove(card);
     }
 

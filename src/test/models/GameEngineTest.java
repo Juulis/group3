@@ -31,6 +31,8 @@ import static org.mockito.Mockito.*;
 class GameEngineTest {
     CreatureCard currentCard;
     CreatureCard opponentCard;
+    MagicCard magicCard;
+    MagicCard magicCard2;
     Player p1;
     Player p2;
     Attack attack;
@@ -71,6 +73,8 @@ class GameEngineTest {
         gameEngine = new GameEngine();
         currentCard = new CreatureCard(3, 2, "c4", "basic", 3, 3, 2);
         opponentCard = new CreatureCard(2, 2, "c3", "basic", 2, 3, 1);
+        magicCard = new MagicCard(5, 2, "TROLL", "playerAttack");
+        magicCard2 = new MagicCard(3, 1, "FISK", "basic");
         p1 = new Player();
         p2 = new Player();
     }
@@ -322,7 +326,7 @@ class GameEngineTest {
     }
 
     @RepeatedTest(100)
-    void testplayerEnginAttack() {
+    void testPlayerEngineAttack() {
         CreatureCard spyCurrentCard = Mockito.spy(currentCard);
         CreatureCard spyOpponentCard = Mockito.spy(opponentCard);
         Player spyCurrentPlayer = Mockito.spy(p1);
@@ -472,10 +476,20 @@ class GameEngineTest {
 
     @Test
     void isCardReadyToAttack() {
-
         when(creatureCardMock.getPlayedOnRound()).thenReturn(0);
         when(creatureCardMock.getPower()).thenReturn(0).thenReturn(4);
         assertTrue(gameEngine.isCardReadyToAttack(creatureCardMock));
         assertFalse(gameEngine.isCardReadyToAttack(creatureCardMock));
+    }
+
+    @Test
+    void whenMagicCardIsUsedSendToGrave() {
+        assertThat(magicCard).isInstanceOfAny(MagicCard.class);
+        p1.getPlayerHand().add(magicCard);
+        assertEquals(1, p1.getPlayerHand().size());
+        p1.playCard(p1.getPlayerHand().indexOf(magicCard), 4);
+        assertEquals(0, p1.getPlayerHand().size());
+
+
     }
 }
