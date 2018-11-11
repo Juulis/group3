@@ -57,6 +57,9 @@ public class Player {
      * @param card
      */
     public void sendToGraveyard(Card card) {
+        if (card instanceof MagicCard) {
+            playerHand.remove(card);
+        }
         tableCards.remove(card);
     }
 
