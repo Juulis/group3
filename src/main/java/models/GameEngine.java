@@ -423,6 +423,11 @@ public class GameEngine {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        Collections.sort(highscores, (Highscore h1, Highscore h2) -> h1.getScore()-h2.getScore());
+        Collections.reverse(highscores);
+        for (int i = 0; i < 5; i++) {
+            System.out.println(highscores.get(i).getName()+" - "+highscores.get(i).getScore());
+        }
         return highscores;
     }
 }
