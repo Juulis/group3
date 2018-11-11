@@ -1,10 +1,12 @@
 package models;
 
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.InputMismatchException;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class GameEngine {
 
@@ -26,6 +28,7 @@ public class GameEngine {
     private boolean playing;
     private int turn;
     private Attack attacks;
+    private List<Highscore> highscores;
 
     public void setP1(Player p) {
         this.p1 = p;
@@ -411,5 +414,15 @@ public class GameEngine {
         if((creatureCard.getPlayedOnRound()+creatureCard.getPower()) < round)
             return true;
         return false;
+    }
+
+    public List<Highscore> readHighscoresFromJSON(){
+        try {
+            JsonReader reader = new JsonReader( new FileReader("src/main/java/json/Highscore.json"));
+            highscores = Arrays.asList(new Gson().fromJson(reader, Highscore[].class));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return highscores;
     }
 }
