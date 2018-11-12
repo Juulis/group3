@@ -1,10 +1,13 @@
 package models;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
@@ -437,6 +440,17 @@ public class GameEngine {
     }
 
     public void saveHighscore(Player p){
-
+        Highscore highscore = new Highscore(p.getName(), p.getScore());
+        highscores[highscores.length-1] = highscore;
+        Arrays.sort(highscores, Collections.reverseOrder((Highscore h1, Highscore h2) -> h1.getScore()-h2.getScore()));
+        try {
+            FileWriter writer = new FileWriter("src/main/java/json/Highscore.json");
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(highscores, writer);
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

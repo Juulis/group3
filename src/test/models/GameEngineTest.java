@@ -491,7 +491,8 @@ class GameEngineTest {
     void saveHighscore() {
         Highscore[] highscores = gameEngine.readHighscoresFromJSON();
         int minScore = highscores[highscores.length-1].getScore();
-        when(p1Mock.getScore()).thenReturn(140);
+        when(p1Mock.getName()).thenReturn("Peter");
+        when(p1Mock.getScore()).thenReturn(165);
         gameEngine.saveHighscore(p1Mock);
         highscores = gameEngine.readHighscoresFromJSON();
         int newMinScore = highscores[highscores.length-1].getScore();
