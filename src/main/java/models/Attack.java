@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Attack {
     Player player;
+    GameEngine gameEngine;
 
     public Attack() {
 
@@ -22,7 +23,9 @@ public class Attack {
 
     }
 
-    public void attackPlayer() {
+    public void attackPlayer(Card selectedCard) {
+        int dmg = selectedCard.getAttack();
+        gameEngine.getOpponentPlayer().removeHp(dmg);
 
     }
 
