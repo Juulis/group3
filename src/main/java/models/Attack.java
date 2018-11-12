@@ -16,8 +16,13 @@ public class Attack {
         }
     }
 
-    public void dualAttack() {
-
+    public void dualAttack(CreatureCard currentPlayerCard, CreatureCard opponentCardOne, CreatureCard opponentCardTwo) {
+        basicAttack(currentPlayerCard, opponentCardOne);
+        if (currentPlayerCard.getHp() < 1) {
+            System.out.println(currentPlayerCard.getCardName() + " was killed before launching second attack!");
+            return;
+        }
+        basicAttack(currentPlayerCard, opponentCardTwo);
     }
 
     public void attackPlayer() {
