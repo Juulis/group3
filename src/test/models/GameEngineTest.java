@@ -499,4 +499,15 @@ class GameEngineTest {
         assertTrue( p1Mock.getScore() >= newMinScore);
         assertTrue(newMinScore > minScore);
     }
+
+    @Test
+    void setPlayerScore() {
+
+        gameEngine.setPlayerScore(p1Mock);
+        verify(p1Mock,times(1)).getHealth();
+        verify(p1Mock,times(1)).getCurrentDeck();
+        verify(p1Mock,times(1)).getPlayerHand();
+        verify(p1Mock,times(1)).getTableCards();
+        verify(p1Mock,times(1)).setScore(anyInt());
+    }
 }

@@ -453,4 +453,11 @@ public class GameEngine {
             e.printStackTrace();
         }
     }
+
+    public void setPlayerScore( Player p){
+        int health = p.getHealth();
+        int nrCardsLeft = p.getCurrentDeck().size() + p.getPlayerHand().size()+ p.getTableCards().size();
+        int score = health * nrCardsLeft;
+        p.setScore(score);
+    }
 }
