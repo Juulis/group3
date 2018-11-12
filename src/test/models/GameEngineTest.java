@@ -502,12 +502,17 @@ class GameEngineTest {
 
     @Test
     void setPlayerScore() {
-
+        when(p1Mock.getCurrentDeck()).thenReturn(playerOneDeckMock);
+        when(p1Mock.getPlayerHand()).thenReturn(currentHandCardsMock);
+        when(p1Mock.getTableCards()).thenReturn(currentTableCardsMock);
         gameEngine.setPlayerScore(p1Mock);
         verify(p1Mock,times(1)).getHealth();
         verify(p1Mock,times(1)).getCurrentDeck();
+        verify(playerOneDeckMock, times(1)).size();
         verify(p1Mock,times(1)).getPlayerHand();
+        verify(currentHandCardsMock, times(1)).size();
         verify(p1Mock,times(1)).getTableCards();
+        verify(currentTableCardsMock,times(1)).size();
         verify(p1Mock,times(1)).setScore(anyInt());
     }
 }
