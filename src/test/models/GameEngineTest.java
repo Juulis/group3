@@ -31,6 +31,9 @@ import static org.mockito.Mockito.*;
 class GameEngineTest {
     CreatureCard currentCard;
     CreatureCard opponentCard;
+    CreatureCard currentCardDualAttack;
+    CreatureCard opponentCardOne;
+    CreatureCard opponentCardTwo;
     Player p1;
     Player p2;
     Attack attack;
@@ -71,6 +74,9 @@ class GameEngineTest {
         gameEngine = new GameEngine();
         currentCard = new CreatureCard(3, 2, "c4", "basic", 3, 3, 2);
         opponentCard = new CreatureCard(2, 2, "c3", "basic", 2, 3, 1);
+        currentCardDualAttack = new CreatureCard(3, 2, "c6", "dualAttack", 6, 3, 2);
+        opponentCardOne = new CreatureCard(2, 2, "c7", "basic", 2, 3, 1);
+        opponentCardTwo = new CreatureCard(2, 2, "c8", "basic", 2, 3, 1);
         p1 = new Player();
         p2 = new Player();
     }
@@ -217,7 +223,7 @@ class GameEngineTest {
         doNothing().when(spyAttacks).ignite();
         doNothing().when(spyAttacks).attackPlayer();
         doNothing().when(spyAttacks).basicAttack(currentCard, opponentCard);
-        doNothing().when(spyAttacks).dualAttack();
+        doNothing().when(spyAttacks).dualAttack(currentCard, opponentCardOne, opponentCardTwo);
         doNothing().when(spyAttacks).attackAll(currentCard,opponentTableCardsMock);
         assertThat(attack, isA(Attack.class));
 
@@ -265,6 +271,30 @@ class GameEngineTest {
         }
     }
 
+    @DisplayName("test dualAttack method")
+    @Test
+    void testDualAttack() {
+        assertFalse(currentCardDualAttack.isTapped());
+        assertThat(currentCard.getSpecialAttack() == "dualAttack");
+
+        // Test where currentCardDualAttack doesn't get killed during dualAttack()...
+        attack.dualAttack(currentCardDualAttack, opponentCardOne, opponentCardTwo);
+
+        assertTrue(gameEngine.isCardKilled(opponentCardOne));
+        assertFalse(gameEngine.isCardKilled(currentCardDualAttack));
+        assertTrue(gameEngine.isCardKilled(opponentCardTwo));
+
+        // Test where currentCardDualAttack is killed during dualAttack()...
+        currentCardDualAttack = new CreatureCard(3, 2, "c6", "dualAttack", 2, 3, 2);
+        opponentCardOne = new CreatureCard(2, 2, "c7", "basic", 2, 3, 1);
+        opponentCardTwo = new CreatureCard(2, 2, "c8", "basic", 2, 3, 1);
+
+        attack.dualAttack(currentCardDualAttack, opponentCardOne, opponentCardTwo);
+
+        assertTrue(gameEngine.isCardKilled(opponentCardOne));
+        assertTrue(gameEngine.isCardKilled(currentCardDualAttack));
+        assertFalse(gameEngine.isCardKilled(opponentCardTwo));
+    }
 
     @Test
     void name() {
