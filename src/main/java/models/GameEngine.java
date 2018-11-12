@@ -28,7 +28,7 @@ public class GameEngine {
     private boolean playing;
     private int turn;
     private Attack attacks;
-    private List<Highscore> highscores;
+    private Highscore[] highscores;
 
     public void setP1(Player p) {
         this.p1 = p;
@@ -416,24 +416,27 @@ public class GameEngine {
         return false;
     }
 
-    public List<Highscore> readHighscoresFromJSON(){
+    public Highscore[] readHighscoresFromJSON(){
         try {
             JsonReader reader = new JsonReader( new FileReader("src/main/java/json/Highscore.json"));
-            highscores = Arrays.asList(new Gson().fromJson(reader, Highscore[].class));
+            highscores = new Gson().fromJson(reader, Highscore[].class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        Collections.sort(highscores, (Highscore h1, Highscore h2) -> h1.getScore()-h2.getScore());
-        Collections.reverse(highscores);
+        Arrays.sort(highscores, Collections.reverseOrder((Highscore h1, Highscore h2) -> h1.getScore()-h2.getScore()));
         return highscores;
     }
 
     public boolean isScoreAHighscore( Player p){
         int score = p.getScore();
         readHighscoresFromJSON();
-        int minHighscore = highscores.get(highscores.size()-1).getScore();
+        int minHighscore = highscores[highscores.length-1].getScore();
         if( score > minHighscore)
             return true;
         return false;
+    }
+
+    public void saveHighscore(Player p){
+
     }
 }
