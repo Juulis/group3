@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import utilities.ScoreHandler;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -21,6 +22,7 @@ public class GameEngine {
         deck = new Deck();
         turn = 1;
         attacks = new Attack();
+        scoreHandler = new ScoreHandler();
     }
 
     private Player p1, p2;
@@ -31,7 +33,7 @@ public class GameEngine {
     private boolean playing;
     private int turn;
     private Attack attacks;
-    private Highscore[] highscores;
+    private ScoreHandler scoreHandler;
 
     public void setP1(Player p) {
         this.p1 = p;
@@ -91,13 +93,13 @@ public class GameEngine {
 
         if (p1.getCurrentDeck().size() == 0 && p1.getPlayerHand().size() == 0 && p1.getTableCards().size() == 0) {
             System.out.println("Congratulations!" + p2 + " is the Winner");
-            checkScore(p2);
+            scoreHandler.checkScore(p2);
             playing = false;
 
         }
         if (p2.getCurrentDeck().size() == 0 && p2.getPlayerHand().size() == 0 && p2.getTableCards().size() == 0) {
             System.out.println("Congratulations!" + p1 + " is the Winner");
-            checkScore(p1);
+            scoreHandler.checkScore(p1);
             playing = false;
         }
 
@@ -106,12 +108,12 @@ public class GameEngine {
     public void checkPlayerHealth() {
         if (p1.getHealth() <= 0) {
             System.out.println("Congratulations! Player2 is the Winner");
-            checkScore(p2);
+            scoreHandler.checkScore(p2);
             playing = false;
 
         } else if (p2.getHealth() <= 0) {
             System.out.println("Congratulations! Player1 is the Winner");
-            checkScore(p1);
+            scoreHandler.checkScore(p1);
             playing = false;
         }
     }
@@ -415,53 +417,5 @@ public class GameEngine {
         if((creatureCard.getPlayedOnRound()+creatureCard.getPower()) < round)
             return true;
         return false;
-    }
-
-    public Highscore[] readHighscoresFromJSON(){
-        try {
-            JsonReader reader = new JsonReader( new FileReader("src/main/java/json/Highscore.json"));
-            highscores = new Gson().fromJson(reader, Highscore[].class);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        Arrays.sort(highscores, Collections.reverseOrder((Highscore h1, Highscore h2) -> h1.getScore()-h2.getScore()));
-        return highscores;
-    }
-
-    public boolean isScoreAHighscore( Player p){
-        int score = p.getScore();
-        readHighscoresFromJSON();
-        int minHighscore = highscores[highscores.length-1].getScore();
-        if( score > minHighscore)
-            return true;
-        return false;
-    }
-
-    public void saveHighscore(Player p){
-        Highscore highscore = new Highscore(p.getName(), p.getScore());
-        highscores[highscores.length-1] = highscore;
-        Arrays.sort(highscores, Collections.reverseOrder((Highscore h1, Highscore h2) -> h1.getScore()-h2.getScore()));
-        try {
-            FileWriter writer = new FileWriter("src/main/java/json/Highscore.json");
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            gson.toJson(highscores, writer);
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setPlayerScore( Player p){
-        int health = p.getHealth();
-        int nrCardsLeft = p.getCurrentDeck().size() + p.getPlayerHand().size()+ p.getTableCards().size();
-        int score = health * nrCardsLeft;
-        p.setScore(score);
-    }
-
-    public void checkScore( Player p){
-        setPlayerScore(p);
-        if( isScoreAHighscore(p))
-            saveHighscore(p);
     }
 }

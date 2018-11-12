@@ -453,18 +453,18 @@ class GameEngineTest {
 
         gameEngine.checkCardsLeft();
 
-        verify(p1Mock, times(1)).getCurrentDeck();
-        verify(p2Mock, times(1)).getCurrentDeck();
-        verify(p1Mock, times(1)).getPlayerHand();
-        verify(p2Mock, times(1)).getPlayerHand();
-        verify(p1Mock, times(1)).getTableCards();
-        verify(p2Mock, times(1)).getTableCards();
-        verify(playerOneDeckMock, times(1)).size();
-        verify(playerTwoDeckMock, times(1)).size();
-        verify(currentHandCardsMock, times(1)).size();
-        verify(opponentHandCardsMock, times(1)).size();
-        verify(currentTableCardsMock, times(1)).size();
-        verify(opponentTableCardsMock, times(1)).size();
+        verify(p1Mock, times(2)).getCurrentDeck();
+        verify(p2Mock, times(2)).getCurrentDeck();
+        verify(p1Mock, times(2)).getPlayerHand();
+        verify(p2Mock, times(2)).getPlayerHand();
+        verify(p1Mock, times(2)).getTableCards();
+        verify(p2Mock, times(2)).getTableCards();
+        verify(playerOneDeckMock, times(2)).size();
+        verify(playerTwoDeckMock, times(2)).size();
+        verify(currentHandCardsMock, times(2)).size();
+        verify(opponentHandCardsMock, times(2)).size();
+        verify(currentTableCardsMock, times(2)).size();
+        verify(opponentTableCardsMock, times(2)).size();
 
     }
 
@@ -475,44 +475,5 @@ class GameEngineTest {
         when(creatureCardMock.getPower()).thenReturn(0).thenReturn(4);
         assertTrue(gameEngine.isCardReadyToAttack(creatureCardMock));
         assertFalse(gameEngine.isCardReadyToAttack(creatureCardMock));
-    }
-
-    @Test
-    void isScoreAHighscore() {
-
-        gameEngine.setP1(p1Mock);
-        int min = gameEngine.readHighscoresFromJSON()[gameEngine.readHighscoresFromJSON().length-1].getScore();
-        when(p1Mock.getScore()).thenReturn(min-1).thenReturn(min+1);
-        assertFalse(gameEngine.isScoreAHighscore(p1Mock));
-        assertTrue(gameEngine.isScoreAHighscore(p1Mock));
-    }
-
-    @Test
-    void saveHighscore() {
-        Highscore[] highscores = gameEngine.readHighscoresFromJSON();
-        int minScore = highscores[highscores.length-1].getScore();
-        when(p1Mock.getName()).thenReturn("Peter");
-        when(p1Mock.getScore()).thenReturn(165);
-        gameEngine.saveHighscore(p1Mock);
-        highscores = gameEngine.readHighscoresFromJSON();
-        int newMinScore = highscores[highscores.length-1].getScore();
-        assertTrue( p1Mock.getScore() >= newMinScore);
-        assertTrue(newMinScore > minScore);
-    }
-
-    @Test
-    void setPlayerScore() {
-        when(p1Mock.getCurrentDeck()).thenReturn(playerOneDeckMock);
-        when(p1Mock.getPlayerHand()).thenReturn(currentHandCardsMock);
-        when(p1Mock.getTableCards()).thenReturn(currentTableCardsMock);
-        gameEngine.setPlayerScore(p1Mock);
-        verify(p1Mock,times(1)).getHealth();
-        verify(p1Mock,times(1)).getCurrentDeck();
-        verify(playerOneDeckMock, times(1)).size();
-        verify(p1Mock,times(1)).getPlayerHand();
-        verify(currentHandCardsMock, times(1)).size();
-        verify(p1Mock,times(1)).getTableCards();
-        verify(currentTableCardsMock,times(1)).size();
-        verify(p1Mock,times(1)).setScore(anyInt());
     }
 }
