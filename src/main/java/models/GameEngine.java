@@ -91,14 +91,13 @@ public class GameEngine {
 
         if (p1.getCurrentDeck().size() == 0 && p1.getPlayerHand().size() == 0 && p1.getTableCards().size() == 0) {
             System.out.println("Congratulations!" + p2 + " is the Winner");
-
+            checkScore(p2);
             playing = false;
 
         }
         if (p2.getCurrentDeck().size() == 0 && p2.getPlayerHand().size() == 0 && p2.getTableCards().size() == 0) {
             System.out.println("Congratulations!" + p1 + " is the Winner");
-
-
+            checkScore(p1);
             playing = false;
         }
 
@@ -107,15 +106,14 @@ public class GameEngine {
     public void checkPlayerHealth() {
         if (p1.getHealth() <= 0) {
             System.out.println("Congratulations! Player2 is the Winner");
-
+            checkScore(p2);
             playing = false;
 
         } else if (p2.getHealth() <= 0) {
             System.out.println("Congratulations! Player1 is the Winner");
-
+            checkScore(p1);
             playing = false;
         }
-
     }
 
     /**
@@ -459,5 +457,11 @@ public class GameEngine {
         int nrCardsLeft = p.getCurrentDeck().size() + p.getPlayerHand().size()+ p.getTableCards().size();
         int score = health * nrCardsLeft;
         p.setScore(score);
+    }
+
+    public void checkScore( Player p){
+        setPlayerScore(p);
+        if( isScoreAHighscore(p))
+            saveHighscore(p);
     }
 }
