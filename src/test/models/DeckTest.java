@@ -2,7 +2,9 @@ package models;
 
 import org.junit.jupiter.api.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
@@ -13,7 +15,7 @@ class DeckTest {
     public Deck deck;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
         deck = new Deck();
         deck.createFullDeck();
     }
@@ -37,7 +39,7 @@ class DeckTest {
     @Test
     void testElementTypeOfdeck() {
         assertThat(deck.getCards().get(5), isA(Card.class));
-        assertThat(deck.getCards(), isA(ArrayList.class));
+        assertThat(deck.getCards(), isA(List.class));
     }
 
     ArrayList<String> playerOneDeck;

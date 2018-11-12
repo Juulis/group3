@@ -67,13 +67,17 @@ public class Player {
      *                   remove it from hand
      *                   add it to table
      */
-    public void playCard(int playCardNr) {
+    public void playCard(int playCardNr, int round) {
         int correctedPlayCardNr = playCardNr - 1;
         try {
-            tableCards.add(playerHand.get(correctedPlayCardNr));
-            playerHand.remove(correctedPlayCardNr);
-            tableCards.get(tableCards.size()-1).tap();
-        } catch(Exception e){
+            Card card = playerHand.get(correctedPlayCardNr);
+            if (card.getClass() == CreatureCard.class) {
+                tableCards.add(card);
+                playerHand.remove(correctedPlayCardNr);
+                ((CreatureCard) card).tap();
+                ((CreatureCard) card).setPlayedOnRound(round);
+            }
+        } catch (Exception e) {
             System.out.println("That card does not exist");
         }
     }

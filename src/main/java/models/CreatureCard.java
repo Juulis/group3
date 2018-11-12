@@ -6,9 +6,10 @@ public class CreatureCard extends Card {
     private int defence;
     private int power;
     private boolean tapped;
+    private int playedOnRound;
+
     
     public CreatureCard(int attack, int cardEnergy, String cardName, String specialAttack, int hp, int defence, int power){
-
         super(attack, cardEnergy, cardName, specialAttack);
         this.hp = hp;
         this.defence = defence;
@@ -42,5 +43,13 @@ public class CreatureCard extends Card {
 
     public void unTap(){
         this.tapped = false;
+    }
+
+    public int getPlayedOnRound() {
+        return playedOnRound;
+    }
+
+    public void setPlayedOnRound(int playedOnRound) {
+        this.playedOnRound = playedOnRound;
     }
 }
