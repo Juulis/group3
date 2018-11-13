@@ -162,6 +162,23 @@ public class GameEngine {
         }
         currentPlayer.pickupCard();
         turn++;
+        increaseIgnCounter(currentPlayer.getTableCards());
+        increaseIgnCounter(opponentPlayer.getTableCards());
+    }
+
+    public void increaseIgnCounter(ArrayList<Card> playerTableCards) {
+        //increase ignited card counter for new round and take damage automatically
+        for (Card card : playerTableCards) {
+            if (card instanceof CreatureCard) {
+                if (((CreatureCard) card).getIgnRoundCounter() >= 1 && ((CreatureCard) card).getIgnRoundCounter() < 3) {
+                    ((CreatureCard) card).increaseIgnRoundCounter();
+                    ((CreatureCard) card).removeHp(2);
+
+                } else if (((CreatureCard) card).getIgnRoundCounter() == 3) {
+                    ((CreatureCard) card).setIgniteCounter(0);
+                }
+            }
+        }
     }
 
     /**
@@ -197,8 +214,17 @@ public class GameEngine {
                         break;
 
                     case IGNITE:
-                        attacks.ignite();
+                        //ignition attack will be last for 3 turns every turn ignited card will takes damage by 2 points
+                        CreatureCard attackedCard2 = new CreatureCard(1, 1, "", "", 1, 1, 1);//Magic card will be fetched from Gui
+                        if (attackedCard2.getIgnRoundCounter() == 0) {
+
+                            attacks.ignite(selectedCard, attackedCard2);
+                        } else {
+                            System.out.println("The targeted cart is already ignited");
+                        }
+
                         break;
+
 
                     case DUALATTACK:
                         CreatureCard attackedCardOne = new CreatureCard(1, 1, "", "", 1, 1, 1);

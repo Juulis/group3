@@ -29,7 +29,13 @@ public class Attack {
 
     }
 
-    public void ignite() {
+    public void ignite(Card attackCard,CreatureCard opponentCard) {
+        if (attackCard instanceof MagicCard){
+            opponentCard.removeHp(2);
+            opponentCard.increaseIgnRoundCounter();
+        }else {
+            System.out.println("The attacked card is not of type magic" );
+        }
 
     }
 
