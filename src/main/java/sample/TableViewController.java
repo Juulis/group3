@@ -118,6 +118,7 @@ public class TableViewController {
         cardPane.setLayoutY(762);
         cardPane.setLayoutX(898);
         tableViewPane.getChildren().add(cardPane);
+        ABS.getInstance().gameEngine.getCurrentPlayer();
     }
 
     public void getSelectedCard(MouseEvent e) {
