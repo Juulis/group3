@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Player {
 
     private int health;
+    private String name;
+    private int score;
 
     private ArrayList<Card> currentDeck;
     private ArrayList<Card> playerHand;
@@ -93,4 +95,19 @@ public class Player {
         this.health -= healthToRemove;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 }
