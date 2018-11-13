@@ -11,9 +11,9 @@
 
 <AnchorPane fx:id="menuPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@menu.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MenuController">
    <children>
-       <StackPane stylesheets="@menu.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+       <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
            <children>
-           <Group stylesheets="@menu.css" StackPane.alignment="CENTER">
+           <Group StackPane.alignment="CENTER">
                <children>
                    <Button fx:id="startGameBtn" layoutX="302.0" layoutY="177.0" mnemonicParsing="false" onAction="#startGame" prefHeight="70.0" prefWidth="250.0" text="START GAME" textAlignment="CENTER" />
                    <Button fx:id="highscoreBtn" layoutX="302.0" layoutY="267.0" mnemonicParsing="false" onAction="#viewHighscore" prefHeight="70.0" prefWidth="250.0" text="VIEW HIGHSCORE" textAlignment="CENTER" />

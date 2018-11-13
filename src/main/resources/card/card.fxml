@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane fx:id="cardPane" prefHeight="175.0" prefWidth="125.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CardController">
+   <children>
+      <Label layoutX="45.0" layoutY="29.0" text="KORT" />
+      <Label layoutX="37.0" layoutY="100.0" text="ATTACK" />
+      <Label layoutX="53.0" layoutY="68.0" text="HP" />
+   </children>
+</AnchorPane>

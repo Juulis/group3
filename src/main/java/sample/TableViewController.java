@@ -2,16 +2,20 @@ package sample;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import models.*;
+
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -102,9 +106,19 @@ public class TableViewController {
     public ImageView tableImageView;
     @FXML
     private Pane currentPlayerHandPane;
+    @FXML
+    private ImageView playerOneHandImageView;
+    @FXML
+    AnchorPane cardPane;
 
 
-    public void initialize() {}
+    public void initialize() throws IOException {
+        cardPane = FXMLLoader.load(getClass().getResource("/card/card.fxml"));
+        
+        cardPane.setLayoutY(762);
+        cardPane.setLayoutX(898);
+        tableViewPane.getChildren().add(cardPane);
+    }
 
     public void getSelectedCard(MouseEvent e) {
         System.out.println("Selected card: " + e.getSource());
