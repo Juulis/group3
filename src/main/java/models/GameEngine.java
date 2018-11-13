@@ -192,7 +192,9 @@ public class GameEngine {
                         break;
 
                     case DUALATTACK:
-                        attacks.dualAttack();
+                        CreatureCard attackedCardOne = new CreatureCard(1, 1, "", "", 1, 1, 1);
+                        CreatureCard attackedCardTwo = new CreatureCard(1, 1, "", "", 1, 1, 1);
+                        attacks.dualAttack((CreatureCard) selectedCard, attackedCardOne, attackedCardTwo);
                         break;
 
                     case PLAYERATTACK:
