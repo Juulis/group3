@@ -26,11 +26,11 @@ public class GameEngine {
     }
 
     private Player p1, p2;
-    public Player currentPlayer;
-    public Player opponentPlayer;
+    private Player currentPlayer;
+    private Player opponentPlayer;
     private Deck deck;
     private boolean game;
-    public boolean playing;
+    private boolean playing;
     private int turn;
     private Attack attacks;
     private ScoreHandler scoreHandler;
