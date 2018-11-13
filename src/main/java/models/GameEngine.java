@@ -159,20 +159,22 @@ public class GameEngine {
         increaseIgnCounter(currentPlayer.getTableCards());
         increaseIgnCounter(opponentPlayer.getTableCards());
     }
-    public void increaseIgnCounter(ArrayList<Card>playerTableCards){
+
+    public void increaseIgnCounter(ArrayList<Card> playerTableCards) {
         //increase ignited card counter for new round and take damage automatically
-        for (Card card: playerTableCards   ) {
-            if (card instanceof CreatureCard){
-                if (((CreatureCard) card).getIgnRoundCounter()>=1&&((CreatureCard) card).getIgnRoundCounter()<3){
+        for (Card card : playerTableCards) {
+            if (card instanceof CreatureCard) {
+                if (((CreatureCard) card).getIgnRoundCounter() >= 1 && ((CreatureCard) card).getIgnRoundCounter() < 3) {
                     ((CreatureCard) card).increaseIgnRoundCounter();
                     ((CreatureCard) card).removeHp(2);
 
-                }else if (((CreatureCard) card).getIgnRoundCounter()==3){
+                } else if (((CreatureCard) card).getIgnRoundCounter() == 3) {
                     ((CreatureCard) card).setIgniteCounter(0);
                 }
             }
         }
     }
+
     /**
      * checks if the card hp is 0
      *
@@ -206,12 +208,12 @@ public class GameEngine {
                         break;
 
                     case IGNITE:
-               //ignition attack will be last for 3 turns every turn ignited card will takes damage by 2 points
-                        CreatureCard attackedCard2 = new CreatureCard(1, 1, "", "", 1, 1, 1) ;//Magic card will be fetched from Gui
-                        if (attackedCard2.getIgnRoundCounter()==0){
+                        //ignition attack will be last for 3 turns every turn ignited card will takes damage by 2 points
+                        CreatureCard attackedCard2 = new CreatureCard(1, 1, "", "", 1, 1, 1);//Magic card will be fetched from Gui
+                        if (attackedCard2.getIgnRoundCounter() == 0) {
 
-                            attacks.ignite(selectedCard,attackedCard2);
-                        }else {
+                            attacks.ignite(selectedCard, attackedCard2);
+                        } else {
                             System.out.println("The targeted cart is already ignited");
                         }
 
@@ -279,8 +281,8 @@ public class GameEngine {
                     playerMenu();
                     return;
                 }
-                round = (turn+1)/2;
-                currentPlayer.playCard(playCard , round);
+                round = (turn + 1) / 2;
+                currentPlayer.playCard(playCard, round);
                 break;
             case 3:
                 if (turn > 2) {
@@ -299,7 +301,7 @@ public class GameEngine {
                         if (checkIfTapped((CreatureCard) currentPlayer.getTableCards().get(attackCard - 1))) {
                             break;
                         }
-                        if(!isCardReadyToAttack((CreatureCard) currentPlayer.getTableCards().get(attackCard - 1))){
+                        if (!isCardReadyToAttack((CreatureCard) currentPlayer.getTableCards().get(attackCard - 1))) {
                             System.out.println("Card is not ready for attack!");
                             break;
                         }
@@ -313,8 +315,8 @@ public class GameEngine {
                         try {
                             cardToAttack = getInput();
                             attacks.basicAttack(currentPlayer.getTableCards().get(attackCard - 1), (CreatureCard) opponentPlayer.getTableCards().get(cardToAttack - 1));
-                            if(isCardKilled((CreatureCard)opponentPlayer.getTableCards().get(cardToAttack-1))){
-                                opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(cardToAttack-1));
+                            if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(cardToAttack - 1))) {
+                                opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(cardToAttack - 1));
                             }
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("That card does not exist");
@@ -430,9 +432,9 @@ public class GameEngine {
         }
     }
 
-    public boolean isCardReadyToAttack(CreatureCard creatureCard){
-        int round = (turn+1)/2;
-        if((creatureCard.getPlayedOnRound()+creatureCard.getPower()) < round)
+    public boolean isCardReadyToAttack(CreatureCard creatureCard) {
+        int round = (turn + 1) / 2;
+        if ((creatureCard.getPlayedOnRound() + creatureCard.getPower()) < round)
             return true;
         return false;
     }
