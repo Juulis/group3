@@ -168,7 +168,7 @@ public class GameEngine {
                     ((CreatureCard) card).removeHp(2);
 
                 }else if (((CreatureCard) card).getIgnRoundCounter()==3){
-                    ((CreatureCard) card).resetIgniteCounter(0);
+                    ((CreatureCard) card).setIgniteCounter(0);
                 }
             }
         }
