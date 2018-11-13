@@ -64,7 +64,7 @@ public class Deck {
 
         for (int i = 0; i < tempCards.size(); i++) {
             if (tempCards.get(i).getHp() == 0) {
-                cards.add(new MagicCard(tempCards.get(i).attack, tempCards.get(i).cardEnergy, tempCards.get(i).cardName, tempCards.get(i).specialAttack));
+                cards.add(new MagicCard(i, tempCards.get(i).attack, tempCards.get(i).cardEnergy, tempCards.get(i).cardName, tempCards.get(i).specialAttack));
             } else {
                 cards.add(tempCards.get(i));
             }
