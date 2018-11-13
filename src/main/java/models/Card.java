@@ -1,5 +1,6 @@
 package models;
 
+
 public class Card {
 
     String cardName;

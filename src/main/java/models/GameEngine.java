@@ -1,10 +1,7 @@
 package models;
 
 import java.io.IOException;
-import java.util.InputMismatchException;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class GameEngine {
 
@@ -347,7 +344,7 @@ public class GameEngine {
         CreatureCard creatureCard;
         ArrayList<Card> currentTableCards = currentPlayer.getTableCards();
         ArrayList<Card> opponentTableCards = opponentPlayer.getTableCards();
-        ArrayList<Card> currentHandCards = currentPlayer.getPlayerHand();
+        List<Card> currentHandCards = currentPlayer.getPlayerHand();
         int[] currentTable = new int[currentTableCards.size()];
         int[] opponentTable = new int[opponentTableCards.size()];
         int[] currentHand = new int[currentHandCards.size()];
