@@ -41,7 +41,7 @@ public class CreatureCard extends Card {
         return ignRoundCounter;
     }
 
-    public void setIgnRoundCounter(int ignRoundCounter) {
+    public void resetIgniteCounter(int ignRoundCounter) {
         this.ignRoundCounter = ignRoundCounter;
     }
 

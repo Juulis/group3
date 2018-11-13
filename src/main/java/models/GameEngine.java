@@ -165,12 +165,10 @@ public class GameEngine {
             if (card instanceof CreatureCard){
                 if (((CreatureCard) card).getIgnRoundCounter()>=1&&((CreatureCard) card).getIgnRoundCounter()<3){
                     ((CreatureCard) card).increaseIgnRoundCounter();
-                    if (((CreatureCard) card).getHp()>=2){
-                        ((CreatureCard) card).removeHp(2);
-                    }
+                    ((CreatureCard) card).removeHp(2);
 
                 }else if (((CreatureCard) card).getIgnRoundCounter()==3){
-                    ((CreatureCard) card).setIgnRoundCounter(0);
+                    ((CreatureCard) card).resetIgniteCounter(0);
                 }
             }
         }
