@@ -62,5 +62,11 @@ public class Server {
         }else if(commands.get(0).equals("playcard")){
             gameEngine.getCurrentPlayer().playCard(selectedCard,gameEngine.getTurn());
         }
+        System.out.println(commands);
+        System.out.println("\""+commands.get(0)+"\"");
+    }
+
+    public void msgToFX(){
+        //TODO: implement some awesome stuff to get msg from gameEngine to FX controllers
     }
 }
