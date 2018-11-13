@@ -79,13 +79,9 @@ class GameEngineTest {
         opponentCard = new CreatureCard(1, 2, 2, "c3", "basic", 2, 3, 1);
         magicCard = new MagicCard(1, 5, 2, "TROLL", "playerAttack");
         magicCard2 = new MagicCard(1, 3, 1, "FISK", "basic");
-        currentCard = new CreatureCard(1,3, 2, "c4", "basic", 3, 3, 2);
-        opponentCard = new CreatureCard(1, 2, 2, "c3", "basic", 2, 3, 1);
-        magicCard = new MagicCard(1,5, 2, "TROLL", "playerAttack");
-        magicCard2 = new MagicCard(1,3, 1, "FISK", "basic");
-        currentCardDualAttack = new CreatureCard(1,3, 2, "c6", "dualAttack", 6, 3, 2);
-        opponentCardOne = new CreatureCard(1,2, 2, "c7", "basic", 2, 3, 1);
-        opponentCardTwo = new CreatureCard(1,2, 2, "c8", "basic", 2, 3, 1);
+        currentCardDualAttack = new CreatureCard(1, 3, 2, "c6", "dualAttack", 6, 3, 2);
+        opponentCardOne = new CreatureCard(1, 2, 2, "c7", "basic", 2, 3, 1);
+        opponentCardTwo = new CreatureCard(1, 2, 2, "c8", "basic", 2, 3, 1);
         p1 = new Player();
         p2 = new Player();
         spyCreature = spy(opponentCard);
@@ -231,9 +227,11 @@ class GameEngineTest {
     @DisplayName("test switch Attack method")
     @Test
     void testSwitchAttack() {
-
+        Card card = new Card(1, 1, 1, "CArd", "Ignite");
         doNothing().when(spyAttacks).ignite(currentCard, opponentCard);
-        doNothing().when(spyAttacks).attackPlayer();
+        doNothing().when(spyAttacks).attackPlayer(currentCard, gameEngine.getOpponentPlayer());
+        doNothing().when(spyAttacks).ignite(card, spyCreature);
+        doNothing().when(spyAttacks).attackPlayer(currentCard, gameEngine.getOpponentPlayer());
         doNothing().when(spyAttacks).basicAttack(currentCard, opponentCard);
         doNothing().when(spyAttacks).dualAttack(currentCard, opponentCardOne, opponentCardTwo);
         doNothing().when(spyAttacks).attackAll(currentCard, opponentTableCardsMock);
@@ -295,9 +293,9 @@ class GameEngineTest {
         assertTrue(gameEngine.isCardKilled(opponentCardTwo));
 
         // Test where currentCardDualAttack is killed during dualAttack()...
-        currentCardDualAttack = new CreatureCard(1,3, 2, "c6", "dualAttack", 2, 3, 2);
-        opponentCardOne = new CreatureCard(1,2, 2, "c7", "basic", 2, 3, 1);
-        opponentCardTwo = new CreatureCard(1,2, 2, "c8", "basic", 2, 3, 1);
+        currentCardDualAttack = new CreatureCard(1, 3, 2, "c6", "dualAttack", 2, 3, 2);
+        opponentCardOne = new CreatureCard(1, 2, 2, "c7", "basic", 2, 3, 1);
+        opponentCardTwo = new CreatureCard(1, 12, 2, "c8", "basic", 2, 3, 1);
 
         attack.dualAttack(currentCardDualAttack, opponentCardOne, opponentCardTwo);
 
@@ -534,9 +532,8 @@ class GameEngineTest {
         verify(spyCreature, atMost(2)).getHp();
         verify(spyCreature, atMost(2)).removeHp(2);
         verify(spyCreature, atMost(2)).getIgnRoundCounter();
-        // assertThat(opponentCard, isA(CreatureCard.class));
-    }
 
+    }
     @Test
     void whenMagicCardIsUsedSendToGrave() {
         assertThat(magicCard).isInstanceOfAny(MagicCard.class);
@@ -545,7 +542,7 @@ class GameEngineTest {
         p1.playCard(p1.getPlayerHand().indexOf(magicCard), 4);
         p1.sendToGraveyard(magicCard);
         assertEquals(0, p1.getPlayerHand().size());
-
+    }
 
     }
-}
+

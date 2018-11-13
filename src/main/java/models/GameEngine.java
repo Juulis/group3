@@ -233,7 +233,7 @@ public class GameEngine {
                         break;
 
                     case PLAYERATTACK:
-                        attacks.attackPlayer();
+                        attacks.attackPlayer(selectedCard,getOpponentPlayer());
                         break;
 
                     case ATTACKALL:
