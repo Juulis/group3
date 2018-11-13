@@ -5,9 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -99,9 +98,10 @@ public class TableViewController {
     private Rectangle playerTwoTableSeven;
     @FXML
     private Pane tableViewPane;
-
     @FXML
     public ImageView tableImageView;
+    @FXML
+    private Pane currentPlayerHandPane;
 
     @FXML
     public ImageView winner;
@@ -163,4 +163,13 @@ public class TableViewController {
     showWinner();
     showPlayerTurn();
     }
+
+    public void getSelectedCard(MouseEvent e) {
+        System.out.println("Selected card: " + e.getSource());
+    }
+
+    /**
+     * initializes the players by
+     * setting the players decks and cards in hands
+     */
 }

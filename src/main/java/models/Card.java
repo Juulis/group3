@@ -1,20 +1,31 @@
 package models;
 
+
 public class Card {
 
+    int id;
     String cardName;
     int cardEnergy;
     int attack;
     String specialAttack;
 
 
-    public Card(int attack, int cardEnergy, String cardName, String specialAttack) {
+    public Card(int id, int attack, int cardEnergy, String cardName, String specialAttack) {
+        this.id = id;
         this.attack = attack;
         this.cardEnergy = cardEnergy;
         this.cardName = cardName;
         this.specialAttack = specialAttack;
     }
 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getCardName() {
         return cardName;

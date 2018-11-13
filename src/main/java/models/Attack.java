@@ -3,8 +3,11 @@ package models;
 import java.util.ArrayList;
 
 public class Attack {
+    Player player;
+    GameEngine gameEngine;
 
     public Attack() {
+
     }
 
     public void basicAttack(Card currentPlayerCard, CreatureCard opponentCard) {
@@ -25,11 +28,20 @@ public class Attack {
         basicAttack(currentPlayerCard, opponentCardTwo);
     }
 
-    public void attackPlayer() {
+    public void attackPlayer(Card selectedCard, Player opponent) {
+        int dmg = selectedCard.getAttack();
+        
+        opponent.removeHp(dmg);
 
     }
 
-    public void ignite() {
+    public void ignite(Card attackCard,CreatureCard opponentCard) {
+        if (attackCard instanceof MagicCard){
+            opponentCard.removeHp(2);
+            opponentCard.increaseIgnRoundCounter();
+        }else {
+            System.out.println("The attacked card is not of type magic" );
+        }
 
     }
 
