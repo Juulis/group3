@@ -14,10 +14,8 @@ import java.util.List;
 import java.util.Random;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.hamcrest.Matchers.isA;
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -33,6 +31,9 @@ class GameEngineTest {
     CreatureCard opponentCard;
     MagicCard magicCard;
     MagicCard magicCard2;
+    CreatureCard currentCardDualAttack;
+    CreatureCard opponentCardOne;
+    CreatureCard opponentCardTwo;
     Player p1;
     Player p2;
     Attack attack;
@@ -75,6 +76,9 @@ class GameEngineTest {
         opponentCard = new CreatureCard(2, 2, "c3", "basic", 2, 3, 1);
         magicCard = new MagicCard(5, 2, "TROLL", "playerAttack");
         magicCard2 = new MagicCard(3, 1, "FISK", "basic");
+        currentCardDualAttack = new CreatureCard(3, 2, "c6", "dualAttack", 6, 3, 2);
+        opponentCardOne = new CreatureCard(2, 2, "c7", "basic", 2, 3, 1);
+        opponentCardTwo = new CreatureCard(2, 2, "c8", "basic", 2, 3, 1);
         p1 = new Player();
         p2 = new Player();
     }
@@ -221,9 +225,9 @@ class GameEngineTest {
         doNothing().when(spyAttacks).ignite();
         doNothing().when(spyAttacks).attackPlayer();
         doNothing().when(spyAttacks).basicAttack(currentCard, opponentCard);
-        doNothing().when(spyAttacks).dualAttack();
+        doNothing().when(spyAttacks).dualAttack(currentCard, opponentCardOne, opponentCardTwo);
         doNothing().when(spyAttacks).attackAll(currentCard,opponentTableCardsMock);
-        assertThat(attack, isA(Attack.class));
+        //assertThat(attack, isA(Attack.class));
 
 
     }
@@ -269,6 +273,30 @@ class GameEngineTest {
         }
     }
 
+    @DisplayName("test dualAttack method")
+    @Test
+    void testDualAttack() {
+        assertFalse(currentCardDualAttack.isTapped());
+        assertThat(currentCard.getSpecialAttack() == "dualAttack");
+
+        // Test where currentCardDualAttack doesn't get killed during dualAttack()...
+        attack.dualAttack(currentCardDualAttack, opponentCardOne, opponentCardTwo);
+
+        assertTrue(gameEngine.isCardKilled(opponentCardOne));
+        assertFalse(gameEngine.isCardKilled(currentCardDualAttack));
+        assertTrue(gameEngine.isCardKilled(opponentCardTwo));
+
+        // Test where currentCardDualAttack is killed during dualAttack()...
+        currentCardDualAttack = new CreatureCard(3, 2, "c6", "dualAttack", 2, 3, 2);
+        opponentCardOne = new CreatureCard(2, 2, "c7", "basic", 2, 3, 1);
+        opponentCardTwo = new CreatureCard(2, 2, "c8", "basic", 2, 3, 1);
+
+        attack.dualAttack(currentCardDualAttack, opponentCardOne, opponentCardTwo);
+
+        assertTrue(gameEngine.isCardKilled(opponentCardOne));
+        assertTrue(gameEngine.isCardKilled(currentCardDualAttack));
+        assertFalse(gameEngine.isCardKilled(opponentCardTwo));
+    }
 
     @Test
     void name() {
@@ -459,18 +487,18 @@ class GameEngineTest {
 
         gameEngine.checkCardsLeft();
 
-        verify(p1Mock, times(1)).getCurrentDeck();
-        verify(p2Mock, times(1)).getCurrentDeck();
-        verify(p1Mock, times(1)).getPlayerHand();
-        verify(p2Mock, times(1)).getPlayerHand();
-        verify(p1Mock, times(1)).getTableCards();
-        verify(p2Mock, times(1)).getTableCards();
-        verify(playerOneDeckMock, times(1)).size();
-        verify(playerTwoDeckMock, times(1)).size();
-        verify(currentHandCardsMock, times(1)).size();
-        verify(opponentHandCardsMock, times(1)).size();
-        verify(currentTableCardsMock, times(1)).size();
-        verify(opponentTableCardsMock, times(1)).size();
+        verify(p1Mock, times(2)).getCurrentDeck();
+        verify(p2Mock, times(2)).getCurrentDeck();
+        verify(p1Mock, times(2)).getPlayerHand();
+        verify(p2Mock, times(2)).getPlayerHand();
+        verify(p1Mock, times(2)).getTableCards();
+        verify(p2Mock, times(2)).getTableCards();
+        verify(playerOneDeckMock, times(2)).size();
+        verify(playerTwoDeckMock, times(2)).size();
+        verify(currentHandCardsMock, times(2)).size();
+        verify(opponentHandCardsMock, times(2)).size();
+        verify(currentTableCardsMock, times(2)).size();
+        verify(opponentTableCardsMock, times(2)).size();
 
     }
 

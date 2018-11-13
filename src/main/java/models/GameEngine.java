@@ -1,10 +1,16 @@
 package models;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import utilities.ScoreHandler;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.InputMismatchException;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class GameEngine {
 
@@ -16,6 +22,7 @@ public class GameEngine {
         deck = new Deck();
         turn = 1;
         attacks = new Attack();
+        scoreHandler = new ScoreHandler();
     }
 
     private Player p1, p2;
@@ -26,6 +33,7 @@ public class GameEngine {
     private boolean playing;
     private int turn;
     private Attack attacks;
+    private ScoreHandler scoreHandler;
 
     public void setP1(Player p) {
         this.p1 = p;
@@ -85,14 +93,13 @@ public class GameEngine {
 
         if (p1.getCurrentDeck().size() == 0 && p1.getPlayerHand().size() == 0 && p1.getTableCards().size() == 0) {
             System.out.println("Congratulations!" + p2 + " is the Winner");
-
+            scoreHandler.checkScore(p2);
             playing = false;
 
         }
         if (p2.getCurrentDeck().size() == 0 && p2.getPlayerHand().size() == 0 && p2.getTableCards().size() == 0) {
             System.out.println("Congratulations!" + p1 + " is the Winner");
-
-
+            scoreHandler.checkScore(p1);
             playing = false;
         }
 
@@ -101,15 +108,14 @@ public class GameEngine {
     public void checkPlayerHealth() {
         if (p1.getHealth() <= 0) {
             System.out.println("Congratulations! Player2 is the Winner");
-
+            scoreHandler.checkScore(p2);
             playing = false;
 
         } else if (p2.getHealth() <= 0) {
             System.out.println("Congratulations! Player1 is the Winner");
-
+            scoreHandler.checkScore(p1);
             playing = false;
         }
-
     }
 
     /**
@@ -195,7 +201,9 @@ public class GameEngine {
                         break;
 
                     case DUALATTACK:
-                        attacks.dualAttack();
+                        CreatureCard attackedCardOne = new CreatureCard(1, 1, "", "", 1, 1, 1);
+                        CreatureCard attackedCardTwo = new CreatureCard(1, 1, "", "", 1, 1, 1);
+                        attacks.dualAttack((CreatureCard) selectedCard, attackedCardOne, attackedCardTwo);
                         break;
 
                     case PLAYERATTACK:
@@ -216,6 +224,9 @@ public class GameEngine {
                     isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
                 opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
             }
+        }
+        if (selectedCard instanceof MagicCard) {
+            currentPlayer.sendToGraveyard(selectedCard);
         }
         if (selectedCard.getClass() == CreatureCard.class) {
             ((CreatureCard) selectedCard).tap();
@@ -255,8 +266,8 @@ public class GameEngine {
                     playerMenu();
                     return;
                 }
-                round = (turn+1)/2;
-                currentPlayer.playCard(playCard , round);
+                round = (turn + 1) / 2;
+                currentPlayer.playCard(playCard, round);
                 break;
             case 3:
                 if (turn > 2) {
@@ -275,7 +286,7 @@ public class GameEngine {
                         if (checkIfTapped((CreatureCard) currentPlayer.getTableCards().get(attackCard - 1))) {
                             break;
                         }
-                        if(!isCardReadyToAttack((CreatureCard) currentPlayer.getTableCards().get(attackCard - 1))){
+                        if (!isCardReadyToAttack((CreatureCard) currentPlayer.getTableCards().get(attackCard - 1))) {
                             System.out.println("Card is not ready for attack!");
                             break;
                         }
@@ -289,8 +300,8 @@ public class GameEngine {
                         try {
                             cardToAttack = getInput();
                             attacks.basicAttack(currentPlayer.getTableCards().get(attackCard - 1), (CreatureCard) opponentPlayer.getTableCards().get(cardToAttack - 1));
-                            if(isCardKilled((CreatureCard)opponentPlayer.getTableCards().get(cardToAttack-1))){
-                                opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(cardToAttack-1));
+                            if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(cardToAttack - 1))) {
+                                opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(cardToAttack - 1));
                             }
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("That card does not exist");
@@ -406,9 +417,9 @@ public class GameEngine {
         }
     }
 
-    public boolean isCardReadyToAttack(CreatureCard creatureCard){
-        int round = (turn+1)/2;
-        if((creatureCard.getPlayedOnRound()+creatureCard.getPower()) < round)
+    public boolean isCardReadyToAttack(CreatureCard creatureCard) {
+        int round = (turn + 1) / 2;
+        if ((creatureCard.getPlayedOnRound() + creatureCard.getPower()) < round)
             return true;
         return false;
     }
