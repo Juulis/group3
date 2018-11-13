@@ -214,27 +214,20 @@ public class GameEngine {
             if (attackName.name().equals(nameOfAttack)) {
                 switch (attackName) {
                     case BASIC:
-                        CreatureCard attackedCard = opponentCards.get(0);
-                        attacks.basicAttack(selectedCard, attackedCard);
+                        attacks.basicAttack(selectedCard, opponentCards.get(0));
                         break;
 
                     case IGNITE:
-                        //ignition attack will be last for 3 turns every turn ignited card will takes damage by 2 points
-                        CreatureCard attackedCard2 = new CreatureCard(1, 1, 1, "", "D", 1, 1, 2);//Magic card will be fetched from Gui
-                        if (attackedCard2.getIgnRoundCounter() == 0) {
-
-                            attacks.ignite(selectedCard, attackedCard2);
+                        //ignition attack will be last for 3 turns, every turn ignited card will takes damage by 2 points
+                        if (opponentCards.get(0).getIgnRoundCounter() == 0) {
+                            attacks.ignite(selectedCard, opponentCards.get(0));
                         } else {
                             System.out.println("The targeted cart is already ignited");
                         }
-
                         break;
 
-
                     case DUALATTACK:
-                        CreatureCard attackedCardOne = new CreatureCard(1, 1, 1, "", "", 1, 1, 2);
-                        CreatureCard attackedCardTwo = new CreatureCard(1, 1, 2, "", "", 1, 1, 4);
-                        attacks.dualAttack((CreatureCard) selectedCard, attackedCardOne, attackedCardTwo);
+                        attacks.dualAttack((CreatureCard) selectedCard, opponentCards.get(0), opponentCards.get(1));
                         break;
 
                     case PLAYERATTACK:
