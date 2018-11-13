@@ -1,10 +1,16 @@
 package models;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import utilities.ScoreHandler;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.InputMismatchException;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class GameEngine {
 
@@ -16,6 +22,7 @@ public class GameEngine {
         deck = new Deck();
         turn = 1;
         attacks = new Attack();
+        scoreHandler = new ScoreHandler();
     }
 
     private Player p1, p2;
@@ -26,6 +33,7 @@ public class GameEngine {
     private boolean playing;
     private int turn;
     private Attack attacks;
+    private ScoreHandler scoreHandler;
 
     public void setP1(Player p) {
         this.p1 = p;
@@ -85,14 +93,13 @@ public class GameEngine {
 
         if (p1.getCurrentDeck().size() == 0 && p1.getPlayerHand().size() == 0 && p1.getTableCards().size() == 0) {
             System.out.println("Congratulations!" + p2 + " is the Winner");
-
+            scoreHandler.checkScore(p2);
             playing = false;
 
         }
         if (p2.getCurrentDeck().size() == 0 && p2.getPlayerHand().size() == 0 && p2.getTableCards().size() == 0) {
             System.out.println("Congratulations!" + p1 + " is the Winner");
-
-
+            scoreHandler.checkScore(p1);
             playing = false;
         }
 
@@ -101,15 +108,14 @@ public class GameEngine {
     public void checkPlayerHealth() {
         if (p1.getHealth() <= 0) {
             System.out.println("Congratulations! Player2 is the Winner");
-
+            scoreHandler.checkScore(p2);
             playing = false;
 
         } else if (p2.getHealth() <= 0) {
             System.out.println("Congratulations! Player1 is the Winner");
-
+            scoreHandler.checkScore(p1);
             playing = false;
         }
-
     }
 
     /**
