@@ -109,7 +109,7 @@ public class TableViewController {
     @FXML
     public ImageView playerTwoTurn;
 
-    public void showWinner() {
+    public static void showWinner() {
 
         Pane endImg = new Pane();
 
@@ -123,7 +123,7 @@ public class TableViewController {
 
     }
 
-    public void showPlayerTurn(int player) {
+    public static void showPlayerTurn(int player) {
 
         Pane turnImg = new Pane();
 
@@ -145,6 +145,24 @@ public class TableViewController {
             show.setImage(turn);
             show.setVisible(false);
         }
+    }
+
+    public static void setPlayer1HP(int i) {
+    }
+
+    public static void setPlayer2HP(int i) {
+    }
+
+    public static void sendToGraveYard(int cardID) {
+    }
+
+    public static void toSoonWarning() {
+    }
+
+    public static void playCard(int cardID) {
+    }
+
+    public static void isTappedWarning() {
     }
 
     public void getSelectedCard(MouseEvent e) {
