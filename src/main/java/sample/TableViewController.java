@@ -116,30 +116,21 @@ public class TableViewController {
 
         Pane endImg = new Pane();
 
-        GameEngine checkPlaying = new GameEngine();
-        boolean checkWinner = checkPlaying.playing;
+        Image winner = new Image("file:tableView/WinnerScreen.png");
+        ImageView show = new ImageView(winner);
 
-        if (!checkWinner) {
-            Image winner = new Image("file:tableView/WinnerScreen.png");
-            ImageView show = new ImageView(winner);
+        endImg.getChildren().add(show);
 
-            endImg.getChildren().add(show);
-
-            show.setImage(winner);
-            show.setVisible(true);
-        }
+        show.setImage(winner);
+        show.setVisible(true);
+        
     }
 
-    public void showPlayerTurn() throws IOException {
+    public void showPlayerTurn(int player) throws IOException {
 
         Pane turnImg = new Pane();
 
-        GameEngine checkPlayerTurn = new GameEngine();
-
-        Player current = checkPlayerTurn.currentPlayer;
-        Player opponent = checkPlayerTurn.opponentPlayer;
-
-        if (current!=null) {
+        if (player==1) {
             Image turn = new Image("file:tableView/Fire_GIF.gif");
             ImageView show = new ImageView(turn);
 
@@ -148,7 +139,7 @@ public class TableViewController {
             show.setImage(turn);
             show.setVisible(true);
 
-        }else if (opponent!=null) {
+        }else if (opponent==2) {
             Image turn = new Image("file:tableView/Fire_GIF.gif");
             ImageView show = new ImageView(turn);
 
