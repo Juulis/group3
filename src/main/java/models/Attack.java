@@ -19,8 +19,13 @@ public class Attack {
         }
     }
 
-    public void dualAttack() {
-
+    public void dualAttack(CreatureCard currentPlayerCard, CreatureCard opponentCardOne, CreatureCard opponentCardTwo) {
+        basicAttack(currentPlayerCard, opponentCardOne);
+        if (currentPlayerCard.getHp() < 1) {
+            System.out.println(currentPlayerCard.getCardName() + " was killed before launching second attack!");
+            return;
+        }
+        basicAttack(currentPlayerCard, opponentCardTwo);
     }
 
     public void attackPlayer(Card selectedCard, Player opponent) {
@@ -30,7 +35,13 @@ public class Attack {
 
     }
 
-    public void ignite() {
+    public void ignite(Card attackCard,CreatureCard opponentCard) {
+        if (attackCard instanceof MagicCard){
+            opponentCard.removeHp(2);
+            opponentCard.increaseIgnRoundCounter();
+        }else {
+            System.out.println("The attacked card is not of type magic" );
+        }
 
     }
 
