@@ -76,6 +76,11 @@ class GameEngineTest {
         opponentCard = new CreatureCard(1,2, 2, "c3", "basic", 2, 3, 1);
         magicCard = new MagicCard(1,5, 2, "TROLL", "playerAttack");
         magicCard2 = new MagicCard(1,3, 1, "FISK", "basic");
+        currentCard = new CreatureCard(1,3, 2, "c4", "basic", 3, 3, 2);
+        opponentCard = new CreatureCard(1,2, 2, "c3", "basic", 2, 3, 1);
+        currentCardDualAttack = new CreatureCard(1,3, 2, "c6", "dualAttack", 6, 3, 2);
+        opponentCardOne = new CreatureCard(1,2, 2, "c7", "basic", 2, 3, 1);
+        opponentCardTwo = new CreatureCard(1,2, 2, "c8", "basic", 2, 3, 1);
         p1 = new Player();
         p2 = new Player();
     }
