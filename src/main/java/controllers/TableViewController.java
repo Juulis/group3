@@ -1,4 +1,4 @@
-package sample;
+package controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,10 +10,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import models.GameEngine;
-import models.Player;
-
-import java.io.IOException;
 
 
 public class TableViewController {
@@ -153,9 +149,4 @@ public class TableViewController {
     public void getSelectedCard(MouseEvent e) {
         System.out.println("Selected card: " + e.getSource());
     }
-
-    /**
-     * initializes the players by
-     * setting the players decks and cards in hands
-     */
 }

@@ -43,6 +43,10 @@ public class GameEngine {
         this.p2 = p;
     }
 
+    public Deck getDeck() {
+        return deck;
+    }
+
     public void setDeck(Deck deck) {
         this.deck = deck;
     }
@@ -55,15 +59,20 @@ public class GameEngine {
         return p2;
     }
 
-    public void startGame() throws IOException {
-        while (game) {
-            initGame();
-            while (playing) {
-                playerMenu();
-
+    public void startGame(String startArgs) throws IOException {
+        System.out.println("starting game");
+        initGame();
+        if (startArgs.equals("console")) {
+            while (game) {
+                while (playing) {
+                    playerMenu();
+                }
             }
+            //Some endscreen in here!
         }
     }
+
+
 
     public void initGame() throws IOException {
         deck.createFullDeck();
@@ -195,28 +204,23 @@ public class GameEngine {
         return false;
     }
 
-
-    public void attack(Card selectedCard) {
-        String attack = selectedCard.getSpecialAttack();
-        chooseAttack(attack, selectedCard);
-    }
-
     public enum AttackNames {BASIC, PLAYERATTACK, DUALATTACK, IGNITE, ATTACKALL}
 
-    public void chooseAttack(String nameOfAttack, Card selectedCard) {
+    public void chooseAttack(Card selectedCard, List<CreatureCard> opponentCards) {
 
-        nameOfAttack = nameOfAttack.toUpperCase();
+        String nameOfAttack = selectedCard.getSpecialAttack().toUpperCase();
+
         for (AttackNames attackName : AttackNames.values()) {
             if (attackName.name().equals(nameOfAttack)) {
                 switch (attackName) {
                     case BASIC:
-                        CreatureCard attackedCard = new CreatureCard(1,1, 1, "", "", 1, 1, 1); //logic för att ta in attackerat kort från JavaFX
+                        CreatureCard attackedCard = opponentCards.get(0);
                         attacks.basicAttack(selectedCard, attackedCard);
                         break;
 
                     case IGNITE:
                         //ignition attack will be last for 3 turns every turn ignited card will takes damage by 2 points
-                        CreatureCard attackedCard2 = new CreatureCard(1, 1, 1, "", "D", 1, 1,2);//Magic card will be fetched from Gui
+                        CreatureCard attackedCard2 = new CreatureCard(1, 1, 1, "", "D", 1, 1, 2);//Magic card will be fetched from Gui
                         if (attackedCard2.getIgnRoundCounter() == 0) {
 
                             attacks.ignite(selectedCard, attackedCard2);
@@ -228,13 +232,13 @@ public class GameEngine {
 
 
                     case DUALATTACK:
-                        CreatureCard attackedCardOne = new CreatureCard(1, 1, 1, "", "", 1, 1,2);
-                        CreatureCard attackedCardTwo = new CreatureCard(1, 1, 2, "", "", 1, 1,4);
+                        CreatureCard attackedCardOne = new CreatureCard(1, 1, 1, "", "", 1, 1, 2);
+                        CreatureCard attackedCardTwo = new CreatureCard(1, 1, 2, "", "", 1, 1, 4);
                         attacks.dualAttack((CreatureCard) selectedCard, attackedCardOne, attackedCardTwo);
                         break;
 
                     case PLAYERATTACK:
-                        attacks.attackPlayer(selectedCard,getOpponentPlayer());
+                        attacks.attackPlayer(selectedCard, getOpponentPlayer());
                         break;
 
                     case ATTACKALL:
