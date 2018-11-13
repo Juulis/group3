@@ -9,8 +9,8 @@ public class CreatureCard extends Card {
     private int playedOnRound;
 
     
-    public CreatureCard(int attack, int cardEnergy, String cardName, String specialAttack, int hp, int defence, int power){
-        super(attack, cardEnergy, cardName, specialAttack);
+    public CreatureCard(int id, int attack, int cardEnergy, String cardName, String specialAttack, int hp, int defence, int power){
+        super(id, attack, cardEnergy, cardName, specialAttack);
         this.hp = hp;
         this.defence = defence;
         this.power = power;

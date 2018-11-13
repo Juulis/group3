@@ -29,10 +29,10 @@ class PlayerTest {
     void setup() {
 
         player = new Player();
-        mockHandList = new ArrayList<Card>(Arrays.asList(new Card(1,2,"c1", "basic"),
-                new Card(2,2,"c2","basic"),
-                new Card(2,1,"c3","basic"),
-                new Card(3,2,"c4", "basic")));
+        mockHandList = new ArrayList<Card>(Arrays.asList(new Card(1,1,2,"c1", "basic"),
+                new Card(1,2,2,"c2","basic"),
+                new Card(1,2,1,"c3","basic"),
+                new Card(1,3,2,"c4", "basic")));
         mockHandList2 = new ArrayList<Card>();
         mockTableList = new ArrayList<Card>();
         mockTableList.add(mockHandList.get(1));
@@ -66,7 +66,7 @@ class PlayerTest {
     @Test
     void pickupCard() {
 
-        player.getCurrentDeck().add(new Card(2,2,"c","basic"));
+        player.getCurrentDeck().add(new Card(1,2,2,"c","basic"));
 
         int cdSize = player.getCurrentDeck().size();
         int phSize = player.getPlayerHand().size();

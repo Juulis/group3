@@ -1,14 +1,19 @@
 package sample;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
+import models.*;
+import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class TableViewController {
@@ -93,12 +98,20 @@ public class TableViewController {
     private Rectangle playerTwoTableSeven;
     @FXML
     private Pane tableViewPane;
-
     @FXML
     public ImageView tableImageView;
+    @FXML
+    private Pane currentPlayerHandPane;
 
-    public void initialize() {
 
+    public void initialize() {}
+
+    public void getSelectedCard(MouseEvent e) {
+        System.out.println("Selected card: " + e.getSource());
     }
 
+    /**
+     * initializes the players by
+     * setting the players decks and cards in hands
+     */
 }

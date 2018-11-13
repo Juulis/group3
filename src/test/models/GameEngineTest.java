@@ -72,6 +72,10 @@ class GameEngineTest {
     void setUp() {
         attack = new Attack();
         gameEngine = new GameEngine();
+        currentCard = new CreatureCard(1,3, 2, "c4", "basic", 3, 3, 2);
+        opponentCard = new CreatureCard(1,2, 2, "c3", "basic", 2, 3, 1);
+        magicCard = new MagicCard(1,5, 2, "TROLL", "playerAttack");
+        magicCard2 = new MagicCard(1,3, 1, "FISK", "basic");
         currentCard = new CreatureCard(3, 2, "c4", "basic", 3, 3, 2);
         opponentCard = new CreatureCard(2, 2, "c3", "basic", 2, 3, 1);
         magicCard = new MagicCard(5, 2, "TROLL", "playerAttack");
@@ -116,7 +120,7 @@ class GameEngineTest {
     @DisplayName("If player deck is not null")
     @Test
     void checkDeckSizeNotNull() {
-        gameCardsSpy.add(new Card(3, 2, "c4", "basic"));
+        gameCardsSpy.add(new Card(1,3, 2, "c4", "basic"));
         assertThat(gameCardsSpy.size(), is(equalTo(1)));
         assertNotNull(gameCardsSpy);
     }
@@ -151,8 +155,8 @@ class GameEngineTest {
         assertEquals(gameEngineSpy.getCurrentPlayer(), gameEngineSpy.getP1());
         assertEquals(gameEngineSpy.getOpponentPlayer(), gameEngineSpy.getP2());
 
-        gameEngineSpy.getCurrentPlayer().getCurrentDeck().add(new Card(3, 2, "c4", "basic"));
-        gameEngineSpy.getOpponentPlayer().getCurrentDeck().add(new Card(3, 1, "c5", "basic"));
+        gameEngineSpy.getCurrentPlayer().getCurrentDeck().add(new Card(1,3, 2, "c4", "basic"));
+        gameEngineSpy.getOpponentPlayer().getCurrentDeck().add(new Card(1,3, 1, "c5", "basic"));
         gameEngineSpy.endTurn();
 
         assertEquals(gameEngineSpy.getCurrentPlayer(), gameEngineSpy.getP2());
@@ -313,10 +317,10 @@ class GameEngineTest {
     void newTurnNewCard() {
         gameEngine.getPlayerToStart(true);
         Player player1 = gameEngine.getCurrentPlayer();
-        player1.getCurrentDeck().add(new CreatureCard(1, 2, "c1", "basic", 2, 3, 2));
-        player1.getCurrentDeck().add(new CreatureCard(2, 2, "c2", "basic", 1, 3, 3));
-        player1.getCurrentDeck().add(new CreatureCard(2, 3, "c3", "basic", 3, 1, 2));
-        player1.getCurrentDeck().add(new CreatureCard(3, 2, "c4", "basic", 2, 2, 3));
+        player1.getCurrentDeck().add(new CreatureCard(1,1, 2, "c1", "basic", 2, 3, 2));
+        player1.getCurrentDeck().add(new CreatureCard(1,2, 2, "c2", "basic", 1, 3, 3));
+        player1.getCurrentDeck().add(new CreatureCard(1,2, 3, "c3", "basic", 3, 1, 2));
+        player1.getCurrentDeck().add(new CreatureCard(1,3, 2, "c4", "basic", 2, 2, 3));
         player1.pickupCard();
         player1.pickupCard();
 
@@ -326,10 +330,10 @@ class GameEngineTest {
 
         gameEngine.getPlayerToStart(false);
         Player player2 = gameEngine.getCurrentPlayer();
-        player2.getCurrentDeck().add(new CreatureCard(1, 2, "c1", "basic", 1, 2, 1));
-        player2.getCurrentDeck().add(new CreatureCard(2, 2, "c2", "basic", 2, 2, 2));
-        player2.getCurrentDeck().add(new CreatureCard(2, 3, "c3", "basic", 3, 2, 1));
-        player2.getCurrentDeck().add(new CreatureCard(3, 2, "c4", "basic", 2, 1, 3));
+        player2.getCurrentDeck().add(new CreatureCard(1,1, 2, "c1", "basic", 1, 2, 1));
+        player2.getCurrentDeck().add(new CreatureCard(1,2, 2, "c2", "basic", 2, 2, 2));
+        player2.getCurrentDeck().add(new CreatureCard(1,2, 3, "c3", "basic", 3, 2, 1));
+        player2.getCurrentDeck().add(new CreatureCard(1,3, 2, "c4", "basic", 2, 1, 3));
         player2.pickupCard();
         player2.pickupCard();
 
@@ -419,20 +423,20 @@ class GameEngineTest {
     void checkIfTapped() {
         gameEngine.getPlayerToStart(true);
         Player player1 = gameEngine.getCurrentPlayer();
-        player1.getCurrentDeck().add(new CreatureCard(1, 2, "c1", "basic", 2, 3, 2));
-        player1.getCurrentDeck().add(new CreatureCard(2, 2, "c2", "basic", 1, 3, 3));
-        player1.getCurrentDeck().add(new CreatureCard(2, 3, "c3", "basic", 3, 1, 2));
-        player1.getCurrentDeck().add(new CreatureCard(3, 2, "c4", "basic", 2, 2, 3));
+        player1.getCurrentDeck().add(new CreatureCard(1,1, 2, "c1", "basic", 2, 3, 2));
+        player1.getCurrentDeck().add(new CreatureCard(1,2, 2, "c2", "basic", 1, 3, 3));
+        player1.getCurrentDeck().add(new CreatureCard(1,2, 3, "c3", "basic", 3, 1, 2));
+        player1.getCurrentDeck().add(new CreatureCard(1,3, 2, "c4", "basic", 2, 2, 3));
         player1.pickupCard();
         player1.pickupCard();
 
         assertEquals(2, player1.getPlayerHand().size());
         gameEngine.getPlayerToStart(false);
         Player player2 = gameEngine.getCurrentPlayer();
-        player2.getCurrentDeck().add(new CreatureCard(1, 2, "c1", "basic", 1, 2, 1));
-        player2.getCurrentDeck().add(new CreatureCard(2, 2, "c2", "basic", 2, 2, 2));
-        player2.getCurrentDeck().add(new CreatureCard(2, 3, "c3", "basic", 3, 2, 1));
-        player2.getCurrentDeck().add(new CreatureCard(3, 2, "c4", "basic", 2, 1, 3));
+        player2.getCurrentDeck().add(new CreatureCard(1,1, 2, "c1", "basic", 1, 2, 1));
+        player2.getCurrentDeck().add(new CreatureCard(1,2, 2, "c2", "basic", 2, 2, 2));
+        player2.getCurrentDeck().add(new CreatureCard(1,2, 3, "c3", "basic", 3, 2, 1));
+        player2.getCurrentDeck().add(new CreatureCard(1,3, 2, "c4", "basic", 2, 1, 3));
 
         player2.pickupCard();
         player2.pickupCard();
