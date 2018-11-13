@@ -1,19 +1,19 @@
 package sample;
 
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import models.*;
+import models.GameEngine;
+import models.Player;
+
 import java.io.IOException;
-import java.util.ArrayList;
 
 
 public class TableViewController {
@@ -103,8 +103,57 @@ public class TableViewController {
     @FXML
     private Pane currentPlayerHandPane;
 
+    @FXML
+    public ImageView winner;
 
-    public void initialize() {}
+    @FXML
+    public ImageView playerOneTurn;
+
+    @FXML
+    public ImageView playerTwoTurn;
+
+    public void showWinner() throws IOException {
+
+        Pane endImg = new Pane();
+
+        Image winner = new Image("file:tableView/WinnerScreen.png");
+        ImageView show = new ImageView(winner);
+
+        endImg.getChildren().add(show);
+
+        show.setImage(winner);
+        show.setVisible(true);
+        
+    }
+
+    public void showPlayerTurn(int player) throws IOException {
+
+        Pane turnImg = new Pane();
+
+        if (player==1) {
+            Image turn = new Image("file:tableView/Fire_GIF.gif");
+            ImageView show = new ImageView(turn);
+
+            turnImg.getChildren().add(show);
+
+            show.setImage(turn);
+            show.setVisible(true);
+
+        }else if (opponent==2) {
+            Image turn = new Image("file:tableView/Fire_GIF.gif");
+            ImageView show = new ImageView(turn);
+
+            turnImg.getChildren().add(show);
+
+            show.setImage(turn);
+            show.setVisible(false);
+        }
+    }
+
+    public void initialize() throws IOException{
+    showWinner();
+    showPlayerTurn();
+    }
 
     public void getSelectedCard(MouseEvent e) {
         System.out.println("Selected card: " + e.getSource());

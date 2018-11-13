@@ -60,6 +60,7 @@ public class GameEngine {
             initGame();
             while (playing) {
                 playerMenu();
+
             }
         }
     }
