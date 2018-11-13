@@ -23,9 +23,10 @@ public class Attack {
 
     }
 
-    public void attackPlayer(Card selectedCard) {
+    public void attackPlayer(Card selectedCard, Player opponent) {
         int dmg = selectedCard.getAttack();
-        gameEngine.getOpponentPlayer().removeHp(dmg);
+        
+        opponent.removeHp(dmg);
 
     }
 

@@ -215,7 +215,7 @@ class GameEngineTest {
     void testSwitchAttack() {
 
         doNothing().when(spyAttacks).ignite();
-        doNothing().when(spyAttacks).attackPlayer();
+        doNothing().when(spyAttacks).attackPlayer(currentCard, gameEngine.getOpponentPlayer());
         doNothing().when(spyAttacks).basicAttack(currentCard, opponentCard);
         doNothing().when(spyAttacks).dualAttack();
         doNothing().when(spyAttacks).attackAll(currentCard,opponentTableCardsMock);
