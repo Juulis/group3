@@ -19,11 +19,11 @@ public class GameEngine {
     }
 
     private Player p1, p2;
-    private Player currentPlayer;
-    private Player opponentPlayer;
+    public Player currentPlayer;
+    public Player opponentPlayer;
     private Deck deck;
     private boolean game;
-    private boolean playing;
+    public boolean playing;
     private int turn;
     private Attack attacks;
 
@@ -52,6 +52,7 @@ public class GameEngine {
             initGame();
             while (playing) {
                 playerMenu();
+
             }
         }
     }
