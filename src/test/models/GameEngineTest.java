@@ -546,7 +546,7 @@ class GameEngineTest {
         verify(spyCreature, atMost(2)).getHp();
         verify(spyCreature, atMost(2)).removeHp(2);
         verify(spyCreature, atMost(2)).getIgnRoundCounter();
-        
+
     }
 
         void whenMagicCardIsUsedSendToGrave () {

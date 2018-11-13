@@ -215,7 +215,7 @@ public class GameEngine {
 
                     case IGNITE:
                         //ignition attack will be last for 3 turns every turn ignited card will takes damage by 2 points
-                        CreatureCard attackedCard2 = new CreatureCard(1, 1, "", "", 1, 1, 1);//Magic card will be fetched from Gui
+                        CreatureCard attackedCard2 = new CreatureCard(1, 1, 4, "", "Ignite", 1, 1,1);//Magic card will be fetched from Gui
                         if (attackedCard2.getIgnRoundCounter() == 0) {
 
                             attacks.ignite(selectedCard, attackedCard2);
@@ -227,8 +227,8 @@ public class GameEngine {
 
 
                     case DUALATTACK:
-                        CreatureCard attackedCardOne = new CreatureCard(1, 1, "", "", 1, 1, 1);
-                        CreatureCard attackedCardTwo = new CreatureCard(1, 1, "", "", 1, 1, 1);
+                        CreatureCard attackedCardOne = new CreatureCard(1, 1, 2, "", "IGNITE", 1, 1,1);
+                        CreatureCard attackedCardTwo = new CreatureCard(1, 1, 1, "", "IGNITE", 1, 1,1);
                         attacks.dualAttack((CreatureCard) selectedCard, attackedCardOne, attackedCardTwo);
                         break;
 
