@@ -59,6 +59,8 @@ public class Server {
         }
         else if(commands.get(0).equals("endturn")){
             gameEngine.endTurn();
+        }else if(commands.get(0).equals("playcard")){
+            gameEngine.getCurrentPlayer().playCard(selectedCard,gameEngine.getTurn());
         }
     }
 }

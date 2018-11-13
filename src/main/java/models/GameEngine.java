@@ -43,6 +43,14 @@ public class GameEngine {
         this.p2 = p;
     }
 
+    public int getTurn() {
+        return turn;
+    }
+
+    public int getRound() {
+        return (turn + 1) / 2;
+    }
+
     public Deck getDeck() {
         return deck;
     }
@@ -282,7 +290,7 @@ public class GameEngine {
                 showTable();
                 break;
             case 2:
-                int playCard, round;
+                int playCard;
                 System.out.println("what card do you want to play out? (0 to cancel)");
 
                 playCard = getInput();
@@ -290,8 +298,7 @@ public class GameEngine {
                     playerMenu();
                     return;
                 }
-                round = (turn + 1) / 2;
-                currentPlayer.playCard(playCard, round);
+                currentPlayer.playCard(deck.getCards().get(playCard), getRound());
                 break;
             case 3:
                 if (turn > 2) {
@@ -442,8 +449,7 @@ public class GameEngine {
     }
 
     public boolean isCardReadyToAttack(CreatureCard creatureCard) {
-        int round = (turn + 1) / 2;
-        if ((creatureCard.getPlayedOnRound() + creatureCard.getPower()) < round)
+        if ((creatureCard.getPlayedOnRound() + creatureCard.getPower()) < getRound())
             return true;
         return false;
     }

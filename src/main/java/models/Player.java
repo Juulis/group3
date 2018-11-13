@@ -66,18 +66,16 @@ public class Player {
     }
 
     /**
-     * @param playCardNr takes an int showing what card to play
+     * @param card takes an int showing what card to play
      *                   play the chosen card:
      *                   remove it from hand
      *                   add it to table
      */
-    public void playCard(int playCardNr, int round) {
-        int correctedPlayCardNr = playCardNr - 1;
+    public void playCard(Card card, int round) {
         try {
-            Card card = playerHand.get(correctedPlayCardNr);
             if (card.getClass() == CreatureCard.class) {
                 tableCards.add(card);
-                playerHand.remove(correctedPlayCardNr);
+                playerHand.remove(card);
                 ((CreatureCard) card).tap();
                 ((CreatureCard) card).setPlayedOnRound(round);
             }
