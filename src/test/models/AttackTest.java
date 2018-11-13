@@ -21,7 +21,7 @@ class AttackTest {
     @BeforeEach
     void setUp() {
         attacks=new Attack();
-        opponent =new CreatureCard(5,7,"ACard","IGNITE",7,6,1);
+        opponent =new CreatureCard(1,5,7,"ACard","IGNITE",7,6,1);
         spyOpponentCard= Mockito.spy(opponent);
     }
     @DisplayName("Test ignite attack method")
