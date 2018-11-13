@@ -112,7 +112,7 @@ public class TableViewController {
     @FXML
     public ImageView playerTwoTurn;
 
-    public void showWinner() throws IOException {
+    public void showWinner() {
 
         Pane endImg = new Pane();
 
@@ -123,14 +123,14 @@ public class TableViewController {
 
         show.setImage(winner);
         show.setVisible(true);
-        
+
     }
 
-    public void showPlayerTurn(int player) throws IOException {
+    public void showPlayerTurn(int player) {
 
         Pane turnImg = new Pane();
 
-        if (player==1) {
+        if (player == 1) {
             Image turn = new Image("file:tableView/Fire_GIF.gif");
             ImageView show = new ImageView(turn);
 
@@ -139,7 +139,7 @@ public class TableViewController {
             show.setImage(turn);
             show.setVisible(true);
 
-        }else if (opponent==2) {
+        } else if (player == 2) {
             Image turn = new Image("file:tableView/Fire_GIF.gif");
             ImageView show = new ImageView(turn);
 
@@ -148,11 +148,6 @@ public class TableViewController {
             show.setImage(turn);
             show.setVisible(false);
         }
-    }
-
-    public void initialize() throws IOException{
-    showWinner();
-    showPlayerTurn();
     }
 
     public void getSelectedCard(MouseEvent e) {
