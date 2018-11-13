@@ -183,7 +183,7 @@ public class GameEngine {
             if (attackName.name().equals(nameOfAttack)) {
                 switch (attackName) {
                     case BASIC:
-                        CreatureCard attackedCard = new CreatureCard(1, 1, "", "", 1, 1, 1); //logic för att ta in attackerat kort från JavaFX
+                        CreatureCard attackedCard = new CreatureCard(1,1, 1, "", "", 1, 1, 1); //logic för att ta in attackerat kort från JavaFX
                         attacks.basicAttack(selectedCard, attackedCard);
                         break;
 
