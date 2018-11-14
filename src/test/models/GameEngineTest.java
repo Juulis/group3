@@ -72,7 +72,7 @@ class GameEngineTest {
     CreatureCard spyCreature;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
         attack = new Attack();
         gameEngine = new GameEngine();
         currentCard = new CreatureCard(1, 3, 2, "c4", "basic", 3, 3, 2);
@@ -150,7 +150,7 @@ class GameEngineTest {
     }
 
     @RepeatedTest(100)
-    void endTurn_testThatCurrentPlayerTogglesAfterEachRound() {
+    void endTurn_testThatCurrentPlayerTogglesAfterEachRound() throws IOException {
         when(gameEngineSpy.makeRandom()).thenReturn(randMock);
         when(randMock.nextBoolean()).thenReturn(true); // Sets currentPlayer to P1
         gameEngineSpy.determinePlayerToStart();
@@ -316,7 +316,7 @@ class GameEngineTest {
     }
 
     @Test
-    void newTurnNewCard() {
+    void newTurnNewCard() throws IOException {
         gameEngine.getPlayerToStart(true);
         Player player1 = gameEngine.getCurrentPlayer();
         player1.getCurrentDeck().add(new CreatureCard(1, 1, 2, "c1", "basic", 2, 3, 2));
@@ -482,7 +482,7 @@ class GameEngineTest {
     }
 
     @Test
-    void checkCardsLeft() {
+    void checkCardsLeft() throws IOException {
         gameEngine.setP1(p1Mock);
         gameEngine.setP2(p2Mock);
         when(p1Mock.getCurrentDeck()).thenReturn(playerOneDeckMock);

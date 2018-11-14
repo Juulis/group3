@@ -66,6 +66,7 @@ public class Deck {
                 cards.add(new MagicCard(i, tempCards.get(i).attack, tempCards.get(i).cardEnergy, tempCards.get(i).cardName, tempCards.get(i).specialAttack));
             } else {
                 cards.add(tempCards.get(i));
+                tempCards.get(i).setId(i);
             }
         }
         return cards;

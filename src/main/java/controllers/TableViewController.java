@@ -11,6 +11,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import models.Card;
+import models.Deck;
+
+import java.io.IOException;
+import java.lang.reflect.UndeclaredThrowableException;
+import java.util.List;
 
 
 public class TableViewController {
@@ -165,7 +171,23 @@ public class TableViewController {
     public static void isTappedWarning() {
     }
 
-    public void getSelectedCard(MouseEvent e) {
+    public static void showPlayerHand(List<String> commands) {
+        Deck deck = new Deck();
+        String player = commands.get(0);
+        commands.remove(0);
+        for (String id : commands) {
+            Card card = deck.getCards().get(Integer.parseInt(id));
+            if (player.equals("1")) {
+                //TODO: Code for showing card in FX for player 1
+            } else if (player.equals("2")) {
+                //TODO: Code for showing card in FX for player 2
+            } else {
+                System.out.println("No player! Something wrong with string input from gameEngine");
+            }
+        }
+    }
+
+    public void getSelectedCard(MouseEvent e) throws IOException {
         System.out.println("Selected card: " + e.getSource());
         Server.getInstance().msgToGameEngine("attack,2,1");
     }

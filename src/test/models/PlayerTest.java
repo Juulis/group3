@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -26,7 +27,7 @@ class PlayerTest {
     Card cardMock;
 
     @BeforeEach
-    void setup() {
+    void setup() throws IOException {
 
         player = new Player();
         mockHandList = new ArrayList<Card>(Arrays.asList(new Card(1,1,2,"c1", "basic"),
