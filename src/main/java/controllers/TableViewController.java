@@ -20,6 +20,12 @@ import models.Card;
 import models.Player;
 
 import java.io.IOException;
+import models.Card;
+import models.Deck;
+
+import java.io.IOException;
+import java.lang.reflect.UndeclaredThrowableException;
+import java.util.List;
 
 
 public class TableViewController {
@@ -131,7 +137,7 @@ public class TableViewController {
         renderOpponentPlayerHand();
     }
 
-    public void showWinner() {
+    public static void showWinner() {
 
         Pane endImg = new Pane();
 
@@ -145,7 +151,7 @@ public class TableViewController {
 
     }
 
-    public void showPlayerTurn(int player) {
+    public static void showPlayerTurn(int player) {
 
         Pane turnImg = new Pane();
 
@@ -166,6 +172,40 @@ public class TableViewController {
 
             show.setImage(turn);
             show.setVisible(false);
+        }
+    }
+
+    public static void setPlayer1HP(int i) {
+    }
+
+    public static void setPlayer2HP(int i) {
+    }
+
+    public static void sendToGraveYard(int cardID) {
+    }
+
+    public static void toSoonWarning() {
+    }
+
+    public static void playCard(int cardID) {
+    }
+
+    public static void isTappedWarning() {
+    }
+
+    public static void showPlayerHand(List<String> commands) {
+        Deck deck = new Deck();
+        String player = commands.get(0);
+        commands.remove(0);
+        for (String id : commands) {
+            Card card = deck.getCards().get(Integer.parseInt(id));
+            if (player.equals("1")) {
+                //TODO: Code for showing card in FX for player 1
+            } else if (player.equals("2")) {
+                //TODO: Code for showing card in FX for player 2
+            } else {
+                System.out.println("No player! Something wrong with string input from gameEngine");
+            }
         }
     }
 
