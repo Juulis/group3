@@ -13,12 +13,14 @@ import java.util.List;
 
 public class Server {
     private GameEngine gameEngine;
+    private TableViewController tableViewController;
 
     private static Server instance = null;
 
     private Server() throws IOException {
         instance = this;
         gameEngine = new GameEngine();
+        tableViewController = new TableViewController();
         gameEngine.startGame("fx");
     }
 
@@ -69,43 +71,35 @@ public class Server {
         switch (commands.get(0)) {
             case "showplayerhand":
                 commands.remove(0);
-                TableViewController.showPlayerHand(commands);
+                tableViewController.showPlayerHand(commands);
                 break;
             case "gameover":
-                TableViewController.showWinner();
+                tableViewController.showWinner();
                 break;
             case "player1":
-                TableViewController.showPlayerTurn(1);
+                tableViewController.showPlayerTurn(1);
                 break;
             case "player2":
-                TableViewController.showPlayerTurn(2);
+                tableViewController.showPlayerTurn(2);
                 break;
             case "player1hp":
-                TableViewController.setPlayer1HP(Integer.parseInt(commands.get(1)));
+                tableViewController.setPlayer1HP(Integer.parseInt(commands.get(1)));
                 break;
             case "player2hp":
-                TableViewController.setPlayer2HP(Integer.parseInt(commands.get(1)));
+                tableViewController.setPlayer2HP(Integer.parseInt(commands.get(1)));
                 break;
             case "sendtograveyard":
-                TableViewController.sendToGraveYard(Integer.parseInt(commands.get(1)));
+                tableViewController.sendToGraveYard(Integer.parseInt(commands.get(1)));
                 break;
             case "attackedtosoon":
-                TableViewController.toSoonWarning();
+                tableViewController.toSoonWarning();
                 break;
             case "playcard":
-                TableViewController.playCard(Integer.parseInt(commands.get(1)));
+                tableViewController.playCard(Integer.parseInt(commands.get(1)));
                 break;
             case "tapped":
-                TableViewController.isTappedWarning();
+                tableViewController.isTappedWarning();
                 break;
         }
-    }
-
-    public List<Card> getCurrentPlayerHand(){
-        return gameEngine.getCurrentPlayer().getPlayerHand();
-    }
-
-    public List<Card> getOpponentPlayerHand(){
-        return gameEngine.getOpponentPlayer().getPlayerHand();
     }
 }

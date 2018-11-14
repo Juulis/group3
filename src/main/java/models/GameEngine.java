@@ -114,19 +114,19 @@ public class GameEngine {
     }
 
 
-    public void checkCardsLeft() throws IOException {
+    public void checkCardsLeft() {
 
         if (p1.getCurrentDeck().size() == 0 && p1.getPlayerHand().size() == 0 && p1.getTableCards().size() == 0) {
             System.out.println("Congratulations!" + p2 + " is the Winner");
             scoreHandler.checkScore(p2);
             playing = false;
-            Server.getInstance().msgToFX("gameover");
+            //server.msgToFX("gameover");
         }
         if (p2.getCurrentDeck().size() == 0 && p2.getPlayerHand().size() == 0 && p2.getTableCards().size() == 0) {
             System.out.println("Congratulations!" + p1 + " is the Winner");
             scoreHandler.checkScore(p1);
             playing = false;
-            Server.getInstance().msgToFX("gameover");
+            //server.msgToFX("gameover");
         }
 
     }

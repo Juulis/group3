@@ -25,6 +25,7 @@ import models.Deck;
 
 import java.io.IOException;
 import java.lang.reflect.UndeclaredThrowableException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -130,28 +131,36 @@ public class TableViewController {
     private HBox playerTwoHandBox;
     @FXML
     private AnchorPane cardPane;
-    private Server server = Server.getInstance();
+    private Server server;
+    private List<String> getCurrentPlayerHandFromServer;
+    private List<String> getOpponentPlayerHandFromServer;
+    private Deck deck;
+    private int handSize = 5;
+
+    public TableViewController() throws IOException {
+        server = Server.getInstance();
+        getCurrentPlayerHandFromServer = new ArrayList<>();
+        getOpponentPlayerHandFromServer = new ArrayList<>();
+    }
 
     public void initialize() throws IOException {
         renderCurrentPlayerHand();
-        renderOpponentPlayerHand();
+        //renderOpponentPlayerHand();
     }
 
-    public static void showWinner() {
+    public void showWinner() {
 
-        Pane endImg = new Pane();
-
-        Image winner = new Image("file:tableView/WinnerScreen.png");
+        Image winner = new Image("/tableView/WinnerScreen.png");
         ImageView show = new ImageView(winner);
 
-        endImg.getChildren().add(show);
+        tableViewPane.getChildren().addAll(show);
 
         show.setImage(winner);
         show.setVisible(true);
 
     }
 
-    public static void showPlayerTurn(int player) {
+    public void showPlayerTurn(int player) {
 
         Pane turnImg = new Pane();
 
@@ -175,32 +184,33 @@ public class TableViewController {
         }
     }
 
-    public static void setPlayer1HP(int i) {
+    public  void setPlayer1HP(int i) {
     }
 
-    public static void setPlayer2HP(int i) {
+    public  void setPlayer2HP(int i) {
     }
 
-    public static void sendToGraveYard(int cardID) {
+    public  void sendToGraveYard(int cardID) {
     }
 
-    public static void toSoonWarning() {
+    public  void toSoonWarning() {
     }
 
-    public static void playCard(int cardID) {
+    public  void playCard(int cardID) {
     }
 
     public static void isTappedWarning() {
     }
 
-    public static void showPlayerHand(List<String> commands) {
+    public  void showPlayerHand(List<String> commands) {
         Deck deck = new Deck();
         String player = commands.get(0);
         commands.remove(0);
         for (String id : commands) {
             Card card = deck.getCards().get(Integer.parseInt(id));
             if (player.equals("1")) {
-                //TODO: Code for showing card in FX for player 1
+                System.out.println(card.getId());
+                System.out.println(card.getImgURL());
             } else if (player.equals("2")) {
                 //TODO: Code for showing card in FX for player 2
             } else {
@@ -210,22 +220,30 @@ public class TableViewController {
     }
 
     public void renderCurrentPlayerHand() throws IOException {
-        for (int i = 0; i < server.getCurrentPlayerHand().size(); i++) {
+        //server.msgToFX("showplayerhand,1,2,3,4,5,6");
+        server.msgToFX("gameover");
+        /*getCurrentPlayerHandFromServer.add("showplayerhand");
+        getCurrentPlayerHandFromServer.add("1"); // player1
+        for (int i = 0; i < handSize; i++) {
             cardPane = FXMLLoader.load(getClass().getResource("/card/card.fxml"));
             playerOneHandBox.getChildren().add(cardPane);
             playerOneHandBox.setSpacing(50);
             playerOneHandBox.setAlignment(Pos.CENTER);
-            cardPane.setId(String.valueOf(server.getCurrentPlayerHand().get(i).getId()));
+            cardPane.setId(String.valueOf(deck.getCards().get(i).getId()));
+            getCurrentPlayerHandFromServer.add(cardPane.getId());*/
         }
     }
-
+/*
     public void renderOpponentPlayerHand() throws IOException {
-        for (int i = 0; i < server.getOpponentPlayerHand().size(); i++) {
+        getOpponentPlayerHandFromServer.add("showplayerhand");
+        getOpponentPlayerHandFromServer.add("2"); // player2
+        for (int i = 0; i < handSize; i++) {
             cardPane = FXMLLoader.load(getClass().getResource("/card/card.fxml"));
-            playerTwoHandBox.getChildren().add(cardPane);
-            playerTwoHandBox.setSpacing(50);
-            playerTwoHandBox.setAlignment(Pos.CENTER);
-            cardPane.setId(String.valueOf(server.getOpponentPlayerHand().get(i).getId()));
-        }
-    }
-}
+            playerOneHandBox.getChildren().add(cardPane);
+            playerOneHandBox.setSpacing(50);
+            playerOneHandBox.setAlignment(Pos.CENTER);
+            cardPane.setId(String.valueOf(deck.getCards().get(i).getId()));
+            getCurrentPlayerHandFromServer.add(cardPane.getId());
+        }*/
+
+
