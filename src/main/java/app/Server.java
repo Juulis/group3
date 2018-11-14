@@ -66,11 +66,10 @@ public class Server {
         System.out.println(commands); //TODO: Remove, testingpurpose
     }
 
-    public void msgToFX(String msg) {
+    public void msgToFX(String msg) throws IOException {
         List<String> commands = Arrays.asList(msg.split(","));
         switch (commands.get(0)) {
             case "showplayerhand":
-                commands.remove(0);
                 tableViewController.showPlayerHand(commands);
                 break;
             case "gameover":

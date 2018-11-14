@@ -132,31 +132,27 @@ public class TableViewController {
     @FXML
     private AnchorPane cardPane;
     private Server server;
-    private List<String> getCurrentPlayerHandFromServer;
-    private List<String> getOpponentPlayerHandFromServer;
     private Deck deck;
-    private int handSize = 5;
+    private String cardURL = "/card/card.fxml";
 
     public TableViewController() throws IOException {
+        deck = new Deck();
         server = Server.getInstance();
-        getCurrentPlayerHandFromServer = new ArrayList<>();
-        getOpponentPlayerHandFromServer = new ArrayList<>();
     }
 
     public void initialize() throws IOException {
-        renderCurrentPlayerHand();
-        //renderOpponentPlayerHand();
     }
 
     public void showWinner() {
 
-        Image winner = new Image("/tableView/WinnerScreen.png");
-        ImageView show = new ImageView(winner);
+        Pane endImg = new Pane();
 
-        tableViewPane.getChildren().addAll(show);
+        Image winner = new Image("file:tableview/WinnerScreen.png");
+        ImageView show = new ImageView(winner);
 
         show.setImage(winner);
         show.setVisible(true);
+        endImg.getChildren().add(show);
 
     }
 
@@ -184,66 +180,67 @@ public class TableViewController {
         }
     }
 
-    public  void setPlayer1HP(int i) {
+    public void setPlayer1HP(int i) {
     }
 
-    public  void setPlayer2HP(int i) {
+    public void setPlayer2HP(int i) {
     }
 
-    public  void sendToGraveYard(int cardID) {
+    public void sendToGraveYard(int cardID) {
     }
 
-    public  void toSoonWarning() {
+    public void toSoonWarning() {
     }
 
-    public  void playCard(int cardID) {
+    public void playCard(int cardID) {
     }
 
     public static void isTappedWarning() {
     }
 
-    public  void showPlayerHand(List<String> commands) {
-        Deck deck = new Deck();
-        String player = commands.get(0);
-        commands.remove(0);
-        for (String id : commands) {
-            Card card = deck.getCards().get(Integer.parseInt(id));
-            if (player.equals("1")) {
-                System.out.println(card.getId());
-                System.out.println(card.getImgURL());
-            } else if (player.equals("2")) {
-                //TODO: Code for showing card in FX for player 2
-            } else {
-                System.out.println("No player! Something wrong with string input from gameEngine");
+    public void showPlayerHand(List<String> commands) throws IOException {
+        int handSize = 5;
+        try {
+            deck.getCardsFromJSON();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String player = commands.get(1);
+        for (int i = 2; i < commands.size(); i++) {
+            Card card = deck.getCards().get(Integer.parseInt(commands.get(i)));
+            switch (player) {
+                case "1":
+                    for (int j = 0; j < handSize; j++) {
+                        cardPane = FXMLLoader.load(getClass().getResource(cardURL));
+                        playerOneHandBox.getChildren().add(cardPane);
+                        playerOneHandBox.setSpacing(50);
+                        playerOneHandBox.setAlignment(Pos.CENTER);
+                        cardPane.setId(String.valueOf(card.getId()));
+                    }
+                    //TODO: Code for showing card in FX for player 1
+                    break;
+                case "2":
+                    for (int k = 0; k < handSize; k++) {
+                        cardPane = FXMLLoader.load(getClass().getResource("/card/card.fxml"));
+                        playerTwoHandBox.getChildren().add(cardPane);
+                        playerTwoHandBox.setSpacing(50);
+                        playerTwoHandBox.setAlignment(Pos.CENTER);
+                        cardPane.setId(String.valueOf(card.getId()));
+                    }
+                    //TODO: Code for showing card in FX for player 2
+                    break;
+                default:
+                    System.out.println("No player! Something wrong with string input from gameEngine");
+                    break;
             }
         }
     }
 
     public void renderCurrentPlayerHand() throws IOException {
-        //server.msgToFX("showplayerhand,1,2,3,4,5,6");
-        server.msgToFX("gameover");
-        /*getCurrentPlayerHandFromServer.add("showplayerhand");
-        getCurrentPlayerHandFromServer.add("1"); // player1
-        for (int i = 0; i < handSize; i++) {
-            cardPane = FXMLLoader.load(getClass().getResource("/card/card.fxml"));
-            playerOneHandBox.getChildren().add(cardPane);
-            playerOneHandBox.setSpacing(50);
-            playerOneHandBox.setAlignment(Pos.CENTER);
-            cardPane.setId(String.valueOf(deck.getCards().get(i).getId()));
-            getCurrentPlayerHandFromServer.add(cardPane.getId());*/
-        }
     }
-/*
+
     public void renderOpponentPlayerHand() throws IOException {
-        getOpponentPlayerHandFromServer.add("showplayerhand");
-        getOpponentPlayerHandFromServer.add("2"); // player2
-        for (int i = 0; i < handSize; i++) {
-            cardPane = FXMLLoader.load(getClass().getResource("/card/card.fxml"));
-            playerOneHandBox.getChildren().add(cardPane);
-            playerOneHandBox.setSpacing(50);
-            playerOneHandBox.setAlignment(Pos.CENTER);
-            cardPane.setId(String.valueOf(deck.getCards().get(i).getId()));
-            getCurrentPlayerHandFromServer.add(cardPane.getId());
-        }*/
+        renderCurrentPlayerHand();
 
-
+    }
+}
