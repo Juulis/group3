@@ -1,5 +1,6 @@
-package models;
 
+
+import models.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ class AttackTest {
     @BeforeEach
     void setUp() {
         attacks=new Attack();
-        opponent =new CreatureCard(1,5,7,"ACard","IGNITE",7,6,1);
+        opponent =new CreatureCard(1,5,7,"ACard","IGNITE",7,6,1, "");
         spyOpponentCard= Mockito.spy(opponent);
     }
     @DisplayName("Test ignite attack method")
@@ -46,7 +47,7 @@ class AttackTest {
         GameEngine gameEngine;
         CreatureCard creatureCard2;
 
-        creatureCard2 = new CreatureCard(5,5, 5, "Beater", "Attack Player", 1, 1, 15);
+        creatureCard2 = new CreatureCard(5,5, 5, "Beater", "Attack Player", 1, 1, 15, "");
         int p1 = player1.getHealth();
         attack = new Attack();
         player = new Player();

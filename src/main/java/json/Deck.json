@@ -7,7 +7,8 @@
     "power": 2,
     "cardEnergy": 2,
     "specialAttack": "dualAttack",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card1.png"
   },
   {
     "name": "Nightscream",
@@ -17,7 +18,8 @@
     "power": 2,
     "cardEnergy": 2,
     "specialAttack": "dualAttack",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card1.png"
   },
   {
     "name": "Nightscream",
@@ -27,7 +29,8 @@
     "power": 2,
     "cardEnergy": 2,
     "specialAttack": "dualAttack",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card1.png"
   },
   {
     "name": "Nightscream",
@@ -37,7 +40,8 @@
     "power": 2,
     "cardEnergy": 2,
     "specialAttack": "dualAttack",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card1.png"
   },
   {
     "name": "Nightscream",
@@ -47,7 +51,8 @@
     "power": 2,
     "cardEnergy": 2,
     "specialAttack": "dualAttack",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card1.png"
   },
   {
     "name": "Nightscream",
@@ -57,7 +62,8 @@
     "power": 2,
     "cardEnergy": 2,
     "specialAttack": "dualAttack",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card1.png"
   },
   {
     "name": "Nightscream",
@@ -67,7 +73,8 @@
     "power": 2,
     "cardEnergy": 2,
     "specialAttack": "dualAttack",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card1.png"
   },
   {
     "name": "Nightscream",
@@ -77,7 +84,8 @@
     "power": 2,
     "cardEnergy": 2,
     "specialAttack": "dualAttack",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card1.png"
   },
   {
     "name": "Nightscream",
@@ -87,7 +95,8 @@
     "power": 2,
     "cardEnergy": 2,
     "specialAttack": "dualAttack",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card1.png"
   },
   {
     "name": "Nightscream",
@@ -97,7 +106,8 @@
     "power": 2,
     "cardEnergy": 2,
     "specialAttack": "dualAttack",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card1.png"
   },
   {
     "name": "Soulspawn",
@@ -107,7 +117,8 @@
     "power": 0,
     "cardEnergy": 1,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card2.png"
   },
   {
     "name": "Soulspawn",
@@ -117,7 +128,8 @@
     "power": 0,
     "cardEnergy": 1,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card2.png"
   },
   {
     "name": "Soulspawn",
@@ -127,7 +139,8 @@
     "power": 0,
     "cardEnergy": 1,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card2.png"
   },
   {
     "name": "Soulspawn",
@@ -137,7 +150,8 @@
     "power": 0,
     "cardEnergy": 1,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card2.png"
   },
   {
     "name": "Soulspawn",
@@ -147,7 +161,8 @@
     "power": 0,
     "cardEnergy": 1,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card2.png"
   },
   {
     "name": "Soulspawn",
@@ -157,7 +172,8 @@
     "power": 0,
     "cardEnergy": 1,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card2.png"
   },
   {
     "name": "Soulspawn",
@@ -167,7 +183,8 @@
     "power": 0,
     "cardEnergy": 1,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card2.png"
   },
   {
     "name": "Soulspawn",
@@ -177,7 +194,8 @@
     "power": 0,
     "cardEnergy": 1,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card2.png"
   },
   {
     "name": "Soulspawn",
@@ -187,7 +205,8 @@
     "power": 0,
     "cardEnergy": 1,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card2.png"
   },
   {
     "name": "Soulspawn",
@@ -197,7 +216,8 @@
     "power": 0,
     "cardEnergy": 1,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card2.png"
   },
   {
     "name": "Rusthand",
@@ -207,7 +227,8 @@
     "power": 0,
     "cardEnergy": 5,
     "specialAttack": "playerAttack",
-    "magicCard": 1
+    "magicCard": 1,
+    "imgURL": "/cardpics/Card3.png"
   },
   {
     "name": "Rusthand",
@@ -217,7 +238,8 @@
     "power": 0,
     "cardEnergy": 5,
     "specialAttack": "playerAttack",
-    "magicCard": 1
+    "magicCard": 1,
+    "imgURL": "/cardpics/Card3.png"
   },
   {
     "name": "Rusthand",
@@ -227,7 +249,8 @@
     "power": 0,
     "cardEnergy": 5,
     "specialAttack": "playerAttack",
-    "magicCard": 1
+    "magicCard": 1,
+    "imgURL": "/cardpics/Card3.png"
   },
   {
     "name": "Rusthand",
@@ -237,7 +260,8 @@
     "power": 0,
     "cardEnergy": 5,
     "specialAttack": "playerAttack",
-    "magicCard": 1
+    "magicCard": 1,
+    "imgURL": "/cardpics/Card3.png"
   },
   {
     "name": "Rusthand",
@@ -247,7 +271,8 @@
     "power": 0,
     "cardEnergy": 5,
     "specialAttack": "playerAttack",
-    "magicCard": 1
+    "magicCard": 1,
+    "imgURL": "/cardpics/Card3.png"
   },
   {
     "name": "Rusthand",
@@ -257,7 +282,8 @@
     "power": 0,
     "cardEnergy": 5,
     "specialAttack": "playerAttack",
-    "magicCard": 1
+    "magicCard": 1,
+    "imgURL": "/cardpics/Card3.png"
   },
   {
     "name": "Rusthand",
@@ -267,7 +293,8 @@
     "power": 0,
     "cardEnergy": 5,
     "specialAttack": "playerAttack",
-    "magicCard": 1
+    "magicCard": 1,
+    "imgURL": "/cardpics/Card3.png"
   },
   {
     "name": "Rusthand",
@@ -277,7 +304,8 @@
     "power": 0,
     "cardEnergy": 5,
     "specialAttack": "playerAttack",
-    "magicCard": 1
+    "magicCard": 1,
+    "imgURL": "/cardpics/Card3.png"
   },
   {
     "name": "Rusthand",
@@ -287,7 +315,8 @@
     "power": 0,
     "cardEnergy": 5,
     "specialAttack": "playerAttack",
-    "magicCard": 1
+    "magicCard": 1,
+    "imgURL": "/cardpics/Card3.png"
   },
   {
     "name": "Rusthand",
@@ -297,7 +326,8 @@
     "power": 0,
     "cardEnergy": 5,
     "specialAttack": "playerAttack",
-    "magicCard": 1
+    "magicCard": 1,
+    "imgURL": "/cardpics/Card3.png"
   },
   {
     "name": "Vilestrike",
@@ -307,7 +337,8 @@
     "power": 0,
     "cardEnergy": 1,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card4.png"
   },
   {
     "name": "Vilestrike",
@@ -317,7 +348,8 @@
     "power": 0,
     "cardEnergy": 1,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card4.png"
   },
   {
     "name": "Vilestrike",
@@ -327,7 +359,8 @@
     "power": 0,
     "cardEnergy": 1,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card4.png"
   },
   {
     "name": "Vilestrike",
@@ -337,7 +370,8 @@
     "power": 0,
     "cardEnergy": 1,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card4.png"
   },
   {
     "name": "Vilestrike",
@@ -347,7 +381,8 @@
     "power": 0,
     "cardEnergy": 1,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card4.png"
   },
   {
     "name": "Vilestrike",
@@ -357,7 +392,8 @@
     "power": 0,
     "cardEnergy": 1,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card4.png"
   },
   {
     "name": "Vilestrike",
@@ -367,7 +403,8 @@
     "power": 0,
     "cardEnergy": 1,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card4.png"
   },
   {
     "name": "Vilestrike",
@@ -377,7 +414,8 @@
     "power": 0,
     "cardEnergy": 1,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card4.png"
   },
   {
     "name": "Vilestrike",
@@ -387,7 +425,8 @@
     "power": 0,
     "cardEnergy": 1,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card4.png"
   },
   {
     "name": "Vilestrike",
@@ -397,7 +436,8 @@
     "power": 0,
     "cardEnergy": 1,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card4.png"
   },
   {
     "name": "Frostbeing",
@@ -407,7 +447,8 @@
     "power": 1,
     "cardEnergy": 2,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card5.png"
   },
   {
     "name": "Frostbeing",
@@ -417,7 +458,8 @@
     "power": 1,
     "cardEnergy": 2,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card5.png"
   },
   {
     "name": "Frostbeing",
@@ -427,7 +469,8 @@
     "power": 1,
     "cardEnergy": 2,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card5.png"
   },
   {
     "name": "Frostbeing",
@@ -437,7 +480,8 @@
     "power": 1,
     "cardEnergy": 2,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card5.png"
   },
   {
     "name": "Frostbeing",
@@ -447,7 +491,8 @@
     "power": 1,
     "cardEnergy": 2,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card5.png"
   },
   {
     "name": "Frostbeing",
@@ -457,7 +502,8 @@
     "power": 1,
     "cardEnergy": 2,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card5.png"
   },
   {
     "name": "Frostbeing",
@@ -467,7 +513,8 @@
     "power": 1,
     "cardEnergy": 2,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card5.png"
   },
   {
     "name": "Frostbeing",
@@ -477,7 +524,8 @@
     "power": 1,
     "cardEnergy": 2,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card5.png"
   },
   {
     "name": "Frostbeing",
@@ -487,7 +535,8 @@
     "power": 1,
     "cardEnergy": 2,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card5.png"
   },
   {
     "name": "Frostbeing",
@@ -497,6 +546,7 @@
     "power": 1,
     "cardEnergy": 2,
     "specialAttack": "basic",
-    "magicCard": 0
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card5.png"
   }
 ]

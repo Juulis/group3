@@ -2,15 +2,24 @@ package controllers;
 
 import app.Server;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import models.Card;
+import models.Player;
+
+import java.io.IOException;
 
 
 public class TableViewController {
@@ -109,6 +118,19 @@ public class TableViewController {
     @FXML
     public ImageView playerTwoTurn;
 
+    @FXML
+    private HBox playerOneHandBox;
+    @FXML
+    private HBox playerTwoHandBox;
+    @FXML
+    private AnchorPane cardPane;
+    private Server server = Server.getInstance();
+
+    public void initialize() throws IOException {
+        renderCurrentPlayerHand();
+        renderOpponentPlayerHand();
+    }
+
     public void showWinner() {
 
         Pane endImg = new Pane();
@@ -147,8 +169,23 @@ public class TableViewController {
         }
     }
 
-    public void getSelectedCard(MouseEvent e) {
-        System.out.println("Selected card: " + e.getSource());
-        Server.getInstance().msgToGameEngine("attack,2,1");
+    public void renderCurrentPlayerHand() throws IOException {
+        for (int i = 0; i < server.getCurrentPlayerHand().size(); i++) {
+            cardPane = FXMLLoader.load(getClass().getResource("/card/card.fxml"));
+            playerOneHandBox.getChildren().add(cardPane);
+            playerOneHandBox.setSpacing(50);
+            playerOneHandBox.setAlignment(Pos.CENTER);
+            cardPane.setId(String.valueOf(server.getCurrentPlayerHand().get(i).getId()));
+        }
+    }
+
+    public void renderOpponentPlayerHand() throws IOException {
+        for (int i = 0; i < server.getOpponentPlayerHand().size(); i++) {
+            cardPane = FXMLLoader.load(getClass().getResource("/card/card.fxml"));
+            playerTwoHandBox.getChildren().add(cardPane);
+            playerTwoHandBox.setSpacing(50);
+            playerTwoHandBox.setAlignment(Pos.CENTER);
+            cardPane.setId(String.valueOf(server.getOpponentPlayerHand().get(i).getId()));
+        }
     }
 }

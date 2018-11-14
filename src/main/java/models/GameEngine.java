@@ -25,10 +25,10 @@ public class GameEngine {
         scoreHandler = new ScoreHandler();
     }
 
-    private Player p1, p2;
-    private Player currentPlayer;
-    private Player opponentPlayer;
-    private Deck deck;
+    public Player p1, p2;
+    public Player currentPlayer;
+    public Player opponentPlayer;
+    public Deck deck;
     private boolean game;
     private boolean playing;
     private int turn;

@@ -1,5 +1,9 @@
 [
   {
+    "name": "Tobias",
+    "score": 1500
+  },
+  {
     "name": "Micke",
     "score": 520
   },
@@ -12,19 +16,15 @@
     "score": 220
   },
   {
-    "name": "Tobias",
-    "score": 1500
+    "name": "Peter",
+    "score": 165
   },
   {
-    "name": "Lidia",
-    "score": 75
+    "name": "Peter",
+    "score": 165
   },
   {
-    "name": "Mohammed",
-    "score": 50
-  },
-  {
-    "name": "Rickard",
-    "score": 100
+    "name": "Peter",
+    "score": 165
   }
 ]

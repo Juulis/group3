@@ -16,7 +16,6 @@ public class MenuController {
     public void startGame() throws IOException {
         Pane tableViewPane = FXMLLoader.load(getClass().getResource("/tableview/tableview.fxml"));
         menuPane.getChildren().setAll(tableViewPane);
-        Server.getInstance();
     }
 
     @FXML

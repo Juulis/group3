@@ -69,4 +69,12 @@ public class Server {
     public void msgToFX(){
         //TODO: implement some awesome stuff to get msg from gameEngine to FX controllers
     }
+
+    public List<Card> getCurrentPlayerHand(){
+        return gameEngine.getCurrentPlayer().getPlayerHand();
+    }
+
+    public List<Card> getOpponentPlayerHand(){
+        return gameEngine.getOpponentPlayer().getPlayerHand();
+    }
 }
