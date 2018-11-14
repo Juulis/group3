@@ -60,7 +60,7 @@ public class Server {
         else if(commands.get(0).equals("endturn")){
             gameEngine.endTurn();
         }else if(commands.get(0).equals("playcard")){
-            gameEngine.getCurrentPlayer().playCard(selectedCard,gameEngine.getTurn());
+            gameEngine.getCurrentPlayer().playCard(selectedCard,gameEngine.getRound());
         }
         System.out.println(commands);
         System.out.println("\""+commands.get(0)+"\"");
