@@ -78,8 +78,8 @@ public class GameEngine {
 
         String player1hand = getStringFromList(p2.getPlayerHand());
         String player2hand = getStringFromList(p1.getPlayerHand());
-        server.msgToFX(player1hand);
-        server.msgToFX(player2hand);
+        server.msgToFX("showplayerhand,1,"+player1hand);
+        server.msgToFX("showplayerhand,2,"+player2hand);
     }
 
     private String getStringFromList(ArrayList<Card> playerHand) {

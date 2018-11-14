@@ -173,13 +173,19 @@ public class TableViewController {
 
     public static void showPlayerHand(List<String> commands) {
         Deck deck = new Deck();
-        String player = commands.get(0);
-        commands.remove(0);
-        for (String id : commands) {
-            Card card = deck.getCards().get(Integer.parseInt(id));
+        try {
+            deck.getCardsFromJSON();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String player = commands.get(1);
+        for (int i = 2;i<commands.size();i++) {
+            Card card = deck.getCards().get(Integer.parseInt(commands.get(i)));
             if (player.equals("1")) {
+                System.out.println("showing card "+card.getId());
                 //TODO: Code for showing card in FX for player 1
             } else if (player.equals("2")) {
+                System.out.println("showing card "+card.getId());
                 //TODO: Code for showing card in FX for player 2
             } else {
                 System.out.println("No player! Something wrong with string input from gameEngine");

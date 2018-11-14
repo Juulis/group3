@@ -68,7 +68,6 @@ public class Server {
         List<String> commands = Arrays.asList(msg.split(","));
         switch (commands.get(0)) {
             case "showplayerhand":
-                commands.remove(0);
                 TableViewController.showPlayerHand(commands);
                 break;
             case "gameover":
