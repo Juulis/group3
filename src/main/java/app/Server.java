@@ -34,14 +34,17 @@ public class Server {
 
 
     /**
-     * @param msg string should be formatted ass following:
-     *            1: command (attack, endturn etc)
-     *            2: selected card id
-     *            3: opponent card id
-     *            4: more opponents if needed
-     *            <p>
-     *            example string: "attack,4,1,2"
-     *            card 4 will attack opponent cards 1 and 2
+     * @param msg
+     *
+     * string should be formatted ass following:
+     * 1: command (attack, endturn etc)
+     * 2: selected card id
+     * 3: opponent card id
+     * 4: more opponents if needed
+     *
+     * example string: "attack,4,1,2"
+     * card 4 will attack opponent cards 1 and 2
+     *
      */
     public void msgToGameEngine(String msg) {
         List<String> commands = Arrays.asList(msg.split(","));
@@ -56,8 +59,8 @@ public class Server {
             gameEngine.chooseAttack(selectedCard, opponents);
         } else if (commands.get(0).equals("endturn")) {
             gameEngine.endTurn();
-        } else if (commands.get(0).equals("playcard")) {
-            gameEngine.getCurrentPlayer().playCard(selectedCard, gameEngine.getTurn());
+        }else if(commands.get(0).equals("playcard")){
+            gameEngine.getCurrentPlayer().playCard(selectedCard,gameEngine.getRound());
         }
         System.out.println(commands); //TODO: Remove, testingpurpose
     }
