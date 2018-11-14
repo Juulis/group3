@@ -43,6 +43,18 @@ public class GameEngine {
         this.p2 = p;
     }
 
+    public int getTurn() {
+        return turn;
+    }
+
+    public int getRound() {
+        return (turn + 1) / 2;
+    }
+
+    public Deck getDeck() {
+        return deck;
+    }
+
     public void setDeck(Deck deck) {
         this.deck = deck;
     }
@@ -55,15 +67,20 @@ public class GameEngine {
         return p2;
     }
 
-    public void startGame() throws IOException {
-        while (game) {
-            initGame();
-            while (playing) {
-                playerMenu();
-
+    public void startGame(String startArgs) throws IOException {
+        System.out.println("starting game");
+        initGame();
+        if (startArgs.equals("console")) {
+            while (game) {
+                while (playing) {
+                    playerMenu();
+                }
             }
+            //TODO: Some endscreen in here!
         }
     }
+
+
 
     public void initGame() throws IOException {
         deck.createFullDeck();
@@ -195,46 +212,34 @@ public class GameEngine {
         return false;
     }
 
-
-    public void attack(Card selectedCard) {
-        String attack = selectedCard.getSpecialAttack();
-        chooseAttack(attack, selectedCard);
-    }
-
     public enum AttackNames {BASIC, PLAYERATTACK, DUALATTACK, IGNITE, ATTACKALL}
 
-    public void chooseAttack(String nameOfAttack, Card selectedCard) {
+    public void chooseAttack(Card selectedCard, List<CreatureCard> opponentCards) {
 
-        nameOfAttack = nameOfAttack.toUpperCase();
+        String nameOfAttack = selectedCard.getSpecialAttack().toUpperCase();
+
         for (AttackNames attackName : AttackNames.values()) {
             if (attackName.name().equals(nameOfAttack)) {
                 switch (attackName) {
                     case BASIC:
-                        CreatureCard attackedCard = new CreatureCard(1,1, 1, "", "", 1, 1, 1); //logic för att ta in attackerat kort från JavaFX
-                        attacks.basicAttack(selectedCard, attackedCard);
+                        attacks.basicAttack(selectedCard, opponentCards.get(0));
                         break;
 
                     case IGNITE:
-                        //ignition attack will be last for 3 turns every turn ignited card will takes damage by 2 points
-                        CreatureCard attackedCard2 = new CreatureCard(1, 1, 1, "", "D", 1, 1,2);//Magic card will be fetched from Gui
-                        if (attackedCard2.getIgnRoundCounter() == 0) {
-
-                            attacks.ignite(selectedCard, attackedCard2);
+                        //ignition attack will be last for 3 turns, every turn ignited card will takes damage by 2 points
+                        if (opponentCards.get(0).getIgnRoundCounter() == 0) {
+                            attacks.ignite(selectedCard, opponentCards.get(0));
                         } else {
                             System.out.println("The targeted cart is already ignited");
                         }
-
                         break;
 
-
                     case DUALATTACK:
-                        CreatureCard attackedCardOne = new CreatureCard(1, 1, 1, "", "", 1, 1,2);
-                        CreatureCard attackedCardTwo = new CreatureCard(1, 1, 2, "", "", 1, 1,4);
-                        attacks.dualAttack((CreatureCard) selectedCard, attackedCardOne, attackedCardTwo);
+                        attacks.dualAttack((CreatureCard) selectedCard, opponentCards.get(0), opponentCards.get(1));
                         break;
 
                     case PLAYERATTACK:
-                        attacks.attackPlayer(selectedCard,getOpponentPlayer());
+                        attacks.attackPlayer(selectedCard, getOpponentPlayer());
                         break;
 
                     case ATTACKALL:
@@ -285,7 +290,7 @@ public class GameEngine {
                 showTable();
                 break;
             case 2:
-                int playCard, round;
+                int playCard;
                 System.out.println("what card do you want to play out? (0 to cancel)");
 
                 playCard = getInput();
@@ -293,8 +298,7 @@ public class GameEngine {
                     playerMenu();
                     return;
                 }
-                round = (turn + 1) / 2;
-                currentPlayer.playCard(playCard, round);
+                currentPlayer.playCard(deck.getCards().get(playCard), getRound());
                 break;
             case 3:
                 if (turn > 2) {
@@ -445,8 +449,7 @@ public class GameEngine {
     }
 
     public boolean isCardReadyToAttack(CreatureCard creatureCard) {
-        int round = (turn + 1) / 2;
-        if ((creatureCard.getPlayedOnRound() + creatureCard.getPower()) < round)
+        if ((creatureCard.getPlayedOnRound() + creatureCard.getPower()) < getRound())
             return true;
         return false;
     }

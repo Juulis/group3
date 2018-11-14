@@ -1,4 +1,4 @@
-package sample;
+package app;
 
 import models.*;
 
@@ -29,7 +29,7 @@ public class Main extends Application {
             launch(args);
         } else if (choice == 2) {
             GameEngine game = new GameEngine();
-            game.startGame();
+            game.startGame("console");
         }
     }
 }

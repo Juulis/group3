@@ -255,7 +255,7 @@ class GameEngineTest {
         currentCard.setAttack(1);
         //fill tableCard list
         for (int i = 0; i < 5; i++) {
-            opponentPlayer.playCard(1, 2);
+            opponentPlayer.playCard(gameEngine.getDeck().getCards().get(i), 2);
         }
 
         //get hp from cards before attack
@@ -283,7 +283,7 @@ class GameEngineTest {
     @Test
     void testDualAttack() {
         assertFalse(currentCardDualAttack.isTapped());
-        assertThat(currentCard.getSpecialAttack() == "dualAttack");
+        assertThat(currentCard.getSpecialAttack().equals("dualAttack"));
 
         // Test where currentCardDualAttack doesn't get killed during dualAttack()...
         attack.dualAttack(currentCardDualAttack, opponentCardOne, opponentCardTwo);
@@ -327,7 +327,7 @@ class GameEngineTest {
         player1.pickupCard();
 
         assertEquals(2, player1.getPlayerHand().size());
-        player1.playCard(1, 1);
+        player1.playCard(player1.getPlayerHand().get(0), 1);
         assertEquals(1, player1.getPlayerHand().size());
 
         gameEngine.getPlayerToStart(false);
@@ -340,7 +340,7 @@ class GameEngineTest {
         player2.pickupCard();
 
         assertEquals(2, player2.getPlayerHand().size());
-        player2.playCard(1, 1);
+        player2.playCard(player2.getPlayerHand().get(0), 1);
         assertEquals(1, player2.getPlayerHand().size());
 
         gameEngine.endTurn();
@@ -446,8 +446,8 @@ class GameEngineTest {
 
         assertEquals(2, player2.getPlayerHand().size());
 
-        player1.playCard(1, 1);
-        player2.playCard(1, 1);
+        player1.playCard(player1.getPlayerHand().get(1), 1);
+        player2.playCard(player2.getPlayerHand().get(1), 1);
 
         assertEquals(1, player1.getPlayerHand().size());
         assertEquals(1, player2.getPlayerHand().size());
@@ -539,7 +539,7 @@ class GameEngineTest {
         assertThat(magicCard).isInstanceOfAny(MagicCard.class);
         p1.getPlayerHand().add(magicCard);
         assertEquals(1, p1.getPlayerHand().size());
-        p1.playCard(p1.getPlayerHand().indexOf(magicCard), 4);
+        p1.playCard(p1.getPlayerHand().get(p1.getPlayerHand().indexOf(magicCard)), 4);
         p1.sendToGraveyard(magicCard);
         assertEquals(0, p1.getPlayerHand().size());
     }
