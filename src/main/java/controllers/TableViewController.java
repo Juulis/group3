@@ -20,12 +20,14 @@ import models.Card;
 import models.Player;
 
 import java.io.IOException;
+
 import models.Card;
 import models.Deck;
 
 import java.io.IOException;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -134,6 +136,8 @@ public class TableViewController {
     private Server server;
     private Deck deck;
     private String cardURL = "/card/card.fxml";
+    /*private List<String> getP1Hand = Arrays.asList("showplayerhand","1","2","3","4","5","6");
+    private List<String> getP2Hand = Arrays.asList("showplayerhand","2","2","3","4","5","6");*/
 
     public TableViewController() throws IOException {
         deck = new Deck();
@@ -141,6 +145,8 @@ public class TableViewController {
     }
 
     public void initialize() throws IOException {
+        server.msgToFX("showplayerhand,1,2,3,4,5,6");
+        server.msgToFX("showplayerhand,2,3,4,5,6,7");
     }
 
     public void showWinner() {
@@ -195,7 +201,7 @@ public class TableViewController {
     public void playCard(int cardID) {
     }
 
-    public static void isTappedWarning() {
+    public void isTappedWarning() {
     }
 
     public void showPlayerHand(List<String> commands) throws IOException {
@@ -221,7 +227,7 @@ public class TableViewController {
                     break;
                 case "2":
                     for (int k = 0; k < handSize; k++) {
-                        cardPane = FXMLLoader.load(getClass().getResource("/card/card.fxml"));
+                        cardPane = FXMLLoader.load(getClass().getResource(cardURL));
                         playerTwoHandBox.getChildren().add(cardPane);
                         playerTwoHandBox.setSpacing(50);
                         playerTwoHandBox.setAlignment(Pos.CENTER);
@@ -240,7 +246,5 @@ public class TableViewController {
     }
 
     public void renderOpponentPlayerHand() throws IOException {
-        renderCurrentPlayerHand();
-
     }
 }

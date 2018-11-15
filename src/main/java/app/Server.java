@@ -1,6 +1,7 @@
 package app;
 
 import controllers.TableViewController;
+import javafx.fxml.FXMLLoader;
 import models.Card;
 import models.CreatureCard;
 import models.GameEngine;
@@ -20,7 +21,9 @@ public class Server {
     private Server() throws IOException {
         instance = this;
         gameEngine = new GameEngine();
-        tableViewController = new TableViewController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tableview/tableview.fxml"));
+        loader.load();
+        tableViewController = loader.getController();
         gameEngine.startGame("fx");
     }
 
