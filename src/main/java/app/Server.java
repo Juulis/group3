@@ -1,6 +1,7 @@
 package app;
 
 import controllers.TableViewController;
+import javafx.fxml.FXMLLoader;
 import models.Card;
 import models.CreatureCard;
 import models.GameEngine;
@@ -13,11 +14,12 @@ import java.util.List;
 
 public class Server {
     private GameEngine gameEngine;
-
     private static Server instance = null;
+    private TableViewController tvc;
 
     private Server() throws IOException {
         instance = this;
+        setTvc();
         gameEngine = new GameEngine();
         gameEngine.startGame("fx");
     }
@@ -29,6 +31,11 @@ public class Server {
         return instance;
     }
 
+    public void setTvc() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tableview/tableview.fxml"));
+        loader.load();
+        tvc = loader.getController();
+    }
 
     /**
      * @param msg string should be formatted ass following:
@@ -68,34 +75,34 @@ public class Server {
         List<String> commands = Arrays.asList(msg.split(","));
         switch (commands.get(0)) {
             case "showplayerhand":
-                TableViewController.showPlayerHand(commands);
+                tvc.showPlayerHand(commands);
                 break;
             case "gameover":
-                TableViewController.showWinner();
+                tvc.showWinner();
                 break;
             case "player1":
-                TableViewController.showPlayerTurn(1);
+                tvc.showPlayerTurn(1);
                 break;
             case "player2":
-                TableViewController.showPlayerTurn(2);
+                tvc.showPlayerTurn(2);
                 break;
             case "player1hp":
-                TableViewController.setPlayer1HP(Integer.parseInt(commands.get(1)));
+                tvc.setPlayer1HP(Integer.parseInt(commands.get(1)));
                 break;
             case "player2hp":
-                TableViewController.setPlayer2HP(Integer.parseInt(commands.get(1)));
+                tvc.setPlayer2HP(Integer.parseInt(commands.get(1)));
                 break;
             case "sendtograveyard":
-                TableViewController.sendToGraveYard(Integer.parseInt(commands.get(1)));
+                tvc.sendToGraveYard(Integer.parseInt(commands.get(1)));
                 break;
             case "attackedtosoon":
-                TableViewController.toSoonWarning();
+                tvc.toSoonWarning();
                 break;
             case "playcard":
-                TableViewController.playCard(Integer.parseInt(commands.get(1)));
+                tvc.playCard(Integer.parseInt(commands.get(1)));
                 break;
             case "tapped":
-                TableViewController.isTappedWarning();
+                tvc.isTappedWarning();
                 break;
         }
     }

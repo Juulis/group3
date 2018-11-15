@@ -115,7 +115,7 @@ public class TableViewController {
     @FXML
     public ImageView playerTwoTurn;
 
-    public static void showWinner() {
+    public void showWinner() {
 
         Pane endImg = new Pane();
 
@@ -129,7 +129,7 @@ public class TableViewController {
 
     }
 
-    public static void showPlayerTurn(int player) {
+    public void showPlayerTurn(int player) {
 
         Pane turnImg = new Pane();
 
@@ -153,25 +153,25 @@ public class TableViewController {
         }
     }
 
-    public static void setPlayer1HP(int i) {
+    public void setPlayer1HP(int i) {
     }
 
-    public static void setPlayer2HP(int i) {
+    public void setPlayer2HP(int i) {
     }
 
-    public static void sendToGraveYard(int cardID) {
+    public void sendToGraveYard(int cardID) {
     }
 
-    public static void toSoonWarning() {
+    public void toSoonWarning() {
     }
 
-    public static void playCard(int cardID) {
+    public void playCard(int cardID) {
     }
 
-    public static void isTappedWarning() {
+    public void isTappedWarning() {
     }
 
-    public static void showPlayerHand(List<String> commands) {
+    public void showPlayerHand(List<String> commands) {
         Deck deck = new Deck();
         try {
             deck.getCardsFromJSON();
@@ -192,6 +192,7 @@ public class TableViewController {
             }
         }
     }
+
 
     public void getSelectedCard(MouseEvent e) throws IOException {
         System.out.println("Selected card: " + e.getSource());
