@@ -1,32 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <Pane fx:id="playerInputPane" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@playerInput.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PlayerInputController">
    <children>
-      <Button fx:id="nameBtn" layoutX="1093.0" layoutY="540.0" mnemonicParsing="false" onAction="#saveNames" prefHeight="39.0" prefWidth="161.0" text="Submit" />
-      <Label layoutX="658.0" layoutY="441.0" prefHeight="40.0" prefWidth="168.0" text="Player 1 :" textFill="WHITE">
+      <Label contentDisplay="RIGHT" layoutX="703.0" layoutY="443.0" prefHeight="40.0" prefWidth="168.0" text="Player 1 :" textFill="WHITE">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <Label layoutX="658.0" layoutY="540.0" prefHeight="40.0" prefWidth="168.0" text="Player 2 :" textFill="WHITE" wrapText="true">
+      <Label contentDisplay="RIGHT" layoutX="703.0" layoutY="541.0" prefHeight="40.0" prefWidth="168.0" text="Player 2 :" textFill="WHITE" wrapText="true">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <TextField fx:id="player1Name" alignment="CENTER" layoutX="833.0" layoutY="441.0" prefHeight="48.0" prefWidth="224.0" promptText="name">
+      <TextField fx:id="player1Name" alignment="CENTER" layoutX="871.0" layoutY="441.0" prefHeight="48.0" prefWidth="224.0" promptText="name">
          <font>
             <Font size="20.0" />
          </font>
       </TextField>
-      <TextField fx:id="player2Name" alignment="CENTER" layoutX="833.0" layoutY="540.0" prefHeight="48.0" prefWidth="224.0" promptText="name">
+      <TextField fx:id="player2Name" alignment="CENTER" layoutX="871.0" layoutY="539.0" prefHeight="48.0" prefWidth="224.0" promptText="name">
          <font>
             <Font size="20.0" />
          </font>
@@ -41,7 +37,7 @@
             </Label>
          </children>
       </StackPane>
-      <Button fx:id="startBtn" layoutX="798.0" layoutY="719.0" mnemonicParsing="false" onAction="#startGame" prefHeight="65.0" prefWidth="297.0" text="Start Game">
+      <Button fx:id="startBtn" layoutX="771.0" layoutY="719.0" mnemonicParsing="false" onAction="#startGame" prefHeight="65.0" prefWidth="324.0" text="Start Game">
          <font>
             <Font size="24.0" />
          </font>

@@ -23,6 +23,7 @@ public class PlayerInputController {
 
     @FXML
     public void startGame() throws IOException {
+        saveNames();
         Pane tableViewPane = FXMLLoader.load(getClass().getResource("/tableview/tableview.fxml"));
         playerInputPane.getChildren().setAll(tableViewPane);
     }
