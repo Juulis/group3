@@ -57,8 +57,6 @@ public class TableViewController {
 
     public void showWinner() {
         winner.setVisible(true);
-        tableViewPane.getChildren().remove(winner);
-        tableViewPane.getChildren().add(winner);
         update();
     }
 
