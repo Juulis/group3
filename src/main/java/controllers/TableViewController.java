@@ -1,37 +1,24 @@
 package controllers;
 
 import app.Server;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import models.Card;
-import models.Player;
-
-import java.awt.*;
-import java.io.IOException;
-
+import javafx.stage.Stage;
 import models.Card;
 import models.Deck;
-import pojo.TableModel;
 
 import java.io.IOException;
-import java.lang.reflect.UndeclaredThrowableException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -39,61 +26,22 @@ public class TableViewController {
 
     @FXML
     private Line playerOneEnergy;
-
     @FXML
     private Rectangle playerOneDeck;
-
     @FXML
     private Circle playerOneGraveyard;
-
     @FXML
     private Label playerOneHp;
-
-
-    @FXML
-    private Rectangle playerOneTableOne;
-    @FXML
-    private Rectangle playerOneTableTwo;
-    @FXML
-    private Rectangle playerOneTableThree;
-    @FXML
-    private Rectangle playerOneTableFour;
-    @FXML
-    private Rectangle playerOneTableFive;
-    @FXML
-    private Rectangle playerOneTableSix;
-    @FXML
-    private Rectangle playerOneTableSeven;
-
     @FXML
     private Button endTurn;
-
     @FXML
     private Line playerTwoEnergy;
-
     @FXML
     private Rectangle playerTwoDeck;
-
     @FXML
     private Circle playerTwoGraveyard;
-
     @FXML
     private Label playerTwoHp;
-
-    @FXML
-    private Rectangle playerTwoTableOne;
-    @FXML
-    private Rectangle playerTwoTableTwo;
-    @FXML
-    private Rectangle playerTwoTableThree;
-    @FXML
-    private Rectangle playerTwoTableFour;
-    @FXML
-    private Rectangle playerTwoTableFive;
-    @FXML
-    private Rectangle playerTwoTableSix;
-    @FXML
-    private Rectangle playerTwoTableSeven;
     @FXML
     private Pane tableViewPane;
     @FXML
@@ -113,30 +61,27 @@ public class TableViewController {
 
     private Server server;
     private Deck deck;
-    private List<String> getP1Hand = Arrays.asList("showplayerhand", "1", "2", "3", "4", "5", "6");
-    private List<String> getP2Hand = Arrays.asList("showplayerhand", "2", "2", "3", "4", "5", "6");
 
     public TableViewController() throws IOException {
         deck = new Deck();
-        server = Server.getInstance();
     }
 
     public void initialize() throws IOException {
         /*cardPane = FXMLLoader.load(getClass().getResource("/card/card.fxml"));
         playerOneHandBox.getChildren().add(cardPane);*/
+        ImageView bajs = new ImageView();
+        Image kiss = new Image("/cardpics/Card1.png");
+        bajs.setImage(kiss);
+        playerOneHandBox.getChildren().addAll(bajs);
     }
 
+    private Stage stage;
+
     public void showWinner() {
-
-        Pane endImg = new Pane();
-
-        Image winner = new Image("file:tableview/WinnerScreen.png");
-        ImageView show = new ImageView(winner);
-
-        show.setImage(winner);
-        show.setVisible(true);
-        endImg.getChildren().add(show);
-
+        winner.setVisible(true);
+        tableViewPane.getChildren().remove(winner);
+        tableViewPane.getChildren().add(winner);
+        update();
     }
 
     public void showPlayerTurn(int player) {
@@ -198,13 +143,15 @@ public class TableViewController {
                     playerOneHandBox.setSpacing(50);
                     playerOneHandBox.setAlignment(Pos.CENTER);
                     cardPane.setId(String.valueOf(card.getId()));
+                    /*((ImageView) cardPane.getChildren()
+                            .filtered(node -> node.getId().equals("cardImageView")).get(0)).setImage(new Image(card.getImgURL()));*/
                     System.out.print("CardId " + card.getId() + "/ " + " imgURL: " + card.getImgURL() + " ");
                     System.out.println(cardPane);
                     //TODO: Code for showing card in FX for player 1
                     break;
                 case "2":
                     cardPane = FXMLLoader.load(getClass().getResource(cardURL));
-                    playerOneHandBox.getChildren().add(cardPane);
+                    playerTwoHandBox.getChildren().add(cardPane);
                     playerTwoHandBox.setSpacing(50);
                     playerTwoHandBox.setAlignment(Pos.CENTER);
                     cardPane.setId(String.valueOf(card.getId()));
@@ -217,5 +164,15 @@ public class TableViewController {
                     break;
             }
         }
+        update();
+    }
+
+    public void setStage(Stage primaryStage) {
+        stage = primaryStage;
+    }
+
+    private void update() {
+        Parent parent = tableViewPane;
+        stage.getScene().setRoot(parent);
     }
 }
