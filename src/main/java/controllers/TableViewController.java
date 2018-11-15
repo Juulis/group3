@@ -2,6 +2,7 @@ package controllers;
 
 import app.Server;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -11,6 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import models.Card;
 import models.Deck;
 
@@ -115,6 +117,8 @@ public class TableViewController {
     @FXML
     public ImageView playerTwoTurn;
 
+    private Stage stage;
+
     public void showWinner() {
 
         Pane endImg = new Pane();
@@ -126,7 +130,6 @@ public class TableViewController {
 
         show.setImage(winner);
         show.setVisible(true);
-
     }
 
     public void showPlayerTurn(int player) {
@@ -197,5 +200,14 @@ public class TableViewController {
     public void getSelectedCard(MouseEvent e) throws IOException {
         System.out.println("Selected card: " + e.getSource());
         Server.getInstance().msgToGameEngine("attack,2,1");
+    }
+
+    public void setControllersNshit(Stage primaryStage) {
+        stage=primaryStage;
+    }
+    private void update(){
+        Scene scene = new Scene(tableViewPane);
+        stage.setScene(scene);
+        stage.show();
     }
 }

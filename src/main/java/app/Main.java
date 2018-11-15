@@ -1,5 +1,6 @@
 package app;
 
+import controllers.TableViewController;
 import models.*;
 
 import javafx.application.Application;
@@ -19,6 +20,16 @@ public class Main extends Application {
         primaryStage.setTitle("This is not a chess inspired game!!");
         primaryStage.setScene(new Scene(root, 1920, 1080));
         primaryStage.show();
+
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        TableViewController tvc = loader.getController();
+        tvc.setControllersNshit(primaryStage);
     }
 
     public static void main(String[] args) throws IOException {
