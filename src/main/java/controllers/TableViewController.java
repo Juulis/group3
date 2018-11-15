@@ -1,28 +1,32 @@
 package controllers;
 
 import app.Server;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import models.Card;
 import models.Player;
 
+import java.awt.*;
 import java.io.IOException;
 
 import models.Card;
 import models.Deck;
+import pojo.TableModel;
 
 import java.io.IOException;
 import java.lang.reflect.UndeclaredThrowableException;
@@ -45,16 +49,6 @@ public class TableViewController {
     @FXML
     private Label playerOneHp;
 
-    @FXML
-    private Rectangle playerOneHandOne;
-    @FXML
-    private Rectangle playerOneHandTwo;
-    @FXML
-    private Rectangle playerOneHandThree;
-    @FXML
-    private Rectangle playerOneHandFour;
-    @FXML
-    private Rectangle playerOneHandFive;
 
     @FXML
     private Rectangle playerOneTableOne;
@@ -87,17 +81,6 @@ public class TableViewController {
     private Label playerTwoHp;
 
     @FXML
-    private Rectangle playerTwoHandOne;
-    @FXML
-    private Rectangle playerTwoHandTwo;
-    @FXML
-    private Rectangle playerTwoHandThree;
-    @FXML
-    private Rectangle playerTwoHandFour;
-    @FXML
-    private Rectangle playerTwoHandFive;
-
-    @FXML
     private Rectangle playerTwoTableOne;
     @FXML
     private Rectangle playerTwoTableTwo;
@@ -116,28 +99,22 @@ public class TableViewController {
     @FXML
     public ImageView tableImageView;
     @FXML
-    private Pane currentPlayerHandPane;
-
-    @FXML
     public ImageView winner;
-
     @FXML
     public ImageView playerOneTurn;
-
     @FXML
     public ImageView playerTwoTurn;
-
     @FXML
     private HBox playerOneHandBox;
     @FXML
     private HBox playerTwoHandBox;
     @FXML
     private AnchorPane cardPane;
+
     private Server server;
     private Deck deck;
-    private String cardURL = "/card/card.fxml";
-    /*private List<String> getP1Hand = Arrays.asList("showplayerhand","1","2","3","4","5","6");
-    private List<String> getP2Hand = Arrays.asList("showplayerhand","2","2","3","4","5","6");*/
+    private List<String> getP1Hand = Arrays.asList("showplayerhand", "1", "2", "3", "4", "5", "6");
+    private List<String> getP2Hand = Arrays.asList("showplayerhand", "2", "2", "3", "4", "5", "6");
 
     public TableViewController() throws IOException {
         deck = new Deck();
@@ -145,8 +122,8 @@ public class TableViewController {
     }
 
     public void initialize() throws IOException {
-        server.msgToFX("showplayerhand,1,2,3,4,5,6");
-        server.msgToFX("showplayerhand,2,3,4,5,6,7");
+        /*cardPane = FXMLLoader.load(getClass().getResource("/card/card.fxml"));
+        playerOneHandBox.getChildren().add(cardPane);*/
     }
 
     public void showWinner() {
@@ -205,7 +182,7 @@ public class TableViewController {
     }
 
     public void showPlayerHand(List<String> commands) throws IOException {
-        int handSize = 5;
+        System.out.println("Call to showPlayerHand() in FX");
         try {
             deck.getCardsFromJSON();
         } catch (IOException e) {
@@ -214,25 +191,25 @@ public class TableViewController {
         String player = commands.get(1);
         for (int i = 2; i < commands.size(); i++) {
             Card card = deck.getCards().get(Integer.parseInt(commands.get(i)));
+            String cardURL = "/card/card.fxml";
             switch (player) {
                 case "1":
-                    for (int j = 0; j < handSize; j++) {
-                        cardPane = FXMLLoader.load(getClass().getResource(cardURL));
-                        playerOneHandBox.getChildren().add(cardPane);
-                        playerOneHandBox.setSpacing(50);
-                        playerOneHandBox.setAlignment(Pos.CENTER);
-                        cardPane.setId(String.valueOf(card.getId()));
-                    }
+                    cardPane = FXMLLoader.load(getClass().getResource(cardURL));
+                    playerOneHandBox.setSpacing(50);
+                    playerOneHandBox.setAlignment(Pos.CENTER);
+                    cardPane.setId(String.valueOf(card.getId()));
+                    System.out.print("CardId " + card.getId() + "/ " + " imgURL: " + card.getImgURL() + " ");
+                    System.out.println(cardPane);
                     //TODO: Code for showing card in FX for player 1
                     break;
                 case "2":
-                    for (int k = 0; k < handSize; k++) {
-                        cardPane = FXMLLoader.load(getClass().getResource(cardURL));
-                        playerTwoHandBox.getChildren().add(cardPane);
-                        playerTwoHandBox.setSpacing(50);
-                        playerTwoHandBox.setAlignment(Pos.CENTER);
-                        cardPane.setId(String.valueOf(card.getId()));
-                    }
+                    cardPane = FXMLLoader.load(getClass().getResource(cardURL));
+                    playerOneHandBox.getChildren().add(cardPane);
+                    playerTwoHandBox.setSpacing(50);
+                    playerTwoHandBox.setAlignment(Pos.CENTER);
+                    cardPane.setId(String.valueOf(card.getId()));
+                    System.out.print("CardId " + card.getId() + "/ " + " imgURL: " + card.getImgURL() + " ");
+                    System.out.println(cardPane);
                     //TODO: Code for showing card in FX for player 2
                     break;
                 default:
@@ -240,11 +217,5 @@ public class TableViewController {
                     break;
             }
         }
-    }
-
-    public void renderCurrentPlayerHand() throws IOException {
-    }
-
-    public void renderOpponentPlayerHand() throws IOException {
     }
 }

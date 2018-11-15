@@ -16,7 +16,6 @@ public class GameEngine {
         turn = 1;
         attacks = new Attack();
         scoreHandler = new ScoreHandler();
-        server = Server.getInstance();
     }
 
     private Player p1, p2;
