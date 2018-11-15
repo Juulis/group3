@@ -1,13 +1,13 @@
 package app;
 
 import controllers.TableViewController;
-import models.*;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import models.GameEngine;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -22,14 +22,14 @@ public class Main extends Application {
         primaryStage.show();
 
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tableview/tableview.fxml"));
         try {
             loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
         TableViewController tvc = loader.getController();
-        tvc.setControllersNshit(primaryStage);
+        Server.getInstance().setTvc(tvc,primaryStage);
     }
 
     public static void main(String[] args) throws IOException {
