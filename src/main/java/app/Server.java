@@ -1,5 +1,7 @@
 package app;
 
+import controllers.TableViewController;
+import javafx.fxml.FXMLLoader;
 import models.Card;
 import models.CreatureCard;
 import models.GameEngine;
@@ -12,61 +14,96 @@ import java.util.List;
 
 public class Server {
     private GameEngine gameEngine;
+    private static Server instance = null;
+    private TableViewController tvc;
 
-    private static Server instance;
-
-    private Server() {
+    private Server() throws IOException {
+        instance = this;
+        setTvc();
         gameEngine = new GameEngine();
-        try {
-            gameEngine.startGame("fx");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        gameEngine.startGame("fx");
     }
 
-    public static synchronized Server getInstance() {
+    public static Server getInstance() throws IOException {
         if (instance == null) {
             instance = new Server();
         }
         return instance;
     }
 
+    public void setTvc() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tableview/tableview.fxml"));
+        loader.load();
+        tvc = loader.getController();
+    }
 
     /**
-     * @param input
-     *
-     * string should be formatted ass following:
-     * 1: command (attack, endturn etc)
-     * 2: selected card id
-     * 3: opponent card id
-     * 4: more opponents if needed
-     *
-     * example string: "attack,4,1,2"
-     * card 4 will attack opponent cards 1 and 2
-     *
+     * @param msg string should be formatted ass following:
+     *            1: command (attack, endturn etc)
+     *            2: selected card id
+     *            3: opponent card id
+     *            4: more opponents if needed
+     *            <p>
+     *            example string: "attack,4,1,2"
+     *            card 4 will attack opponent cards 1 and 2
      */
-    public void msgToGameEngine(String input) {
-        List<String> commands = Arrays.asList(input.split(","));
+    public void msgToGameEngine(String msg) throws IOException {
+        List<String> commands = Arrays.asList(msg.split(","));
         Card selectedCard = gameEngine.getDeck().getCards().get(Integer.parseInt(commands.get(1)));
         List<CreatureCard> opponents = new ArrayList<>();
 
-        if (commands.get(0).equals("attack")) {
-            int opponentAmount = commands.size() - 2; //ignoring the first two spots
-            for (int i = 0; i < opponentAmount; i++) {
-                opponents.add((CreatureCard)gameEngine.getDeck().getCards().get(Integer.parseInt(commands.get(i + 2)))); //ignoring first two spots
-            }
-            gameEngine.chooseAttack(selectedCard, opponents);
+        switch (commands.get(0)) {
+            case "attack":
+                int opponentAmount = commands.size() - 2; //ignoring the first two spots
+
+                for (int i = 0; i < opponentAmount; i++) {
+                    opponents.add((CreatureCard) gameEngine.getDeck().getCards().get(Integer.parseInt(commands.get(i + 2)))); //ignoring first two spots
+                }
+                gameEngine.chooseAttack(selectedCard, opponents);
+                break;
+            case "endturn":
+                gameEngine.endTurn();
+                break;
+            case "playcard":
+                gameEngine.getCurrentPlayer().playCard(selectedCard, gameEngine.getRound());
+                break;
         }
-        else if(commands.get(0).equals("endturn")){
-            gameEngine.endTurn();
-        }else if(commands.get(0).equals("playcard")){
-            gameEngine.getCurrentPlayer().playCard(selectedCard,gameEngine.getRound());
-        }
-        System.out.println(commands);
-        System.out.println("\""+commands.get(0)+"\"");
+        System.out.println(commands); //TODO: Remove, testingpurpose
     }
 
-    public void msgToFX(){
-        //TODO: implement some awesome stuff to get msg from gameEngine to FX controllers
+    public void msgToFX(String msg) {
+        List<String> commands = Arrays.asList(msg.split(","));
+        switch (commands.get(0)) {
+            case "showplayerhand":
+                tvc.showPlayerHand(commands);
+                break;
+            case "gameover":
+                tvc.showWinner();
+                break;
+            case "player1":
+                tvc.showPlayerTurn(1);
+                break;
+            case "player2":
+                tvc.showPlayerTurn(2);
+                break;
+            case "player1hp":
+                tvc.setPlayer1HP(Integer.parseInt(commands.get(1)));
+                break;
+            case "player2hp":
+                tvc.setPlayer2HP(Integer.parseInt(commands.get(1)));
+                break;
+            case "sendtograveyard":
+                tvc.sendToGraveYard(Integer.parseInt(commands.get(1)));
+                break;
+            case "attackedtosoon":
+                tvc.toSoonWarning();
+                break;
+            case "playcard":
+                tvc.playCard(Integer.parseInt(commands.get(1)));
+                break;
+            case "tapped":
+                tvc.isTappedWarning();
+                break;
+        }
     }
 }

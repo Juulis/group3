@@ -11,6 +11,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import models.Card;
+import models.Deck;
+
+import java.io.IOException;
+import java.lang.reflect.UndeclaredThrowableException;
+import java.util.List;
 
 
 public class TableViewController {
@@ -147,7 +153,48 @@ public class TableViewController {
         }
     }
 
-    public void getSelectedCard(MouseEvent e) {
+    public void setPlayer1HP(int i) {
+    }
+
+    public void setPlayer2HP(int i) {
+    }
+
+    public void sendToGraveYard(int cardID) {
+    }
+
+    public void toSoonWarning() {
+    }
+
+    public void playCard(int cardID) {
+    }
+
+    public void isTappedWarning() {
+    }
+
+    public void showPlayerHand(List<String> commands) {
+        Deck deck = new Deck();
+        try {
+            deck.getCardsFromJSON();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String player = commands.get(1);
+        for (int i = 2;i<commands.size();i++) {
+            Card card = deck.getCards().get(Integer.parseInt(commands.get(i)));
+            if (player.equals("1")) {
+                System.out.println("showing card "+card.getId());
+                //TODO: Code for showing card in FX for player 1
+            } else if (player.equals("2")) {
+                System.out.println("showing card "+card.getId());
+                //TODO: Code for showing card in FX for player 2
+            } else {
+                System.out.println("No player! Something wrong with string input from gameEngine");
+            }
+        }
+    }
+
+
+    public void getSelectedCard(MouseEvent e) throws IOException {
         System.out.println("Selected card: " + e.getSource());
         Server.getInstance().msgToGameEngine("attack,2,1");
     }

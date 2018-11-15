@@ -9,6 +9,7 @@ import java.io.IOException;
 
 public class MenuController {
 
+
     @FXML
     private AnchorPane menuPane;
 
@@ -29,4 +30,7 @@ public class MenuController {
     public void quitGame() {
         System.exit(0);
     }
+
+
+
 }

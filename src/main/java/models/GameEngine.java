@@ -1,39 +1,33 @@
 package models;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
+import app.Server;
 import utilities.ScoreHandler;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
 public class GameEngine {
 
-    public GameEngine() {
+    public GameEngine() throws IOException {
         p1 = new Player();
         p2 = new Player();
-        game = true;
         playing = true;
         deck = new Deck();
         turn = 1;
         attacks = new Attack();
         scoreHandler = new ScoreHandler();
+        server = Server.getInstance();
     }
 
     private Player p1, p2;
     private Player currentPlayer;
     private Player opponentPlayer;
     private Deck deck;
-    private boolean game;
     private boolean playing;
     private int turn;
     private Attack attacks;
     private ScoreHandler scoreHandler;
+    private Server server;
 
     public void setP1(Player p) {
         this.p1 = p;
@@ -71,20 +65,31 @@ public class GameEngine {
         System.out.println("starting game");
         initGame();
         if (startArgs.equals("console")) {
-            while (game) {
-                while (playing) {
-                    playerMenu();
-                }
+            while (playing) {
+                playerMenu();
             }
-            //TODO: Some endscreen in here!
         }
     }
-
 
 
     public void initGame() throws IOException {
         deck.createFullDeck();
         initPlayer();
+
+        String player1hand = getStringFromList(p2.getPlayerHand());
+        String player2hand = getStringFromList(p1.getPlayerHand());
+        server.msgToFX("showplayerhand,1,"+player1hand);
+        server.msgToFX("showplayerhand,2,"+player2hand);
+    }
+
+    private String getStringFromList(ArrayList<Card> playerHand) {
+        String string = "";
+        for (Card card : playerHand) {
+            string += Integer.toString(card.getId());
+            string += ",";
+        }
+        System.out.println(string);
+        return string;
     }
 
     /**
@@ -107,32 +112,35 @@ public class GameEngine {
     }
 
 
-    public void checkCardsLeft() {
+    public void checkCardsLeft() throws IOException {
 
         if (p1.getCurrentDeck().size() == 0 && p1.getPlayerHand().size() == 0 && p1.getTableCards().size() == 0) {
             System.out.println("Congratulations!" + p2 + " is the Winner");
             scoreHandler.checkScore(p2);
             playing = false;
-
+            Server.getInstance().msgToFX("gameover");
         }
         if (p2.getCurrentDeck().size() == 0 && p2.getPlayerHand().size() == 0 && p2.getTableCards().size() == 0) {
             System.out.println("Congratulations!" + p1 + " is the Winner");
             scoreHandler.checkScore(p1);
             playing = false;
+            Server.getInstance().msgToFX("gameover");
         }
 
     }
 
-    public void checkPlayerHealth() {
+    public void checkPlayerHealth() throws IOException {
         if (p1.getHealth() <= 0) {
             System.out.println("Congratulations! Player2 is the Winner");
             scoreHandler.checkScore(p2);
             playing = false;
+            Server.getInstance().msgToFX("gameover");
 
         } else if (p2.getHealth() <= 0) {
             System.out.println("Congratulations! Player1 is the Winner");
             scoreHandler.checkScore(p1);
             playing = false;
+            Server.getInstance().msgToFX("gameover");
         }
     }
 
@@ -167,7 +175,7 @@ public class GameEngine {
         return currentPlayer;
     }
 
-    public void endTurn() {
+    public void endTurn() throws IOException {
         checkCardsLeft();
         unTap();
 
@@ -214,62 +222,73 @@ public class GameEngine {
 
     public enum AttackNames {BASIC, PLAYERATTACK, DUALATTACK, IGNITE, ATTACKALL}
 
-    public void chooseAttack(Card selectedCard, List<CreatureCard> opponentCards) {
-
+    public void chooseAttack(Card selectedCard, List<CreatureCard> opponentCards) throws IOException {
+        //TODO: change to string instead of ENUM . works with string to since java 8
+        boolean notTapped = true;
         String nameOfAttack = selectedCard.getSpecialAttack().toUpperCase();
+        if (getRound() > 1) {
+            if (selectedCard instanceof CreatureCard) {
+                notTapped = checkIfTapped((CreatureCard) selectedCard);
+            }
+            if (notTapped) {
+                for (AttackNames attackName : AttackNames.values()) {
+                    if (attackName.name().equals(nameOfAttack)) {
+                        switch (attackName) {
+                            case BASIC:
+                                attacks.basicAttack(selectedCard, opponentCards.get(0));
+                                break;
 
-        for (AttackNames attackName : AttackNames.values()) {
-            if (attackName.name().equals(nameOfAttack)) {
-                switch (attackName) {
-                    case BASIC:
-                        attacks.basicAttack(selectedCard, opponentCards.get(0));
-                        break;
+                            case IGNITE:
+                                //ignition attack will be last for 3 turns, every turn ignited card will takes damage by 2 points
+                                if (opponentCards.get(0).getIgnRoundCounter() == 0) {
+                                    attacks.ignite(selectedCard, opponentCards.get(0));
+                                } else {
+                                    System.out.println("The targeted cart is already ignited");
+                                }
+                                break;
 
-                    case IGNITE:
-                        //ignition attack will be last for 3 turns, every turn ignited card will takes damage by 2 points
-                        if (opponentCards.get(0).getIgnRoundCounter() == 0) {
-                            attacks.ignite(selectedCard, opponentCards.get(0));
-                        } else {
-                            System.out.println("The targeted cart is already ignited");
+                            case DUALATTACK:
+                                attacks.dualAttack((CreatureCard) selectedCard, opponentCards.get(0), opponentCards.get(1));
+                                break;
+
+                            case PLAYERATTACK:
+                                attacks.attackPlayer(selectedCard, getOpponentPlayer());
+                                break;
+
+                            case ATTACKALL:
+                                attacks.attackAll(selectedCard, opponentPlayer.getTableCards());
+                                break;
+
+                            default:
+                                break;
                         }
-                        break;
-
-                    case DUALATTACK:
-                        attacks.dualAttack((CreatureCard) selectedCard, opponentCards.get(0), opponentCards.get(1));
-                        break;
-
-                    case PLAYERATTACK:
-                        attacks.attackPlayer(selectedCard, getOpponentPlayer());
-                        break;
-
-                    case ATTACKALL:
-                        attacks.attackAll(selectedCard, opponentPlayer.getTableCards());
-                        break;
-
-                    default:
-                        break;
+                    }
                 }
+                for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
+                    if (
+                            isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
+                        opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
+                    }
+                }
+                if (selectedCard instanceof MagicCard) {
+                    currentPlayer.sendToGraveyard(selectedCard);
+                }
+                if (selectedCard.getClass() == CreatureCard.class) {
+                    ((CreatureCard) selectedCard).tap();
+                    if (isCardKilled((CreatureCard) selectedCard)) {
+                        currentPlayer.sendToGraveyard(selectedCard);
+                    }
+                }
+                checkPlayerHealth();
+            } else {
+                Server.getInstance().msgToFX("tapped");
             }
+        } else {
+            Server.getInstance().msgToFX("tosoon");
         }
-        for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
-            if (
-                    isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
-                opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
-            }
-        }
-        if (selectedCard instanceof MagicCard) {
-            currentPlayer.sendToGraveyard(selectedCard);
-        }
-        if (selectedCard.getClass() == CreatureCard.class) {
-            ((CreatureCard) selectedCard).tap();
-            if (isCardKilled((CreatureCard) selectedCard)) {
-                currentPlayer.sendToGraveyard(selectedCard);
-            }
-        }
-        checkPlayerHealth();
     }
 
-    private void playerMenu() {
+    private void playerMenu() throws IOException {
         int input;
         System.out.println(
                 "------------------------------------------------- \n" +
@@ -333,6 +352,7 @@ public class GameEngine {
                             attacks.basicAttack(currentPlayer.getTableCards().get(attackCard - 1), (CreatureCard) opponentPlayer.getTableCards().get(cardToAttack - 1));
                             if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(cardToAttack - 1))) {
                                 opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(cardToAttack - 1));
+
                             }
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("That card does not exist");
@@ -370,6 +390,7 @@ public class GameEngine {
             System.out.println("Card is tapped, use another!");
             return true;
         }
+
         return false;
     }
 
