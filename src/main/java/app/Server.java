@@ -69,4 +69,9 @@ public class Server {
     public void msgToFX(){
         //TODO: implement some awesome stuff to get msg from gameEngine to FX controllers
     }
+
+    public void setPlayerNames(String name1, String name2){
+        gameEngine.getP1().setName(name1);
+        gameEngine.getP2().setName(name2);
+    }
 }
