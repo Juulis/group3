@@ -64,6 +64,9 @@ public class GameEngine {
 
     public void startGame(String startArgs) throws IOException {
         System.out.println("starting game");
+        if (startArgs.equals("fx")) {
+            consoleGame = false;
+        }
         initGame();
         if (startArgs.equals("console")) {
             while (playing) {
@@ -71,8 +74,6 @@ public class GameEngine {
             }
 
             //TODO: Some endscreen in here!
-        } else {
-            consoleGame = false;
         }
     }
 
