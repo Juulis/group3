@@ -95,6 +95,8 @@ public class GameEngine {
      * setting the players decks and cards in hands
      */
     public void initPlayer() {
+        p1.setPlayer(1);
+        p2.setPlayer(2);
         determinePlayerToStart();
         ArrayList<Card> playerOneDeck, playerTwoDeck;
         deck.playerDeck();
@@ -195,6 +197,7 @@ public class GameEngine {
         increaseIgnCounter(currentPlayer.getTableCards());
         increaseIgnCounter(opponentPlayer.getTableCards());
         server.msgToFX("player"+Integer.toString(active));
+        currentPlayer.removeHp(2);
     }
 
     public void increaseIgnCounter(ArrayList<Card> playerTableCards) {

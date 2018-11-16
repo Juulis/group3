@@ -22,6 +22,10 @@ public class TableViewController {
     private static AnchorPane selectedPane;
 
     @FXML
+    private ProgressIndicator playerOneHpRound;
+    @FXML
+    private ProgressIndicator playerTwoHpRound;
+    @FXML
     private ProgressBar playerOneMana;
     @FXML
     private Rectangle playerOneDeck;
@@ -101,12 +105,6 @@ public class TableViewController {
         update();
         System.out.println(activePlayer);
 
-    }
-
-    public void setPlayer1HP(int i) {
-    }
-
-    public void setPlayer2HP(int i) {
     }
 
     public void sendToGraveYard(int cardID) {
@@ -211,5 +209,15 @@ public class TableViewController {
         selectedCurrentCard = null;
         selectedOpponentCard1 = null;
         selectedOpponentCard2 = null;
+    }
+
+    public void setPlayerHP(int player, int hp) {
+        if (player == 1) {
+            playerOneHp.setText(Integer.toString(hp));
+            playerOneHpRound.setProgress(Math.abs(((double)hp/20)-1));
+        } else if (player == 2) {
+            playerTwoHp.setText(Integer.toString(hp));
+            playerTwoHpRound.setProgress(Math.abs(((double)hp/20)-1));
+        }
     }
 }

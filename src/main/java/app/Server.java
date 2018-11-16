@@ -85,11 +85,8 @@ public class Server {
             case "player2":
                 tvc.showPlayerTurn(2);
                 break;
-            case "player1hp":
-                tvc.setPlayer1HP(Integer.parseInt(commands.get(1)));
-                break;
-            case "player2hp":
-                tvc.setPlayer2HP(Integer.parseInt(commands.get(1)));
+            case "playerhp":
+                tvc.setPlayerHP(Integer.parseInt(commands.get(1)),Integer.parseInt(commands.get(2)));
                 break;
             case "sendtograveyard":
                 tvc.sendToGraveYard(Integer.parseInt(commands.get(1)));

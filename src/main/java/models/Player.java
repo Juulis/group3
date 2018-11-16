@@ -1,5 +1,8 @@
 package models;
 
+import app.Server;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Player {
@@ -11,6 +14,7 @@ public class Player {
     private ArrayList<Card> currentDeck;
     private ArrayList<Card> playerHand;
     private ArrayList<Card> tableCards;
+    private int player;
 
     public Player() {
         this.health = 20;
@@ -91,6 +95,11 @@ public class Player {
      */
     public void removeHp(int healthToRemove) {
         this.health -= healthToRemove;
+        try {
+            Server.getInstance().msgToFX("playerHP,"+player+","+Integer.toString(health));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getName() {
@@ -107,5 +116,9 @@ public class Player {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public void setPlayer(int i) {
+        player = i;
     }
 }
