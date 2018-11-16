@@ -73,11 +73,6 @@ public class GameEngine {
     public void initGame() throws IOException {
         deck.createFullDeck();
         initPlayer();
-
-//        String player1hand = server.getStringFromList(p2.getPlayerHand());
-//        String player2hand = server.getStringFromList(p1.getPlayerHand());
-//        server.msgToFX("showplayerhand,1," + player1hand);
-//        server.msgToFX("showplayerhand,2," + player2hand);
     }
 
 
