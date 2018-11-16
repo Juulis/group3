@@ -20,8 +20,8 @@
                 <Image url="@gameboard.jpg" />
             </image>
         </ImageView>
-      <HBox fx:id="playerOneHandBox" layoutX="451.0" layoutY="767.0" prefHeight="224.0" prefWidth="973.0" />
-      <HBox fx:id="playerTwoHandBox" layoutX="546.0" layoutY="91.0" prefHeight="207.0" prefWidth="830.0" />
+      <HBox fx:id="playerOneHandBox" layoutX="545.0" layoutY="781.0" prefHeight="183.0" prefWidth="830.0" />
+      <HBox fx:id="playerTwoHandBox" layoutX="545.0" layoutY="96.0" prefHeight="183.0" prefWidth="830.0" />
         <Rectangle id="playerOneTableOne" fx:id="playerOneTableOne" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="899.0" layoutY="556.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
         <Rectangle id="playerOneTableFour" fx:id="playerOneTableFour" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="1170.0" layoutY="556.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
         <Rectangle id="playerOneTableTwo" fx:id="playerOneTableTwo" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="1034.0" layoutY="556.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />

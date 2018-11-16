@@ -1,17 +1,11 @@
 package app;
 
-import controllers.TableViewController;
-import javafx.fxml.FXMLLoader;
+import controllers.*;
 import javafx.stage.Stage;
-import models.Card;
-import models.CreatureCard;
-import models.GameEngine;
+import models.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+import java.util.*;
 
 public class Server {
     private GameEngine gameEngine;

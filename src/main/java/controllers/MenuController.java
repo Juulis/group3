@@ -2,13 +2,11 @@ package controllers;
 
 import app.Server;
 import javafx.fxml.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 
 import java.io.IOException;
 
 public class MenuController {
-
 
     @FXML
     private Pane menuPane;
@@ -17,7 +15,6 @@ public class MenuController {
         Pane tableViewPane = FXMLLoader.load(getClass().getResource("/tableview/tableview.fxml"));
         menuPane.getChildren().setAll(tableViewPane);
         Server.getInstance().startGame();
-
     }
 
     public void viewHighscore() throws IOException {
