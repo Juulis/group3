@@ -74,10 +74,6 @@ public class GameEngine {
         }
         else {
             consoleGame = false;
-            String player1hand = getStringFromList(p2.getPlayerHand());
-            String player2hand = getStringFromList(p1.getPlayerHand());
-            Server.getInstance().msgToFX("showplayerhand,1," + player1hand);
-            Server.getInstance().msgToFX("showplayerhand,2," + player2hand);
         }
     }
 
@@ -171,7 +167,11 @@ public class GameEngine {
             currentPlayer = p2;
             opponentPlayer = p1;
         }
+        try{
         server.msgToFX("player" + Integer.toString(active));
+    }catch (Exception e){
+            System.out.println("not running FX");
+        }
     }
 
     public Random makeRandom() {
@@ -203,8 +203,11 @@ public class GameEngine {
         turn++;
         increaseIgnCounter(currentPlayer.getTableCards());
         increaseIgnCounter(opponentPlayer.getTableCards());
-        server.msgToFX("player"+Integer.toString(active));
-        currentPlayer.removeHp(2);
+        try {
+            server.msgToFX("player"+Integer.toString(active));
+        } catch (Exception e) {
+            System.out.println("noFX");
+        }
     }
 
     public void increaseIgnCounter(ArrayList<Card> playerTableCards) {
@@ -477,7 +480,7 @@ public class GameEngine {
         System.out.println("Turn " + turn);
         System.out.println("----------");
         CreatureCard creatureCard;
-      
+
         int currentHealth = currentPlayer.getHealth();
         int opponentHealth = opponentPlayer.getHealth();
         System.out.print("Your health: " + currentHealth + " hp");
@@ -489,7 +492,7 @@ public class GameEngine {
         System.out.println();
         System.out.println();
 
-        System.out.print("Your table: ");
+        System.out.println("Your table: ");
         printCards(currentPlayer.getTableCards());
         System.out.println();
         System.out.println();
@@ -508,15 +511,12 @@ public class GameEngine {
         for (int i = 0; i < cards.size(); i++) {
             Card card = cards.get(i);
             if (card instanceof CreatureCard)
-                System.out.print(i + 1 + ": creature card with " + ((CreatureCard) card).getHp()+ " hp  "+card.getAttack()+" attack ");
+                System.out.println(i + 1 + ": creature card with " + ((CreatureCard) card).getHp()+ " hp  "+card.getAttack()+" attack ");
 
-
-            if (i%2==0)
-                System.out.println();
 
             if (card instanceof MagicCard){
 
-                System.out.print(i+1+": magic card with special attack "+ card.getSpecialAttack());
+                System.out.println(i+1+": magic card with special attack "+ card.getSpecialAttack());
 
             }
 
