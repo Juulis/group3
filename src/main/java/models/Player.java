@@ -51,6 +51,8 @@ public class Player {
         int index = currentDeck.size() - 1;
         Card card = currentDeck.remove(index);
         playerHand.add(card);
+        server.msgToFX("showplayerhand,1," + player1hand);
+//        server.msgToFX("showplayerhand,2," + player2hand);
     }
 
     /**
