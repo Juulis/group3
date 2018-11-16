@@ -52,6 +52,8 @@ public class TableViewController {
     @FXML
     private AnchorPane cardPane;
     @FXML
+    private HBox playerOneTableBox;
+    @FXML
     private HBox playerTwoTableBox;
     private Deck deck;
 
@@ -148,7 +150,7 @@ public class TableViewController {
     private Card selectedCurrentCard;
     private Card selectedOpponentCard1;
     private Card selectedOpponentCard2;
-    private AnchorPane selectedPane;
+    private static AnchorPane selectedPane;
 
     private Card getCardFromId(String id) {
         return deck.getCards().get(Integer.parseInt(id));
@@ -156,20 +158,15 @@ public class TableViewController {
 
     @FXML
     private void getSelectedPlaceHolder(Event event) {
-        System.out.println("SELECTED PANE IN GETSELECTPLACEHOLDER " + selectedPane);
         //check if selectedCurrentCard != null && opponentcards == null
         Rectangle rect = (Rectangle)event.getSource();
-        System.out.println("getSelectedPlaceHolder");
         swapPlaceHolder(rect);
     }
 
     @FXML
     private void getSelectedCard(Event event) {
-        System.out.println("getSelectedCard");
         Card selectedCard = getCardFromId(((AnchorPane) event.getSource()).getId());
-        System.out.println(selectedCard + " selected card");
         selectedPane = (AnchorPane) event.getSource();
-        System.out.println(selectedPane + " selected pane IN GETSELECTECARD ");
         if (selectedCurrentCard != null) {
 //           does card exist in currentplayerhand or currentplayertable
             selectedCurrentCard = selectedCard;
@@ -178,14 +175,11 @@ public class TableViewController {
 
     @FXML
     private void swapPlaceHolder(Rectangle r) {
-        System.out.println("swapPlaceHolder");
-        System.out.println(selectedPane + " selected pane");
         if(selectedPane != null) {
-            System.out.println("swapPlaceHolder if");
-            selectedPane.setLayoutY(r.getLayoutY());
-            selectedPane.setLayoutX(r.getLayoutX());
+            playerOneTableBox.setSpacing(50);
+            playerOneTableBox.getChildren().add(selectedPane);
+            update();
         }
-        update();
         //set id to cardId
         //place card to placeHolder
         //if removing card from r , set id to random nr 0-100000
