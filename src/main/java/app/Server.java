@@ -108,4 +108,9 @@ public class Server {
                 break;
         }
     }
+
+    public void setPlayerNames(String name1, String name2){
+        gameEngine.getP1().setName(name1);
+        gameEngine.getP2().setName(name2);
+    }
 }
