@@ -16,6 +16,10 @@ import java.util.List;
 public class TableViewController {
 
     @FXML
+    private ProgressIndicator playerOneHpRound;
+    @FXML
+    private ProgressIndicator playerTwoHpRound;
+    @FXML
     private ProgressBar playerOneMana;
     @FXML
     private Rectangle playerOneDeck;
@@ -79,12 +83,6 @@ public class TableViewController {
         update();
     }
 
-    public void setPlayer1HP(int i) {
-    }
-
-    public void setPlayer2HP(int i) {
-    }
-
     public void sendToGraveYard(int cardID) {
     }
 
@@ -139,5 +137,16 @@ public class TableViewController {
     private void update() {
         Parent parent = tableViewPane;
         stage.getScene().setRoot(parent);
+    }
+
+    public void setPlayerHP(int hp) {
+        int activePlayer = 2;
+        if (activePlayer == 1) {
+            playerTwoHp.setText(Integer.toString(hp));
+            playerTwoHpRound.setProgress((20-(double)hp)/20*100);
+        } else if (activePlayer == 2) {
+            playerOneHp.setText(Integer.toString(hp));
+            playerOneHpRound.setProgress((20-(double)hp)/20*100);
+        }
     }
 }

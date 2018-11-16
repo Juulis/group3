@@ -1,5 +1,8 @@
 package models;
 
+import app.Server;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Player {
@@ -91,6 +94,11 @@ public class Player {
      */
     public void removeHp(int healthToRemove) {
         this.health -= healthToRemove;
+        try {
+            Server.getInstance().msgToFX("playerHP,"+Integer.toString(health));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getName() {
