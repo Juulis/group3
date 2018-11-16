@@ -1,29 +1,22 @@
 package controllers;
 
-import app.Server;
-import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
+import javafx.fxml.*;
+import javafx.geometry.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import javafx.scene.layout.*;
+import javafx.scene.shape.*;
 import javafx.stage.Stage;
-import models.Card;
-import models.Deck;
+import models.*;
 
 import java.io.IOException;
 import java.util.List;
 
-
 public class TableViewController {
 
     @FXML
-    private Line playerOneEnergy;
+    private ProgressBar playerOneMana;
     @FXML
     private Rectangle playerOneDeck;
     @FXML
@@ -33,9 +26,7 @@ public class TableViewController {
     @FXML
     private Button endTurn;
     @FXML
-
-    private Line playerTwoMana;
-
+    private ProgressBar playerTwoMana;
     @FXML
     private Rectangle playerTwoDeck;
     @FXML
@@ -47,13 +38,25 @@ public class TableViewController {
     @FXML
     public ImageView tableImageView;
     @FXML
-    private Pane currentPlayerHandPane;
-    @FXML
     public ImageView winner;
     @FXML
     public ImageView playerOneTurn;
     @FXML
     public ImageView playerTwoTurn;
+    @FXML
+    private HBox playerOneHandBox;
+    @FXML
+    private HBox playerTwoHandBox;
+    @FXML
+    private AnchorPane cardPane;
+    private Deck deck;
+
+    public TableViewController() throws IOException {
+        deck = new Deck();
+    }
+
+    public void initialize() throws IOException {
+    }
 
     private Stage stage;
 
@@ -70,7 +73,7 @@ public class TableViewController {
         } else if (player == 2) {
             playerOneTurn.setVisible(false);
             playerTwoTurn.setVisible(true);
-        }else{
+        } else {
             System.out.println("no Player");
         }
         update();
@@ -94,32 +97,39 @@ public class TableViewController {
     public void isTappedWarning() {
     }
 
-    public void showPlayerHand(List<String> commands) {
-        Deck deck = new Deck();
-        try {
-            deck.getCardsFromJSON();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void showPlayerHand(List<String> commands) throws IOException {
+        deck.getCardsFromJSON();
         String player = commands.get(1);
         for (int i = 2; i < commands.size(); i++) {
             Card card = deck.getCards().get(Integer.parseInt(commands.get(i)));
-            if (player.equals("1")) {
-                System.out.println("showing card " + card.getId());
-                //TODO: Code for showing card in FX for player 1
-            } else if (player.equals("2")) {
-                System.out.println("showing card " + card.getId());
-                //TODO: Code for showing card in FX for player 2
-            } else {
-                System.out.println("No player! Something wrong with string input from gameEngine");
+            String cardURL = "/card/card.fxml";
+            switch (player) {
+                case "1":
+                    cardPane = FXMLLoader.load(getClass().getResource(cardURL));
+                    playerOneHandBox.setSpacing(50);
+                    playerOneHandBox.setAlignment(Pos.CENTER);
+                    cardPane.setId(String.valueOf(card.getId()));
+                    ((ImageView) cardPane.getChildren().get(cardPane.getChildren()
+                            .indexOf(cardPane.lookup("#cardImageView"))))
+                            .setImage(new Image(card.getImgURL()));
+                    playerOneHandBox.getChildren().add(cardPane);
+                    break;
+                case "2":
+                    cardPane = FXMLLoader.load(getClass().getResource(cardURL));
+                    playerTwoHandBox.setSpacing(50);
+                    playerTwoHandBox.setAlignment(Pos.CENTER);
+                    cardPane.setId(String.valueOf(card.getId()));
+                    ((ImageView) cardPane.getChildren().get(cardPane.getChildren()
+                            .indexOf(cardPane.lookup("#cardImageView"))))
+                            .setImage(new Image(card.getImgURL()));
+                    playerTwoHandBox.getChildren().add(cardPane);
+                    break;
+                default:
+                    System.out.println("No player! Something wrong with string input from gameEngine");
+                    break;
             }
         }
-    }
-
-
-    public void getSelectedCard(MouseEvent e) throws IOException {
-        System.out.println("Selected card: " + e.getSource());
-        Server.getInstance().msgToGameEngine("attack,2,1");
+        update();
     }
 
     public void setStage(Stage primaryStage) {
@@ -127,8 +137,7 @@ public class TableViewController {
     }
 
     private void update() {
-        Scene scene = new Scene(tableViewPane);
-        stage.setScene(scene);
-        stage.show();
+        Parent parent = tableViewPane;
+        stage.getScene().setRoot(parent);
     }
 }

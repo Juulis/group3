@@ -1,22 +1,15 @@
 package controllers;
 
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import pojo.HighscoreModel;
-import pojo.TableModel;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
+import com.google.gson.*;
+import com.google.gson.stream.*;
+import javafx.collections.*;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.*;
+import javafx.scene.layout.*;
+import pojo.*;
+import java.io.*;
+import java.util.*;
 
 public class HighscoreController {
 

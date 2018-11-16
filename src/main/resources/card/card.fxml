@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="cardPane" onMouseClicked="#getSelectedCard" prefHeight="175.0" prefWidth="125.0" stylesheets="@card.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CardController">
+    <children>
+        <Label layoutX="45.0" layoutY="29.0" text="KORT" />
+        <Label layoutX="37.0" layoutY="100.0" text="ATTACK" />
+        <Label layoutX="53.0" layoutY="68.0" text="HP" />
+      <ImageView fx:id="cardImageView" fitHeight="175.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" />
+    </children>
+</AnchorPane>
