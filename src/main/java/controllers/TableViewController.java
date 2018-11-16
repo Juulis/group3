@@ -176,8 +176,10 @@ public class TableViewController {
     @FXML
     private void swapPlaceHolder(Rectangle r) {
         if(selectedPane != null) {
-            playerOneTableBox.setSpacing(50);
-            playerOneTableBox.getChildren().add(selectedPane);
+            playerOneTableBox.setSpacing(20);
+            playerOneTableBox.setAlignment(Pos.CENTER);
+            playerOneTableBox.getChildren().remove(playerOneTableBox.getChildren().size() - 1);
+            playerOneTableBox.getChildren().add(0,selectedPane);
             update();
         }
         //set id to cardId
