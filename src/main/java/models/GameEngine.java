@@ -16,6 +16,11 @@ public class GameEngine {
         turn = 1;
         attacks = new Attack();
         scoreHandler = new ScoreHandler();
+        try {
+            server = Server.getInstance();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private Player p1, p2;
@@ -27,6 +32,7 @@ public class GameEngine {
     private Attack attacks;
     private ScoreHandler scoreHandler;
     private boolean consoleGame = true;
+    private Server server;
 
     public void setP1(Player p) {
         this.p1 = p;
