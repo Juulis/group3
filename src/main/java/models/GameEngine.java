@@ -26,6 +26,7 @@ public class GameEngine {
     private int turn;
     private Attack attacks;
     private ScoreHandler scoreHandler;
+    private boolean consoleGame = true;
 
     public void setP1(Player p) {
         this.p1 = p;
@@ -66,6 +67,7 @@ public class GameEngine {
             //TODO: Some endscreen in here!
         }
         else {
+            consoleGame = false;
             String player1hand = getStringFromList(p2.getPlayerHand());
             String player2hand = getStringFromList(p1.getPlayerHand());
             Server.getInstance().msgToFX("showplayerhand,1," + player1hand);
@@ -118,7 +120,10 @@ public class GameEngine {
             System.out.println("Congratulations!" + q.getName() + " is the Winner");
             scoreHandler.checkScore(q);
             playing = false;
-            Server.getInstance().msgToFX("gameover");
+            if(!consoleGame){
+                Server.getInstance().msgToFX("gameover");
+            }
+
         }
     }
 
@@ -132,7 +137,9 @@ public class GameEngine {
             System.out.println("Congratulations! " + q.getName() + " is the Winner");
             scoreHandler.checkScore(q);
             playing = false;
-            Server.getInstance().msgToFX("gameover");
+            if(!consoleGame){
+                Server.getInstance().msgToFX("gameover");
+            }
         }
     }
 
