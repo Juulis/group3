@@ -1,7 +1,6 @@
 package models;
 
 import app.Server;
-import models.*;
 import utilities.ScoreHandler;
 
 import java.io.IOException;
@@ -109,30 +108,28 @@ public class GameEngine {
 
     }
 
-
     public void checkCardsLeft() {
-
-        if (p1.getCurrentDeck().size() == 0 && p1.getPlayerHand().size() == 0 && p1.getTableCards().size() == 0) {
-            System.out.println("Congratulations!" + p2 + " is the Winner");
-            scoreHandler.checkScore(p2);
-            playing = false;
-        }
-        if (p2.getCurrentDeck().size() == 0 && p2.getPlayerHand().size() == 0 && p2.getTableCards().size() == 0) {
-            System.out.println("Congratulations!" + p1 + " is the Winner");
-            scoreHandler.checkScore(p1);
-            playing = false;
-        }
-
+        checkPlayerCards( p1, p2);
+        checkPlayerCards( p2, p1);
     }
 
-    public void checkPlayerHealth(){
-        if (p1.getHealth() <= 0) {
-            System.out.println("Congratulations! Player2 is the Winner");
-            scoreHandler.checkScore(p2);
+    public void checkPlayerCards( Player p, Player q){
+        if (p.getCurrentDeck().size() == 0 && p.getPlayerHand().size() == 0 && p.getTableCards().size() == 0) {
+            System.out.println("Congratulations!" + q.getName() + " is the Winner");
+            scoreHandler.checkScore(q);
             playing = false;
-        } else if (p2.getHealth() <= 0) {
-            System.out.println("Congratulations! Player1 is the Winner");
-            scoreHandler.checkScore(p1);
+        }
+    }
+
+    public void checkHealthLeft(){
+        checkPlayerHealth( p1, p2);
+        checkPlayerHealth( p2, p1);
+    }
+
+    public void checkPlayerHealth( Player p, Player q){
+        if (p.getHealth() <= 0) {
+            System.out.println("Congratulations! "+ q.getName() +" is the Winner");
+            scoreHandler.checkScore(q);
             playing = false;
         }
     }
@@ -272,7 +269,7 @@ public class GameEngine {
                         currentPlayer.sendToGraveyard(selectedCard);
                     }
                 }
-                checkPlayerHealth();
+                checkHealthLeft();
             } else {
                 Server.getInstance().msgToFX("tapped");
             }
