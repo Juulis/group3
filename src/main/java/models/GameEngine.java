@@ -1,6 +1,7 @@
 package models;
 
 import app.Server;
+import models.*;
 import utilities.ScoreHandler;
 
 import java.io.IOException;
@@ -35,10 +36,6 @@ public class GameEngine {
 
     public void setP2(Player p) {
         this.p2 = p;
-    }
-
-    public int getTurn() {
-        return turn;
     }
 
     public int getRound() {

@@ -2,6 +2,7 @@ package app;
 
 import controllers.TableViewController;
 import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
 import models.Card;
 import models.CreatureCard;
 import models.GameEngine;
@@ -19,9 +20,6 @@ public class Server {
 
     private Server() throws IOException {
         instance = this;
-        setTvc();
-        gameEngine = new GameEngine();
-        gameEngine.startGame("fx");
     }
 
     public static Server getInstance() throws IOException {
@@ -31,10 +29,14 @@ public class Server {
         return instance;
     }
 
-    public void setTvc() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tableview/tableview.fxml"));
-        loader.load();
-        tvc = loader.getController();
+    public void startGame() throws IOException {
+        gameEngine = new GameEngine();
+        gameEngine.startGame("fx");
+    }
+
+    public void setTvc(TableViewController tvc, Stage stage) {
+        this.tvc = tvc;
+        tvc.setStage(stage);
     }
 
     /**
