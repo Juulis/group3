@@ -116,7 +116,6 @@ public class TableViewController {
                     cardPane = FXMLLoader.load(getClass().getResource(cardURL));
                     playerOneHandBox.setSpacing(50);
                     playerOneHandBox.setAlignment(Pos.CENTER);
-                    playerOneHandBox.setHgrow(cardPane, Priority.NEVER);
                     cardPane.setId(String.valueOf(card.getId()));
                     ((ImageView) cardPane.getChildren().get(cardPane.getChildren()
                             .indexOf(cardPane.lookup("#cardImageView"))))
@@ -128,7 +127,9 @@ public class TableViewController {
                     playerTwoHandBox.setSpacing(50);
                     playerTwoHandBox.setAlignment(Pos.CENTER);
                     cardPane.setId(String.valueOf(card.getId()));
-                    ((ImageView) cardPane.getChildren().get(3)).setImage(new Image(card.getImgURL()));
+                    ((ImageView) cardPane.getChildren().get(cardPane.getChildren()
+                            .indexOf(cardPane.lookup("#cardImageView"))))
+                            .setImage(new Image(card.getImgURL()));
                     playerTwoHandBox.getChildren().add(cardPane);
                     break;
                 default:
