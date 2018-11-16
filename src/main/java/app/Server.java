@@ -14,6 +14,7 @@ public class Server {
 
     private Server() throws IOException {
         instance = this;
+        gameEngine = new GameEngine();
     }
 
     public static Server getInstance() throws IOException {
@@ -24,7 +25,6 @@ public class Server {
     }
 
     public void startGame() throws IOException {
-        gameEngine = new GameEngine();
         gameEngine.startGame("fx");
     }
 

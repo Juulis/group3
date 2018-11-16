@@ -30,5 +30,6 @@ public class PlayerInputController {
         saveNames();
         Pane tableViewPane = FXMLLoader.load(getClass().getResource("/tableview/tableview.fxml"));
         playerInputPane.getChildren().setAll(tableViewPane);
+        Server.getInstance().startGame();
     }
 }

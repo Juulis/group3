@@ -12,9 +12,9 @@ public class MenuController {
     private Pane menuPane;
 
     public void startGame() throws IOException {
-        Pane tableViewPane = FXMLLoader.load(getClass().getResource("/tableview/tableview.fxml"));
-        menuPane.getChildren().setAll(tableViewPane);
-        Server.getInstance().startGame();
+        Pane playerInputPane = FXMLLoader.load(getClass().getResource("/playerInput/playerInput.fxml"));
+        menuPane.getChildren().setAll(playerInputPane);
+
     }
 
     public void viewHighscore() throws IOException {
