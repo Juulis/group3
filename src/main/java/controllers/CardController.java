@@ -2,9 +2,11 @@ package controllers;
 
 import app.Server;
 import javafx.fxml.FXML;
+import javafx.scene.control.Control;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 public class CardController {
     @FXML
@@ -22,7 +24,7 @@ public class CardController {
     }
 
     public void getSelectedCard(MouseEvent e) {
-        System.out.println("Selected card: " + e.getSource());
+        System.out.println("Selected card: " + ((AnchorPane)e.getSource()).getId());
        // Server.getInstance().msgToGameEngine("attack,2,1");
     }
 }
