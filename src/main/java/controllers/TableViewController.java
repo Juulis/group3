@@ -1,6 +1,7 @@
 package controllers;
 
 import app.Server;
+import javafx.event.Event;
 import javafx.fxml.*;
 import javafx.geometry.*;
 import javafx.scene.*;
@@ -19,6 +20,10 @@ public class TableViewController {
     private Card selectedCurrentCard;
     private Card selectedOpponentCard1;
     private Card selectedOpponentCard2;
+    private static AnchorPane selectedPane;
+    private Deck deck;
+    private Server server;
+    private int activePlayer;
 
     @FXML
     private ProgressIndicator playerOneHpRound;
@@ -58,10 +63,11 @@ public class TableViewController {
     private HBox playerTwoHandBox;
     @FXML
     private AnchorPane cardPane;
+    @FXML
+    private HBox playerOneTableBox;
+    @FXML
+    private HBox playerTwoTableBox;
 
-    private int activePlayer;
-    private Deck deck;
-    private Server server;
 
     public TableViewController() throws IOException {
         deck = new Deck();
@@ -115,7 +121,6 @@ public class TableViewController {
     }
 
     public void showPlayerHand(List<String> commands) {
-        System.out.println("creating player hand");
         String player = commands.get(1);
         if (player.equals("1"))
             playerOneHandBox.getChildren().clear();
@@ -171,35 +176,51 @@ public class TableViewController {
         stage.getScene().setRoot(parent);
     }
 
-    private void clearCards() {
-        selectedCurrentCard = null;
-        selectedOpponentCard1 = null;
-        selectedOpponentCard2 = null;
-    }
-
-
     private Card getCardFromId(String id) {
         return deck.getCards().get(Integer.parseInt(id));
     }
 
-    private void swapPlaceHolder(Rectangle r, Card c) {
-        //set id to cardId
-        //place card to placeHolder
-        //if removing card from r , set id to random nr 0-100000
-    }
-
-    private void getSelectedPlaceHolder(MouseEvent event) {
-        //check if selectedCurrentCard != null && opponentcards == null
+    @FXML
+    private void getSelectedPlaceHolder(Event event) throws IOException {
+        //TODO: check if selectedCurrentCard != null && opponentcards == null
         Rectangle rect = (Rectangle) event.getSource();
-        swapPlaceHolder(rect, selectedCurrentCard);
+        swapPlaceHolder(rect);
     }
 
-    public void getSelectedCard(MouseEvent mouseEvent) {
-        Card selectedCard = getCardFromId(((AnchorPane) mouseEvent.getSource()).getId());
+    @FXML
+    private void getSelectedCard(Event event) {
+        Card selectedCard = getCardFromId(((AnchorPane) event.getSource()).getId());
+        selectedPane = (AnchorPane) event.getSource();
         if (selectedCurrentCard != null) {
-//           does card exist in currentplayerhand or currentplayertable
+//          TODO: does card exist in currentplayerhand or currentplayertable
             selectedCurrentCard = selectedCard;
         }
+    }
+
+    @FXML
+    private void swapPlaceHolder(Rectangle rect) throws IOException {
+        if (selectedPane != null) {
+            if (playerOneTableBox.getChildren().contains(rect)) {
+                playerOneTableBox.setSpacing(20);
+                playerOneTableBox.setAlignment(Pos.CENTER);
+                playerOneTableBox.getChildren().remove(playerOneTableBox.getChildren().size() - 1);
+                playerOneTableBox.getChildren().add(0, selectedPane);
+            } else if (playerTwoTableBox.getChildren().contains(rect)) {
+                playerTwoTableBox.setSpacing(20);
+                playerTwoTableBox.setAlignment(Pos.CENTER);
+                playerTwoTableBox.getChildren().remove(playerTwoTableBox.getChildren().size() - 1);
+                playerTwoTableBox.getChildren().add(0, selectedPane);
+            }
+        }
+        update();
+        server.msgToGameEngine("playcard," + selectedPane.getId());
+    }
+
+
+    private void clearCards() {
+        selectedCurrentCard = null;
+        selectedOpponentCard1 = null;
+        selectedOpponentCard2 = null;
     }
 
     @FXML

@@ -44,10 +44,12 @@ public class Server {
      *            card 4 will attack opponent cards 1 and 2
      */
     public void msgToGameEngine(String msg) throws IOException {
+        Deck deck = new Deck();
+        deck.createFullDeck();
         List<String> commands = Arrays.asList(msg.toLowerCase().split(","));
         Card selectedCard = null;
         if (commands.size() > 1) {
-            selectedCard = gameEngine.getDeck().getCards().get(Integer.parseInt(commands.get(1)));
+            selectedCard = deck.getCards().get(Integer.parseInt(commands.get(1)));
         }
         List<CreatureCard> opponents = new ArrayList<>();
 

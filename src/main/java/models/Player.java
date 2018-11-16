@@ -87,9 +87,13 @@ public class Player {
         try {
             if (card.getClass() == CreatureCard.class) {
                 tableCards.add(card);
-                playerHand.remove(card);
+                Card removeCard = playerHand.stream().filter(c -> card.getId() == (c.getId())).findAny().orElse(null);
+                playerHand.remove(removeCard);
                 ((CreatureCard) card).tap();
                 ((CreatureCard) card).setPlayedOnRound(round);
+                System.out.println("in loop");
+            } else {
+                System.out.println("magic card cant be played");
             }
         } catch (Exception e) {
             System.out.println("That card does not exist");
