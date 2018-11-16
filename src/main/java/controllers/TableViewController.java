@@ -186,7 +186,7 @@ public class TableViewController {
     @FXML
     private void getSelectedCard(Event event) {
         Card selectedCard = getCardFromId(((AnchorPane) event.getSource()).getId());
-        selectedPane = (AnchorPane) event.getSource();
+        selectedPane = (AnchorPane) event.getSource();;
         if (selectedCurrentCard != null) {
 //           does card exist in currentplayerhand or currentplayertable
             selectedCurrentCard = selectedCard;
