@@ -3,8 +3,6 @@ package models;
 import java.util.ArrayList;
 
 public class Attack {
-    Player player;
-    GameEngine gameEngine;
 
     public Attack() {
 
