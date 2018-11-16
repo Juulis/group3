@@ -86,11 +86,11 @@ public class Player {
     public void playCard(Card card, int round) {
         try {
             if (card.getClass() == CreatureCard.class) {
-                tableCards.add(card);
-                Card removeCard = playerHand.stream().filter(c -> card.getId() == (c.getId())).findAny().orElse(null);
-                playerHand.remove(removeCard);
-                ((CreatureCard) card).tap();
-                ((CreatureCard) card).setPlayedOnRound(round);
+                Card realCard = playerHand.stream().filter(c -> card.getId() == (c.getId())).findAny().orElse(null);
+                tableCards.add(realCard);
+                playerHand.remove(realCard);
+                ((CreatureCard) realCard).tap();
+                ((CreatureCard) realCard).setPlayedOnRound(round);
                 System.out.println("in loop");
             } else {
                 System.out.println("magic card cant be played");
