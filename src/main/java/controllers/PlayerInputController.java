@@ -18,7 +18,11 @@ public class PlayerInputController {
     public void saveNames(){
         String name1 = player1Name.getText();
         String name2 = player2Name.getText();
-        Server.getInstance().setPlayerNames( name1, name2);
+        try {
+            Server.getInstance().setPlayerNames( name1, name2);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
