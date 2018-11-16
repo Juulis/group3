@@ -414,44 +414,26 @@ public class GameEngine {
             System.out.println("Player 2");
         System.out.println("Turn " + turn);
         System.out.println("----------");
-
         CreatureCard creatureCard;
-        ArrayList<Card> currentTableCards = currentPlayer.getTableCards();
-        ArrayList<Card> opponentTableCards = opponentPlayer.getTableCards();
-        List<Card> currentHandCards = currentPlayer.getPlayerHand();
-        int[] currentTable = new int[currentTableCards.size()];
-        int[] opponentTable = new int[opponentTableCards.size()];
-        int[] currentHand = new int[currentHandCards.size()];
+      
         int currentHealth = currentPlayer.getHealth();
         int opponentHealth = opponentPlayer.getHealth();
         System.out.print("Your health: " + currentHealth + " hp");
         System.out.println();
         System.out.println();
+
         System.out.print("Your hand: ");
-        for (int i = 0; i < currentHandCards.size(); i++) {
-            Card card = currentHandCards.get(i);
-            if (card instanceof CreatureCard)
-
-                currentHand[i] = ((CreatureCard) card).getHp();
-            System.out.print(i + 1 + ": " + currentHand[i] + " hp  ");
-
-        }
+        printCards(currentPlayer.getPlayerHand());
         System.out.println();
         System.out.println();
+
         System.out.print("Your table: ");
-        for (int i = 0; i < currentTableCards.size(); i++) {
-            creatureCard = (CreatureCard) currentTableCards.get(i);
-            currentTable[i] = creatureCard.getHp();
-            System.out.print(i + 1 + ": " + currentTable[i] + " hp  ");
-        }
+        printCards(currentPlayer.getTableCards());
         System.out.println();
         System.out.println();
+
         System.out.print("Opponents table: ");
-        for (int j = 0; j < opponentTableCards.size(); j++) {
-            creatureCard = (CreatureCard) opponentTableCards.get(j);
-            opponentTable[j] = creatureCard.getHp();
-            System.out.print(j + 1 + ": " + opponentTable[j] + " hp  ");
-        }
+        printCards(opponentPlayer.getTableCards());
         System.out.println();
         System.out.println();
         System.out.print("Opponents health: " + opponentHealth + " hp");
@@ -459,6 +441,24 @@ public class GameEngine {
 
 
         System.out.println("--------------------------------------------------------------------");
+    }
+    void printCards(ArrayList<Card>cards){
+        for (int i = 0; i < cards.size(); i++) {
+            Card card = cards.get(i);
+            if (card instanceof CreatureCard)
+                System.out.print(i + 1 + ": creature card with " + ((CreatureCard) card).getHp()+ " hp  "+card.getAttack()+" attack ");
+
+
+            if (i%2==0)
+                System.out.println();
+
+            if (card instanceof MagicCard){
+
+                System.out.print(i+1+": magic card with special attack "+ card.getSpecialAttack());
+
+            }
+
+        }
     }
 
     /**
