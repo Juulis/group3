@@ -44,8 +44,11 @@ public class Server {
      *            card 4 will attack opponent cards 1 and 2
      */
     public void msgToGameEngine(String msg) throws IOException {
-        List<String> commands = Arrays.asList(msg.split(","));
-        Card selectedCard = gameEngine.getDeck().getCards().get(Integer.parseInt(commands.get(1)));
+        List<String> commands = Arrays.asList(msg.toLowerCase().split(","));
+        Card selectedCard = null;
+        if (commands.size() > 1) {
+            selectedCard = gameEngine.getDeck().getCards().get(Integer.parseInt(commands.get(1)));
+        }
         List<CreatureCard> opponents = new ArrayList<>();
 
         switch (commands.get(0)) {
@@ -67,8 +70,8 @@ public class Server {
         System.out.println(commands); //TODO: Remove, testingpurpose
     }
 
-    public void msgToFX(String msg) throws IOException {
-        List<String> commands = Arrays.asList(msg.split(","));
+    public void msgToFX(String msg) {
+        List<String> commands = Arrays.asList(msg.toLowerCase().split(","));
         switch (commands.get(0)) {
             case "showplayerhand":
                 tvc.showPlayerHand(commands);
@@ -83,7 +86,7 @@ public class Server {
                 tvc.showPlayerTurn(2);
                 break;
             case "playerhp":
-                tvc.setPlayerHP(Integer.parseInt(commands.get(1)));
+                tvc.setPlayerHP(Integer.parseInt(commands.get(1)),Integer.parseInt(commands.get(2)));
                 break;
             case "sendtograveyard":
                 tvc.sendToGraveYard(Integer.parseInt(commands.get(1)));
@@ -100,7 +103,7 @@ public class Server {
         }
     }
 
-    public void setPlayerNames(String name1, String name2){
+    public void setPlayerNames(String name1, String name2) {
         gameEngine.getP1().setName(name1);
         gameEngine.getP2().setName(name2);
     }

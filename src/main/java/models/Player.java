@@ -14,6 +14,7 @@ public class Player {
     private ArrayList<Card> currentDeck;
     private ArrayList<Card> playerHand;
     private ArrayList<Card> tableCards;
+    private int player;
 
     public Player() {
         this.health = 20;
@@ -95,7 +96,7 @@ public class Player {
     public void removeHp(int healthToRemove) {
         this.health -= healthToRemove;
         try {
-            Server.getInstance().msgToFX("playerHP,"+Integer.toString(health));
+            Server.getInstance().msgToFX("playerHP,"+player+","+Integer.toString(health));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -115,5 +116,9 @@ public class Player {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public void setPlayer(int i) {
+        player = i;
     }
 }

@@ -70,15 +70,14 @@ public class GameEngine {
     }
 
 
-
     public void initGame() throws IOException {
         deck.createFullDeck();
         initPlayer();
 
         String player1hand = getStringFromList(p2.getPlayerHand());
         String player2hand = getStringFromList(p1.getPlayerHand());
-        server.msgToFX("showplayerhand,1,"+player1hand);
-        server.msgToFX("showplayerhand,2,"+player2hand);
+        server.msgToFX("showplayerhand,1," + player1hand);
+        server.msgToFX("showplayerhand,2," + player2hand);
     }
 
     private String getStringFromList(ArrayList<Card> playerHand) {
@@ -96,6 +95,8 @@ public class GameEngine {
      * setting the players decks and cards in hands
      */
     public void initPlayer() {
+        p1.setPlayer(1);
+        p2.setPlayer(2);
         determinePlayerToStart();
         ArrayList<Card> playerOneDeck, playerTwoDeck;
         deck.playerDeck();
@@ -153,13 +154,17 @@ public class GameEngine {
     }
 
     public void getPlayerToStart(boolean random) {
+        int active;
         if (random) {
+            active = 1;
             currentPlayer = p1;
             opponentPlayer = p2;
         } else {
+            active = 2;
             currentPlayer = p2;
             opponentPlayer = p1;
         }
+        server.msgToFX("player" + Integer.toString(active));
     }
 
     public Random makeRandom() {
@@ -177,11 +182,13 @@ public class GameEngine {
     public void endTurn() throws IOException {
         checkCardsLeft();
         unTap();
-
+        int active;
         if (currentPlayer == p1) {
+            active = 2;
             currentPlayer = p2;
             opponentPlayer = p1;
         } else {
+            active = 1;
             currentPlayer = p1;
             opponentPlayer = p2;
         }
@@ -189,6 +196,8 @@ public class GameEngine {
         turn++;
         increaseIgnCounter(currentPlayer.getTableCards());
         increaseIgnCounter(opponentPlayer.getTableCards());
+        server.msgToFX("player"+Integer.toString(active));
+        currentPlayer.removeHp(2);
     }
 
     public void increaseIgnCounter(ArrayList<Card> playerTableCards) {
