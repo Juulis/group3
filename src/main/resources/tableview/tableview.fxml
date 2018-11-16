@@ -145,13 +145,13 @@
                 <Glow level="0.65"/>
             </effect>
         </ImageView>
-        <ImageView id="PlayerTwoTurn" fx:id="PlayerTwoTurn" fitHeight="279.0" fitWidth="141.0" layoutX="1536.0"
+        <ImageView id="PlayerTwoTurn" fx:id="playerTwoTurn" fitHeight="279.0" fitWidth="141.0" layoutX="1536.0"
                    layoutY="114.0" pickOnBounds="true" preserveRatio="true" visible="false">
             <image>
                 <Image url="@Fire_GIF.gif"/>
             </image>
         </ImageView>
-        <ImageView id="PlayerOneTurn" fx:id="PlayerOneTurn" fitHeight="279.0" fitWidth="141.0" layoutX="1536.0"
+        <ImageView id="PlayerOneTurn" fx:id="playerOneTurn" fitHeight="279.0" fitWidth="141.0" layoutX="1536.0"
                    layoutY="595.0" pickOnBounds="true" preserveRatio="true" visible="false">
             <image>
                 <Image url="@Fire_GIF.gif"/>

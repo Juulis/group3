@@ -33,7 +33,9 @@ public class TableViewController {
     @FXML
     private Button endTurn;
     @FXML
-    private Line playerTwoEnergy;
+
+    private Line playerTwoMana;
+
     @FXML
     private Rectangle playerTwoDeck;
     @FXML
@@ -62,26 +64,16 @@ public class TableViewController {
 
     public void showPlayerTurn(int player) {
 
-        Pane turnImg = new Pane();
-
         if (player == 1) {
-            Image turn = new Image("file:tableView/Fire_GIF.gif");
-            ImageView show = new ImageView(turn);
-
-            turnImg.getChildren().add(show);
-
-            show.setImage(turn);
-            show.setVisible(true);
-
+            playerOneTurn.setVisible(true);
+            playerTwoTurn.setVisible(false);
         } else if (player == 2) {
-            Image turn = new Image("file:tableView/Fire_GIF.gif");
-            ImageView show = new ImageView(turn);
-
-            turnImg.getChildren().add(show);
-
-            show.setImage(turn);
-            show.setVisible(false);
+            playerOneTurn.setVisible(false);
+            playerTwoTurn.setVisible(true);
+        }else{
+            System.out.println("no Player");
         }
+        update();
     }
 
     public void setPlayer1HP(int i) {
