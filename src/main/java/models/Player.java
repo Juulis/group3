@@ -62,7 +62,12 @@ public class Player {
         playerHand.add(card);
 
         String playerHandString = server.getStringFromList(playerHand);
-        server.msgToFX("showplayerhand," + player + "," + playerHandString);
+
+        try {
+            server.msgToFX("showplayerhand," + player + "," + playerHandString);
+        } catch (Exception e) {
+            System.out.println("noFX");
+        }
     }
 
     /**
@@ -110,7 +115,7 @@ public class Player {
         try {
             Server.getInstance().msgToFX("playerHP," + player + "," + Integer.toString(health));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("noFX");
         }
     }
 
