@@ -62,8 +62,14 @@ public class GameEngine {
             while (playing) {
                 playerMenu();
             }
-            Server.getInstance().msgToFX("gameover");
+
             //TODO: Some endscreen in here!
+        }
+        else {
+            String player1hand = getStringFromList(p2.getPlayerHand());
+            String player2hand = getStringFromList(p1.getPlayerHand());
+            Server.getInstance().msgToFX("showplayerhand,1," + player1hand);
+            Server.getInstance().msgToFX("showplayerhand,2," + player2hand);
         }
     }
 
@@ -71,11 +77,6 @@ public class GameEngine {
     public void initGame() throws IOException {
         deck.createFullDeck();
         initPlayer();
-
-        String player1hand = getStringFromList(p2.getPlayerHand());
-        String player2hand = getStringFromList(p1.getPlayerHand());
-        Server.getInstance().msgToFX("showplayerhand,1," + player1hand);
-        Server.getInstance().msgToFX("showplayerhand,2," + player2hand);
     }
 
     private String getStringFromList(ArrayList<Card> playerHand) {
@@ -107,29 +108,31 @@ public class GameEngine {
 
     }
 
-    public void checkCardsLeft() {
+    public void checkCardsLeft() throws IOException {
         checkPlayerCards(p1, p2);
         checkPlayerCards(p2, p1);
     }
 
-    public void checkPlayerCards(Player p, Player q) {
+    public void checkPlayerCards(Player p, Player q) throws IOException {
         if (p.getCurrentDeck().size() == 0 && p.getPlayerHand().size() == 0 && p.getTableCards().size() == 0) {
             System.out.println("Congratulations!" + q.getName() + " is the Winner");
             scoreHandler.checkScore(q);
             playing = false;
+            Server.getInstance().msgToFX("gameover");
         }
     }
 
-    public void checkHealthLeft() {
+    public void checkHealthLeft() throws IOException {
         checkPlayerHealth(p1, p2);
         checkPlayerHealth(p2, p1);
     }
 
-    public void checkPlayerHealth(Player p, Player q) {
+    public void checkPlayerHealth(Player p, Player q) throws IOException {
         if (p.getHealth() <= 0) {
             System.out.println("Congratulations! " + q.getName() + " is the Winner");
             scoreHandler.checkScore(q);
             playing = false;
+            Server.getInstance().msgToFX("gameover");
         }
     }
 
@@ -164,7 +167,7 @@ public class GameEngine {
         return currentPlayer;
     }
 
-    public void endTurn() {
+    public void endTurn() throws IOException {
         checkCardsLeft();
         unTap();
 
@@ -328,7 +331,7 @@ public class GameEngine {
     }
 
 
-    private void playerMenu(){
+    private void playerMenu() throws IOException {
         int input;
         System.out.println(
                 "------------------------------------------------- \n" +
@@ -357,7 +360,8 @@ public class GameEngine {
                     playerMenu();
                     return;
                 }
-                currentPlayer.playCard(deck.getCards().get(playCard), getRound());
+                Card card = currentPlayer.getPlayerHand().get(playCard - 1);
+                currentPlayer.playCard( card, getRound());
                 break;
             case 3:
                 if (turn > 2) {
