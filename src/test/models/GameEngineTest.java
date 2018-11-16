@@ -2,9 +2,7 @@ package models;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.*;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.*;
 
 
@@ -37,7 +35,7 @@ class GameEngineTest {
     Player p1;
     Player p2;
     Attack attack;
-    private GameEngine gameEngine;
+    GameEngine gameEngine;
     CreatureCard spyCurrentCard;
     CreatureCard spyOpponentCard;
 

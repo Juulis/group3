@@ -2,6 +2,7 @@ package controllers;
 
 import app.Server;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -11,11 +12,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import models.Card;
 import models.Deck;
 
 import java.io.IOException;
-import java.lang.reflect.UndeclaredThrowableException;
 import java.util.List;
 
 
@@ -23,110 +24,42 @@ public class TableViewController {
 
     @FXML
     private Line playerOneEnergy;
-
     @FXML
     private Rectangle playerOneDeck;
-
     @FXML
     private Circle playerOneGraveyard;
-
     @FXML
     private Label playerOneHp;
-
-    @FXML
-    private Rectangle playerOneHandOne;
-    @FXML
-    private Rectangle playerOneHandTwo;
-    @FXML
-    private Rectangle playerOneHandThree;
-    @FXML
-    private Rectangle playerOneHandFour;
-    @FXML
-    private Rectangle playerOneHandFive;
-
-    @FXML
-    private Rectangle playerOneTableOne;
-    @FXML
-    private Rectangle playerOneTableTwo;
-    @FXML
-    private Rectangle playerOneTableThree;
-    @FXML
-    private Rectangle playerOneTableFour;
-    @FXML
-    private Rectangle playerOneTableFive;
-    @FXML
-    private Rectangle playerOneTableSix;
-    @FXML
-    private Rectangle playerOneTableSeven;
-
     @FXML
     private Button endTurn;
-
     @FXML
+
     private Line playerTwoMana;
 
     @FXML
     private Rectangle playerTwoDeck;
-
     @FXML
     private Circle playerTwoGraveyard;
-
     @FXML
     private Label playerTwoHp;
-
-    @FXML
-    private Rectangle playerTwoHandOne;
-    @FXML
-    private Rectangle playerTwoHandTwo;
-    @FXML
-    private Rectangle playerTwoHandThree;
-    @FXML
-    private Rectangle playerTwoHandFour;
-    @FXML
-    private Rectangle playerTwoHandFive;
-
-    @FXML
-    private Rectangle playerTwoTableOne;
-    @FXML
-    private Rectangle playerTwoTableTwo;
-    @FXML
-    private Rectangle playerTwoTableThree;
-    @FXML
-    private Rectangle playerTwoTableFour;
-    @FXML
-    private Rectangle playerTwoTableFive;
-    @FXML
-    private Rectangle playerTwoTableSix;
-    @FXML
-    private Rectangle playerTwoTableSeven;
     @FXML
     private Pane tableViewPane;
     @FXML
     public ImageView tableImageView;
     @FXML
     private Pane currentPlayerHandPane;
-
     @FXML
     public ImageView winner;
-
     @FXML
     public ImageView playerOneTurn;
-
     @FXML
     public ImageView playerTwoTurn;
 
+    private Stage stage;
+
     public void showWinner() {
-
-        Pane endImg = new Pane();
-
-        Image winner = new Image("file:tableView/WinnerScreen.png");
-        ImageView show = new ImageView(winner);
-
-        endImg.getChildren().add(show);
-
-        show.setImage(winner);
-        show.setVisible(true);
-
+        winner.setVisible(true);
+        update();
     }
 
     public void showPlayerTurn(int player) {
@@ -169,13 +102,13 @@ public class TableViewController {
             e.printStackTrace();
         }
         String player = commands.get(1);
-        for (int i = 2;i<commands.size();i++) {
+        for (int i = 2; i < commands.size(); i++) {
             Card card = deck.getCards().get(Integer.parseInt(commands.get(i)));
             if (player.equals("1")) {
-                System.out.println("showing card "+card.getId());
+                System.out.println("showing card " + card.getId());
                 //TODO: Code for showing card in FX for player 1
             } else if (player.equals("2")) {
-                System.out.println("showing card "+card.getId());
+                System.out.println("showing card " + card.getId());
                 //TODO: Code for showing card in FX for player 2
             } else {
                 System.out.println("No player! Something wrong with string input from gameEngine");
@@ -187,5 +120,15 @@ public class TableViewController {
     public void getSelectedCard(MouseEvent e) throws IOException {
         System.out.println("Selected card: " + e.getSource());
         Server.getInstance().msgToGameEngine("attack,2,1");
+    }
+
+    public void setStage(Stage primaryStage) {
+        stage = primaryStage;
+    }
+
+    private void update() {
+        Scene scene = new Scene(tableViewPane);
+        stage.setScene(scene);
+        stage.show();
     }
 }
