@@ -72,10 +72,11 @@ public class Server {
                 gameEngine.endTurn();
                 break;
             case "playcard":
+                System.out.println(commands+" "+selectedCard.getClass()); //TODO: Remove, testingpurpose
                 gameEngine.getCurrentPlayer().playCard(selectedCard, gameEngine.getRound());
+                System.out.println("sending msg");
                 break;
         }
-        System.out.println(commands); //TODO: Remove, testingpurpose
     }
 
     public void msgToFX(String msg) {
@@ -121,8 +122,9 @@ public class Server {
         for (Card card : playerHand) {
             string += Integer.toString(card.getId());
             string += ",";
+            System.out.print(card.getClass());
+            System.out.println(" "+card.getId());
         }
-        System.out.println(string);
         return string;
     }
 
