@@ -9,7 +9,7 @@ import java.util.*;
 
 public class GameEngine {
 
-    public GameEngine() throws IOException {
+    public GameEngine(){
         p1 = new Player();
         p2 = new Player();
         playing = true;
@@ -17,7 +17,6 @@ public class GameEngine {
         turn = 1;
         attacks = new Attack();
         scoreHandler = new ScoreHandler();
-        server = Server.getInstance();
     }
 
     private Player p1, p2;
@@ -28,7 +27,6 @@ public class GameEngine {
     private int turn;
     private Attack attacks;
     private ScoreHandler scoreHandler;
-    private Server server;
 
     public void setP1(Player p) {
         this.p1 = p;
@@ -65,6 +63,7 @@ public class GameEngine {
             while (playing) {
                 playerMenu();
             }
+            Server.getInstance().msgToFX("gameover");
             //TODO: Some endscreen in here!
         }
     }
@@ -77,8 +76,8 @@ public class GameEngine {
 
         String player1hand = getStringFromList(p2.getPlayerHand());
         String player2hand = getStringFromList(p1.getPlayerHand());
-        server.msgToFX("showplayerhand,1,"+player1hand);
-        server.msgToFX("showplayerhand,2,"+player2hand);
+        Server.getInstance().msgToFX("showplayerhand,1,"+player1hand);
+        Server.getInstance().msgToFX("showplayerhand,2,"+player2hand);
     }
 
     private String getStringFromList(ArrayList<Card> playerHand) {
@@ -117,29 +116,24 @@ public class GameEngine {
             System.out.println("Congratulations!" + p2 + " is the Winner");
             scoreHandler.checkScore(p2);
             playing = false;
-            //server.msgToFX("gameover");
         }
         if (p2.getCurrentDeck().size() == 0 && p2.getPlayerHand().size() == 0 && p2.getTableCards().size() == 0) {
             System.out.println("Congratulations!" + p1 + " is the Winner");
             scoreHandler.checkScore(p1);
             playing = false;
-            //server.msgToFX("gameover");
         }
 
     }
 
-    public void checkPlayerHealth() throws IOException {
+    public void checkPlayerHealth(){
         if (p1.getHealth() <= 0) {
             System.out.println("Congratulations! Player2 is the Winner");
             scoreHandler.checkScore(p2);
             playing = false;
-            Server.getInstance().msgToFX("gameover");
-
         } else if (p2.getHealth() <= 0) {
             System.out.println("Congratulations! Player1 is the Winner");
             scoreHandler.checkScore(p1);
             playing = false;
-            Server.getInstance().msgToFX("gameover");
         }
     }
 
@@ -174,7 +168,7 @@ public class GameEngine {
         return currentPlayer;
     }
 
-    public void endTurn() throws IOException {
+    public void endTurn(){
         checkCardsLeft();
         unTap();
 
