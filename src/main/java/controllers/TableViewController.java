@@ -5,6 +5,7 @@ import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
@@ -139,5 +140,14 @@ public class TableViewController {
     private void update() {
         Parent parent = tableViewPane;
         stage.getScene().setRoot(parent);
+    }
+
+    @FXML
+    private void p2PickCard(MouseEvent mouseEvent) {
+        
+    }
+
+    @FXML
+    private void p1PickCard(MouseEvent mouseEvent) {
     }
 }
