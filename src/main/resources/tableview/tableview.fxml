@@ -1,41 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<Pane fx:id="tableViewPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="controllers.TableViewController">
+<Pane fx:id="tableViewPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TableViewController">
     <children>
         <ImageView fx:id="tableImageView" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@gameboard.jpg"/>
+                <Image url="@gameboard.jpg" />
             </image>
         </ImageView>
       <HBox fx:id="playerOneHandBox" layoutX="545.0" layoutY="781.0" prefHeight="183.0" prefWidth="830.0" />
       <HBox fx:id="playerTwoHandBox" layoutX="545.0" layoutY="96.0" prefHeight="183.0" prefWidth="830.0" />
-        <Rectangle id="playerOneTableOne" fx:id="playerOneTableOne" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="899.0" layoutY="556.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
-        <Rectangle id="playerOneTableFour" fx:id="playerOneTableFour" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="1170.0" layoutY="556.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
-        <Rectangle id="playerOneTableTwo" fx:id="playerOneTableTwo" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="1034.0" layoutY="556.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
-        <Rectangle id="playerOneTableThree" fx:id="playerOneTableThree" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="763.0" layoutY="556.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
-        <Rectangle id="playerOneTableFive" fx:id="playerOneTableFive" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="626.0" layoutY="556.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
-        <Rectangle id="playerOneTableSix" fx:id="playerOneTableSix" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="1305.0" layoutY="556.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
-        <Rectangle id="playerOneTableSeven" fx:id="playerOneTableSeven" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="491.0" layoutY="556.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
-        <Rectangle id="playerTwoTableSix" fx:id="playerTwoTableSix" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="492.0" layoutY="341.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
-        <Rectangle id="playerTwoTableSeven" fx:id="playerTwoTableSeven" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="1306.0" layoutY="341.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
-        <Rectangle id="playerTwoTableFour" fx:id="playerTwoTableFour" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="627.0" layoutY="341.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
-        <Rectangle id="playerTwoTableTwo" fx:id="playerTwoTableTwo" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="764.0" layoutY="341.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
-        <Rectangle id="playerTwoTableThree" fx:id="playerTwoTableThree" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="1035.0" layoutY="341.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
-        <Rectangle id="playerTwoTableFive" fx:id="playerTwoTableFive" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="1171.0" layoutY="341.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
-        <Rectangle id="playerTwoTableOne" fx:id="playerTwoTableOne" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="900.0" layoutY="341.0" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
+        <Rectangle id="playerOneTableOne" fx:id="playerOneTableOne" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="899.0" layoutY="556.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
+        <Rectangle id="playerOneTableFour" fx:id="playerOneTableFour" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="1170.0" layoutY="556.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
+        <Rectangle id="playerOneTableTwo" fx:id="playerOneTableTwo" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="1034.0" layoutY="556.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
+        <Rectangle id="playerOneTableThree" fx:id="playerOneTableThree" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="763.0" layoutY="556.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
+        <Rectangle id="playerOneTableFive" fx:id="playerOneTableFive" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="626.0" layoutY="556.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
+        <Rectangle id="playerOneTableSix" fx:id="playerOneTableSix" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="1305.0" layoutY="556.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
+        <Rectangle id="playerOneTableSeven" fx:id="playerOneTableSeven" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="491.0" layoutY="556.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" width="125.0" />
+      <HBox fx:id="playerTwoTableBox" layoutX="492.0" layoutY="341.0" />
         <Rectangle id="playerTwoDeck" fx:id="playerTwoDeck" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="326.0" layoutY="52.0" rotate="45.0" stroke="WHITE" strokeType="INSIDE" width="108.0" />
         <Rectangle id="playerOneDeck" fx:id="playerOneDeck" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="326.0" layoutY="853.0" rotate="135.0" stroke="WHITE" strokeType="INSIDE" width="108.0" />
         <Button id="endTurn" fx:id="endTurn" layoutX="1560.0" layoutY="516.0" mnemonicParsing="false" opacity="0.5" prefHeight="47.0" prefWidth="109.0" text="End Turn" />
@@ -73,14 +67,12 @@
                 <Glow level="0.65" />
             </effect>
         </ImageView>
-        <ImageView id="PlayerTwoTurn" fx:id="playerTwoTurn" fitHeight="279.0" fitWidth="141.0" layoutX="1536.0"
-                   layoutY="114.0" pickOnBounds="true" preserveRatio="true" visible="false">
+        <ImageView id="PlayerTwoTurn" fx:id="playerTwoTurn" fitHeight="279.0" fitWidth="141.0" layoutX="1536.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true" visible="false">
             <image>
                 <Image url="@Fire_GIF.gif" />
             </image>
         </ImageView>
-        <ImageView id="PlayerOneTurn" fx:id="playerOneTurn" fitHeight="279.0" fitWidth="141.0" layoutX="1536.0"
-                   layoutY="595.0" pickOnBounds="true" preserveRatio="true" visible="false">
+        <ImageView id="PlayerOneTurn" fx:id="playerOneTurn" fitHeight="279.0" fitWidth="141.0" layoutX="1536.0" layoutY="595.0" pickOnBounds="true" preserveRatio="true" visible="false">
             <image>
                 <Image url="@Fire_GIF.gif" />
             </image>

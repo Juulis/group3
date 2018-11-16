@@ -1,10 +1,12 @@
 package controllers;
 
+import javafx.event.Event;
 import javafx.fxml.*;
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
@@ -49,13 +51,16 @@ public class TableViewController {
     private HBox playerTwoHandBox;
     @FXML
     private AnchorPane cardPane;
+    @FXML
+    private HBox playerTwoTableBox;
     private Deck deck;
 
     public TableViewController() throws IOException {
-        deck = new Deck();
     }
 
     public void initialize() throws IOException {
+        deck = new Deck();
+        deck.getCardsFromJSON();
     }
 
     private Stage stage;
@@ -98,7 +103,6 @@ public class TableViewController {
     }
 
     public void showPlayerHand(List<String> commands) throws IOException {
-        deck.getCardsFromJSON();
         String player = commands.get(1);
         for (int i = 2; i < commands.size(); i++) {
             Card card = deck.getCards().get(Integer.parseInt(commands.get(i)));
@@ -139,5 +143,51 @@ public class TableViewController {
     private void update() {
         Parent parent = tableViewPane;
         stage.getScene().setRoot(parent);
+    }
+
+    private Card selectedCurrentCard;
+    private Card selectedOpponentCard1;
+    private Card selectedOpponentCard2;
+    private AnchorPane selectedPane;
+
+    private Card getCardFromId(String id) {
+        return deck.getCards().get(Integer.parseInt(id));
+    }
+
+    @FXML
+    private void getSelectedPlaceHolder(Event event) {
+        System.out.println("SELECTED PANE IN GETSELECTPLACEHOLDER " + selectedPane);
+        //check if selectedCurrentCard != null && opponentcards == null
+        Rectangle rect = (Rectangle)event.getSource();
+        System.out.println("getSelectedPlaceHolder");
+        swapPlaceHolder(rect);
+    }
+
+    @FXML
+    private void getSelectedCard(Event event) {
+        System.out.println("getSelectedCard");
+        Card selectedCard = getCardFromId(((AnchorPane) event.getSource()).getId());
+        System.out.println(selectedCard + " selected card");
+        selectedPane = (AnchorPane) event.getSource();
+        System.out.println(selectedPane + " selected pane IN GETSELECTECARD ");
+        if (selectedCurrentCard != null) {
+//           does card exist in currentplayerhand or currentplayertable
+            selectedCurrentCard = selectedCard;
+        }
+    }
+
+    @FXML
+    private void swapPlaceHolder(Rectangle r) {
+        System.out.println("swapPlaceHolder");
+        System.out.println(selectedPane + " selected pane");
+        if(selectedPane != null) {
+            System.out.println("swapPlaceHolder if");
+            selectedPane.setLayoutY(r.getLayoutY());
+            selectedPane.setLayoutX(r.getLayoutX());
+        }
+        update();
+        //set id to cardId
+        //place card to placeHolder
+        //if removing card from r , set id to random nr 0-100000
     }
 }
