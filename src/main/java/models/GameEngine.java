@@ -74,27 +74,21 @@ public class GameEngine {
         deck.createFullDeck();
         initPlayer();
 
-        String player1hand = getStringFromList(p2.getPlayerHand());
-        String player2hand = getStringFromList(p1.getPlayerHand());
+//        String player1hand = server.getStringFromList(p2.getPlayerHand());
+//        String player2hand = server.getStringFromList(p1.getPlayerHand());
 //        server.msgToFX("showplayerhand,1," + player1hand);
 //        server.msgToFX("showplayerhand,2," + player2hand);
     }
 
-    private String getStringFromList(ArrayList<Card> playerHand) {
-        String string = "";
-        for (Card card : playerHand) {
-            string += Integer.toString(card.getId());
-            string += ",";
-        }
-        System.out.println(string);
-        return string;
-    }
+
 
     /**
      * initializes the players by
      * setting the players decks and cards in hands
      */
     public void initPlayer() {
+        p1.setPlayer(1);
+        p2.setPlayer(2);
         determinePlayerToStart();
         ArrayList<Card> playerOneDeck, playerTwoDeck;
         deck.playerDeck();
@@ -195,6 +189,7 @@ public class GameEngine {
         increaseIgnCounter(currentPlayer.getTableCards());
         increaseIgnCounter(opponentPlayer.getTableCards());
         server.msgToFX("player"+Integer.toString(active));
+        currentPlayer.removeHp(2);
     }
 
     public void increaseIgnCounter(ArrayList<Card> playerTableCards) {

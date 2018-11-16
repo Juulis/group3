@@ -1,5 +1,8 @@
 package models;
 
+import app.Server;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Player {
@@ -11,6 +14,7 @@ public class Player {
     private ArrayList<Card> currentDeck;
     private ArrayList<Card> playerHand;
     private ArrayList<Card> tableCards;
+    private int player;
 
     public Player() {
         this.health = 20;
@@ -47,12 +51,18 @@ public class Player {
      * puts it in players hand
      */
     public void pickupCard() {
-
+        Server server = null;
+        try {
+            server = Server.getInstance();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         int index = currentDeck.size() - 1;
         Card card = currentDeck.remove(index);
         playerHand.add(card);
-        server.msgToFX("showplayerhand,1," + player1hand);
-//        server.msgToFX("showplayerhand,2," + player2hand);
+
+        String playerHandString = server.getStringFromList(playerHand);
+        server.msgToFX("showplayerhand," + player + "," + playerHandString);
     }
 
     /**
@@ -69,9 +79,9 @@ public class Player {
 
     /**
      * @param card takes an int showing what card to play
-     *                   play the chosen card:
-     *                   remove it from hand
-     *                   add it to table
+     *             play the chosen card:
+     *             remove it from hand
+     *             add it to table
      */
     public void playCard(Card card, int round) {
         try {
@@ -93,6 +103,11 @@ public class Player {
      */
     public void removeHp(int healthToRemove) {
         this.health -= healthToRemove;
+        try {
+            Server.getInstance().msgToFX("playerHP," + player + "," + Integer.toString(health));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getName() {
@@ -109,5 +124,9 @@ public class Player {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public void setPlayer(int i) {
+        player = i;
     }
 }

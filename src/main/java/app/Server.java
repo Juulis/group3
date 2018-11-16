@@ -52,6 +52,12 @@ public class Server {
         List<CreatureCard> opponents = new ArrayList<>();
 
         switch (commands.get(0)) {
+            case "pickcard":
+                if (commands.get(1).equals("1"))
+                    gameEngine.getP1().pickupCard();
+                else if (commands.get(1).equals("2"))
+                    gameEngine.getP2().pickupCard();
+                break;
             case "attack":
                 int opponentAmount = commands.size() - 2; //ignoring the first two spots
 
@@ -85,11 +91,8 @@ public class Server {
             case "player2":
                 tvc.showPlayerTurn(2);
                 break;
-            case "player1hp":
-                tvc.setPlayer1HP(Integer.parseInt(commands.get(1)));
-                break;
-            case "player2hp":
-                tvc.setPlayer2HP(Integer.parseInt(commands.get(1)));
+            case "playerhp":
+                tvc.setPlayerHP(Integer.parseInt(commands.get(1)), Integer.parseInt(commands.get(2)));
                 break;
             case "sendtograveyard":
                 tvc.sendToGraveYard(Integer.parseInt(commands.get(1)));
@@ -110,4 +113,15 @@ public class Server {
         gameEngine.getP1().setName(name1);
         gameEngine.getP2().setName(name2);
     }
+
+    public String getStringFromList(ArrayList<Card> playerHand) {
+        String string = "";
+        for (Card card : playerHand) {
+            string += Integer.toString(card.getId());
+            string += ",";
+        }
+        System.out.println(string);
+        return string;
+    }
+
 }

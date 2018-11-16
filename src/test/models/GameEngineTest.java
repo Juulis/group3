@@ -88,7 +88,7 @@ class GameEngineTest {
     }
 
     @Test
-    void initPlayer() {
+    void initPlayer() throws IOException {
 
         gameEngine.setP1(p1Mock);
         gameEngine.setP2(p2Mock);

@@ -21,6 +21,10 @@ public class TableViewController {
     private Card selectedOpponentCard2;
 
     @FXML
+    private ProgressIndicator playerOneHpRound;
+    @FXML
+    private ProgressIndicator playerTwoHpRound;
+    @FXML
     private ProgressBar playerOneMana;
     @FXML
     private Rectangle playerOneDeck;
@@ -98,12 +102,6 @@ public class TableViewController {
 
     }
 
-    public void setPlayer1HP(int i) {
-    }
-
-    public void setPlayer2HP(int i) {
-    }
-
     public void sendToGraveYard(int cardID) {
     }
 
@@ -117,7 +115,13 @@ public class TableViewController {
     }
 
     public void showPlayerHand(List<String> commands) {
+        System.out.println("creating player hand");
         String player = commands.get(1);
+        if (player.equals("1"))
+            playerOneHandBox.getChildren().clear();
+        if (player.equals("2"))
+            playerTwoHandBox.getChildren().clear();
+
         for (int i = 2; i < commands.size(); i++) {
             Card card = deck.getCards().get(Integer.parseInt(commands.get(i)));
             String cardURL = "/card/card.fxml";
@@ -207,4 +211,14 @@ public class TableViewController {
         }
     }
 
+
+    public void setPlayerHP(int player, int hp) {
+        if (player == 1) {
+            playerOneHp.setText(Integer.toString(hp));
+            playerOneHpRound.setProgress(Math.abs(((double) hp / 20) - 1));
+        } else if (player == 2) {
+            playerTwoHp.setText(Integer.toString(hp));
+            playerTwoHpRound.setProgress(Math.abs(((double) hp / 20) - 1));
+        }
+    }
 }
