@@ -51,10 +51,18 @@ public class Player {
      * puts it in players hand
      */
     public void pickupCard() {
-
+        Server server = null;
+        try {
+            server = Server.getInstance();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         int index = currentDeck.size() - 1;
         Card card = currentDeck.remove(index);
         playerHand.add(card);
+
+        String playerHandString = server.getStringFromList(playerHand);
+        server.msgToFX("showplayerhand," + player + "," + playerHandString);
     }
 
     /**
@@ -71,17 +79,21 @@ public class Player {
 
     /**
      * @param card takes an int showing what card to play
-     *                   play the chosen card:
-     *                   remove it from hand
-     *                   add it to table
+     *             play the chosen card:
+     *             remove it from hand
+     *             add it to table
      */
     public void playCard(Card card, int round) {
         try {
             if (card.getClass() == CreatureCard.class) {
-                tableCards.add(card);
-                playerHand.remove(card);
-                ((CreatureCard) card).tap();
-                ((CreatureCard) card).setPlayedOnRound(round);
+                Card realCard = playerHand.stream().filter(c -> card.getId() == (c.getId())).findAny().orElse(null);
+                tableCards.add(realCard);
+                playerHand.remove(realCard);
+                ((CreatureCard) realCard).tap();
+                ((CreatureCard) realCard).setPlayedOnRound(round);
+                System.out.println("in loop");
+            } else {
+                System.out.println("magic card cant be played");
             }
         } catch (Exception e) {
             System.out.println("That card does not exist");
@@ -96,7 +108,7 @@ public class Player {
     public void removeHp(int healthToRemove) {
         this.health -= healthToRemove;
         try {
-            Server.getInstance().msgToFX("playerHP,"+player+","+Integer.toString(health));
+            Server.getInstance().msgToFX("playerHP," + player + "," + Integer.toString(health));
         } catch (IOException e) {
             e.printStackTrace();
         }

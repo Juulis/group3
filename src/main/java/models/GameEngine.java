@@ -83,15 +83,7 @@ public class GameEngine {
         initPlayer();
     }
 
-    private String getStringFromList(ArrayList<Card> playerHand) {
-        String string = "";
-        for (Card card : playerHand) {
-            string += Integer.toString(card.getId());
-            string += ",";
-        }
-        System.out.println(string);
-        return string;
-    }
+
 
     /**
      * initializes the players by

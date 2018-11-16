@@ -44,14 +44,22 @@ public class Server {
      *            card 4 will attack opponent cards 1 and 2
      */
     public void msgToGameEngine(String msg) throws IOException {
+        Deck deck = new Deck();
+        deck.createFullDeck();
         List<String> commands = Arrays.asList(msg.toLowerCase().split(","));
         Card selectedCard = null;
         if (commands.size() > 1) {
-            selectedCard = gameEngine.getDeck().getCards().get(Integer.parseInt(commands.get(1)));
+            selectedCard = deck.getCards().get(Integer.parseInt(commands.get(1)));
         }
         List<CreatureCard> opponents = new ArrayList<>();
 
         switch (commands.get(0)) {
+            case "pickcard":
+                if (commands.get(1).equals("1"))
+                    gameEngine.getP1().pickupCard();
+                else if (commands.get(1).equals("2"))
+                    gameEngine.getP2().pickupCard();
+                break;
             case "attack":
                 int opponentAmount = commands.size() - 2; //ignoring the first two spots
 
@@ -86,7 +94,7 @@ public class Server {
                 tvc.showPlayerTurn(2);
                 break;
             case "playerhp":
-                tvc.setPlayerHP(Integer.parseInt(commands.get(1)),Integer.parseInt(commands.get(2)));
+                tvc.setPlayerHP(Integer.parseInt(commands.get(1)), Integer.parseInt(commands.get(2)));
                 break;
             case "sendtograveyard":
                 tvc.sendToGraveYard(Integer.parseInt(commands.get(1)));
@@ -107,4 +115,15 @@ public class Server {
         gameEngine.getP1().setName(name1);
         gameEngine.getP2().setName(name2);
     }
+
+    public String getStringFromList(ArrayList<Card> playerHand) {
+        String string = "";
+        for (Card card : playerHand) {
+            string += Integer.toString(card.getId());
+            string += ",";
+        }
+        System.out.println(string);
+        return string;
+    }
+
 }
