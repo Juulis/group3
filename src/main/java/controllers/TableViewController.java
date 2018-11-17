@@ -250,6 +250,7 @@ public class TableViewController {
                 clearCards();
             }
 //
+
         }
         if (isSelectingCardToAttackWith(event)) {
             selectedCurrentCard = getCardFromId(((AnchorPane) event.getSource()).getId());
@@ -297,7 +298,6 @@ public class TableViewController {
 
 
     private void clearCards() {
-        System.out.println("clearing");
         selectedPane = null;
         selectedCurrentCard = null;
         selectedOpponentCard1 = null;
