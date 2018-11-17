@@ -52,7 +52,7 @@ public class Server {
             selectedCard = deck.getCards().get(Integer.parseInt(commands.get(1)));
         }
         List<CreatureCard> opponents = new ArrayList<>();
-
+        System.out.println(msg);
         switch (commands.get(0)) {
             case "pickcard":
                 if (commands.get(1).equals("1"))
@@ -74,7 +74,6 @@ public class Server {
             case "playcard":
                 System.out.println(commands+" "+selectedCard.getClass()); //TODO: Remove, testingpurpose
                 gameEngine.getCurrentPlayer().playCard(selectedCard, gameEngine.getRound());
-                System.out.println("sending msg");
                 break;
         }
     }
