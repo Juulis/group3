@@ -15,11 +15,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="cardPane" onMouseClicked="#getSelectedCard" prefHeight="175.0" prefWidth="125.0" styleClass="cardAnchor" stylesheets="@card.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TableViewController">
+<AnchorPane fx:id="cardPane" onMouseClicked="#getSelectedCard" prefHeight="178.0" prefWidth="125.0" styleClass="cardAnchor" stylesheets="@card.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TableViewController">
     <children>
-      <StackPane id="cardType" fx:id="cardType" layoutY="98.0" prefHeight="79.0" prefWidth="194.0">
+      <StackPane id="cardType" fx:id="cardType" layoutY="111.0" prefHeight="66.0" prefWidth="138.0">
          <children>
-              <Label text="CardType" textAlignment="CENTER" textFill="WHITE">
+              <Label prefHeight="25.0" prefWidth="87.0" text="CardType" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
                </font>
@@ -34,10 +34,10 @@
             <Bloom />
          </effect>
       </ImageView>
-      <StackPane id="attackPane" fx:id="attackPane" layoutX="167.0" layoutY="-26.0" prefHeight="25.0" prefWidth="25.0">
+      <StackPane id="attackPane" fx:id="attackPane" layoutX="99.0" layoutY="-20.0" prefHeight="38.0" prefWidth="40.0">
          <children>
-            <Circle fill="#14d734" opacity="0.85" radius="26.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-              <Label text="Attack" textAlignment="CENTER" textFill="#ebebeb">
+            <Circle fill="#14d734" opacity="0.85" radius="18.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+              <Label prefHeight="25.0" prefWidth="13.0" text="0" textAlignment="CENTER" textFill="#ebebeb" StackPane.alignment="CENTER">
                <font>
                   <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
                </font>
@@ -46,17 +46,17 @@
       </StackPane>
       <StackPane id="manaPane" fx:id="manaPane" layoutX="-23.0" layoutY="-23.0" prefHeight="45.0" prefWidth="49.0">
          <children>
-            <Circle fill="#1f28ff" opacity="0.85" radius="26.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-              <Label style="-fx-border-color: ;" text="Mana" textAlignment="CENTER" textFill="WHITE">
+            <Circle fill="#1f28ff" opacity="0.85" radius="18.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+              <Label prefHeight="25.0" prefWidth="16.0" style="-fx-border-color: ;" text="0" textAlignment="CENTER" textFill="WHITE" StackPane.alignment="CENTER">
                <font>
                   <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
                </font>
             </Label>
          </children>
       </StackPane>
-      <StackPane id="healthPane" fx:id="healthPane" layoutX="53.0" layoutY="-42.0" prefHeight="79.0" prefWidth="89.0">
+      <StackPane id="healthPane" fx:id="healthPane" layoutX="29.0" layoutY="-31.0" prefHeight="50.0" prefWidth="50.0">
          <children>
-            <Circle fill="#e82626" opacity="0.85" radius="42.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Circle fill="#e82626" opacity="0.85" radius="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             <Label style="-fx-border-color: ;" text="Hp" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
