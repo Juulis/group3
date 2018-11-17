@@ -183,8 +183,8 @@ public class TableViewController {
     @FXML
     private void getSelectedPlaceHolder(Event event) throws IOException {
         //TODO: check if selectedCurrentCard != null && opponentcards == null
-        Rectangle rect = (Rectangle) event.getSource();
-        swapPlaceHolder(rect);
+        Rectangle placeHolder = (Rectangle) event.getSource();
+        swapPlaceHolder(placeHolder);
     }
 
     @FXML
@@ -208,6 +208,8 @@ public class TableViewController {
                 playerTwoTableBox.setAlignment(Pos.CENTER);
                 playerTwoTableBox.getChildren().remove(playerTwoTableBox.getChildren().size() - 1);
                 playerTwoTableBox.getChildren().add(0, selectedPane);
+            } else {
+                return;
             }
             server.msgToGameEngine("playcard," + selectedPane.getId());
             update();
@@ -225,9 +227,9 @@ public class TableViewController {
 
     @FXML
     private void pickCard(MouseEvent mouseEvent) throws IOException {
-        if (((Rectangle) mouseEvent.getSource()).getId().equals("playerOneDeck")) {
+        if (playerOneHandBox.getChildren().size() <= 5 && ((Rectangle) mouseEvent.getSource()).getId().equals("playerOneDeck")) {
             server.msgToGameEngine("pickcard,1");
-        } else if (((Rectangle) mouseEvent.getSource()).getId().equals("playerTwoDeck")) {
+        } else if (playerTwoHandBox.getChildren().size() <= 5 && ((Rectangle) mouseEvent.getSource()).getId().equals("playerTwoDeck")) {
             server.msgToGameEngine("pickcard,2");
         }
     }
