@@ -117,7 +117,7 @@ public class Player {
         this.health -= healthToRemove;
         try {
             Server.getInstance().msgToFX("playerHP," + player + "," + Integer.toString(health));
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("noFX");
         }
     }
