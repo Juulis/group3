@@ -75,7 +75,6 @@ public class Server {
                 gameEngine.getCurrentPlayer().playCard(selectedCard, gameEngine.getRound());
                 break;
         }
-        System.out.println(commands); //TODO: Remove, testingpurpose
     }
 
     public void msgToFX(String msg) {
@@ -122,7 +121,6 @@ public class Server {
             string += Integer.toString(card.getId());
             string += ",";
         }
-        System.out.println(string);
         return string;
     }
 
