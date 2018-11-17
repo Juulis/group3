@@ -31,12 +31,13 @@ public class Deck {
     }
 
     public void playerDeck() { // Shuffle game cards and split them into two player decks
-        Collections.shuffle(cards);
+        List<Card> shuffledDeck = new ArrayList<>(cards);
+        Collections.shuffle(shuffledDeck);
 
         playerDeckSize = 25;
 
-        playerOneDeck.addAll(cards.subList(0, cards.size() / 2));
-        playerTwoDeck.addAll(cards.subList(cards.size() / 2, cards.size()));
+        playerOneDeck.addAll(shuffledDeck.subList(0, shuffledDeck.size() / 2));
+        playerTwoDeck.addAll(shuffledDeck.subList(shuffledDeck.size() / 2, shuffledDeck.size()));
 
         Collections.shuffle(playerOneDeck);
         Collections.shuffle(playerTwoDeck);
