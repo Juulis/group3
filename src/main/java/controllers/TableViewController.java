@@ -183,8 +183,8 @@ public class TableViewController {
     @FXML
     private void getSelectedPlaceHolder(Event event) throws IOException {
         //TODO: check if selectedCurrentCard != null && opponentcards == null
-        Rectangle rect = (Rectangle) event.getSource();
-        swapPlaceHolder(rect);
+        Rectangle placeHolder = (Rectangle) event.getSource();
+        swapPlaceHolder(placeHolder);
     }
 
     @FXML
@@ -198,22 +198,24 @@ public class TableViewController {
     }
 
     @FXML
-    private void swapPlaceHolder(Rectangle rect) throws IOException {
+    private void swapPlaceHolder(Rectangle placeHolder) throws IOException {
         if (selectedPane != null) {
-            if (playerOneTableBox.getChildren().contains(rect)) {
+            if (playerOneTableBox.getChildren().contains(placeHolder)) { //checks to see if we clicked p1 or p2 table
                 playerOneTableBox.setSpacing(20);
                 playerOneTableBox.setAlignment(Pos.CENTER);
                 playerOneTableBox.getChildren().remove(playerOneTableBox.getChildren().size() - 1);
                 playerOneTableBox.getChildren().add(0, selectedPane);
-            } else if (playerTwoTableBox.getChildren().contains(rect)) {
+            } else if (playerTwoTableBox.getChildren().contains(placeHolder)) {
                 playerTwoTableBox.setSpacing(20);
                 playerTwoTableBox.setAlignment(Pos.CENTER);
                 playerTwoTableBox.getChildren().remove(playerTwoTableBox.getChildren().size() - 1);
                 playerTwoTableBox.getChildren().add(0, selectedPane);
+            } else {
+                return;
             }
+            update();
+            server.msgToGameEngine("playcard," + selectedPane.getId());
         }
-        update();
-        server.msgToGameEngine("playcard," + selectedPane.getId());
     }
 
 
@@ -225,9 +227,9 @@ public class TableViewController {
 
     @FXML
     private void pickCard(MouseEvent mouseEvent) throws IOException {
-        if (((Rectangle) mouseEvent.getSource()).getId().equals("playerOneDeck")) {
+        if (playerOneHandBox.getChildren().size() <= 5 && ((Rectangle) mouseEvent.getSource()).getId().equals("playerOneDeck")) {
             server.msgToGameEngine("pickcard,1");
-        } else if (((Rectangle) mouseEvent.getSource()).getId().equals("playerTwoDeck")) {
+        } else if (playerTwoHandBox.getChildren().size() <= 5 && ((Rectangle) mouseEvent.getSource()).getId().equals("playerTwoDeck")) {
             server.msgToGameEngine("pickcard,2");
         }
     }
