@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Bloom?>
@@ -7,27 +15,55 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="cardPane" onMouseClicked="#getSelectedCard" prefHeight="175.0" prefWidth="125.0" styleClass="cardAnchor" stylesheets="@card.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TableViewController">
+<AnchorPane fx:id="cardPane" onMouseClicked="#getSelectedCard" prefHeight="175.0" prefWidth="125.0" styleClass="cardAnchor" stylesheets="@card.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TableViewController">
     <children>
-        <Label layoutX="10.0" layoutY="29.0" style="-fx-border-color: black;" text="KORT" textAlignment="CENTER" textFill="#ff0042">
-         <font>
-            <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
-         </font></Label>
-        <Label layoutX="10.0" layoutY="100.0" style="-fx-border-color: black;" text="ATTACK" textAlignment="CENTER" textFill="#ff0042">
-         <font>
-            <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
-         </font></Label>
-        <Label layoutX="10.0" layoutY="68.0" style="-fx-border-color: black;" text="HP" textAlignment="CENTER" textFill="#ff0042">
-         <font>
-            <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
-         </font></Label>
+      <StackPane id="cardType" fx:id="cardType" layoutY="98.0" prefHeight="79.0" prefWidth="194.0">
+         <children>
+              <Label text="CardType" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
       <ImageView fx:id="cardImageView" disable="true" fitHeight="175.0" fitWidth="125.0" opacity="0.76" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
          <effect>
             <Bloom />
-         </effect></ImageView>
+         </effect>
+      </ImageView>
+      <StackPane id="attackPane" fx:id="attackPane" layoutX="167.0" layoutY="-26.0" prefHeight="25.0" prefWidth="25.0">
+         <children>
+            <Circle fill="#14d734" radius="26.0" stroke="BLACK" strokeType="INSIDE" />
+              <Label text="Attack" textAlignment="CENTER" textFill="#ebebeb">
+               <font>
+                  <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+      <StackPane id="manaPane" fx:id="manaPane" layoutX="-23.0" layoutY="-23.0" prefHeight="45.0" prefWidth="49.0">
+         <children>
+            <Circle fill="#1f28ff" radius="26.0" stroke="BLACK" strokeType="INSIDE" />
+              <Label style="-fx-border-color: ;" text="Mana" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+      <StackPane id="healthPane" fx:id="healthPane" layoutX="53.0" layoutY="-42.0" prefHeight="79.0" prefWidth="89.0">
+         <children>
+            <Circle fill="#e82626" radius="42.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label style="-fx-border-color: ;" text="Hp" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
     </children>
    <cursor>
       <Cursor fx:constant="OPEN_HAND" />
