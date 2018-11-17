@@ -51,6 +51,12 @@ public class Player {
      * puts it in players hand
      */
     public void pickupCard() {
+        Server server = null;
+        try {
+            server = Server.getInstance();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         if(playerHand.size()>=5)
             return;
         int index = currentDeck.size() - 1;
@@ -99,7 +105,6 @@ public class Player {
                 playerHand.remove(realCard);
                 ((CreatureCard) realCard).tap();
                 ((CreatureCard) realCard).setPlayedOnRound(round);
-                System.out.println("in loop");
             } else {
                 System.out.println("magic card cant be played");
             }

@@ -8,13 +8,13 @@ public class CreatureCard extends Card {
     private boolean tapped;
     private int playedOnRound;
     private int ignRoundCounter;
-    
-    public CreatureCard(int id, int attack, int cardEnergy, String cardName, String specialAttack, int hp, int defence, int power, String imgURL){
+
+    public CreatureCard(int id, int attack, int cardEnergy, String cardName, String specialAttack, int hp, int defence, int power, String imgURL) {
         super(id, attack, cardEnergy, cardName, specialAttack, imgURL);
         this.hp = hp;
         this.defence = defence;
         this.power = power;
-        ignRoundCounter=0;
+        ignRoundCounter = 0;
     }
 
     public int getHp() {
@@ -29,12 +29,13 @@ public class CreatureCard extends Card {
         return power;
     }
 
-    public void removeHp( int dmg){
-
+    public void removeHp(int dmg) {
         this.hp -= dmg;
+        System.out.println("id:" + id + " hp:" + hp + " atk:" + attack);
     }
+
     public void increaseIgnRoundCounter() {
-        ignRoundCounter+=1;
+        ignRoundCounter += 1;
     }
 
     public int getIgnRoundCounter() {
@@ -49,11 +50,11 @@ public class CreatureCard extends Card {
         return tapped;
     }
 
-    public void tap(){
+    public void tap() {
         this.tapped = true;
     }
 
-    public void unTap(){
+    public void unTap() {
         this.tapped = false;
     }
 

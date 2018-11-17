@@ -52,7 +52,6 @@ public class Server {
             selectedCard = deck.getCards().get(Integer.parseInt(commands.get(1)));
         }
         List<CreatureCard> opponents = new ArrayList<>();
-
         switch (commands.get(0)) {
             case "pickcard":
                 if (commands.get(1).equals("1"))
@@ -75,7 +74,6 @@ public class Server {
                 gameEngine.getCurrentPlayer().playCard(selectedCard, gameEngine.getRound());
                 break;
         }
-        System.out.println(commands); //TODO: Remove, testingpurpose
     }
 
     public void msgToFX(String msg) {
@@ -122,7 +120,6 @@ public class Server {
             string += Integer.toString(card.getId());
             string += ",";
         }
-        System.out.println(string);
         return string;
     }
 
