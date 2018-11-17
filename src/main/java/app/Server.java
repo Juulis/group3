@@ -62,7 +62,7 @@ public class Server {
                 int opponentAmount = commands.size() - 2; //ignoring the first two spots
 
                 for (int i = 0; i < opponentAmount; i++) {
-                    opponents.add((CreatureCard) deck.getCards().get(Integer.parseInt(commands.get(i + 2)))); //ignoring first two spots
+                    opponents.add((CreatureCard) gameEngine.getDeck().getCards().get(Integer.parseInt(commands.get(i + 2)))); //ignoring first two spots
                 }
                 System.out.println(selectedCard.getId()+" attacks "+opponents.get(0).getId());
                 gameEngine.chooseAttack(selectedCard, opponents);
@@ -95,7 +95,7 @@ public class Server {
                 tvc.setPlayerHP(Integer.parseInt(commands.get(1)), Integer.parseInt(commands.get(2)));
                 break;
             case "sendtograveyard":
-                tvc.sendToGraveYard(Integer.parseInt(commands.get(1)));
+                tvc.sendToGraveYard(commands.get(1), commands.get(2));
                 break;
             case "attackedtosoon":
                 tvc.toSoonWarning();

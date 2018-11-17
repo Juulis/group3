@@ -108,14 +108,21 @@ public class TableViewController {
 
     }
 
-    public void sendToGraveYard(int cardID) {
-        playerOneTableBox.getChildren().forEach(node -> {
-            if (node.getId().equals(String.valueOf(cardID))) {
-                playerOneTableBox.getChildren().remove(cardID);
-            } else {
-                playerTwoTableBox.getChildren().remove(cardID);
-            }
-        });
+    public void sendToGraveYard(String cardID, String player) {
+        System.out.println("sendToGraveYard");
+        if (player.equals("1")) {
+            System.out.println("PLAYER1");
+            playerOneTableBox.getChildren().forEach(node -> {
+                if (node.getId().equals(cardID)) {
+                    System.out.println("HEJ");
+                    playerOneTableBox.getChildren().remove(node);
+                } else {
+                    playerTwoTableBox.getChildren().remove(node);
+                    System.out.println("HEJDÅ");
+                }
+            });
+        }
+        update();
     }
 
     public void toSoonWarning() {

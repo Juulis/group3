@@ -81,7 +81,7 @@ public class Player {
         }
         tableCards.remove(card);
         try {
-            Server.getInstance().msgToFX("sendtograveyard" + card.getId());
+            Server.getInstance().msgToFX("sendtograveyard," + card.getId() + "," + player);
         } catch (IOException e) {
             e.printStackTrace();
         }
