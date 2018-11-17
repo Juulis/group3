@@ -206,9 +206,9 @@ public class TableViewController {
                     top = (Label) healthPane.getChildren().get(1);
                     top.setText(Integer.toString(((CreatureCard)card).getHp()));
 
-                    /*StackPane cardType = (StackPane) cardPane.getChildren().get(0);
-                    cardIdType = (Label) cardType.getChildren().get(1);
-                    cardIdType.setText(card.getCardName());*/
+                    StackPane cardType = (StackPane) cardPane.getChildren().get(0);
+                    cardIdType = (Label) cardType.getChildren().get(0);
+                    cardIdType.setText(card.getSpecialAttack().toUpperCase());
 
                     /*top.setText(card.getSpecialAttack());
                     if(card instanceof MagicCard){
@@ -220,7 +220,7 @@ public class TableViewController {
                     top.toFront();
                     middle.toFront();
                     bottom.toFront();
-                    //cardIdType.toFront();
+                    cardIdType.toFront();
 
                     playerTwoHandBox.getChildren().add(cardPane);
                     break;

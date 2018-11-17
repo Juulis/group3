@@ -36,7 +36,7 @@
       </ImageView>
       <StackPane id="attackPane" fx:id="attackPane" layoutX="167.0" layoutY="-26.0" prefHeight="25.0" prefWidth="25.0">
          <children>
-            <Circle fill="#14d734" radius="26.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fill="#14d734" opacity="0.85" radius="26.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
               <Label text="Attack" textAlignment="CENTER" textFill="#ebebeb">
                <font>
                   <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
@@ -46,7 +46,7 @@
       </StackPane>
       <StackPane id="manaPane" fx:id="manaPane" layoutX="-23.0" layoutY="-23.0" prefHeight="45.0" prefWidth="49.0">
          <children>
-            <Circle fill="#1f28ff" radius="26.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fill="#1f28ff" opacity="0.85" radius="26.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
               <Label style="-fx-border-color: ;" text="Mana" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
@@ -56,7 +56,7 @@
       </StackPane>
       <StackPane id="healthPane" fx:id="healthPane" layoutX="53.0" layoutY="-42.0" prefHeight="79.0" prefWidth="89.0">
          <children>
-            <Circle fill="#e82626" radius="42.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fill="#e82626" opacity="0.85" radius="42.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             <Label style="-fx-border-color: ;" text="Hp" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
