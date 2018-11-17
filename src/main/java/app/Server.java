@@ -52,7 +52,6 @@ public class Server {
             selectedCard = deck.getCards().get(Integer.parseInt(commands.get(1)));
         }
         List<CreatureCard> opponents = new ArrayList<>();
-
         switch (commands.get(0)) {
             case "pickcard":
                 if (commands.get(1).equals("1"))
