@@ -51,12 +51,6 @@ public class Player {
      * puts it in players hand
      */
     public void pickupCard() {
-        Server server = null;
-        try {
-            server = Server.getInstance();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         if(playerHand.size()>=5)
             return;
         int index = currentDeck.size() - 1;
@@ -73,7 +67,6 @@ public class Player {
         try {
             Server.getInstance().msgToFX("showplayerhand," + player + "," + playerHandString);
         } catch (Exception e) {
-            System.out.println("noFX");
         }
     }
 
@@ -105,11 +98,10 @@ public class Player {
             return;
         try {
             if (card.getClass() == CreatureCard.class) {
-                Card realCard = playerHand.stream().filter(c -> card.getId() == (c.getId())).findAny().orElse(null);
-                tableCards.add(realCard);
-                playerHand.remove(realCard);
-                ((CreatureCard) realCard).tap();
-                ((CreatureCard) realCard).setPlayedOnRound(round);
+                tableCards.add(card);
+                playerHand.remove(card);
+                ((CreatureCard) card).tap();
+                ((CreatureCard) card).setPlayedOnRound(round);
             } else {
                 System.out.println("magic card cant be played");
             }
@@ -128,7 +120,6 @@ public class Player {
         try {
             Server.getInstance().msgToFX("playerHP," + player + "," + Integer.toString(health));
         } catch (IOException e) {
-            System.out.println("noFX");
         }
     }
 
