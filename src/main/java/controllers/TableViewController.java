@@ -109,6 +109,13 @@ public class TableViewController {
     }
 
     public void sendToGraveYard(int cardID) {
+        playerOneTableBox.getChildren().forEach(node -> {
+            if (node.getId().equals(String.valueOf(cardID))) {
+                playerOneTableBox.getChildren().remove(cardID);
+            } else {
+                playerTwoTableBox.getChildren().remove(cardID);
+            }
+        });
     }
 
     public void toSoonWarning() {
@@ -148,13 +155,13 @@ public class TableViewController {
                             .setImage(new Image(card.getImgURL()));
 
 
-                    top = (Label)cardPane.getChildren().get(0);
-                    middle = (Label)cardPane.getChildren().get(1);
-                    bottom = (Label)cardPane.getChildren().get(2);
+                    top = (Label) cardPane.getChildren().get(0);
+                    middle = (Label) cardPane.getChildren().get(1);
+                    bottom = (Label) cardPane.getChildren().get(2);
                     top.setText(card.getSpecialAttack());
-                    if(card instanceof MagicCard){
+                    if (card instanceof MagicCard) {
                         middle.setText("MAGIC");
-                    }else{
+                    } else {
                         middle.setText("CREATURE");
                     }
                     bottom.setText(Integer.toString(card.getId()));
@@ -178,20 +185,19 @@ public class TableViewController {
                             .setImage(new Image(card.getImgURL()));
 
 
-                    top = (Label)cardPane.getChildren().get(0);
-                    middle = (Label)cardPane.getChildren().get(1);
-                    bottom = (Label)cardPane.getChildren().get(2);
+                    top = (Label) cardPane.getChildren().get(0);
+                    middle = (Label) cardPane.getChildren().get(1);
+                    bottom = (Label) cardPane.getChildren().get(2);
                     top.setText(card.getSpecialAttack());
-                    if(card instanceof MagicCard){
+                    if (card instanceof MagicCard) {
                         middle.setText("MAGIC");
-                    }else{
+                    } else {
                         middle.setText("CREATURE");
                     }
                     bottom.setText(Integer.toString(card.getId()));
                     top.toFront();
                     middle.toFront();
                     bottom.toFront();
-
 
 
                     playerTwoHandBox.getChildren().add(cardPane);

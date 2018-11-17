@@ -52,6 +52,7 @@ public class Server {
             selectedCard = deck.getCards().get(Integer.parseInt(commands.get(1)));
         }
         List<CreatureCard> opponents = new ArrayList<>();
+        System.out.println(msg);
         switch (commands.get(0)) {
             case "pickcard":
                 if (commands.get(1).equals("1"))
@@ -63,8 +64,9 @@ public class Server {
                 int opponentAmount = commands.size() - 2; //ignoring the first two spots
 
                 for (int i = 0; i < opponentAmount; i++) {
-                    opponents.add((CreatureCard) gameEngine.getDeck().getCards().get(Integer.parseInt(commands.get(i + 2)))); //ignoring first two spots
+                    opponents.add((CreatureCard) deck.getCards().get(Integer.parseInt(commands.get(i + 2)))); //ignoring first two spots
                 }
+                System.out.println(selectedCard.getId()+" attacks "+opponents.get(0).getId());
                 gameEngine.chooseAttack(selectedCard, opponents);
                 break;
             case "endturn":
