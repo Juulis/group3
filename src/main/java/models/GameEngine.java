@@ -198,7 +198,8 @@ public class GameEngine {
     }
 
     public void regeneratePlayerEnergy(){
-
+        p1.setPlayerEnergy(p1.getPlayerEnergy()+2);
+        p2.setPlayerEnergy(p2.getPlayerEnergy()+2);
     }
 
     public void increaseIgnCounter(ArrayList<Card> playerTableCards) {
