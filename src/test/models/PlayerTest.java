@@ -27,7 +27,7 @@ class PlayerTest {
     Card cardMock;
 
     @BeforeEach
-    void setup() throws IOException {
+    void setup(){
 
         player = new Player();
         mockHandList = new ArrayList<Card>(Arrays.asList(new Card(1,1,2,"c1", "basic", ""),
@@ -100,6 +100,15 @@ class PlayerTest {
         player.removeHp(2);
         assertEquals(expected, player.getHealth());
 
+    }
+
+    @Test
+    void decreaseEnergyOnPlayCard(){
+        int energy = 3;
+        when(cardMock.getCardEnergy()).thenReturn(2);
+        player.setPlayerEnergy(energy);
+        player.playCard(cardMock,2);
+        assertEquals(energy - cardMock.getCardEnergy(), player.getPlayerEnergy());
     }
 
 }
