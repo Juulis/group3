@@ -193,13 +193,13 @@ public class GameEngine {
         turn++;
         increaseIgnCounter(currentPlayer.getTableCards());
         increaseIgnCounter(opponentPlayer.getTableCards());
+        regeneratePlayerEnergy(currentPlayer);
         if (!consoleGame)
             server.msgToFX("player" + Integer.toString(active));
     }
 
-    public void regeneratePlayerEnergy(){
-        p1.setPlayerEnergy(p1.getPlayerEnergy()+2);
-        p2.setPlayerEnergy(p2.getPlayerEnergy()+2);
+    public void regeneratePlayerEnergy(Player p){
+        p.setPlayerEnergy(p.getPlayerEnergy()+2);
     }
 
     public void increaseIgnCounter(ArrayList<Card> playerTableCards) {

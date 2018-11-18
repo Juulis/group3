@@ -548,8 +548,9 @@ class GameEngineTest {
     void regeneratePlayerEnergy(){
         int p1Energy = gameEngine.getP1().getPlayerEnergy();
         int p2Energy = gameEngine.getP2().getPlayerEnergy();
-        gameEngine.regeneratePlayerEnergy();
+        gameEngine.regeneratePlayerEnergy(gameEngine.getP1());
         assertEquals(p1Energy+2, gameEngine.getP1().getPlayerEnergy());
+        gameEngine.regeneratePlayerEnergy(gameEngine.getP2());
         assertEquals(p2Energy+2, gameEngine.getP2().getPlayerEnergy());
     }
 
