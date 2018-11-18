@@ -187,7 +187,9 @@ public class GameEngine {
             currentPlayer = p1;
             opponentPlayer = p2;
         }
-        currentPlayer.pickupCard();
+        if(currentPlayer.getCurrentDeck().size() != 0) {
+            currentPlayer.pickupCard();
+        }
         turn++;
         increaseIgnCounter(currentPlayer.getTableCards());
         increaseIgnCounter(opponentPlayer.getTableCards());
@@ -231,7 +233,7 @@ public class GameEngine {
 
         if (getRound() > 1) {
             if (selectedCard instanceof CreatureCard) {
-                notTapped = checkIfTapped((CreatureCard) selectedCard);
+                notTapped = !checkIfTapped((CreatureCard) selectedCard);
             }
             if (notTapped) {
                 chooseAttack(selectedCard, opponentCards);

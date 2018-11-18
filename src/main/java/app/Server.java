@@ -64,8 +64,7 @@ public class Server {
                 for (int i = 0; i < opponentAmount; i++) {
                     opponents.add((CreatureCard) gameEngine.getDeck().getCards().get(Integer.parseInt(commands.get(i + 2)))); //ignoring first two spots
                 }
-                System.out.println(selectedCard.getId()+" attacks "+opponents.get(0).getId());
-                gameEngine.chooseAttack(selectedCard, opponents);
+                gameEngine.attack(selectedCard, opponents);
                 break;
             case "endturn":
                 gameEngine.endTurn();

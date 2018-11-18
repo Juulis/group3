@@ -1,6 +1,7 @@
 package controllers;
 
 import app.Server;
+import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.*;
 import javafx.geometry.*;
@@ -12,9 +13,12 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
 import models.*;
+import org.w3c.dom.css.Rect;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class TableViewController {
     private static Card selectedCurrentCard;
@@ -109,20 +113,48 @@ public class TableViewController {
     }
 
     public void sendToGraveYard(String cardID, String player) {
+        List<Node> nodesToRemove = new ArrayList<>();
         System.out.println("sendToGraveYard");
         if (player.equals("1")) {
-            System.out.println("PLAYER1");
-            playerOneTableBox.getChildren().forEach(node -> {
-                if (node.getId().equals(cardID)) {
-                    System.out.println("HEJ");
-                    playerOneTableBox.getChildren().remove(node);
-                } else {
-                    playerTwoTableBox.getChildren().remove(node);
-                    System.out.println("HEJDÅ");
+            for (Node n : playerOneTableBox.getChildren()) {
+                if (n.getId().equals(cardID)) {
+                    nodesToRemove.add(n);
                 }
-            });
+            }
+            playerOneTableBox.getChildren().removeAll(nodesToRemove);
+        } else {
+            for (Node n : playerTwoTableBox.getChildren()) {
+                if (n.getId().equals(cardID)) {
+                    nodesToRemove.add(n);
+                }
+            }
+            playerTwoTableBox.getChildren().removeAll(nodesToRemove);
         }
+        addNewPlaceholderForP1();
+        addNewPlaceholderForP2();
         update();
+    }
+
+    public String randomId() {
+        Random r = new Random();
+        int randomNr = r.nextInt(1000000);
+        return String.valueOf(randomNr);
+    }
+
+    public void addNewPlaceholderForP1() {
+        Rectangle rect = new Rectangle();
+        rect.setArcHeight(500);
+        rect.setArcWidth(50);
+        rect.setId(randomId());
+        playerOneTableBox.getChildren().add(rect);
+    }
+
+    public void addNewPlaceholderForP2() {
+        Rectangle rect = new Rectangle();
+        rect.setArcHeight(500);
+        rect.setArcWidth(50);
+        rect.setId(randomId());
+        playerTwoTableBox.getChildren().add(rect);
     }
 
     public void toSoonWarning() {
