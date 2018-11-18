@@ -115,20 +115,38 @@ public class TableViewController {
     public void sendToGraveYard(String cardID, String player) {
         List<Node> nodesToRemove = new ArrayList<>();
         System.out.println("sendToGraveYard");
-        if (player.equals("1")) {
-            for (Node n : playerOneTableBox.getChildren()) {
-                if (n.getId().equals(cardID)) {
-                    nodesToRemove.add(n);
+        if (deck.getCards().get(Integer.parseInt(cardID)) instanceof MagicCard) {
+            if (player.equals("1")) {
+                for (Node n : playerOneHandBox.getChildren()) {
+                    if (n.getId().equals(cardID)) {
+                        nodesToRemove.add(n);
+                    }
                 }
+                playerOneHandBox.getChildren().removeAll(nodesToRemove);
+            } else {
+                for (Node n : playerTwoHandBox.getChildren()) {
+                    if (n.getId().equals(cardID)) {
+                        nodesToRemove.add(n);
+                    }
+                }
+                playerTwoHandBox.getChildren().removeAll(nodesToRemove);
             }
-            playerOneTableBox.getChildren().removeAll(nodesToRemove);
         } else {
-            for (Node n : playerTwoTableBox.getChildren()) {
-                if (n.getId().equals(cardID)) {
-                    nodesToRemove.add(n);
+            if (player.equals("1")) {
+                for (Node n : playerOneTableBox.getChildren()) {
+                    if (n.getId().equals(cardID)) {
+                        nodesToRemove.add(n);
+                    }
                 }
+                playerOneTableBox.getChildren().removeAll(nodesToRemove);
+            } else {
+                for (Node n : playerTwoTableBox.getChildren()) {
+                    if (n.getId().equals(cardID)) {
+                        nodesToRemove.add(n);
+                    }
+                }
+                playerTwoTableBox.getChildren().removeAll(nodesToRemove);
             }
-            playerTwoTableBox.getChildren().removeAll(nodesToRemove);
         }
         addNewPlaceholderForP1();
         addNewPlaceholderForP2();
@@ -271,7 +289,7 @@ public class TableViewController {
 
     @FXML
     private void getSelectedCard(Event event) {
-        if (isActivePlayerSelectingHandCard(event) || isSelectingCardToAttackWith(event) ) {
+        if (isActivePlayerSelectingHandCard(event) || isSelectingCardToAttackWith(event)) {
             selectedCurrentCard = getCardFromId(((AnchorPane) event.getSource()).getId());
             selectedPane = (AnchorPane) event.getSource();
         } else if (isSelectingCardToAttack(event)) {
