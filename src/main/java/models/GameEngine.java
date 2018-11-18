@@ -382,6 +382,11 @@ public class GameEngine {
                     int cardNr = getInput();
                     if (choice == 1) {
                         MagicCard magicCard = (MagicCard) currentPlayer.getPlayerHand().get(cardNr - 1);
+                        if (magicCard == null) {
+                            System.out.println("Selected card does not exist!");
+                            playerMenu();
+                            return;
+                        }
                         chooseConsoleAttack(magicCard);
                         currentPlayer.sendToGraveyard(magicCard);
                         for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
@@ -392,6 +397,11 @@ public class GameEngine {
                         checkHealthLeft();
                     } else if (choice == 2) {
                         CreatureCard creatureCard = (CreatureCard) currentPlayer.getTableCards().get(cardNr - 1);
+                        if (creatureCard == null) {
+                            System.out.println("Selected card does not exist!");
+                            playerMenu();
+                            return;
+                        }
                         if (!checkIfTapped(creatureCard)) {
                             if (isCardReadyToAttack(creatureCard)) {
                                 chooseConsoleAttack(creatureCard);
