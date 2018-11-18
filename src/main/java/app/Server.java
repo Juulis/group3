@@ -75,7 +75,7 @@ public class Server {
     }
 
     public void msgToFX(String msg) {
-        List<String> commands = Arrays.asList(msg.toLowerCase().split(","));
+        List<String> commands = Arrays.asList(msg.split(","));
         switch (commands.get(0)) {
             case "showplayerhand":
                 tvc.showPlayerHand(commands);
@@ -110,6 +110,8 @@ public class Server {
             case "updatedeck":
                 tvc.setDeckLabels(Integer.parseInt(commands.get(1)), Integer.parseInt(commands.get(2)));
                 break;
+            case "setplayernames":
+                tvc.setPlayerNames(commands.get(1),commands.get(2));
         }
     }
 

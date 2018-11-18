@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.*?>
 <?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -62,7 +63,6 @@
                </cursor></Rectangle>
          </children>
       </HBox>
-        <Button id="endTurn" fx:id="endTurn" layoutX="1560.0" layoutY="516.0" mnemonicParsing="false" onMouseClicked="#endTurn" opacity="0.5" prefHeight="47.0" prefWidth="109.0" text="End Turn" />
         <Label id="playerOneHp" fx:id="playerOneHp" layoutX="1527.0" layoutY="603.0" text="20" textFill="#ffffffcc">
             <font>
                 <Font name="System Bold" size="64.0" />
@@ -74,7 +74,7 @@
             </font>
         </Label>
         <Circle fill="#00000080" layoutX="1605.0" layoutY="301.0" radius="37.0" stroke="WHITE" strokeType="INSIDE" />
-        <Circle fill="#000000b8" layoutX="1606.0" layoutY="781.0" radius="37.0" stroke="WHITE" strokeType="INSIDE" />
+        <Circle fill="#000000b8" layoutX="1606.0" layoutY="781.0" radius="37.0" stroke="#c99e9e" strokeType="INSIDE" />
         <Circle id="playeroneavatar" fx:id="playeroneavatar" fill="#ffffff8a" layoutX="1569.0" layoutY="960.0" onMouseClicked="#playerattack" opacity="0.0" radius="100.0" stroke="BLACK" strokeType="INSIDE">
          <cursor>
             <Cursor fx:constant="OPEN_HAND" />
@@ -94,8 +94,8 @@
                 <Glow level="0.65" />
             </effect>
         </ProgressBar>
-        <ProgressIndicator id="playerOneHpRound" fx:id="playerOneHpRound" blendMode="RED" layoutX="1507.0" layoutY="608.0" prefHeight="104.0" prefWidth="115.0" progress="0.0" />
-        <ProgressIndicator id="playerTwoHpRound" fx:id="playerTwoHpRound" blendMode="RED" layoutX="1507.0" layoutY="391.0" prefHeight="104.0" prefWidth="115.0" progress="0.0" />
+        <ProgressIndicator id="playerOneHpRound" fx:id="playerOneHpRound" blendMode="RED" layoutX="1507.0" layoutY="608.0" prefHeight="104.0" prefWidth="115.0" progress="0.0" styleClass=".progress-indicator" stylesheets="@tableview.css" />
+        <ProgressIndicator id="playerTwoHpRound" fx:id="playerTwoHpRound" blendMode="RED" layoutX="1507.0" layoutY="391.0" prefHeight="104.0" prefWidth="115.0" progress="0.0" styleClass=".progress-indicator" stylesheets="@tableview.css" />
         <ProgressBar id="playerTwoMana" fx:id="playerTwoMana" layoutX="697.0" layoutY="24.0" opacity="0.8" prefHeight="30.0" prefWidth="530.0" progress="1.0">
             <effect>
                 <Glow level="0.65" />
@@ -162,14 +162,19 @@
             <Font name="System Bold" size="48.0" />
          </font>
       </Label>
-      <Label fx:id="player1label" layoutX="1481.0" layoutY="83.0" onMouseClicked="#playerattack" prefHeight="62.0" prefWidth="191.0" text="Mohammed" textFill="WHITE">
+      <Label fx:id="player1label" alignment="CENTER" contentDisplay="CENTER" layoutX="1481.0" layoutY="83.0" onMouseClicked="#playerattack" prefHeight="62.0" prefWidth="191.0" text="Mohammed" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Jokerman" size="29.0" />
          </font>
       </Label>
-      <Label fx:id="player2label" layoutX="1481.0" layoutY="929.0" onMouseClicked="#playerattack" prefHeight="62.0" prefWidth="185.0" text="Mohammed" textFill="WHITE">
+      <Label fx:id="player2label" alignment="CENTER" contentDisplay="CENTER" layoutX="1481.0" layoutY="929.0" onMouseClicked="#playerattack" prefHeight="62.0" prefWidth="185.0" text="Mohammed" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Jokerman" size="29.0" />
+         </font>
+      </Label>
+      <Label fx:id="endTurn" contentDisplay="CENTER" layoutX="1552.0" layoutY="514.0" onMouseClicked="#endTurn" prefHeight="53.0" prefWidth="125.0" style="-fx-background-color: black; -fx-background-radius: 60;" text=" END TURN" textFill="#ff000076">
+         <font>
+            <Font name="Chiller" size="34.0" />
          </font>
       </Label>
     </children>

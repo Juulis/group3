@@ -61,6 +61,7 @@ public class GameEngine {
     public void startGame(String startArgs) throws IOException {
         System.out.println("starting game");
         if (startArgs.equals("fx")) {
+            server.msgToFX("setplayernames,"+p1.getName()+","+p2.getName());
             consoleGame = false;
         }
         initGame();

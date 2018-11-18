@@ -21,12 +21,13 @@ public class TableViewController {
     private static Card selectedOpponentCard1;
     private static Card selectedOpponentCard2;
     private static AnchorPane selectedPane;
-    public Label player1label;
-    public Label player2label;
     private Deck deck;
     private Server server;
     private static int activePlayer;
-
+    @FXML
+    private Label player1label;
+    @FXML
+    private Label player2label;
     @FXML
     private ProgressIndicator playerOneHpRound;
     @FXML
@@ -34,15 +35,9 @@ public class TableViewController {
     @FXML
     private ProgressBar playerOneMana;
     @FXML
-    private Rectangle playerOneDeck;
-    @FXML
     private Label playerOneHp;
     @FXML
-    private Button endTurn;
-    @FXML
     private ProgressBar playerTwoMana;
-    @FXML
-    private Rectangle playerTwoDeck;
     @FXML
     private Label playerTwoHp;
     @FXML
@@ -71,7 +66,6 @@ public class TableViewController {
     private Label decklabel1;
     @FXML
     private Label decklabel2;
-
 
     public TableViewController() throws IOException {
         deck = new Deck();
@@ -329,5 +323,10 @@ public class TableViewController {
                         (((Circle) mouseEvent.getSource()).getId().equals("playeroneavatar") && activePlayer == 1))) {
             server.msgToGameEngine("attack," + selectedCurrentCard.getId());
         }
+    }
+
+    public void setPlayerNames(String p1, String p2) {
+        player1label.setText(p1);
+        player2label.setText(p2);
     }
 }
