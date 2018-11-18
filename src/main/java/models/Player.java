@@ -93,11 +93,12 @@ public class Player {
         if(tableCards.size()>=7)
             return;
         try {
-            if (card.getClass() == CreatureCard.class) {
+            if (card instanceof CreatureCard) {
                 tableCards.add(card);
                 playerHand.remove(card);
                 ((CreatureCard) card).tap();
                 ((CreatureCard) card).setPlayedOnRound(round);
+                playerEnergy -= card.getCardEnergy();
             } else {
                 System.out.println("magic card cant be played");
             }

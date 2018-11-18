@@ -26,6 +26,9 @@ class PlayerTest {
     @Mock
     Card cardMock;
 
+    @Mock
+    CreatureCard creatureCardMock;
+
     @BeforeEach
     void setup(){
 
@@ -105,10 +108,22 @@ class PlayerTest {
     @Test
     void decreaseEnergyOnPlayCard(){
         int energy = 3;
-        when(cardMock.getCardEnergy()).thenReturn(2);
+        when(creatureCardMock.getCardEnergy()).thenReturn(2);
         player.setPlayerEnergy(energy);
-        player.playCard(cardMock,2);
-        assertEquals(energy - cardMock.getCardEnergy(), player.getPlayerEnergy());
+        player.playCard(creatureCardMock,2);
+        assertEquals(energy - creatureCardMock.getCardEnergy(), player.getPlayerEnergy());
+    }
+
+    @Test
+    void notEnoughEnergyToPlayCard(){
+        int playerEnergy = 3;
+        int cardEnergy = 5;
+        int handSize = player.getPlayerHand().size();
+        when(creatureCardMock.getCardEnergy()).thenReturn(cardEnergy);
+        player.setPlayerEnergy(playerEnergy);
+        player.playCard(creatureCardMock, 2);
+        assertEquals(playerEnergy, player.getPlayerEnergy());
+        assertEquals(handSize, player.getPlayerHand().size());
     }
 
 }
