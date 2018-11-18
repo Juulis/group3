@@ -385,6 +385,7 @@ public class GameEngine {
                         MagicCard magicCard = (MagicCard) currentPlayer.getPlayerHand().get(cardNr - 1);
                         if (isOpponentTableEmpty) {
                             attackPlayerWhenTableEmpty(magicCard);
+                            currentPlayer.sendToGraveyard(magicCard);
                             return;
                         }
                         chooseConsoleAttack(magicCard);
