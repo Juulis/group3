@@ -344,13 +344,14 @@ public class GameEngine {
 
     private void playerMenu() throws IOException {
         int input;
+        boolean isOpponentTableEmpty = opponentPlayer.getTableCards().isEmpty();
         System.out.println(
                 "------------------------------------------------- \n" +
                         (currentPlayer == p1 ? "Player 1 \n" : "Player 2 \n") +
                         "Here are your choices: \n" +
                         "1. Show table \n" +
                         "2. Play card on hand \n" +
-                        (opponentPlayer.getTableCards().isEmpty() ? "3. Attack player \n" : "3. Attack a card \n") +
+                        (isOpponentTableEmpty ? "3. Attack player \n" : "3. Attack a card \n") +
                         "4. End Turn \n" +
                         "-------------------------------------------------");
         input = getInput();
@@ -382,14 +383,10 @@ public class GameEngine {
                     int cardNr = getInput();
                     if (choice == 1) {
                         MagicCard magicCard = (MagicCard) currentPlayer.getPlayerHand().get(cardNr - 1);
-
-//                        attackPlayerIfTableEmpty(magicCard);
-
-                        if (opponentPlayer.getTableCards().isEmpty()) {
-                            attacks.attackPlayer(magicCard, opponentPlayer);
+                        if (isOpponentTableEmpty) {
+                            attackPlayerWhenTableEmpty(magicCard);
                             return;
                         }
-
                         chooseConsoleAttack(magicCard);
                         currentPlayer.sendToGraveyard(magicCard);
                         for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
@@ -402,15 +399,10 @@ public class GameEngine {
                         CreatureCard creatureCard = (CreatureCard) currentPlayer.getTableCards().get(cardNr - 1);
                         if (!checkIfTapped(creatureCard)) {
                             if (isCardReadyToAttack(creatureCard)) {
-
-//                                attackPlayerIfTableEmpty(creatureCard);
-
-                                if (opponentPlayer.getTableCards().isEmpty()) {
-                                    attacks.attackPlayer(creatureCard, opponentPlayer);
+                                if (isOpponentTableEmpty) {
+                                    attackPlayerWhenTableEmpty(creatureCard);
                                     return;
                                 }
-
-
                                 chooseConsoleAttack(creatureCard);
                                 for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
                                     if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
@@ -544,9 +536,7 @@ public class GameEngine {
         return false;
     }
 
-    public void attackPlayerIfTableEmpty(Card card) {
-        if (opponentPlayer.getTableCards().isEmpty()) {
-            attacks.attackPlayer(card, opponentPlayer);
-        }
+    public void attackPlayerWhenTableEmpty(Card card) {
+        attacks.attackPlayer(card, opponentPlayer);
     }
 }
