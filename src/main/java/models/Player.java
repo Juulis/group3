@@ -10,6 +10,7 @@ public class Player {
     private int health;
     private String name;
     private int score;
+    private int playerEnergy;
 
     private ArrayList<Card> currentDeck;
     private ArrayList<Card> playerHand;
@@ -136,5 +137,13 @@ public class Player {
 
     public void setPlayer(int i) {
         player = i;
+    }
+
+    public int getPlayerEnergy() {
+        return playerEnergy;
+    }
+
+    public void setPlayerEnergy(int playerEnergy) {
+        this.playerEnergy = playerEnergy;
     }
 }
