@@ -389,14 +389,19 @@ public class GameEngine {
                     int cardNr = getInput();
                     if (choice == 1) {
                         MagicCard magicCard = (MagicCard) currentPlayer.getPlayerHand().get(cardNr - 1);
-                        chooseConsoleAttack(magicCard);
-                        currentPlayer.sendToGraveyard(magicCard);
-                        for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
-                            if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
-                                opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
+                        if( magicCard.getCardEnergy() < currentPlayer.getPlayerEnergy()){
+                            chooseConsoleAttack(magicCard);
+                            currentPlayer.sendToGraveyard(magicCard);
+                            for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
+                                if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
+                                    opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
+                                }
                             }
+                            checkHealthLeft();
+                        } else {
+                            System.out.println("You don't have enough energy to use this card");
                         }
-                        checkHealthLeft();
+
                     } else if (choice == 2) {
                         CreatureCard creatureCard = (CreatureCard) currentPlayer.getTableCards().get(cardNr - 1);
                         if (!checkIfTapped(creatureCard)) {
