@@ -89,6 +89,7 @@ public class GameEngine {
      * setting the players decks and cards in hands
      */
     public void initPlayer() {
+        int startEnergy = 1;
         p1.setPlayer(1);
         p2.setPlayer(2);
         determinePlayerToStart();
@@ -102,7 +103,8 @@ public class GameEngine {
             p1.pickupCard();
             p2.pickupCard();
         }
-
+        p1.setPlayerEnergy(startEnergy);
+        p2.setPlayerEnergy(startEnergy);
     }
 
     public void checkCardsLeft() throws IOException {
