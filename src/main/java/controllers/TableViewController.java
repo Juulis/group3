@@ -243,6 +243,11 @@ public class TableViewController {
         }
     }
 
+    private boolean usingValidAttackCard() {
+        return ((activePlayer == 1 && !playerOneHandBox.getChildren().contains(selectedPane)) || selectedCurrentCard instanceof MagicCard) ||
+                ((activePlayer == 2 && !playerTwoHandBox.getChildren().contains(selectedPane)) || selectedCurrentCard instanceof MagicCard);
+    }
+
     private boolean isSelectingCardToAttackWith(Event event) {
         return (selectedCurrentCard == null && activePlayer == 1 && ((AnchorPane) event.getSource()).getParent().getId().equals("playerOneTableBox")) ||
                 (selectedCurrentCard == null && activePlayer == 2 && ((AnchorPane) event.getSource()).getParent().getId().equals("playerTwoTableBox"));

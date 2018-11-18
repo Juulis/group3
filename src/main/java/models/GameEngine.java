@@ -224,7 +224,9 @@ public class GameEngine {
     public void attack(Card selectedCard, List<CreatureCard> opponentCards) {
         //TODO: change to string instead of ENUM . works with string to since java 8
         boolean notTapped = true;
-
+        if(currentPlayer.getPlayerHand().contains(selectedCard) && !(selectedCard instanceof MagicCard)){
+            return;
+        }
         if (getRound() > 1) {
             if (selectedCard instanceof CreatureCard) {
                 notTapped = !checkIfTapped((CreatureCard) selectedCard);

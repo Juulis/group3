@@ -10,11 +10,11 @@ public class Player {
     private int health;
     private String name;
     private int score;
+    private int player;
 
     private ArrayList<Card> currentDeck;
     private ArrayList<Card> playerHand;
     private ArrayList<Card> tableCards;
-    private int player;
 
     public Player() {
         this.health = 20;
