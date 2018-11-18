@@ -253,7 +253,7 @@ public class GameEngine {
                 }
                 checkHealthLeft();
             } else {
-                Server.getInstance().msgToFX("tapped");
+                Server.getInstance().msgToFX("tappedwarning");
             }
         } else {
             Server.getInstance().msgToFX("tosoon");

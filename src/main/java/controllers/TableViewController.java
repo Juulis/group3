@@ -7,6 +7,8 @@ import javafx.fxml.*;
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -163,7 +165,32 @@ public class TableViewController {
     public void playCard(int cardID) {
     }
 
-    public void isTappedWarning() {
+    public void tapCard(String cardID) {
+        for (Node n : playerOneTableBox.getChildren()) {
+            if (n.getId().equals(cardID)) {
+                n.lookup("#cardImageView").setEffect(new GaussianBlur());
+            } else {
+                for (Node o : playerTwoTableBox.getChildren()) {
+                    if (o.getId().equals(cardID)) {
+                        o.lookup("#cardImageView").setEffect(new GaussianBlur());
+                    }
+                }
+            }
+        }
+    }
+
+    public void unTapCard(String cardID) {
+        for (Node n : playerOneTableBox.getChildren()) {
+            if (n.getId().equals(cardID)) {
+                n.lookup("#cardImageView").setEffect(null);
+            } else {
+                for (Node o : playerTwoTableBox.getChildren()) {
+                    if (o.getId().equals(cardID)) {
+                        o.lookup("#cardImageView").setEffect(null);
+                    }
+                }
+            }
+        }
     }
 
     public void showPlayerHand(List<String> commands) {
@@ -271,7 +298,7 @@ public class TableViewController {
 
     @FXML
     private void getSelectedCard(Event event) {
-        if (isActivePlayerSelectingHandCard(event) || isSelectingCardToAttackWith(event) ) {
+        if (isActivePlayerSelectingHandCard(event) || isSelectingCardToAttackWith(event)) {
             selectedCurrentCard = getCardFromId(((AnchorPane) event.getSource()).getId());
             selectedPane = (AnchorPane) event.getSource();
         } else if (isSelectingCardToAttack(event)) {

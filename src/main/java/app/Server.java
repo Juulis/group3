@@ -103,8 +103,10 @@ public class Server {
                 tvc.playCard(Integer.parseInt(commands.get(1)));
                 break;
             case "tapped":
-                tvc.isTappedWarning();
+                tvc.tapCard(commands.get(1));
                 break;
+            case "untap":
+                tvc.unTapCard(commands.get(1));
         }
     }
 
