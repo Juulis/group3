@@ -231,7 +231,7 @@ public class GameEngine {
 
         if (getRound() > 1) {
             if (selectedCard instanceof CreatureCard) {
-                notTapped = checkIfTapped((CreatureCard) selectedCard);
+                notTapped = !checkIfTapped((CreatureCard) selectedCard);
             }
             if (notTapped) {
                 chooseAttack(selectedCard, opponentCards);
