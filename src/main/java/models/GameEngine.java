@@ -350,7 +350,7 @@ public class GameEngine {
                         "Here are your choices: \n" +
                         "1. Show table \n" +
                         "2. Play card on hand \n" +
-                        "3. Attack a card \n" +
+                        (opponentPlayer.getTableCards().isEmpty() ? "3. Attack player \n" : "3. Attack a card \n") +
                         "4. End Turn \n" +
                         "-------------------------------------------------");
         input = getInput();
