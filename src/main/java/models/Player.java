@@ -94,11 +94,15 @@ public class Player {
             return;
         try {
             if (card instanceof CreatureCard) {
-                tableCards.add(card);
-                playerHand.remove(card);
-                ((CreatureCard) card).tap();
-                ((CreatureCard) card).setPlayedOnRound(round);
-                playerEnergy -= card.getCardEnergy();
+                if (card.getCardEnergy() < playerEnergy){
+                    tableCards.add(card);
+                    playerHand.remove(card);
+                    ((CreatureCard) card).tap();
+                    ((CreatureCard) card).setPlayedOnRound(round);
+                    playerEnergy -= card.getCardEnergy();
+                } else {
+                    System.out.println("You don't have enough energy to play this card");
+                }
             } else {
                 System.out.println("magic card cant be played");
             }
