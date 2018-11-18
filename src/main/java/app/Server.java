@@ -12,12 +12,12 @@ public class Server {
     private static Server instance = null;
     private TableViewController tvc;
 
-    private Server() throws IOException {
+    private Server() {
         instance = this;
         gameEngine = new GameEngine();
     }
 
-    public static Server getInstance() throws IOException {
+    public static Server getInstance()  {
         if (instance == null) {
             instance = new Server();
         }
@@ -43,7 +43,7 @@ public class Server {
      *            example string: "attack,4,1,2"
      *            card 4 will attack opponent cards 1 and 2
      */
-    public void msgToGameEngine(String msg) throws IOException {
+    public void msgToGameEngine(String msg) {
         List<String> commands = Arrays.asList(msg.toLowerCase().split(","));
         Card selectedCard = null;
         if (commands.size() > 1) {

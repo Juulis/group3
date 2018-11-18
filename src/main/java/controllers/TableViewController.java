@@ -148,13 +148,13 @@ public class TableViewController {
                             .setImage(new Image(card.getImgURL()));
 
 
-                    top = (Label)cardPane.getChildren().get(0);
-                    middle = (Label)cardPane.getChildren().get(1);
-                    bottom = (Label)cardPane.getChildren().get(2);
+                    top = (Label) cardPane.getChildren().get(0);
+                    middle = (Label) cardPane.getChildren().get(1);
+                    bottom = (Label) cardPane.getChildren().get(2);
                     top.setText(card.getSpecialAttack());
-                    if(card instanceof MagicCard){
+                    if (card instanceof MagicCard) {
                         middle.setText("MAGIC");
-                    }else{
+                    } else {
                         middle.setText("CREATURE");
                     }
                     bottom.setText(Integer.toString(card.getId()));
@@ -178,20 +178,19 @@ public class TableViewController {
                             .setImage(new Image(card.getImgURL()));
 
 
-                    top = (Label)cardPane.getChildren().get(0);
-                    middle = (Label)cardPane.getChildren().get(1);
-                    bottom = (Label)cardPane.getChildren().get(2);
+                    top = (Label) cardPane.getChildren().get(0);
+                    middle = (Label) cardPane.getChildren().get(1);
+                    bottom = (Label) cardPane.getChildren().get(2);
                     top.setText(card.getSpecialAttack());
-                    if(card instanceof MagicCard){
+                    if (card instanceof MagicCard) {
                         middle.setText("MAGIC");
-                    }else{
+                    } else {
                         middle.setText("CREATURE");
                     }
                     bottom.setText(Integer.toString(card.getId()));
                     top.toFront();
                     middle.toFront();
                     bottom.toFront();
-
 
 
                     playerTwoHandBox.getChildren().add(cardPane);
@@ -226,37 +225,22 @@ public class TableViewController {
 
     @FXML
     private void getSelectedCard(Event event) {
-        if (isActivePlayerSelectingHandCard(event)) {
+        if (isActivePlayerSelectingHandCard(event) || isSelectingCardToAttackWith(event)) {
             selectedCurrentCard = getCardFromId(((AnchorPane) event.getSource()).getId());
             selectedPane = (AnchorPane) event.getSource();
         } else if (isSelectingCardToAttack(event)) {
             if (selectedOpponentCard1 == null) {
                 selectedOpponentCard1 = getCardFromId(((AnchorPane) event.getSource()).getId());
-                if (selectedCurrentCard.getSpecialAttack().equals("basic")) {
-                    try {
-                        server.msgToGameEngine("attack," + selectedCurrentCard.getId() + "," + selectedOpponentCard1.getId());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                if (selectedCurrentCard.getSpecialAttack().equals("basic") || selectedCurrentCard.getSpecialAttack().equals("ignite")) {
+                    server.msgToGameEngine("attack," + selectedCurrentCard.getId() + "," + selectedOpponentCard1.getId());
                     clearCards();
                 }
             } else if (selectedCurrentCard.getSpecialAttack().equals("dualAttack")) {
                 selectedOpponentCard2 = getCardFromId(((AnchorPane) event.getSource()).getId());
-                try {
-                    server.msgToGameEngine("attack," + selectedCurrentCard.getId() + "," + selectedOpponentCard1.getId() + "," + selectedOpponentCard2.getId());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                server.msgToGameEngine("attack," + selectedCurrentCard.getId() + "," + selectedOpponentCard1.getId() + "," + selectedOpponentCard2.getId());
                 clearCards();
             }
-//
-
         }
-        if (isSelectingCardToAttackWith(event)) {
-            selectedCurrentCard = getCardFromId(((AnchorPane) event.getSource()).getId());
-        }
-
-
     }
 
     private boolean isSelectingCardToAttackWith(Event event) {
@@ -274,7 +258,6 @@ public class TableViewController {
                 (((AnchorPane) event.getSource()).getParent().getId().equals("playerTwoHandBox") && activePlayer == 2);
     }
 
-    @FXML
     private void swapPlaceHolder(Rectangle rect) throws IOException {
         if (selectedPane != null && !(selectedCurrentCard.getClass().equals(MagicCard.class))) {
             if (activePlayer == 1 && playerOneTableBox.getChildren().contains(rect) && playerOneHandBox.getChildren().contains(selectedPane)) {
