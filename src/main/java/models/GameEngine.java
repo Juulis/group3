@@ -101,12 +101,12 @@ public class GameEngine {
 
     }
 
-    public void checkCardsLeft() throws IOException {
+    public void checkCardsLeft() {
         checkPlayerCards(p1, p2);
         checkPlayerCards(p2, p1);
     }
 
-    public void checkPlayerCards(Player p, Player q) throws IOException {
+    public void checkPlayerCards(Player p, Player q) {
         if (p.getCurrentDeck().size() == 0 && p.getPlayerHand().size() == 0 && p.getTableCards().size() == 0) {
             System.out.println("Congratulations!" + q.getName() + " is the Winner");
             scoreHandler.checkScore(q);
@@ -118,12 +118,12 @@ public class GameEngine {
         }
     }
 
-    public void checkHealthLeft() throws IOException {
+    public void checkHealthLeft() {
         checkPlayerHealth(p1, p2);
         checkPlayerHealth(p2, p1);
     }
 
-    public void checkPlayerHealth(Player p, Player q) throws IOException {
+    public void checkPlayerHealth(Player p, Player q) {
         if (p.getHealth() <= 0) {
             System.out.println("Congratulations! " + q.getName() + " is the Winner");
             scoreHandler.checkScore(q);
@@ -170,7 +170,7 @@ public class GameEngine {
         return currentPlayer;
     }
 
-    public void endTurn() throws IOException {
+    public void endTurn() {
         checkCardsLeft();
         unTap();
         int active;
@@ -221,7 +221,7 @@ public class GameEngine {
 
     public enum AttackNames {BASIC, PLAYERATTACK, DUALATTACK, IGNITE, ATTACKALL}
 
-    public void attack(Card selectedCard, List<CreatureCard> opponentCards) throws IOException {
+    public void attack(Card selectedCard, List<CreatureCard> opponentCards) {
         //TODO: change to string instead of ENUM . works with string to since java 8
         boolean notTapped = true;
 

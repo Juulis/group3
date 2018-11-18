@@ -62,6 +62,7 @@ public class Player {
 
         try {
             Server.getInstance().msgToFX("showplayerhand," + player + "," + playerHandString);
+            Server.getInstance().msgToFX("updatedeck,"+player+","+currentDeck.size());
         } catch (Exception e) {
         }
     }

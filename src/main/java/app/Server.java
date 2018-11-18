@@ -43,7 +43,7 @@ public class Server {
      *            example string: "attack,4,1,2"
      *            card 4 will attack opponent cards 1 and 2
      */
-    public void msgToGameEngine(String msg) throws IOException {
+    public void msgToGameEngine(String msg) {
         List<String> commands = Arrays.asList(msg.toLowerCase().split(","));
         Card selectedCard = null;
         if (commands.size() > 1) {
@@ -106,6 +106,10 @@ public class Server {
                 break;
             case "showmessage":
                 tvc.showMessage(commands.get(1));
+                break;
+            case "updatedeck":
+                tvc.setDeckLabels(Integer.parseInt(commands.get(1)), Integer.parseInt(commands.get(2)));
+                break;
         }
     }
 
