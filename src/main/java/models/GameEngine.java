@@ -381,15 +381,21 @@ public class GameEngine {
                     System.out.println("Choose a card to attack with");
                     int cardNr = getInput();
                     if (choice == 1) {
-                        MagicCard magicCard = (MagicCard) currentPlayer.getPlayerHand().get(cardNr - 1);
-                        chooseConsoleAttack(magicCard);
-                        currentPlayer.sendToGraveyard(magicCard);
-                        for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
-                            if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
-                                opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
-                            }
+                        Card magicCard = currentPlayer.getPlayerHand().get(cardNr - 1);
+                        if(! (magicCard instanceof MagicCard)){
+                            System.out.println("Wrong card. Try again");
                         }
-                        checkHealthLeft();
+                        else{
+                            chooseConsoleAttack(magicCard);
+                            currentPlayer.sendToGraveyard(magicCard);
+                            for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
+                                if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
+                                    opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
+                                }
+                            }
+                            checkHealthLeft();
+                        }
+
                     } else if (choice == 2) {
                         CreatureCard creatureCard = (CreatureCard) currentPlayer.getTableCards().get(cardNr - 1);
                         if (!checkIfTapped(creatureCard)) {
