@@ -271,7 +271,7 @@ public class TableViewController {
 
     @FXML
     private void getSelectedCard(Event event) {
-        if (isActivePlayerSelectingHandCard(event)) {
+        if (isActivePlayerSelectingHandCard(event) || isSelectingCardToAttackWith(event) ) {
             selectedCurrentCard = getCardFromId(((AnchorPane) event.getSource()).getId());
             selectedPane = (AnchorPane) event.getSource();
         } else if (isSelectingCardToAttack(event)) {
@@ -297,11 +297,6 @@ public class TableViewController {
 //
 
         }
-        if (isSelectingCardToAttackWith(event)) {
-            selectedCurrentCard = getCardFromId(((AnchorPane) event.getSource()).getId());
-        }
-
-
     }
 
     private boolean isSelectingCardToAttackWith(Event event) {
