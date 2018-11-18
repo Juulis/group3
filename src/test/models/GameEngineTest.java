@@ -108,8 +108,8 @@ class GameEngineTest {
         verify(p2Mock, times(1)).setCurrentDeck(playerTwoDeckMock);
         verify(p1Mock, times(5)).pickupCard();
         verify(p2Mock, times(5)).pickupCard();
-        verify(p1Mock,times(1)).setPlayerEnergy(1);
-        verify(p2Mock,times(1)).setPlayerEnergy(1);
+        verify(p1Mock,times(1)).setPlayerEnergy(2);
+        verify(p2Mock,times(1)).setPlayerEnergy(2);
     }
 
     @DisplayName("If player deck is null")
@@ -542,6 +542,15 @@ class GameEngineTest {
         p1.playCard(p1.getPlayerHand().get(p1.getPlayerHand().indexOf(magicCard)), 4);
         p1.sendToGraveyard(magicCard);
         assertEquals(0, p1.getPlayerHand().size());
+    }
+
+    @Test
+    void regeneratePlayerEnergy(){
+        int p1Energy = gameEngine.getP1().getPlayerEnergy();
+        int p2Energy = gameEngine.getP2().getPlayerEnergy();
+        gameEngine.regeneratePlayerEnergy();
+        assertEquals(p1Energy+2, gameEngine.getP1().getPlayerEnergy());
+        assertEquals(p2Energy+2, gameEngine.getP2().getPlayerEnergy());
     }
 
     }
