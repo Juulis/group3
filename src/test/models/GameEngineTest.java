@@ -88,7 +88,7 @@ class GameEngineTest {
     }
 
     @Test
-    void initPlayer() throws IOException {
+    void initPlayer(){
 
         gameEngine.setP1(p1Mock);
         gameEngine.setP2(p2Mock);
@@ -108,6 +108,8 @@ class GameEngineTest {
         verify(p2Mock, times(1)).setCurrentDeck(playerTwoDeckMock);
         verify(p1Mock, times(5)).pickupCard();
         verify(p2Mock, times(5)).pickupCard();
+        verify(p1Mock,times(1)).setPlayerEnergy(1);
+        verify(p2Mock,times(1)).setPlayerEnergy(1);
     }
 
     @DisplayName("If player deck is null")
