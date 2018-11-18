@@ -321,9 +321,15 @@ public class GameEngine {
                         System.out.println("Choose two cards to attack");
                         attackedCardNr = getInput();
                         attackedCard = (CreatureCard) opponentPlayer.getTableCards().get(attackedCardNr - 1);
-                        attackedCardNr = getInput();
-                        CreatureCard attackedCard2 = (CreatureCard) opponentPlayer.getTableCards().get(attackedCardNr - 1);
-                        attacks.dualAttack((CreatureCard) selectedCard, attackedCard, attackedCard2);
+                        if(opponentPlayer.getTableCards().size()>=2){
+                            attackedCardNr = getInput();
+                            CreatureCard attackedCard2 = (CreatureCard) opponentPlayer.getTableCards().get(attackedCardNr - 1);
+                            attacks.dualAttack((CreatureCard) selectedCard, attackedCard, attackedCard2);
+                        }
+                        else {
+                            attacks.basicAttack(selectedCard, attackedCard);
+                            attacks.attackPlayer(selectedCard, opponentPlayer);
+                        }
                         break;
 
                     case PLAYERATTACK:
@@ -460,7 +466,6 @@ public class GameEngine {
             System.out.println("Player 2");
         System.out.println("Turn " + turn);
         System.out.println("----------");
-        CreatureCard creatureCard;
 
         int currentHealth = currentPlayer.getHealth();
         int opponentHealth = opponentPlayer.getHealth();
@@ -493,7 +498,7 @@ public class GameEngine {
         for (int i = 0; i < cards.size(); i++) {
             Card card = cards.get(i);
             if (card instanceof CreatureCard)
-                System.out.println(i + 1 + ": creature card with " + ((CreatureCard) card).getHp() + " hp  " + card.getAttack() + " attack ");
+                System.out.println(i + 1 + ": creature card with " + ((CreatureCard) card).getHp() + " hp  " + card.getAttack() + " attack "+ card.getSpecialAttack());
 
 
             if (card instanceof MagicCard) {
