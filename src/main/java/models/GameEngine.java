@@ -382,6 +382,14 @@ public class GameEngine {
                     int cardNr = getInput();
                     if (choice == 1) {
                         MagicCard magicCard = (MagicCard) currentPlayer.getPlayerHand().get(cardNr - 1);
+
+//                        attackPlayerIfTableEmpty(magicCard);
+
+                        if (opponentPlayer.getTableCards().isEmpty()) {
+                            attacks.attackPlayer(magicCard, opponentPlayer);
+                            return;
+                        }
+
                         chooseConsoleAttack(magicCard);
                         currentPlayer.sendToGraveyard(magicCard);
                         for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
@@ -394,6 +402,15 @@ public class GameEngine {
                         CreatureCard creatureCard = (CreatureCard) currentPlayer.getTableCards().get(cardNr - 1);
                         if (!checkIfTapped(creatureCard)) {
                             if (isCardReadyToAttack(creatureCard)) {
+
+//                                attackPlayerIfTableEmpty(creatureCard);
+
+                                if (opponentPlayer.getTableCards().isEmpty()) {
+                                    attacks.attackPlayer(creatureCard, opponentPlayer);
+                                    return;
+                                }
+
+
                                 chooseConsoleAttack(creatureCard);
                                 for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
                                     if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
@@ -468,7 +485,7 @@ public class GameEngine {
         System.out.println();
         System.out.println();
 
-        System.out.print("Your hand: ");
+        System.out.print("Your hand: \n");
         printCards(currentPlayer.getPlayerHand());
         System.out.println();
         System.out.println();
@@ -525,5 +542,11 @@ public class GameEngine {
         if ((creatureCard.getPlayedOnRound() + creatureCard.getPower()) < getRound())
             return true;
         return false;
+    }
+
+    public void attackPlayerIfTableEmpty(Card card) {
+        if (opponentPlayer.getTableCards().isEmpty()) {
+            attacks.attackPlayer(card, opponentPlayer);
+        }
     }
 }
