@@ -62,9 +62,9 @@
                </cursor></Rectangle>
          </children>
       </HBox>
-        <Rectangle id="playerTwoDeck" onMouseClicked="#pickCard" fx:id="playerTwoDeck" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="326.0" layoutY="52.0" rotate="45.0" stroke="WHITE" strokeType="INSIDE" width="108.0" />
-        <Rectangle id="playerOneDeck" onMouseClicked="#pickCard" fx:id="playerOneDeck" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="326.0" layoutY="853.0" rotate="135.0" stroke="WHITE" strokeType="INSIDE" width="108.0" />
-        <Button id="endTurn" fx:id="endTurn" onMouseClicked="#endTurn" layoutX="1560.0" layoutY="516.0" mnemonicParsing="false" opacity="0.5" prefHeight="47.0" prefWidth="109.0" text="End Turn" />
+        <Rectangle id="playerTwoDeck" fx:id="playerTwoDeck" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="326.0" layoutY="52.0" onMouseClicked="#pickCard" rotate="45.0" stroke="WHITE" strokeType="INSIDE" width="108.0" />
+        <Rectangle id="playerOneDeck" fx:id="playerOneDeck" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="175.0" layoutX="326.0" layoutY="853.0" onMouseClicked="#pickCard" rotate="135.0" stroke="WHITE" strokeType="INSIDE" width="108.0" />
+        <Button id="endTurn" fx:id="endTurn" layoutX="1560.0" layoutY="516.0" mnemonicParsing="false" onMouseClicked="#endTurn" opacity="0.5" prefHeight="47.0" prefWidth="109.0" text="End Turn" />
         <Label id="playerOneHp" fx:id="playerOneHp" layoutX="1527.0" layoutY="603.0" text="20" textFill="#ffffffcc">
             <font>
                 <Font name="System Bold" size="64.0" />
@@ -141,5 +141,6 @@
                </cursor></Rectangle>
          </children>
       </HBox>
+      <Label fx:id="messagebar" ellipsisString=".." layoutX="241.0" layoutY="477.0" prefHeight="74.0" prefWidth="86.0" text="to soon" textFill="RED" wrapText="true" />
     </children>
 </Pane>

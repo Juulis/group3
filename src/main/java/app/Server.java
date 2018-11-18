@@ -12,12 +12,12 @@ public class Server {
     private static Server instance = null;
     private TableViewController tvc;
 
-    private Server() throws IOException {
+    private Server() {
         instance = this;
         gameEngine = new GameEngine();
     }
 
-    public static Server getInstance() throws IOException {
+    public static Server getInstance() {
         if (instance == null) {
             instance = new Server();
         }
@@ -104,6 +104,8 @@ public class Server {
             case "tapped":
                 tvc.isTappedWarning();
                 break;
+            case "showmessage":
+                tvc.showMessage(commands.get(1));
         }
     }
 

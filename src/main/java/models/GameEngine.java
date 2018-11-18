@@ -16,11 +16,7 @@ public class GameEngine {
         turn = 1;
         attacks = new Attack();
         scoreHandler = new ScoreHandler();
-        try {
-            server = Server.getInstance();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        server = Server.getInstance();
     }
 
     private Player p1, p2;

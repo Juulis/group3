@@ -67,6 +67,8 @@ public class TableViewController {
     private HBox playerOneTableBox;
     @FXML
     private HBox playerTwoTableBox;
+    @FXML
+    private Label messagebar;
 
 
     public TableViewController() throws IOException {
@@ -322,5 +324,9 @@ public class TableViewController {
             playerTwoHp.setText(Integer.toString(hp));
             playerTwoHpRound.setProgress(Math.abs(((double) hp / 20) - 1));
         }
+    }
+
+    public void showMessage(String msg) {
+        messagebar.setText(msg);
     }
 }
