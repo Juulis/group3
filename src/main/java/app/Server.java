@@ -123,6 +123,9 @@ public class Server {
             case "updatemana":
                 tvc.setMana(Integer.parseInt(commands.get(1)),Integer.parseInt(commands.get(2)));
                 break;
+            case "cardhp":
+                tvc.setCardHP(Integer.parseInt(commands.get(1)),Integer.parseInt(commands.get(2)));
+                break;
         }
     }
 

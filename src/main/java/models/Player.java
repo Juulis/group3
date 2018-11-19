@@ -102,6 +102,10 @@ public class Player {
                     playerEnergy -= card.getCardEnergy();
                 } else {
                     System.out.println("You don't have enough energy to play this card");
+                    try {
+                        Server.getInstance().msgToFX("showmessage,not enough energy");
+                    } catch (Exception e) {
+                    }
                 }
             } else {
                 System.out.println("magic card cant be played");
@@ -150,6 +154,9 @@ public class Player {
 
     public void setPlayerEnergy(int playerEnergy) {
         this.playerEnergy = playerEnergy;
-        Server.getInstance().msgToFX("updatemana,"+player+","+playerEnergy);
+        try {
+            Server.getInstance().msgToFX("updatemana,"+player+","+playerEnergy);
+        } catch (Exception e) {
+        }
     }
 }

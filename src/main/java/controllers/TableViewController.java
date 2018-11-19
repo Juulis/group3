@@ -1,14 +1,12 @@
 package controllers;
 
 import app.Server;
-import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.*;
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.effect.GaussianBlur;
-import javafx.scene.effect.Glow;
 import javafx.scene.image.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -121,13 +119,10 @@ public class TableViewController {
             System.out.println("no Player");
         }
         update();
-        System.out.println(activePlayer);
-
     }
 
     public void sendToGraveYard(String cardID, String player) {
         List<Node> nodesToRemove = new ArrayList<>();
-        System.out.println("sendToGraveYard");
         if (deck.getCards().get(Integer.parseInt(cardID)) instanceof MagicCard) {
             if (player.equals("1")) {
                 for (Node n : playerOneHandBox.getChildren()) {
@@ -250,8 +245,6 @@ public class TableViewController {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    playerOneHandBox.setSpacing(50);
-                    playerOneHandBox.setAlignment(Pos.CENTER);
                     cardPane.setId(String.valueOf(card.getId()));
                     ((ImageView) cardPane.getChildren().get(cardPane.getChildren()
                             .indexOf(cardPane.lookup("#cardImageView"))))
@@ -294,8 +287,6 @@ public class TableViewController {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    playerTwoHandBox.setSpacing(50);
-                    playerTwoHandBox.setAlignment(Pos.CENTER);
                     cardPane.setId(String.valueOf(card.getId()));
                     ((ImageView) cardPane.getChildren().get(cardPane.getChildren()
                             .indexOf(cardPane.lookup("#cardImageView"))))
@@ -354,7 +345,7 @@ public class TableViewController {
     }
 
     @FXML
-    private void getSelectedPlaceHolder(Event event) throws IOException {
+    private void getSelectedPlaceHolder(Event event) {
         //TODO: check if selectedCurrentCard != null && opponentcards == null
         Rectangle placeHolder = (Rectangle) event.getSource();
         swapPlaceHolder(placeHolder);
@@ -399,13 +390,9 @@ public class TableViewController {
     private void swapPlaceHolder(Rectangle rect) {
         if (selectedPane != null && !(selectedCurrentCard.getClass().equals(MagicCard.class))) {
             if (activePlayer == 1 && playerOneTableBox.getChildren().contains(rect) && playerOneHandBox.getChildren().contains(selectedPane)) {
-                playerOneTableBox.setSpacing(20);
-                playerOneTableBox.setAlignment(Pos.CENTER);
                 playerOneTableBox.getChildren().remove(playerOneTableBox.getChildren().size() - 1);
                 playerOneTableBox.getChildren().add(0, selectedPane);
             } else if (activePlayer == 2 && playerTwoTableBox.getChildren().contains(rect) && playerTwoHandBox.getChildren().contains(selectedPane)) {
-                playerTwoTableBox.setSpacing(20);
-                playerTwoTableBox.setAlignment(Pos.CENTER);
                 playerTwoTableBox.getChildren().remove(playerTwoTableBox.getChildren().size() - 1);
                 playerTwoTableBox.getChildren().add(0, selectedPane);
             } else {
@@ -449,7 +436,6 @@ public class TableViewController {
 
     @FXML
     private void playerattack(MouseEvent mouseEvent) {
-        showMessage("clicked " + activePlayer);
         if (selectedCurrentCard != null && selectedCurrentCard.getSpecialAttack().equals("playerAttack") && ( //check so player dont targets it self
                 (((Circle) mouseEvent.getSource()).getId().equals("playeroneavatar") && activePlayer == 2) ||
                         (((Circle) mouseEvent.getSource()).getId().equals("playeroneavatar") && activePlayer == 1))) {
@@ -471,5 +457,28 @@ public class TableViewController {
             p2manalabel.setText(Integer.toString(mana));
         }
         update();
+    }
+
+    public void setCardHP(int cardID, int hp) {
+        try {
+            ((Label)((StackPane)(getAnchorPaneFromBox(cardID, playerOneTableBox).lookup("#healthPane"))).getChildren().get(1)).setText(Integer.toString(hp));
+            return;
+        } catch (Exception e) {
+        }
+        try {
+            ((Label)((StackPane)(getAnchorPaneFromBox(cardID, playerTwoTableBox).lookup("#healthPane"))).getChildren().get(1)).setText(Integer.toString(hp));
+            return;
+        } catch (Exception e) {
+
+        }
+    }
+
+    private AnchorPane getAnchorPaneFromBox(int cardID, HBox hBox) {
+        for(Node node: hBox.getChildren()){
+            if(node.getId().equals(Integer.toString(cardID))){
+                return (AnchorPane) node;
+            }
+        }
+        return null;
     }
 }

@@ -35,7 +35,7 @@ public class CreatureCard extends Card {
         this.hp -= dmg;
 
         try {
-            Server.getInstance().msgToFX("showmessage,id:" + id + " hp:" + hp + " atk:" + attack);
+            Server.getInstance().msgToFX("cardhp," + id + "," + hp);
         } catch (Exception e) {
         }
     }
