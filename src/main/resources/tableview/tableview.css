@@ -1,3 +1,7 @@
 .cardView:hover {
     -fx-opacity: 5.0;
+
+}
+.progress-indicator .percentage {
+    -fx-fill:null;
 }

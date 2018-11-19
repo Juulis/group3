@@ -51,21 +51,18 @@ public class Player {
      * puts it in players hand
      */
     public void pickupCard() {
-        if(playerHand.size()>=5)
+        if (playerHand.size() >= 5)
             return;
         int index = currentDeck.size() - 1;
         Card card = currentDeck.remove(index);
         playerHand.add(card);
 
         String playerHandString = null;
-        try {
-            playerHandString = Server.getInstance().getStringFromList(playerHand);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        playerHandString = Server.getInstance().getStringFromList(playerHand);
 
         try {
             Server.getInstance().msgToFX("showplayerhand," + player + "," + playerHandString);
+            Server.getInstance().msgToFX("updatedeck,"+player+","+currentDeck.size());
         } catch (Exception e) {
         }
     }
@@ -94,7 +91,7 @@ public class Player {
      *             add it to table
      */
     public void playCard(Card card, int round) {
-        if(tableCards.size()>=7)
+        if (tableCards.size() >= 7)
             return;
         try {
             if (card.getClass() == CreatureCard.class) {

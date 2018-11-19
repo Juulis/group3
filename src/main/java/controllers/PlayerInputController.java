@@ -15,14 +15,10 @@ public class PlayerInputController {
     private TextField player1Name, player2Name;
 
     @FXML
-    public void saveNames(){
+    public void saveNames() {
         String name1 = player1Name.getText();
         String name2 = player2Name.getText();
-        try {
-            Server.getInstance().setPlayerNames( name1, name2);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Server.getInstance().setPlayerNames(name1, name2);
     }
 
     @FXML
