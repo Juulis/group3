@@ -1,18 +1,18 @@
 package controllers;
 
 import app.Server;
-import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.*;
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.effect.GaussianBlur;
-import javafx.scene.effect.Glow;
 import javafx.scene.image.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import models.*;
 
@@ -29,6 +29,10 @@ public class TableViewController {
     private Deck deck;
     private Server server;
     private static int activePlayer;
+    @FXML
+    private Label p2manalabel;
+    @FXML
+    private Label p1manalabel;
     @FXML
     private Label player1label;
     @FXML
@@ -116,14 +120,12 @@ public class TableViewController {
         } else {
             System.out.println("no Player");
         }
+        showMessage(Integer.toString(activePlayer));
         update();
-        System.out.println(activePlayer);
-
     }
 
     public void sendToGraveYard(String cardID, String player) {
         List<Node> nodesToRemove = new ArrayList<>();
-        System.out.println("sendToGraveYard");
         if (deck.getCards().get(Integer.parseInt(cardID)) instanceof MagicCard) {
             if (player.equals("1")) {
                 for (Node n : playerOneHandBox.getChildren()) {
@@ -262,6 +264,9 @@ public class TableViewController {
                     cardType = (StackPane) cardPane.getChildren().get(0);
                     cardIdType = (Label) cardType.getChildren().get(0);
                     cardIdType.setText(card.getSpecialAttack().toUpperCase());
+                    if(card.getSpecialAttack().equalsIgnoreCase("dualattack")) {
+                        cardIdType.setFont(new Font("Gill Sans Ultra Bold Condensed", 15));
+                    }
 
                     if (!(card instanceof MagicCard)) {
                         healthPane = (StackPane) cardPane.getChildren().get(4);
@@ -304,6 +309,9 @@ public class TableViewController {
                     cardType = (StackPane) cardPane.getChildren().get(0);
                     cardIdType = (Label) cardType.getChildren().get(0);
                     cardIdType.setText(card.getSpecialAttack().toUpperCase());
+                    if(card.getSpecialAttack().equalsIgnoreCase("dualattack")) {
+                        cardIdType.setFont(new Font("Gill Sans Ultra Bold Condensed", 15));
+                    }
 
                     if (!(card instanceof MagicCard)) {
                         healthPane = (StackPane) cardPane.getChildren().get(4);
@@ -346,7 +354,7 @@ public class TableViewController {
     }
 
     @FXML
-    private void getSelectedPlaceHolder(Event event) throws IOException {
+    private void getSelectedPlaceHolder(Event event) {
         //TODO: check if selectedCurrentCard != null && opponentcards == null
         Rectangle placeHolder = (Rectangle) event.getSource();
         swapPlaceHolder(placeHolder);
@@ -389,7 +397,7 @@ public class TableViewController {
 
     @FXML
     private void swapPlaceHolder(Rectangle rect) {
-        if (selectedPane != null && !(selectedCurrentCard.getClass().equals(MagicCard.class))) {
+        if (selectedPane != null && !(selectedCurrentCard.getClass().equals(MagicCard.class)) && isManaEnough()) {
             if (activePlayer == 1 && playerOneTableBox.getChildren().contains(rect) && playerOneHandBox.getChildren().contains(selectedPane)) {
                 playerOneTableBox.getChildren().remove(playerOneTableBox.getChildren().size() - 1);
                 playerOneTableBox.getChildren().add(0, selectedPane);
@@ -403,6 +411,11 @@ public class TableViewController {
             update();
             clearCards();
         }
+    }
+
+    private boolean isManaEnough() {
+        return (activePlayer == 1 && Integer.parseInt(p1manalabel.getText()) >= selectedCurrentCard.getCardEnergy()) ||
+                (activePlayer == 2 && Integer.parseInt(p2manalabel.getText()) >= selectedCurrentCard.getCardEnergy());
     }
 
 
@@ -437,7 +450,6 @@ public class TableViewController {
 
     @FXML
     private void playerattack(MouseEvent mouseEvent) {
-        showMessage("clicked " + activePlayer);
         if (
         selectedCurrentCard != null && (selectedCurrentCard.getSpecialAttack().equals("playerAttack") || isNoOpponentsOnTable()) && isNotAttackingSelf(mouseEvent)){
                         server.msgToGameEngine("attack," + selectedCurrentCard.getId());
@@ -445,15 +457,49 @@ public class TableViewController {
     }
 
     private boolean isNotAttackingSelf(MouseEvent mouseEvent) {
-        return (((Circle) mouseEvent.getSource()).getId().equals("playeroneavatar") && activePlayer == 2) || (((Circle) mouseEvent.getSource()).getId().equals("playeroneavatar") && activePlayer == 1);
+        return (((Label) mouseEvent.getSource()).getId().equals("player2label") && activePlayer == 1) || (((Label) mouseEvent.getSource()).getId().equals("player1label") && activePlayer == 2);
     }
 
     private boolean isNoOpponentsOnTable() {
-        return (activePlayer == 1 && playerTwoTableBox.getChildren().isEmpty()) || (activePlayer == 2 && playerOneTableBox.getChildren().isEmpty());
+        return (activePlayer == 1 && !(playerTwoTableBox.getChildren().filtered(item -> item instanceof AnchorPane).size() >= 1)) || (activePlayer == 2 && !(playerOneTableBox.getChildren().filtered(item -> item instanceof AnchorPane).size() >= 1));
     }
 
     public void setPlayerNames(String p1, String p2) {
         player1label.setText(p1);
         player2label.setText(p2);
+    }
+
+    public void setMana(int player, int mana) {
+        if (player == 1) {
+//            playerOneMana.setProgress(mana);
+            p1manalabel.setText(Integer.toString(mana));
+        } else if (player == 2) {
+//            playerTwoMana.setProgress(mana);
+            p2manalabel.setText(Integer.toString(mana));
+        }
+        update();
+    }
+
+    public void setCardHP(int cardID, int hp) {
+        try {
+            ((Label)((StackPane)(getAnchorPaneFromBox(cardID, playerOneTableBox).lookup("#healthPane"))).getChildren().get(1)).setText(Integer.toString(hp));
+            return;
+        } catch (Exception e) {
+        }
+        try {
+            ((Label)((StackPane)(getAnchorPaneFromBox(cardID, playerTwoTableBox).lookup("#healthPane"))).getChildren().get(1)).setText(Integer.toString(hp));
+            return;
+        } catch (Exception e) {
+
+        }
+    }
+
+    private AnchorPane getAnchorPaneFromBox(int cardID, HBox hBox) {
+        for(Node node: hBox.getChildren()){
+            if(node.getId().equals(Integer.toString(cardID))){
+                return (AnchorPane) node;
+            }
+        }
+        return null;
     }
 }

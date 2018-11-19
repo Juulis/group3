@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<Pane fx:id="tableViewPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TableViewController">
+<Pane fx:id="tableViewPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TableViewController">
     <children>
         <ImageView fx:id="tableImageView" fitHeight="768.0" fitWidth="1024.0" pickOnBounds="true" preserveRatio="false">
             <image>
@@ -140,7 +143,10 @@
             </image>
         </ImageView>
         <Circle fill="#00000080" layoutX="857.0" layoutY="212.0" opacity="0.82" radius="28.0" stroke="WHITE" strokeType="INSIDE" />
-      <Label fx:id="messagebar" ellipsisString=".." layoutX="105.0" layoutY="330.0" prefHeight="74.0" prefWidth="86.0" textFill="RED" wrapText="true" />
+      <Label fx:id="messagebar" ellipsisString=".." layoutX="123.0" layoutY="323.0" prefHeight="74.0" prefWidth="56.0" textFill="RED" wrapText="true">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
       <Label fx:id="decklabel2" layoutX="174.0" layoutY="57.0" opacity="0.73" prefHeight="68.0" prefWidth="49.0" text="20" textFill="WHITE">
          <font>
             <Font name="System Bold" size="40.0" />
@@ -151,7 +157,7 @@
             <Font name="System Bold" size="40.0" />
          </font>
       </Label>
-      <Label fx:id="player1label" alignment="CENTER" contentDisplay="CENTER" layoutX="780.0" layoutY="69.0" onMouseClicked="#playerattack" prefHeight="44.0" prefWidth="115.0" text="Mohammed" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="player2label" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="780.0" layoutY="20.0" onMouseClicked="#playerattack" prefHeight="136.0" prefWidth="115.0" text="Mohammed" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Jokerman" size="16.0" />
          </font>
@@ -159,7 +165,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </Label>
-      <Label fx:id="player2label" alignment="CENTER" contentDisplay="CENTER" layoutX="780.0" layoutY="666.0" onMouseClicked="#playerattack" prefHeight="30.0" prefWidth="115.0" text="Mohammed" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="player1label" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="780.0" layoutY="615.0" onMouseClicked="#playerattack" prefHeight="136.0" prefWidth="115.0" text="Mohammed" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Jokerman" size="16.0" />
          </font>
@@ -169,7 +175,17 @@
       </Label>
       <Label fx:id="endTurn2" contentDisplay="CENTER" layoutX="819.0" layoutY="362.0" onMouseClicked="#endTurn" prefHeight="44.0" prefWidth="76.0" style="-fx-background-color: black; -fx-background-radius: 60;" text=" END TURN" textFill="#ff000076">
          <font>
-            <Font name="Chiller" size="19.0" />
+            <Font name="Chiller" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="p2manalabel" alignment="CENTER" contentDisplay="CENTER" layoutX="507.0" layoutY="9.0" text="2" textAlignment="CENTER">
+         <font>
+            <Font name="Jokerman" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="p1manalabel" alignment="CENTER" contentDisplay="CENTER" layoutX="501.0" layoutY="721.0" text="2" textAlignment="CENTER">
+         <font>
+            <Font name="Jokerman" size="20.0" />
          </font>
          <cursor>
             <Cursor fx:constant="OPEN_HAND" />
