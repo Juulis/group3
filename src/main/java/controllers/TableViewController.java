@@ -115,13 +115,10 @@ public class TableViewController {
             System.out.println("no Player");
         }
         update();
-        System.out.println(activePlayer);
-
     }
 
     public void sendToGraveYard(String cardID, String player) {
         List<Node> nodesToRemove = new ArrayList<>();
-        System.out.println("sendToGraveYard");
         if (deck.getCards().get(Integer.parseInt(cardID)) instanceof MagicCard) {
             if (player.equals("1")) {
                 for (Node n : playerOneHandBox.getChildren()) {
