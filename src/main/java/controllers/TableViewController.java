@@ -11,6 +11,8 @@ import javafx.scene.image.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import models.*;
 
@@ -257,6 +259,9 @@ public class TableViewController {
                     cardType = (StackPane) cardPane.getChildren().get(0);
                     cardIdType = (Label) cardType.getChildren().get(0);
                     cardIdType.setText(card.getSpecialAttack().toUpperCase());
+                    if(card.getSpecialAttack().equalsIgnoreCase("dualattack")) {
+                        cardIdType.setFont(new Font("Gill Sans Ultra Bold Condensed", 15));
+                    }
 
                     if (!(card instanceof MagicCard)) {
                         healthPane = (StackPane) cardPane.getChildren().get(4);
@@ -300,6 +305,9 @@ public class TableViewController {
                     cardType = (StackPane) cardPane.getChildren().get(0);
                     cardIdType = (Label) cardType.getChildren().get(0);
                     cardIdType.setText(card.getSpecialAttack().toUpperCase());
+                    if(card.getSpecialAttack().equalsIgnoreCase("dualattack")) {
+                        cardIdType.setFont(new Font("Gill Sans Ultra Bold Condensed", 15));
+                    }
 
                     if (!(card instanceof MagicCard)) {
                         healthPane = (StackPane) cardPane.getChildren().get(4);
