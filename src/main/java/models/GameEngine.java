@@ -16,11 +16,7 @@ public class GameEngine {
         turn = 1;
         attacks = new Attack();
         scoreHandler = new ScoreHandler();
-        try {
-            server = Server.getInstance();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        server = Server.getInstance();
     }
 
     private Player p1, p2;
@@ -65,6 +61,7 @@ public class GameEngine {
     public void startGame(String startArgs) throws IOException {
         System.out.println("starting game");
         if (startArgs.equals("fx")) {
+            server.msgToFX("setplayernames,"+p1.getName()+","+p2.getName());
             consoleGame = false;
         }
         initGame();
@@ -105,12 +102,12 @@ public class GameEngine {
 
     }
 
-    public void checkCardsLeft() throws IOException {
+    public void checkCardsLeft() {
         checkPlayerCards(p1, p2);
         checkPlayerCards(p2, p1);
     }
 
-    public void checkPlayerCards(Player p, Player q) throws IOException {
+    public void checkPlayerCards(Player p, Player q) {
         if (p.getCurrentDeck().size() == 0 && p.getPlayerHand().size() == 0 && p.getTableCards().size() == 0) {
             System.out.println("Congratulations!" + q.getName() + " is the Winner");
             scoreHandler.checkScore(q);
@@ -122,12 +119,12 @@ public class GameEngine {
         }
     }
 
-    public void checkHealthLeft() throws IOException {
+    public void checkHealthLeft() {
         checkPlayerHealth(p1, p2);
         checkPlayerHealth(p2, p1);
     }
 
-    public void checkPlayerHealth(Player p, Player q) throws IOException {
+    public void checkPlayerHealth(Player p, Player q) {
         if (p.getHealth() <= 0) {
             System.out.println("Congratulations! " + q.getName() + " is the Winner");
             scoreHandler.checkScore(q);
@@ -174,7 +171,7 @@ public class GameEngine {
         return currentPlayer;
     }
 
-    public void endTurn() throws IOException {
+    public void endTurn() {
         checkCardsLeft();
         unTap();
         int active;
@@ -187,7 +184,9 @@ public class GameEngine {
             currentPlayer = p1;
             opponentPlayer = p2;
         }
-        currentPlayer.pickupCard();
+        if(currentPlayer.getCurrentDeck().size() != 0) {
+            currentPlayer.pickupCard();
+        }
         turn++;
         increaseIgnCounter(currentPlayer.getTableCards());
         increaseIgnCounter(opponentPlayer.getTableCards());
@@ -225,13 +224,13 @@ public class GameEngine {
 
     public enum AttackNames {BASIC, PLAYERATTACK, DUALATTACK, IGNITE, ATTACKALL}
 
-    public void attack(Card selectedCard, List<CreatureCard> opponentCards) throws IOException {
+    public void attack(Card selectedCard, List<CreatureCard> opponentCards) {
         //TODO: change to string instead of ENUM . works with string to since java 8
         boolean notTapped = true;
 
         if (getRound() > 1) {
             if (selectedCard instanceof CreatureCard) {
-                notTapped = checkIfTapped((CreatureCard) selectedCard);
+                notTapped = !checkIfTapped((CreatureCard) selectedCard);
             }
             if (notTapped) {
                 chooseAttack(selectedCard, opponentCards);
