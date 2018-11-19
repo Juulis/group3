@@ -50,7 +50,6 @@ public class Server {
             selectedCard = gameEngine.getDeck().getCards().get(Integer.parseInt(commands.get(1)));
         }
         List<CreatureCard> opponents = new ArrayList<>();
-        System.out.println(msg);
         switch (commands.get(0)) {
             case "pickcard":
                 if (commands.get(1).equals("1"))
@@ -103,11 +102,14 @@ public class Server {
                 tvc.playCard(Integer.parseInt(commands.get(1)));
                 break;
             case "tapped":
-                tvc.isTappedWarning();
+                tvc.tapCard(commands.get(1));
                 break;
             case "notready":  // power system - card not ready to attack
                 break;
             case "lowenergy":  // energy system - not enough energy to play card
+                break;
+            case "untap":
+                tvc.unTapCard(commands.get(1));
                 break;
             case "showmessage":
                 tvc.showMessage(commands.get(1));
@@ -117,7 +119,7 @@ public class Server {
                 break;
             case "setplayernames":
                 tvc.setPlayerNames(commands.get(1),commands.get(2));
-
+                break;
         }
     }
 

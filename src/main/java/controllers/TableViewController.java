@@ -7,13 +7,14 @@ import javafx.fxml.*;
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
 import models.*;
-//import org.w3c.dom.css.Rect;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -179,7 +180,32 @@ public class TableViewController {
     public void playCard(int cardID) {
     }
 
-    public void isTappedWarning() {
+    public void tapCard(String cardID) {
+        for (Node n : playerOneTableBox.getChildren()) {
+            if (n.getId().equals(cardID)) {
+                n.lookup("#cardImageView").setEffect(new GaussianBlur());
+            } else {
+                for (Node o : playerTwoTableBox.getChildren()) {
+                    if (o.getId().equals(cardID)) {
+                        o.lookup("#cardImageView").setEffect(new GaussianBlur());
+                    }
+                }
+            }
+        }
+    }
+
+    public void unTapCard(String cardID) {
+        for (Node n : playerOneTableBox.getChildren()) {
+            if (n.getId().equals(cardID)) {
+                n.lookup("#cardImageView").setEffect(null);
+            } else {
+                for (Node o : playerTwoTableBox.getChildren()) {
+                    if (o.getId().equals(cardID)) {
+                        o.lookup("#cardImageView").setEffect(null);
+                    }
+                }
+            }
+        }
     }
 
     public void showPlayerHand(List<String> commands) {
@@ -293,7 +319,7 @@ public class TableViewController {
         } else if (isSelectingCardToAttack(event)) {
             if (selectedOpponentCard1 == null) {
                 selectedOpponentCard1 = getCardFromId(((AnchorPane) event.getSource()).getId());
-                if (selectedCurrentCard.getSpecialAttack().equals("basic")) {
+                if (selectedCurrentCard.getSpecialAttack().equals("basic") || selectedCurrentCard.getSpecialAttack().equals("ignite")) {
                     server.msgToGameEngine("attack," + selectedCurrentCard.getId() + "," + selectedOpponentCard1.getId());
                     clearCards();
                 }
@@ -302,8 +328,6 @@ public class TableViewController {
                 server.msgToGameEngine("attack," + selectedCurrentCard.getId() + "," + selectedOpponentCard1.getId() + "," + selectedOpponentCard2.getId());
                 clearCards();
             }
-//
-
         }
     }
 
