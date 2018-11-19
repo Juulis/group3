@@ -96,9 +96,6 @@ public class Server {
             case "sendtograveyard":
                 tvc.sendToGraveYard(commands.get(1), commands.get(2));
                 break;
-            case "attackedtosoon":
-                tvc.toSoonWarning();
-                break;
             case "playcard":
                 tvc.playCard(Integer.parseInt(commands.get(1)));
                 break;
@@ -106,8 +103,6 @@ public class Server {
                 tvc.tapCard(commands.get(1));
                 break;
             case "notready":  // power system - card not ready to attack
-                break;
-            case "lowenergy":  // energy system - not enough energy to play card
                 break;
             case "untap":
                 tvc.unTapCard(commands.get(1));

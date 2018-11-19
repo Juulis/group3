@@ -257,7 +257,7 @@ public class GameEngine {
                             currentPlayer.sendToGraveyard(selectedCard);
                         }
                     } else {
-                        Server.getInstance().msgToFX("notready");
+                        Server.getInstance().msgToFX("showmessage,Card not ready!");
                     }
                 } else {
                     Server.getInstance().msgToFX("tappedwarning");
