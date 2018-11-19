@@ -16,8 +16,13 @@ public class PlayerInputController {
 
     @FXML
     public void saveNames() {
-        String name1 = player1Name.getText();
-        String name2 = player2Name.getText();
+        String name1 = "n0n4m3";
+        String name2 = "n0n4m3";
+        if (!player1Name.getText().equals(""))
+            name1 = player1Name.getText();
+        if (!player2Name.getText().equals(""))
+            name2 = player2Name.getText();
+
         Server.getInstance().setPlayerNames(name1, name2);
     }
 
