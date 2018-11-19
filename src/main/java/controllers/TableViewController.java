@@ -40,9 +40,19 @@ public class TableViewController {
     @FXML
     private ProgressBar playerOneMana;
     @FXML
+    private Rectangle playerOneDeck;
+    @FXML
+    private Circle playerOneGraveyard;
+    @FXML
     private Label playerOneHp;
     @FXML
+    private Button endTurn;
+    @FXML
     private ProgressBar playerTwoMana;
+    @FXML
+    private Rectangle playerTwoDeck;
+    @FXML
+    private Circle playerTwoGraveyard;
     @FXML
     private Label playerTwoHp;
     @FXML
@@ -210,9 +220,17 @@ public class TableViewController {
 
     public void showPlayerHand(List<String> commands) {
         String player = commands.get(1);
+        Circle hpCircle;
         Label top;
         Label middle;
         Label bottom;
+        Label cardIdType;
+
+        StackPane attackPane;
+        StackPane manaPane;
+        StackPane cardType;
+        StackPane healthPane;
+
         if (player.equals("1"))
             playerOneHandBox.getChildren().clear();
         if (player.equals("2"))
@@ -235,20 +253,35 @@ public class TableViewController {
                             .indexOf(cardPane.lookup("#cardImageView"))))
                             .setImage(new Image(card.getImgURL()));
 
+                    attackPane = (StackPane) cardPane.getChildren().get(2);
+                    bottom = (Label) attackPane.getChildren().get(1);
+                    bottom.setText(Integer.toString(card.getAttack()));
 
-                    top = (Label) cardPane.getChildren().get(0);
-                    middle = (Label) cardPane.getChildren().get(1);
-                    bottom = (Label) cardPane.getChildren().get(2);
-                    top.setText(card.getSpecialAttack());
-                    if (card instanceof MagicCard) {
-                        middle.setText("MAGIC");
-                    } else {
-                        middle.setText("CREATURE");
+                    manaPane = (StackPane) cardPane.getChildren().get(3);
+                    middle = (Label) manaPane.getChildren().get(1);
+                    middle.setText(Integer.toString(card.getCardEnergy()));
+
+                    cardType = (StackPane) cardPane.getChildren().get(0);
+                    cardIdType = (Label) cardType.getChildren().get(0);
+                    cardIdType.setText(card.getSpecialAttack().toUpperCase());
+
+                    if (!(card instanceof MagicCard)) {
+                        healthPane = (StackPane) cardPane.getChildren().get(4);
+                        top = (Label) healthPane.getChildren().get(1);
+                        top.setText(Integer.toString(((CreatureCard)card).getHp()));
+                        top.toFront();
                     }
-                    bottom.setText(Integer.toString(card.getId()));
-                    top.toFront();
+                    else if (card instanceof MagicCard) {
+                        healthPane = (StackPane) cardPane.getChildren().get(4);
+                        top = (Label) healthPane.getChildren().get(1);
+                        hpCircle = (Circle) healthPane.getChildren().get(0);
+                        hpCircle.setVisible(false);
+                        top.setVisible(false);
+                    }
+
                     middle.toFront();
                     bottom.toFront();
+                    cardIdType.toFront();
 
                     playerOneHandBox.getChildren().add(cardPane);
                     break;
@@ -265,21 +298,35 @@ public class TableViewController {
                             .indexOf(cardPane.lookup("#cardImageView"))))
                             .setImage(new Image(card.getImgURL()));
 
+                    attackPane = (StackPane) cardPane.getChildren().get(2);
+                    bottom = (Label) attackPane.getChildren().get(1);
+                    bottom.setText(Integer.toString(card.getAttack()));
 
-                    top = (Label) cardPane.getChildren().get(0);
-                    middle = (Label) cardPane.getChildren().get(1);
-                    bottom = (Label) cardPane.getChildren().get(2);
-                    top.setText(card.getSpecialAttack());
-                    if (card instanceof MagicCard) {
-                        middle.setText("MAGIC");
-                    } else {
-                        middle.setText("CREATURE");
+                    manaPane = (StackPane) cardPane.getChildren().get(3);
+                    middle = (Label) manaPane.getChildren().get(1);
+                    middle.setText(Integer.toString(card.getCardEnergy()));
+
+                    cardType = (StackPane) cardPane.getChildren().get(0);
+                    cardIdType = (Label) cardType.getChildren().get(0);
+                    cardIdType.setText(card.getSpecialAttack().toUpperCase());
+
+                    if (!(card instanceof MagicCard)) {
+                        healthPane = (StackPane) cardPane.getChildren().get(4);
+                        top = (Label) healthPane.getChildren().get(1);
+                        top.setText(Integer.toString(((CreatureCard)card).getHp()));
+                        top.toFront();
                     }
-                    bottom.setText(Integer.toString(card.getId()));
-                    top.toFront();
+                    else if (card instanceof MagicCard) {
+                        healthPane = (StackPane) cardPane.getChildren().get(4);
+                        top = (Label) healthPane.getChildren().get(1);
+                        hpCircle = (Circle) healthPane.getChildren().get(0);
+                        hpCircle.setVisible(false);
+                        top.setVisible(false);
+                    }
+
                     middle.toFront();
                     bottom.toFront();
-
+                    cardIdType.toFront();
 
                     playerTwoHandBox.getChildren().add(cardPane);
                     break;

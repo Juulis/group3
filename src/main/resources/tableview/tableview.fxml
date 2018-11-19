@@ -172,7 +172,7 @@
             <Font name="Jokerman" size="29.0" />
          </font>
       </Label>
-      <Label fx:id="endTurn" contentDisplay="CENTER" layoutX="1552.0" layoutY="514.0" onMouseClicked="#endTurn" prefHeight="53.0" prefWidth="125.0" style="-fx-background-color: black; -fx-background-radius: 60;" text=" END TURN" textFill="#ff000076">
+      <Label fx:id="endTurn2" contentDisplay="CENTER" layoutX="1552.0" layoutY="514.0" onMouseClicked="#endTurn" prefHeight="53.0" prefWidth="125.0" style="-fx-background-color: black; -fx-background-radius: 60;" text=" END TURN" textFill="#ff000076">
          <font>
             <Font name="Chiller" size="34.0" />
          </font>
