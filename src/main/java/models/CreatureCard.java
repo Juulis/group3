@@ -61,7 +61,6 @@ public class CreatureCard extends Card {
         try {
             Server.getInstance().msgToFX("tapped," + id);
         } catch (Exception e) {
-            e.printStackTrace();
         }
 
     }
@@ -71,7 +70,6 @@ public class CreatureCard extends Card {
         try {
             Server.getInstance().msgToFX("untap," + id);
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
