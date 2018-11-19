@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import javafx.scene.*?>
@@ -19,7 +20,7 @@
     <children>
       <StackPane id="cardType" fx:id="cardType" layoutY="111.0" prefHeight="66.0" prefWidth="125.0">
          <children>
-              <Label alignment="CENTER" prefHeight="25.0" prefWidth="107.0" text="CardType" textAlignment="CENTER" textFill="WHITE">
+              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="107.0" text="CardType" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
                </font>
@@ -62,7 +63,7 @@
       </StackPane>
       <StackPane id="healthPane" fx:id="healthPane" layoutX="35.0" layoutY="149.0" prefHeight="50.0" prefWidth="50.0">
          <children>
-            <Circle fill="#e82626" opacity="0.85" radius="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+            <Circle fill="#e82626" opacity="0.85" radius="20.0" stroke="BLACK" strokeDashOffset="10.0">
                <effect>
                   <Reflection />
                </effect>
