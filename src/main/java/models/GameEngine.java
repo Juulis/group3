@@ -245,7 +245,7 @@ public class GameEngine {
                     chooseAttack(selectedCard, opponentCards);
                     currentPlayer.sendToGraveyard(selectedCard);
                 } else {
-                    Server.getInstance().msgToFX("lowenergy");
+                    Server.getInstance().msgToFX("showmessage,To low on mana");
                 }
             }
             if (selectedCard instanceof CreatureCard) {
