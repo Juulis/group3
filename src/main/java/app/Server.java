@@ -106,6 +106,7 @@ public class Server {
                 break;
             case "untap":
                 tvc.unTapCard(commands.get(1));
+                break;
             case "showmessage":
                 tvc.showMessage(commands.get(1));
                 break;
@@ -114,6 +115,10 @@ public class Server {
                 break;
             case "setplayernames":
                 tvc.setPlayerNames(commands.get(1),commands.get(2));
+                break;
+            case "cardhp":
+                tvc.setCardHP(Integer.parseInt(commands.get(1)),Integer.parseInt(commands.get(2)));
+                break;
         }
     }
 
