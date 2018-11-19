@@ -123,7 +123,7 @@ public class Player {
     public void removeHp(int healthToRemove) {
         this.health -= healthToRemove;
         try {
-            Server.getInstance().msgToFX("playerHP," + player + "," + Integer.toString(health));
+            Server.getInstance().msgToFX("playerhp," + player + "," + Integer.toString(health));
         } catch (Exception e) {
         }
     }
