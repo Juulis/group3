@@ -224,6 +224,12 @@ public class TableViewController {
         Label middle;
         Label bottom;
         Label cardIdType;
+
+        StackPane attackPane;
+        StackPane manaPane;
+        StackPane cardType;
+        StackPane healthPane;
+
         if (player.equals("1"))
             playerOneHandBox.getChildren().clear();
         if (player.equals("2"))
@@ -246,23 +252,25 @@ public class TableViewController {
                             .indexOf(cardPane.lookup("#cardImageView"))))
                             .setImage(new Image(card.getImgURL()));
 
-                    StackPane attackPane = (StackPane) cardPane.getChildren().get(2);
+                    attackPane = (StackPane) cardPane.getChildren().get(2);
                     bottom = (Label) attackPane.getChildren().get(1);
                     bottom.setText(Integer.toString(card.getAttack()));
 
-                    StackPane manaPane = (StackPane) cardPane.getChildren().get(3);
+                    manaPane = (StackPane) cardPane.getChildren().get(3);
                     middle = (Label) manaPane.getChildren().get(1);
-                    middle.setText(Integer.toString(card.getCardEnergy()));//Change To MANA!
+                    middle.setText(Integer.toString(card.getCardEnergy()));
 
-                    StackPane healthPane = (StackPane) cardPane.getChildren().get(4);
-                    top = (Label) healthPane.getChildren().get(1);
-                    top.setText(Integer.toString(((CreatureCard)card).getHp()));
-
-                    StackPane cardType = (StackPane) cardPane.getChildren().get(0);
+                    cardType = (StackPane) cardPane.getChildren().get(0);
                     cardIdType = (Label) cardType.getChildren().get(0);
                     cardIdType.setText(card.getSpecialAttack().toUpperCase());
 
-                    top.toFront();
+                    if (!(card instanceof MagicCard)) {
+                        healthPane = (StackPane) cardPane.getChildren().get(4);
+                        top = (Label) healthPane.getChildren().get(1);
+                        top.setText(Integer.toString(((CreatureCard)card).getHp()));
+                        top.toFront();
+                    }
+
                     middle.toFront();
                     bottom.toFront();
                     cardIdType.toFront();
@@ -288,17 +296,19 @@ public class TableViewController {
 
                     manaPane = (StackPane) cardPane.getChildren().get(3);
                     middle = (Label) manaPane.getChildren().get(1);
-                    middle.setText(Integer.toString(card.getCardEnergy()));//Change To MANA!
-
-                    healthPane = (StackPane) cardPane.getChildren().get(4);
-                    top = (Label) healthPane.getChildren().get(1);
-                    top.setText(Integer.toString(((CreatureCard)card).getHp()));
+                    middle.setText(Integer.toString(card.getCardEnergy()));
 
                     cardType = (StackPane) cardPane.getChildren().get(0);
                     cardIdType = (Label) cardType.getChildren().get(0);
                     cardIdType.setText(card.getSpecialAttack().toUpperCase());
 
-                    top.toFront();
+                    if (!(card instanceof MagicCard)) {
+                        healthPane = (StackPane) cardPane.getChildren().get(4);
+                        top = (Label) healthPane.getChildren().get(1);
+                        top.setText(Integer.toString(((CreatureCard)card).getHp()));
+                        top.toFront();
+                    }
+
                     middle.toFront();
                     bottom.toFront();
                     cardIdType.toFront();
