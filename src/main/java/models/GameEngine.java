@@ -357,6 +357,7 @@ public class GameEngine {
                         "2. Play card on hand \n" +
                         "3. Attack a card \n" +
                         "4. End Turn \n" +
+                        "9. Quit Game \n" +
                         "-------------------------------------------------");
         input = getInput();
 
@@ -432,9 +433,24 @@ public class GameEngine {
             case 4:
                 endTurn();
                 break;
+            case 9:
+                System.out.println("Thank you for playing!");
+                System.exit(0);
+                break;
+            case 1337:
+                System.out.println("\n**************************************");
+                System.out.println("This game was created by:");
+                System.out.println("Danny");
+                System.out.println("Fatlum");
+                System.out.println("Lidia");
+                System.out.println("Mikael");
+                System.out.println("Mohammed");
+                System.out.println("Rickard");
+                System.out.println("Tobias");
+                System.out.println("************************************** \n");
+                break;
         }
-
-
+        
     }
 
     public int getInput() {
