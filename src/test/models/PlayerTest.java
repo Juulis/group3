@@ -26,8 +26,11 @@ class PlayerTest {
     @Mock
     Card cardMock;
 
+    @Mock
+    CreatureCard creatureCardMock;
+
     @BeforeEach
-    void setup() throws IOException {
+    void setup(){
 
         player = new Player();
         mockHandList = new ArrayList<Card>(Arrays.asList(new Card(1,1,2,"c1", "basic", ""),
@@ -100,6 +103,27 @@ class PlayerTest {
         player.removeHp(2);
         assertEquals(expected, player.getHealth());
 
+    }
+
+    @Test
+    void decreaseEnergyOnPlayCard(){
+        int energy = 3;
+        when(creatureCardMock.getCardEnergy()).thenReturn(2);
+        player.setPlayerEnergy(energy);
+        player.playCard(creatureCardMock,2);
+        assertEquals(energy - creatureCardMock.getCardEnergy(), player.getPlayerEnergy());
+    }
+
+    @Test
+    void notEnoughEnergyToPlayCard(){
+        int playerEnergy = 3;
+        int cardEnergy = 5;
+        int handSize = player.getPlayerHand().size();
+        when(creatureCardMock.getCardEnergy()).thenReturn(cardEnergy);
+        player.setPlayerEnergy(playerEnergy);
+        player.playCard(creatureCardMock, 2);
+        assertEquals(playerEnergy, player.getPlayerEnergy());
+        assertEquals(handSize, player.getPlayerHand().size());
     }
 
 }

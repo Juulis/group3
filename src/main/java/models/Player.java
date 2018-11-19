@@ -9,6 +9,7 @@ public class Player {
     private int health;
     private String name;
     private int score;
+    private int playerEnergy;
     private int player;
 
     private ArrayList<Card> currentDeck;
@@ -92,11 +93,16 @@ public class Player {
         if (tableCards.size() >= 7)
             return;
         try {
-            if (card.getClass() == CreatureCard.class) {
-                tableCards.add(card);
-                playerHand.remove(card);
-                ((CreatureCard) card).tap();
-                ((CreatureCard) card).setPlayedOnRound(round);
+            if (card instanceof CreatureCard) {
+                if (card.getCardEnergy() <= playerEnergy){
+                    tableCards.add(card);
+                    playerHand.remove(card);
+                    ((CreatureCard) card).tap();
+                    ((CreatureCard) card).setPlayedOnRound(round);
+                    playerEnergy -= card.getCardEnergy();
+                } else {
+                    System.out.println("You don't have enough energy to play this card");
+                }
             } else {
                 System.out.println("magic card cant be played");
             }
@@ -136,5 +142,13 @@ public class Player {
 
     public void setPlayer(int i) {
         player = i;
+    }
+
+    public int getPlayerEnergy() {
+        return playerEnergy;
+    }
+
+    public void setPlayerEnergy(int playerEnergy) {
+        this.playerEnergy = playerEnergy;
     }
 }
