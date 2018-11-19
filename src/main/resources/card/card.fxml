@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="cardPane" onMouseClicked="#getSelectedCard" prefHeight="175.0" prefWidth="125.0" styleClass="cardAnchor" stylesheets="@card.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TableViewController">
+<AnchorPane fx:id="cardPane" onMouseClicked="#getSelectedCard" scaleX="0.5" scaleY="0.5" styleClass="cardAnchor" stylesheets="@card.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TableViewController">
     <children>
         <Label layoutX="10.0" layoutY="29.0" style="-fx-border-color: black;" text="KORT" textAlignment="CENTER" textFill="#ff0042">
          <font>
