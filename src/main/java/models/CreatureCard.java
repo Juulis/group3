@@ -2,8 +2,6 @@ package models;
 
 import app.Server;
 
-import java.io.IOException;
-
 public class CreatureCard extends Card {
 
     private int hp;
@@ -35,7 +33,11 @@ public class CreatureCard extends Card {
 
     public void removeHp(int dmg) {
         this.hp -= dmg;
-        System.out.println("id:" + id + " hp:" + hp + " atk:" + attack);
+
+        try {
+            Server.getInstance().msgToFX("showmessage,id:" + id + " hp:" + hp + " atk:" + attack);
+        } catch (Exception e) {
+        }
     }
 
     public void increaseIgnRoundCounter() {
@@ -58,8 +60,7 @@ public class CreatureCard extends Card {
         this.tapped = true;
         try {
             Server.getInstance().msgToFX("tapped," + id);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
         }
 
     }
@@ -68,8 +69,7 @@ public class CreatureCard extends Card {
         this.tapped = false;
         try {
             Server.getInstance().msgToFX("untap," + id);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
         }
     }
 

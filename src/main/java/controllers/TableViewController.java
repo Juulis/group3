@@ -15,7 +15,6 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
 import models.*;
-import org.w3c.dom.css.Rect;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +29,10 @@ public class TableViewController {
     private Deck deck;
     private Server server;
     private static int activePlayer;
-
+    @FXML
+    private Label player1label;
+    @FXML
+    private Label player2label;
     @FXML
     private ProgressIndicator playerOneHpRound;
     @FXML
@@ -38,19 +40,9 @@ public class TableViewController {
     @FXML
     private ProgressBar playerOneMana;
     @FXML
-    private Rectangle playerOneDeck;
-    @FXML
-    private Circle playerOneGraveyard;
-    @FXML
     private Label playerOneHp;
     @FXML
-    private Button endTurn;
-    @FXML
     private ProgressBar playerTwoMana;
-    @FXML
-    private Rectangle playerTwoDeck;
-    @FXML
-    private Circle playerTwoGraveyard;
     @FXML
     private Label playerTwoHp;
     @FXML
@@ -73,7 +65,12 @@ public class TableViewController {
     private HBox playerOneTableBox;
     @FXML
     private HBox playerTwoTableBox;
-
+    @FXML
+    private Label messagebar;
+    @FXML
+    private Label decklabel1;
+    @FXML
+    private Label decklabel2;
 
     public TableViewController() throws IOException {
         deck = new Deck();
@@ -117,20 +114,38 @@ public class TableViewController {
     public void sendToGraveYard(String cardID, String player) {
         List<Node> nodesToRemove = new ArrayList<>();
         System.out.println("sendToGraveYard");
-        if (player.equals("1")) {
-            for (Node n : playerOneTableBox.getChildren()) {
-                if (n.getId().equals(cardID)) {
-                    nodesToRemove.add(n);
+        if (deck.getCards().get(Integer.parseInt(cardID)) instanceof MagicCard) {
+            if (player.equals("1")) {
+                for (Node n : playerOneHandBox.getChildren()) {
+                    if (n.getId().equals(cardID)) {
+                        nodesToRemove.add(n);
+                    }
                 }
+                playerOneHandBox.getChildren().removeAll(nodesToRemove);
+            } else {
+                for (Node n : playerTwoHandBox.getChildren()) {
+                    if (n.getId().equals(cardID)) {
+                        nodesToRemove.add(n);
+                    }
+                }
+                playerTwoHandBox.getChildren().removeAll(nodesToRemove);
             }
-            playerOneTableBox.getChildren().removeAll(nodesToRemove);
         } else {
-            for (Node n : playerTwoTableBox.getChildren()) {
-                if (n.getId().equals(cardID)) {
-                    nodesToRemove.add(n);
+            if (player.equals("1")) {
+                for (Node n : playerOneTableBox.getChildren()) {
+                    if (n.getId().equals(cardID)) {
+                        nodesToRemove.add(n);
+                    }
                 }
+                playerOneTableBox.getChildren().removeAll(nodesToRemove);
+            } else {
+                for (Node n : playerTwoTableBox.getChildren()) {
+                    if (n.getId().equals(cardID)) {
+                        nodesToRemove.add(n);
+                    }
+                }
+                playerTwoTableBox.getChildren().removeAll(nodesToRemove);
             }
-            playerTwoTableBox.getChildren().removeAll(nodesToRemove);
         }
         addNewPlaceholderForP1();
         addNewPlaceholderForP2();
@@ -300,25 +315,15 @@ public class TableViewController {
         } else if (isSelectingCardToAttack(event)) {
             if (selectedOpponentCard1 == null) {
                 selectedOpponentCard1 = getCardFromId(((AnchorPane) event.getSource()).getId());
-                if (selectedCurrentCard.getSpecialAttack().equals("basic")) {
-                    try {
-                        server.msgToGameEngine("attack," + selectedCurrentCard.getId() + "," + selectedOpponentCard1.getId());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                if (selectedCurrentCard.getSpecialAttack().equals("basic") || selectedCurrentCard.getSpecialAttack().equals("ignite")) {
+                    server.msgToGameEngine("attack," + selectedCurrentCard.getId() + "," + selectedOpponentCard1.getId());
                     clearCards();
                 }
             } else if (selectedCurrentCard.getSpecialAttack().equals("dualAttack")) {
                 selectedOpponentCard2 = getCardFromId(((AnchorPane) event.getSource()).getId());
-                try {
-                    server.msgToGameEngine("attack," + selectedCurrentCard.getId() + "," + selectedOpponentCard1.getId() + "," + selectedOpponentCard2.getId());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                server.msgToGameEngine("attack," + selectedCurrentCard.getId() + "," + selectedOpponentCard1.getId() + "," + selectedOpponentCard2.getId());
                 clearCards();
             }
-//
-
         }
     }
 
@@ -338,7 +343,7 @@ public class TableViewController {
     }
 
     @FXML
-    private void swapPlaceHolder(Rectangle rect) throws IOException {
+    private void swapPlaceHolder(Rectangle rect) {
         if (selectedPane != null && !(selectedCurrentCard.getClass().equals(MagicCard.class))) {
             if (activePlayer == 1 && playerOneTableBox.getChildren().contains(rect) && playerOneHandBox.getChildren().contains(selectedPane)) {
                 playerOneTableBox.getChildren().remove(playerOneTableBox.getChildren().size() - 1);
@@ -363,16 +368,6 @@ public class TableViewController {
         selectedOpponentCard2 = null;
     }
 
-    @FXML
-    private void pickCard(MouseEvent mouseEvent) throws IOException {
-        if (playerOneHandBox.getChildren().size() <= 5 && ((Rectangle) mouseEvent.getSource()).getId().equals("playerOneDeck")) {
-            server.msgToGameEngine("pickcard,1");
-        } else if (playerTwoHandBox.getChildren().size() <= 5 && ((Rectangle) mouseEvent.getSource()).getId().equals("playerTwoDeck")) {
-            server.msgToGameEngine("pickcard,2");
-        }
-    }
-
-
     public void setPlayerHP(int player, int hp) {
         if (player == 1) {
             playerOneHp.setText(Integer.toString(hp));
@@ -381,5 +376,32 @@ public class TableViewController {
             playerTwoHp.setText(Integer.toString(hp));
             playerTwoHpRound.setProgress(Math.abs(((double) hp / 20) - 1));
         }
+    }
+
+    public void setDeckLabels(int player, int cards) {
+        if (player == 1) {
+            decklabel1.setText(Integer.toString(cards));
+        } else if (player == 2) {
+            decklabel2.setText(Integer.toString(cards));
+        }
+    }
+
+    public void showMessage(String msg) {
+        messagebar.setText(msg);
+    }
+
+    @FXML
+    private void playerattack(MouseEvent mouseEvent) {
+        showMessage("clicked " + activePlayer);
+        if (selectedCurrentCard != null && selectedCurrentCard.getSpecialAttack().equals("playerAttack") && ( //check so player dont targets it self
+                (((Circle) mouseEvent.getSource()).getId().equals("playeroneavatar") && activePlayer == 2) ||
+                        (((Circle) mouseEvent.getSource()).getId().equals("playeroneavatar") && activePlayer == 1))) {
+            server.msgToGameEngine("attack," + selectedCurrentCard.getId());
+        }
+    }
+
+    public void setPlayerNames(String p1, String p2) {
+        player1label.setText(p1);
+        player2label.setText(p2);
     }
 }
