@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
@@ -14,25 +16,59 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="cardPane" onMouseClicked="#getSelectedCard" scaleX="0.5" scaleY="0.5" styleClass="cardAnchor" stylesheets="@card.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TableViewController">
-    <children>
-        <Label layoutX="10.0" layoutY="29.0" style="-fx-border-color: black;" text="KORT" textAlignment="CENTER" textFill="#ff0042">
-         <font>
-            <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
-         </font></Label>
-        <Label layoutX="10.0" layoutY="100.0" style="-fx-border-color: black;" text="ATTACK" textAlignment="CENTER" textFill="#ff0042">
-         <font>
-            <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
-         </font></Label>
-        <Label layoutX="10.0" layoutY="68.0" style="-fx-border-color: black;" text="HP" textAlignment="CENTER" textFill="#ff0042">
-         <font>
-            <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
-         </font></Label>
-      <ImageView fx:id="cardImageView" disable="true" fitHeight="175.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
-         <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
-         </cursor></ImageView>
-    </children>
+<AnchorPane fx:id="cardPane" onMouseClicked="#getSelectedCard" prefHeight="178.0" prefWidth="125.0" scaleX="0.5" scaleY="0.5" styleClass="cardAnchor" stylesheets="@card.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TableViewController">
+   <children>
+       <StackPane id="cardType" fx:id="cardType" layoutY="111.0" prefHeight="66.0" prefWidth="125.0">
+           <children>
+               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="107.0" text="CardType" textAlignment="CENTER" textFill="WHITE">
+                   <font>
+                       <Font name="Gill Sans Ultra Bold Condensed" size="10.0" />
+                   </font>
+               </Label>
+           </children>
+       </StackPane>
+       <ImageView fx:id="cardImageView" disable="true" fitHeight="175.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
+           <cursor>
+               <Cursor fx:constant="OPEN_HAND" />
+           </cursor>
+       </ImageView>
+       <StackPane id="attackPane" fx:id="attackPane" layoutX="99.0" layoutY="-20.0" prefHeight="38.0" prefWidth="40.0">
+           <children>
+               <Circle fill="#14d734" opacity="0.85" radius="18.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+               <Label prefHeight="25.0" prefWidth="13.0" text="0" textAlignment="CENTER" textFill="#ebebeb" StackPane.alignment="CENTER">
+                   <font>
+                       <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
+                   </font>
+                   <effect>
+                       <Glow level="1.0" />
+                   </effect>
+               </Label>
+           </children>
+       </StackPane>
+       <StackPane id="manaPane" fx:id="manaPane" layoutX="-23.0" layoutY="-23.0" prefHeight="45.0" prefWidth="49.0">
+           <children>
+               <Circle fill="#1f28ff" opacity="0.85" radius="18.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+               <Label alignment="CENTER" prefHeight="25.0" prefWidth="20.0" text="0" textAlignment="CENTER" textFill="WHITE" StackPane.alignment="CENTER">
+                   <font>
+                       <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
+                   </font>
+                   <effect>
+                       <Glow level="1.0" />
+                   </effect>
+               </Label>
+           </children>
+       </StackPane>
+       <StackPane id="healthPane" fx:id="healthPane" layoutX="35.0" layoutY="149.0" prefHeight="50.0" prefWidth="50.0">
+           <children>
+               <Circle fill="#e82626" opacity="0.85" radius="20.0" stroke="BLACK" strokeDashOffset="10.0" />
+               <Label text="Hp" textAlignment="CENTER" textFill="WHITE">
+                   <font>
+                       <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
+                   </font>
+               </Label>
+           </children>
+       </StackPane>
+   </children>
    <cursor>
       <Cursor fx:constant="OPEN_HAND" />
    </cursor>
