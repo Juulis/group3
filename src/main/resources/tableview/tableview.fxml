@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
@@ -13,7 +21,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="tableViewPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TableViewController">
+<Pane fx:id="tableViewPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TableViewController">
     <children>
         <ImageView fx:id="tableImageView" fitHeight="768.0" fitWidth="1024.0" pickOnBounds="true" preserveRatio="false">
             <image>
@@ -22,7 +30,7 @@
         </ImageView>
       <HBox fx:id="playerOneHandBox" layoutX="245.0" layoutY="520.0" prefHeight="93.0" prefWidth="426.0" style="-fx-spacing: -40px;" />
       <HBox fx:id="playerTwoHandBox" layoutX="245.0" layoutY="60.0" prefHeight="93.0" prefWidth="426.0" style="-fx-spacing: -40px;" />
-      <HBox fx:id="playerOneTableBox" layoutX="215.0" layoutY="360.0" prefHeight="93.0" prefWidth="426.0" style="-fx-spacing: -40px;">
+      <HBox fx:id="playerOneTableBox" layoutX="200.0" layoutY="360.0" prefHeight="93.0" prefWidth="573.0" style="-fx-spacing: -60px;">
          <children>
               <Rectangle id="playerOneTableSeven" fx:id="playerOneTableSeven" arcHeight="50.0" arcWidth="10.0" fill="#1f93ff00" height="87.5" layoutX="491.0" layoutY="556.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.33" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
                <cursor>
@@ -53,6 +61,76 @@
                <cursor>
                   <Cursor fx:constant="OPEN_HAND" />
                </cursor></Rectangle>
+            <Rectangle id="playerOneTableFour" fx:id="playerOneTableFour2" arcHeight="50.0" arcWidth="10.0" fill="#1f93ff00" height="87.5" layoutX="125.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.33" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableSix" fx:id="playerOneTableSix2" arcHeight="50.0" arcWidth="10.0" fill="#1f93ff00" height="87.5" layoutX="148.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.33" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableThree" fx:id="playerOneTableThree2" arcHeight="50.0" arcWidth="10.0" fill="#1f93ff00" height="87.5" layoutX="56.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.33" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableSeven" fx:id="playerOneTableSeven2" arcHeight="50.0" arcWidth="10.0" fill="#1f93ff00" height="87.5" layoutX="10.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.33" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="CLOSED_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableOne" fx:id="playerOneTableOne2" arcHeight="50.0" arcWidth="10.0" fill="#1f93ff00" height="87.5" layoutX="79.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.33" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableTwo" fx:id="playerOneTableTwo2" arcHeight="50.0" arcWidth="10.0" fill="#1f93ff00" height="87.5" layoutX="102.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.33" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableFive" fx:id="playerOneTableFive2" arcHeight="50.0" arcWidth="10.0" fill="#1f93ff00" height="87.5" layoutX="33.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.33" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableFive" fx:id="playerOneTableFive21" arcHeight="50.0" arcWidth="10.0" fill="#1f93ff00" height="87.5" layoutX="309.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableTwo" fx:id="playerOneTableTwo21" arcHeight="50.0" arcWidth="10.0" fill="#1f93ff00" height="87.5" layoutX="286.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.33" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableTwo" fx:id="playerOneTableTwo211" arcHeight="50.0" arcWidth="10.0" fill="#1f93ff00" height="87.5" layoutX="355.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.33" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableFive" fx:id="playerOneTableFive22" arcHeight="50.0" arcWidth="10.0" fill="#1f93ff00" height="87.5" layoutX="309.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.33" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableFive" fx:id="playerOneTableFive211" arcHeight="50.0" arcWidth="10.0" fill="#1f93ff00" height="87.5" layoutX="332.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.33" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableTwo" fx:id="playerOneTableTwo22" arcHeight="50.0" arcWidth="10.0" fill="#1f93ff00" height="87.5" layoutX="286.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.33" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableOne" fx:id="playerOneTableOne21" arcHeight="50.0" arcWidth="10.0" fill="#1f93ff00" height="87.5" layoutX="263.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.33" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
          </children>
       </HBox>
         <Label id="playerOneHp" fx:id="playerOneHp" layoutX="816.0" layoutY="431.0" text="20" textFill="#ffffffcc">
@@ -104,7 +182,7 @@
                 <Image url="@Fire_GIF.gif" />
             </image>
         </ImageView>
-      <HBox fx:id="playerTwoTableBox" layoutX="215.0" layoutY="225.0" prefHeight="93.0" prefWidth="426.0" style="-fx-spacing: -40px;">
+      <HBox fx:id="playerTwoTableBox" layoutX="200.0" layoutY="225.0" prefHeight="93.0" prefWidth="573.0" style="-fx-spacing: -60px;">
          <children>
             <Rectangle id="playerOneTableSeven" fx:id="playerOneTableSeven1" arcHeight="25.0" arcWidth="250.0" fill="#1f93ff00" height="87.5" layoutX="491.0" layoutY="556.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
                <cursor>
@@ -134,6 +212,76 @@
                <cursor>
                   <Cursor fx:constant="OPEN_HAND" />
                </cursor></Rectangle>
+            <Rectangle id="playerOneTableTwo" fx:id="playerOneTableTwo11" arcHeight="25.0" arcWidth="250.0" fill="#1f93ff00" height="87.5" layoutX="102.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableSix" fx:id="playerOneTableSix11" arcHeight="50.0" arcWidth="500.0" fill="#1f93ff00" height="87.5" layoutX="148.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableThree" fx:id="playerOneTableThree11" arcHeight="25.0" arcWidth="250.0" fill="#1f93ff00" height="87.5" layoutX="56.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableSeven" fx:id="playerOneTableSeven11" arcHeight="25.0" arcWidth="250.0" fill="#1f93ff00" height="87.5" layoutX="10.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableFour" fx:id="playerOneTableFour11" arcHeight="25.0" arcWidth="250.0" fill="#1f93ff00" height="87.5" layoutX="125.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableFive" fx:id="playerOneTableFive11" arcHeight="25.0" arcWidth="250.0" fill="#1f93ff00" height="87.5" layoutX="33.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableOne" fx:id="playerOneTableOne11" arcHeight="25.0" arcWidth="250.0" fill="#1f93ff00" height="87.5" layoutX="79.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableOne" fx:id="playerOneTableOne111" arcHeight="25.0" arcWidth="250.0" fill="#1f93ff00" height="87.5" layoutX="309.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableFour" fx:id="playerOneTableFour111" arcHeight="25.0" arcWidth="250.0" fill="#1f93ff00" height="87.5" layoutX="263.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableOne" fx:id="playerOneTableOne1111" arcHeight="25.0" arcWidth="250.0" fill="#1f93ff00" height="87.5" layoutX="332.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableThree" fx:id="playerOneTableThree111" arcHeight="25.0" arcWidth="250.0" fill="#1f93ff00" height="87.5" layoutX="217.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableOne" fx:id="playerOneTableOne112" arcHeight="25.0" arcWidth="250.0" fill="#1f93ff00" height="87.5" layoutX="309.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableFive" fx:id="playerOneTableFive111" arcHeight="25.0" arcWidth="250.0" fill="#1f93ff00" height="87.5" layoutX="286.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
+            <Rectangle id="playerOneTableSeven" fx:id="playerOneTableSeven111" arcHeight="25.0" arcWidth="250.0" fill="#1f93ff00" height="87.5" layoutX="240.0" layoutY="10.0" onMouseClicked="#getSelectedPlaceHolder" opacity="0.5" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="62.5">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </Rectangle>
          </children>
       </HBox>
         <Circle fill="#000000b8" layoutX="857.0" layoutY="556.0" opacity="0.77" radius="30.0" stroke="WHITE" strokeType="INSIDE" />
@@ -157,7 +305,7 @@
             <Font name="System Bold" size="40.0" />
          </font>
       </Label>
-      <Label fx:id="player1label" alignment="CENTER" contentDisplay="CENTER" layoutX="780.0" layoutY="69.0" onMouseClicked="#playerattack" prefHeight="44.0" prefWidth="115.0" text="Mohammed" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="player2label" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="780.0" layoutY="20.0" onMouseClicked="#playerattack" prefHeight="136.0" prefWidth="115.0" text="Mohammed" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Jokerman" size="16.0" />
          </font>
@@ -165,7 +313,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </Label>
-      <Label fx:id="player2label" alignment="CENTER" contentDisplay="CENTER" layoutX="780.0" layoutY="666.0" onMouseClicked="#playerattack" prefHeight="30.0" prefWidth="115.0" text="Mohammed" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="player1label" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="780.0" layoutY="615.0" onMouseClicked="#playerattack" prefHeight="136.0" prefWidth="115.0" text="Mohammed" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Jokerman" size="16.0" />
          </font>
@@ -177,6 +325,9 @@
          <font>
             <Font name="Chiller" size="20.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </Label>
       <Label fx:id="p2manalabel" alignment="CENTER" contentDisplay="CENTER" layoutX="507.0" layoutY="9.0" text="2" textAlignment="CENTER">
          <font>
@@ -188,7 +339,7 @@
             <Font name="Jokerman" size="20.0" />
          </font>
          <cursor>
-            <Cursor fx:constant="OPEN_HAND" />
+            <Cursor fx:constant="DEFAULT" />
          </cursor>
       </Label>
     </children>

@@ -61,7 +61,7 @@ public class GameEngine {
     public void startGame(String startArgs) {
         System.out.println("starting game");
         if (startArgs.equals("fx")) {
-            server.msgToFX("setplayernames,"+p1.getName()+","+p2.getName());
+            server.msgToFX("setplayernames," + p1.getName() + "," + p2.getName());
             consoleGame = false;
         }
         initGame();
@@ -186,21 +186,21 @@ public class GameEngine {
             currentPlayer = p1;
             opponentPlayer = p2;
         }
-        if(currentPlayer.getCurrentDeck().size() != 0) {
+        if (currentPlayer.getCurrentDeck().size() != 0) {
             currentPlayer.pickupCard();
         }
         turn++;
         increaseIgnCounter(currentPlayer.getTableCards());
         increaseIgnCounter(opponentPlayer.getTableCards());
-        if (turn > 2){
+        if (turn > 2) {
             regeneratePlayerEnergy(currentPlayer);
         }
         if (!consoleGame)
             server.msgToFX("player" + Integer.toString(active));
     }
 
-    public void regeneratePlayerEnergy(Player p){
-        p.setPlayerEnergy(p.getPlayerEnergy()+2);
+    public void regeneratePlayerEnergy(Player p) {
+        p.setPlayerEnergy(p.getPlayerEnergy() + 2);
     }
 
     public void increaseIgnCounter(ArrayList<Card> playerTableCards) {
@@ -236,21 +236,21 @@ public class GameEngine {
     public void attack(Card selectedCard, List<CreatureCard> opponentCards) {
         //TODO: change to string instead of ENUM . works with string to since java 8
 
-        if(currentPlayer.getPlayerHand().contains(selectedCard) && !(selectedCard instanceof MagicCard)){
+        if (currentPlayer.getPlayerHand().contains(selectedCard) && !(selectedCard instanceof MagicCard)) {
             return;
         }
         if (getRound() > 1) {
-            if (selectedCard instanceof MagicCard){
-                if (selectedCard.getCardEnergy() <= currentPlayer.getPlayerEnergy()){
+            if (selectedCard instanceof MagicCard) {
+                if (selectedCard.getCardEnergy() <= currentPlayer.getPlayerEnergy()) {
                     chooseAttack(selectedCard, opponentCards);
                     currentPlayer.sendToGraveyard(selectedCard);
                 } else {
-                    Server.getInstance().msgToFX("lowenergy");
+                    Server.getInstance().msgToFX("showmessage,To low on mana");
                 }
             }
             if (selectedCard instanceof CreatureCard) {
                 if (!checkIfTapped((CreatureCard) selectedCard)) {
-                    if (isCardReadyToAttack( (CreatureCard) selectedCard)) {
+                    if (isCardReadyToAttack((CreatureCard) selectedCard)) {
                         chooseAttack(selectedCard, opponentCards);
                         ((CreatureCard) selectedCard).tap();
                         if (isCardKilled((CreatureCard) selectedCard)) {
@@ -278,6 +278,8 @@ public class GameEngine {
         String nameOfAttack = selectedCard.getSpecialAttack().toUpperCase();
         for (AttackNames attackName : AttackNames.values()) {
             if (attackName.name().equals(nameOfAttack)) {
+                if (opponentPlayer.getTableCards().isEmpty())
+                    attackName = AttackNames.PLAYERATTACK;
                 switch (attackName) {
                     case BASIC:
                         attacks.basicAttack(selectedCard, opponentCards.get(0));
@@ -292,15 +294,18 @@ public class GameEngine {
                         break;
 
                     case DUALATTACK:
-                        attacks.dualAttack((CreatureCard) selectedCard, opponentCards.get(0), opponentCards.get(1));
+                        try {
+                            attacks.dualAttack((CreatureCard) selectedCard, opponentCards.get(0), opponentCards.get(1));
+                        } catch (Exception e) {
+                            nameOfAttack = "playerattack";
+                        }
+                        break;
+                    case ATTACKALL:
+                        attacks.attackAll(selectedCard, opponentPlayer.getTableCards());
                         break;
 
                     case PLAYERATTACK:
                         attacks.attackPlayer(selectedCard, opponentPlayer);
-                        break;
-
-                    case ATTACKALL:
-                        attacks.attackAll(selectedCard, opponentPlayer.getTableCards());
                         break;
 
                     default:
@@ -337,12 +342,11 @@ public class GameEngine {
                         System.out.println("Choose two cards to attack");
                         attackedCardNr = getInput();
                         attackedCard = (CreatureCard) opponentPlayer.getTableCards().get(attackedCardNr - 1);
-                        if(opponentPlayer.getTableCards().size()>=2){
+                        if (opponentPlayer.getTableCards().size() >= 2) {
                             attackedCardNr = getInput();
                             CreatureCard attackedCard2 = (CreatureCard) opponentPlayer.getTableCards().get(attackedCardNr - 1);
                             attacks.dualAttack((CreatureCard) selectedCard, attackedCard, attackedCard2);
-                        }
-                        else {
+                        } else {
                             attacks.basicAttack(selectedCard, attackedCard);
                             attacks.attackPlayer(selectedCard, opponentPlayer);
                         }
@@ -406,10 +410,9 @@ public class GameEngine {
                     int cardNr = getInput();
                     if (choice == 1) {
                         Card magicCard = currentPlayer.getPlayerHand().get(cardNr - 1);
-                        if(! (magicCard instanceof MagicCard)){
+                        if (!(magicCard instanceof MagicCard)) {
                             System.out.println("Wrong card. Try again");
-                        }
-                        else {
+                        } else {
                             if (magicCard.getCardEnergy() <= currentPlayer.getPlayerEnergy()) {
                                 if (isOpponentTableEmpty) {
                                     attackPlayerWhenTableEmpty(magicCard);
@@ -438,13 +441,12 @@ public class GameEngine {
                             if (isCardReadyToAttack(creatureCard)) {
                                 if (isOpponentTableEmpty) {
                                     attackPlayerWhenTableEmpty(creatureCard);
-                                    checkHealthLeft();
-                                    return;
-                                }
-                                chooseConsoleAttack(creatureCard);
-                                for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
-                                    if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
-                                        opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
+                                } else {
+                                    chooseConsoleAttack(creatureCard);
+                                    for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
+                                        if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
+                                            opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
+                                        }
                                     }
                                 }
                                 if (isCardKilled(creatureCard)) {
@@ -485,7 +487,7 @@ public class GameEngine {
                 System.out.println("************************************** \n");
                 break;
         }
-        
+
     }
 
     public int getInput() {
@@ -555,7 +557,7 @@ public class GameEngine {
         for (int i = 0; i < cards.size(); i++) {
             Card card = cards.get(i);
             if (card instanceof CreatureCard)
-                System.out.println(i + 1 + ": creature card with " + ((CreatureCard) card).getHp() + " hp  " + card.getAttack() + " attack "+ card.getSpecialAttack() + " " + card.getCardEnergy() + " energy ");
+                System.out.println(i + 1 + ": creature card with " + ((CreatureCard) card).getHp() + " hp  " + card.getAttack() + " attack " + card.getSpecialAttack() + " " + card.getCardEnergy() + " energy ");
 
             if (card instanceof MagicCard) {
 
