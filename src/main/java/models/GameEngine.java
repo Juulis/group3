@@ -438,6 +438,7 @@ public class GameEngine {
                             if (isCardReadyToAttack(creatureCard)) {
                                 if (isOpponentTableEmpty) {
                                     attackPlayerWhenTableEmpty(creatureCard);
+                                    checkHealthLeft();
                                     return;
                                 }
                                 chooseConsoleAttack(creatureCard);
