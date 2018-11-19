@@ -120,6 +120,7 @@ public class TableViewController {
         } else {
             System.out.println("no Player");
         }
+        showMessage(Integer.toString(activePlayer));
         update();
     }
 
@@ -449,11 +450,18 @@ public class TableViewController {
 
     @FXML
     private void playerattack(MouseEvent mouseEvent) {
-        if (selectedCurrentCard != null && selectedCurrentCard.getSpecialAttack().equals("playerAttack") && ( //check so player dont targets it self
-                (((Circle) mouseEvent.getSource()).getId().equals("playeroneavatar") && activePlayer == 2) ||
-                        (((Circle) mouseEvent.getSource()).getId().equals("playeroneavatar") && activePlayer == 1))) {
-            server.msgToGameEngine("attack," + selectedCurrentCard.getId());
+        if (
+        selectedCurrentCard != null && (selectedCurrentCard.getSpecialAttack().equals("playerAttack") || isNoOpponentsOnTable()) && isNotAttackingSelf(mouseEvent)){
+                        server.msgToGameEngine("attack," + selectedCurrentCard.getId());
         }
+    }
+
+    private boolean isNotAttackingSelf(MouseEvent mouseEvent) {
+        return (((Label) mouseEvent.getSource()).getId().equals("player2label") && activePlayer == 1) || (((Label) mouseEvent.getSource()).getId().equals("player1label") && activePlayer == 2);
+    }
+
+    private boolean isNoOpponentsOnTable() {
+        return (activePlayer == 1 && !(playerTwoTableBox.getChildren().filtered(item -> item instanceof AnchorPane).size() >= 1)) || (activePlayer == 2 && !(playerOneTableBox.getChildren().filtered(item -> item instanceof AnchorPane).size() >= 1));
     }
 
     public void setPlayerNames(String p1, String p2) {
