@@ -59,9 +59,10 @@ public class Server {
                 break;
             case "attack":
                 int opponentAmount = commands.size() - 2; //ignoring the first two spots
-
-                for (int i = 0; i < opponentAmount; i++) {
-                    opponents.add((CreatureCard) gameEngine.getDeck().getCards().get(Integer.parseInt(commands.get(i + 2)))); //ignoring first two spots
+                if (commands.size() > 2) {
+                    for (int i = 0; i < opponentAmount; i++) {
+                        opponents.add((CreatureCard) gameEngine.getDeck().getCards().get(Integer.parseInt(commands.get(i + 2)))); //ignoring first two spots
+                    }
                 }
                 gameEngine.attack(selectedCard, opponents);
                 break;
@@ -118,7 +119,7 @@ public class Server {
                 tvc.setDeckLabels(Integer.parseInt(commands.get(1)), Integer.parseInt(commands.get(2)));
                 break;
             case "setplayernames":
-                tvc.setPlayerNames(commands.get(1),commands.get(2));
+                tvc.setPlayerNames(commands.get(1), commands.get(2));
                 break;
         }
     }

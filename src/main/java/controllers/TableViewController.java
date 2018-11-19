@@ -268,10 +268,9 @@ public class TableViewController {
                     if (!(card instanceof MagicCard)) {
                         healthPane = (StackPane) cardPane.getChildren().get(4);
                         top = (Label) healthPane.getChildren().get(1);
-                        top.setText(Integer.toString(((CreatureCard)card).getHp()));
+                        top.setText(Integer.toString(((CreatureCard) card).getHp()));
                         top.toFront();
-                    }
-                    else if (card instanceof MagicCard) {
+                    } else if (card instanceof MagicCard) {
                         healthPane = (StackPane) cardPane.getChildren().get(4);
                         top = (Label) healthPane.getChildren().get(1);
                         hpCircle = (Circle) healthPane.getChildren().get(0);
@@ -313,10 +312,9 @@ public class TableViewController {
                     if (!(card instanceof MagicCard)) {
                         healthPane = (StackPane) cardPane.getChildren().get(4);
                         top = (Label) healthPane.getChildren().get(1);
-                        top.setText(Integer.toString(((CreatureCard)card).getHp()));
+                        top.setText(Integer.toString(((CreatureCard) card).getHp()));
                         top.toFront();
-                    }
-                    else if (card instanceof MagicCard) {
+                    } else if (card instanceof MagicCard) {
                         healthPane = (StackPane) cardPane.getChildren().get(4);
                         top = (Label) healthPane.getChildren().get(1);
                         hpCircle = (Circle) healthPane.getChildren().get(0);
@@ -448,11 +446,18 @@ public class TableViewController {
     @FXML
     private void playerattack(MouseEvent mouseEvent) {
         showMessage("clicked " + activePlayer);
-        if (selectedCurrentCard != null && selectedCurrentCard.getSpecialAttack().equals("playerAttack") && ( //check so player dont targets it self
-                (((Circle) mouseEvent.getSource()).getId().equals("playeroneavatar") && activePlayer == 2) ||
-                        (((Circle) mouseEvent.getSource()).getId().equals("playeroneavatar") && activePlayer == 1))) {
-            server.msgToGameEngine("attack," + selectedCurrentCard.getId());
+        if (
+        selectedCurrentCard != null && (selectedCurrentCard.getSpecialAttack().equals("playerAttack") || isNoOpponentsOnTable()) && isNotAttackingSelf(mouseEvent)){
+                        server.msgToGameEngine("attack," + selectedCurrentCard.getId());
         }
+    }
+
+    private boolean isNotAttackingSelf(MouseEvent mouseEvent) {
+        return (((Circle) mouseEvent.getSource()).getId().equals("playeroneavatar") && activePlayer == 2) || (((Circle) mouseEvent.getSource()).getId().equals("playeroneavatar") && activePlayer == 1);
+    }
+
+    private boolean isNoOpponentsOnTable() {
+        return (activePlayer == 1 && playerTwoTableBox.getChildren().isEmpty()) || (activePlayer == 2 && playerOneTableBox.getChildren().isEmpty());
     }
 
     public void setPlayerNames(String p1, String p2) {
