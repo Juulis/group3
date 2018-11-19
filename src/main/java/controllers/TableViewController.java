@@ -462,7 +462,7 @@ public class TableViewController {
         }
     }
 
-    public void showMessage(String msg) {
+    public synchronized void showMessage(String msg) {
         messagebar.setText(msg);
     }
 
