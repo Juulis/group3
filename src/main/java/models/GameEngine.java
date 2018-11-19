@@ -438,12 +438,12 @@ public class GameEngine {
                             if (isCardReadyToAttack(creatureCard)) {
                                 if (isOpponentTableEmpty) {
                                     attackPlayerWhenTableEmpty(creatureCard);
-                                    return;
-                                }
-                                chooseConsoleAttack(creatureCard);
-                                for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
-                                    if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
-                                        opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
+                                } else {
+                                    chooseConsoleAttack(creatureCard);
+                                    for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
+                                        if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
+                                            opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
+                                        }
                                     }
                                 }
                                 if (isCardKilled(creatureCard)) {
