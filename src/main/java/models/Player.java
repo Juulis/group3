@@ -150,5 +150,6 @@ public class Player {
 
     public void setPlayerEnergy(int playerEnergy) {
         this.playerEnergy = playerEnergy;
+        Server.getInstance().msgToFX("updatemana,"+player+","+playerEnergy);
     }
 }
