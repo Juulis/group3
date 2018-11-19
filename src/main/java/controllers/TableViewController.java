@@ -359,8 +359,10 @@ public class TableViewController {
     @FXML
     private void getSelectedPlaceHolder(Event event) {
         //TODO: check if selectedCurrentCard != null && opponentcards == null
-        Rectangle placeHolder = (Rectangle) event.getSource();
-        swapPlaceHolder(placeHolder);
+        if(selectedCurrentCard != null) {
+            Rectangle placeHolder = (Rectangle) event.getSource();
+            swapPlaceHolder(placeHolder);
+        }
     }
 
     @FXML
@@ -405,6 +407,10 @@ public class TableViewController {
             return;
         }
         if (selectedPane != null && !(selectedCurrentCard.getClass().equals(MagicCard.class))) {
+            if (!tableNotFull()) {
+                showMessage("Table is full");
+                return;
+            }
             if (activePlayer == 1 && playerOneTableBox.getChildren().contains(rect) && playerOneHandBox.getChildren().contains(selectedPane)) {
                 playerOneTableBox.getChildren().remove(playerOneTableBox.getChildren().size() - 1);
                 playerOneTableBox.getChildren().add(0, selectedPane);
@@ -418,6 +424,11 @@ public class TableViewController {
             update();
             clearCards();
         }
+    }
+
+    private boolean tableNotFull() {
+        return ((playerOneTableBox.getChildren().filtered(item -> item instanceof AnchorPane)).size() < 7 && activePlayer == 1) ||
+                ((playerTwoTableBox.getChildren().filtered(item -> item instanceof AnchorPane)).size() < 7 && activePlayer == 2);
     }
 
     private boolean isManaEnough() {
