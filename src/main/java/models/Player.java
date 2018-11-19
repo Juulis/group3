@@ -62,7 +62,7 @@ public class Player {
 
         try {
             Server.getInstance().msgToFX("showplayerhand," + player + "," + playerHandString);
-            Server.getInstance().msgToFX("updatedeck,"+player+","+currentDeck.size());
+            Server.getInstance().msgToFX("updatedeck," + player + "," + currentDeck.size());
         } catch (Exception e) {
         }
     }
@@ -94,12 +94,12 @@ public class Player {
             return;
         try {
             if (card instanceof CreatureCard) {
-                if (card.getCardEnergy() <= playerEnergy){
+                if (card.getCardEnergy() <= playerEnergy) {
                     tableCards.add(card);
                     playerHand.remove(card);
                     ((CreatureCard) card).tap();
                     ((CreatureCard) card).setPlayedOnRound(round);
-                    playerEnergy -= card.getCardEnergy();
+                    setPlayerEnergy(playerEnergy - card.getCardEnergy());
                 } else {
                     System.out.println("You don't have enough energy to play this card");
                     try {
@@ -155,7 +155,7 @@ public class Player {
     public void setPlayerEnergy(int playerEnergy) {
         this.playerEnergy = playerEnergy;
         try {
-            Server.getInstance().msgToFX("updatemana,"+player+","+playerEnergy);
+            Server.getInstance().msgToFX("updatemana," + player + "," + playerEnergy);
         } catch (Exception e) {
         }
     }
