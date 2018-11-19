@@ -250,7 +250,7 @@ public class GameEngine {
                 }
                 checkHealthLeft();
             } else {
-                Server.getInstance().msgToFX("tapped");
+                Server.getInstance().msgToFX("tappedwarning");
             }
         } else {
             Server.getInstance().msgToFX("tosoon");
@@ -320,9 +320,15 @@ public class GameEngine {
                         System.out.println("Choose two cards to attack");
                         attackedCardNr = getInput();
                         attackedCard = (CreatureCard) opponentPlayer.getTableCards().get(attackedCardNr - 1);
-                        attackedCardNr = getInput();
-                        CreatureCard attackedCard2 = (CreatureCard) opponentPlayer.getTableCards().get(attackedCardNr - 1);
-                        attacks.dualAttack((CreatureCard) selectedCard, attackedCard, attackedCard2);
+                        if(opponentPlayer.getTableCards().size()>=2){
+                            attackedCardNr = getInput();
+                            CreatureCard attackedCard2 = (CreatureCard) opponentPlayer.getTableCards().get(attackedCardNr - 1);
+                            attacks.dualAttack((CreatureCard) selectedCard, attackedCard, attackedCard2);
+                        }
+                        else {
+                            attacks.basicAttack(selectedCard, attackedCard);
+                            attacks.attackPlayer(selectedCard, opponentPlayer);
+                        }
                         break;
 
                     case PLAYERATTACK:
@@ -351,6 +357,7 @@ public class GameEngine {
                         "2. Play card on hand \n" +
                         "3. Attack a card \n" +
                         "4. End Turn \n" +
+                        "9. Quit Game \n" +
                         "-------------------------------------------------");
         input = getInput();
 
@@ -380,15 +387,21 @@ public class GameEngine {
                     System.out.println("Choose a card to attack with");
                     int cardNr = getInput();
                     if (choice == 1) {
-                        MagicCard magicCard = (MagicCard) currentPlayer.getPlayerHand().get(cardNr - 1);
-                        chooseConsoleAttack(magicCard);
-                        currentPlayer.sendToGraveyard(magicCard);
-                        for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
-                            if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
-                                opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
-                            }
+                        Card magicCard = currentPlayer.getPlayerHand().get(cardNr - 1);
+                        if(! (magicCard instanceof MagicCard)){
+                            System.out.println("Wrong card. Try again");
                         }
-                        checkHealthLeft();
+                        else{
+                            chooseConsoleAttack(magicCard);
+                            currentPlayer.sendToGraveyard(magicCard);
+                            for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
+                                if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
+                                    opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
+                                }
+                            }
+                            checkHealthLeft();
+                        }
+
                     } else if (choice == 2) {
                         CreatureCard creatureCard = (CreatureCard) currentPlayer.getTableCards().get(cardNr - 1);
                         if (!checkIfTapped(creatureCard)) {
@@ -420,9 +433,24 @@ public class GameEngine {
             case 4:
                 endTurn();
                 break;
+            case 9:
+                System.out.println("Thank you for playing!");
+                System.exit(0);
+                break;
+            case 1337:
+                System.out.println("\n**************************************");
+                System.out.println("This game was created by:");
+                System.out.println("Danny");
+                System.out.println("Fatlum");
+                System.out.println("Lidia");
+                System.out.println("Mikael");
+                System.out.println("Mohammed");
+                System.out.println("Rickard");
+                System.out.println("Tobias");
+                System.out.println("************************************** \n");
+                break;
         }
-
-
+        
     }
 
     public int getInput() {
@@ -459,7 +487,6 @@ public class GameEngine {
             System.out.println("Player 2");
         System.out.println("Turn " + turn);
         System.out.println("----------");
-        CreatureCard creatureCard;
 
         int currentHealth = currentPlayer.getHealth();
         int opponentHealth = opponentPlayer.getHealth();
@@ -492,7 +519,7 @@ public class GameEngine {
         for (int i = 0; i < cards.size(); i++) {
             Card card = cards.get(i);
             if (card instanceof CreatureCard)
-                System.out.println(i + 1 + ": creature card with " + ((CreatureCard) card).getHp() + " hp  " + card.getAttack() + " attack ");
+                System.out.println(i + 1 + ": creature card with " + ((CreatureCard) card).getHp() + " hp  " + card.getAttack() + " attack "+ card.getSpecialAttack());
 
 
             if (card instanceof MagicCard) {

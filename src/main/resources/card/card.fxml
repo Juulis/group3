@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<<<<<<< HEAD
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
+=======
+>>>>>>> 4d640dfeba0049fee6ece9fdb0ec9d904189c9c8
 <?import java.lang.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
@@ -16,6 +19,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 <AnchorPane fx:id="cardPane" onMouseClicked="#getSelectedCard" prefHeight="178.0" prefWidth="125.0" styleClass="cardAnchor" stylesheets="@card.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TableViewController">
     <children>
       <StackPane id="cardType" fx:id="cardType" layoutY="111.0" prefHeight="66.0" prefWidth="125.0">
@@ -78,6 +82,26 @@
             </Label>
          </children>
       </StackPane>
+=======
+<AnchorPane fx:id="cardPane" onMouseClicked="#getSelectedCard" prefHeight="175.0" prefWidth="125.0" styleClass="cardAnchor" stylesheets="@card.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TableViewController">
+    <children>
+        <Label layoutX="10.0" layoutY="29.0" style="-fx-border-color: black;" text="KORT" textAlignment="CENTER" textFill="#ff0042">
+         <font>
+            <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
+         </font></Label>
+        <Label layoutX="10.0" layoutY="100.0" style="-fx-border-color: black;" text="ATTACK" textAlignment="CENTER" textFill="#ff0042">
+         <font>
+            <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
+         </font></Label>
+        <Label layoutX="10.0" layoutY="68.0" style="-fx-border-color: black;" text="HP" textAlignment="CENTER" textFill="#ff0042">
+         <font>
+            <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
+         </font></Label>
+      <ImageView fx:id="cardImageView" disable="true" fitHeight="175.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor></ImageView>
+>>>>>>> 4d640dfeba0049fee6ece9fdb0ec9d904189c9c8
     </children>
    <cursor>
       <Cursor fx:constant="OPEN_HAND" />
