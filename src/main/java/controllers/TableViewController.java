@@ -195,10 +195,12 @@ public class TableViewController {
         for (Node n : playerOneTableBox.getChildren()) {
             if (n.getId().equals(cardID)) {
                 n.lookup("#cardImageView").setEffect(new GaussianBlur());
+                n.setCursor(Cursor.CLOSED_HAND);
             } else {
                 for (Node o : playerTwoTableBox.getChildren()) {
                     if (o.getId().equals(cardID)) {
                         o.lookup("#cardImageView").setEffect(new GaussianBlur());
+                        o.setCursor(Cursor.CLOSED_HAND);
                     }
                 }
             }
@@ -209,10 +211,12 @@ public class TableViewController {
         for (Node n : playerOneTableBox.getChildren()) {
             if (n.getId().equals(cardID)) {
                 n.lookup("#cardImageView").setEffect(null);
+                n.setCursor(Cursor.OPEN_HAND);
             } else {
                 for (Node o : playerTwoTableBox.getChildren()) {
                     if (o.getId().equals(cardID)) {
                         o.lookup("#cardImageView").setEffect(null);
+                        o.setCursor(Cursor.OPEN_HAND);
                     }
                 }
             }

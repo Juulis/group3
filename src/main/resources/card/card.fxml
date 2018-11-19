@@ -69,4 +69,7 @@
             </children>
         </StackPane>
     </children>
+   <cursor>
+      <Cursor fx:constant="OPEN_HAND" />
+   </cursor>
 </AnchorPane>
