@@ -86,6 +86,7 @@ public class GameEngine {
      * setting the players decks and cards in hands
      */
     public void initPlayer() {
+        int startEnergy = 2;
         p1.setPlayer(1);
         p2.setPlayer(2);
         determinePlayerToStart();
@@ -99,7 +100,8 @@ public class GameEngine {
             p1.pickupCard();
             p2.pickupCard();
         }
-
+        p1.setPlayerEnergy(startEnergy);
+        p2.setPlayerEnergy(startEnergy);
     }
 
     public void checkCardsLeft() {
@@ -190,8 +192,15 @@ public class GameEngine {
         turn++;
         increaseIgnCounter(currentPlayer.getTableCards());
         increaseIgnCounter(opponentPlayer.getTableCards());
+        if (turn > 2){
+            regeneratePlayerEnergy(currentPlayer);
+        }
         if (!consoleGame)
             server.msgToFX("player" + Integer.toString(active));
+    }
+
+    public void regeneratePlayerEnergy(Player p){
+        p.setPlayerEnergy(p.getPlayerEnergy()+2);
     }
 
     public void increaseIgnCounter(ArrayList<Card> playerTableCards) {
@@ -226,34 +235,40 @@ public class GameEngine {
 
     public void attack(Card selectedCard, List<CreatureCard> opponentCards) {
         //TODO: change to string instead of ENUM . works with string to since java 8
-        boolean notTapped = true;
+
         if(currentPlayer.getPlayerHand().contains(selectedCard) && !(selectedCard instanceof MagicCard)){
             return;
         }
         if (getRound() > 1) {
-            if (selectedCard instanceof CreatureCard) {
-                notTapped = !checkIfTapped((CreatureCard) selectedCard);
-            }
-            if (notTapped) {
-                chooseAttack(selectedCard, opponentCards);
-                for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
-                    if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
-                        opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
-                    }
-                }
-                if (selectedCard instanceof MagicCard) {
+            if (selectedCard instanceof MagicCard){
+                if (selectedCard.getCardEnergy() <= currentPlayer.getPlayerEnergy()){
+                    chooseAttack(selectedCard, opponentCards);
                     currentPlayer.sendToGraveyard(selectedCard);
+                } else {
+                    Server.getInstance().msgToFX("lowenergy");
                 }
-                if (selectedCard.getClass() == CreatureCard.class) {
-                    ((CreatureCard) selectedCard).tap();
-                    if (isCardKilled((CreatureCard) selectedCard)) {
-                        currentPlayer.sendToGraveyard(selectedCard);
-                    }
-                }
-                checkHealthLeft();
-            } else {
-                Server.getInstance().msgToFX("tappedwarning");
             }
+            if (selectedCard instanceof CreatureCard) {
+                if (!checkIfTapped((CreatureCard) selectedCard)) {
+                    if (isCardReadyToAttack( (CreatureCard) selectedCard)) {
+                        chooseAttack(selectedCard, opponentCards);
+                        ((CreatureCard) selectedCard).tap();
+                        if (isCardKilled((CreatureCard) selectedCard)) {
+                            currentPlayer.sendToGraveyard(selectedCard);
+                        }
+                    } else {
+                        Server.getInstance().msgToFX("notready");
+                    }
+                } else {
+                    Server.getInstance().msgToFX("tappedwarning");
+                }
+            }
+            for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
+                if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
+                    opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
+                }
+            }
+            checkHealthLeft();
         } else {
             Server.getInstance().msgToFX("tosoon");
         }
@@ -394,22 +409,25 @@ public class GameEngine {
                         if(! (magicCard instanceof MagicCard)){
                             System.out.println("Wrong card. Try again");
                         }
-                        else{
-                            if (isOpponentTableEmpty) {
-                                attackPlayerWhenTableEmpty(magicCard);
-                                currentPlayer.sendToGraveyard(magicCard);
-                                return;
-                            }
-                            chooseConsoleAttack(magicCard);
-                            currentPlayer.sendToGraveyard(magicCard);
-                            for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
-                                if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
-                                    opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
+                        else {
+                            if (magicCard.getCardEnergy() <= currentPlayer.getPlayerEnergy()) {
+                                if (isOpponentTableEmpty) {
+                                    attackPlayerWhenTableEmpty(magicCard);
+                                } else {
+                                    chooseConsoleAttack(magicCard);
                                 }
+                                currentPlayer.sendToGraveyard(magicCard);
+                                currentPlayer.setPlayerEnergy(currentPlayer.getPlayerEnergy() - magicCard.getCardEnergy());
+                                for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
+                                    if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
+                                        opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
+                                    }
+                                }
+                                checkHealthLeft();
+                            } else {
+                                System.out.println("You don't have enough energy to use this card");
                             }
-                            checkHealthLeft();
                         }
-
                     } else if (choice == 2) {
                         CreatureCard creatureCard = (CreatureCard) currentPlayer.getTableCards().get(cardNr - 1);
                         if (!checkIfTapped(creatureCard)) {
@@ -502,7 +520,8 @@ public class GameEngine {
 
         int currentHealth = currentPlayer.getHealth();
         int opponentHealth = opponentPlayer.getHealth();
-        System.out.print("Your health: " + currentHealth + " hp");
+        int currentEnergy = currentPlayer.getPlayerEnergy();
+        System.out.print("Your health: " + currentHealth + " hp     Your energy: " + currentEnergy);
         System.out.println();
         System.out.println();
 
@@ -531,12 +550,11 @@ public class GameEngine {
         for (int i = 0; i < cards.size(); i++) {
             Card card = cards.get(i);
             if (card instanceof CreatureCard)
-                System.out.println(i + 1 + ": creature card with " + ((CreatureCard) card).getHp() + " hp  " + card.getAttack() + " attack "+ card.getSpecialAttack());
-
+                System.out.println(i + 1 + ": creature card with " + ((CreatureCard) card).getHp() + " hp  " + card.getAttack() + " attack "+ card.getSpecialAttack() + " " + card.getCardEnergy() + " energy ");
 
             if (card instanceof MagicCard) {
 
-                System.out.println(i + 1 + ": magic card with special attack " + card.getSpecialAttack());
+                System.out.println(i + 1 + ": magic card with special attack " + card.getAttack() + " " + card.getSpecialAttack() + " " + card.getCardEnergy() + " energy ");
 
             }
 

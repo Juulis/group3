@@ -104,8 +104,13 @@ public class Server {
             case "tapped":
                 tvc.tapCard(commands.get(1));
                 break;
+            case "notready":  // power system - card not ready to attack
+                break;
+            case "lowenergy":  // energy system - not enough energy to play card
+                break;
             case "untap":
                 tvc.unTapCard(commands.get(1));
+                break;
             case "showmessage":
                 tvc.showMessage(commands.get(1));
                 break;
@@ -114,6 +119,7 @@ public class Server {
                 break;
             case "setplayernames":
                 tvc.setPlayerNames(commands.get(1),commands.get(2));
+                break;
         }
     }
 
