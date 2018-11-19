@@ -94,7 +94,7 @@ public class Player {
             return;
         try {
             if (card instanceof CreatureCard) {
-                if (card.getCardEnergy() < playerEnergy){
+                if (card.getCardEnergy() <= playerEnergy){
                     tableCards.add(card);
                     playerHand.remove(card);
                     ((CreatureCard) card).tap();

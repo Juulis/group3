@@ -104,6 +104,10 @@ public class Server {
             case "tapped":
                 tvc.isTappedWarning();
                 break;
+            case "notready":  // power system - card not ready to attack
+                break;
+            case "lowenergy":  // energy system - not enough energy to play card
+                break;
         }
     }
 
