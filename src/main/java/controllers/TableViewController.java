@@ -396,7 +396,7 @@ public class TableViewController {
 
     @FXML
     private void swapPlaceHolder(Rectangle rect) {
-        if (selectedPane != null && !(selectedCurrentCard.getClass().equals(MagicCard.class))) {
+        if (selectedPane != null && !(selectedCurrentCard.getClass().equals(MagicCard.class)) && isManaEnough()) {
             if (activePlayer == 1 && playerOneTableBox.getChildren().contains(rect) && playerOneHandBox.getChildren().contains(selectedPane)) {
                 playerOneTableBox.getChildren().remove(playerOneTableBox.getChildren().size() - 1);
                 playerOneTableBox.getChildren().add(0, selectedPane);
@@ -410,6 +410,11 @@ public class TableViewController {
             update();
             clearCards();
         }
+    }
+
+    private boolean isManaEnough() {
+        return (activePlayer == 1 && Integer.parseInt(p1manalabel.getText()) >= selectedCurrentCard.getCardEnergy()) ||
+                (activePlayer == 2 && Integer.parseInt(p2manalabel.getText()) >= selectedCurrentCard.getCardEnergy());
     }
 
 
