@@ -13,7 +13,7 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
 import models.*;
-import org.w3c.dom.css.Rect;
+//import org.w3c.dom.css.Rect;
 
 import java.io.IOException;
 import java.util.ArrayList;
