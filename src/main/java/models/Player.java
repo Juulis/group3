@@ -2,7 +2,6 @@ package models;
 
 import app.Server;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Player {
@@ -10,11 +9,11 @@ public class Player {
     private int health;
     private String name;
     private int score;
+    private int player;
 
     private ArrayList<Card> currentDeck;
     private ArrayList<Card> playerHand;
     private ArrayList<Card> tableCards;
-    private int player;
 
     public Player() {
         this.health = 20;
@@ -80,7 +79,6 @@ public class Player {
         try {
             Server.getInstance().msgToFX("sendtograveyard," + card.getId() + "," + player);
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

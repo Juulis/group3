@@ -58,7 +58,7 @@ public class GameEngine {
         return p2;
     }
 
-    public void startGame(String startArgs) throws IOException {
+    public void startGame(String startArgs) {
         System.out.println("starting game");
         if (startArgs.equals("fx")) {
             server.msgToFX("setplayernames,"+p1.getName()+","+p2.getName());
@@ -75,7 +75,7 @@ public class GameEngine {
     }
 
 
-    public void initGame() throws IOException {
+    public void initGame() {
         deck.createFullDeck();
         initPlayer();
     }
@@ -227,7 +227,9 @@ public class GameEngine {
     public void attack(Card selectedCard, List<CreatureCard> opponentCards) {
         //TODO: change to string instead of ENUM . works with string to since java 8
         boolean notTapped = true;
-
+        if(currentPlayer.getPlayerHand().contains(selectedCard) && !(selectedCard instanceof MagicCard)){
+            return;
+        }
         if (getRound() > 1) {
             if (selectedCard instanceof CreatureCard) {
                 notTapped = !checkIfTapped((CreatureCard) selectedCard);
@@ -270,7 +272,7 @@ public class GameEngine {
                         if (opponentCards.get(0).getIgnRoundCounter() == 0) {
                             attacks.ignite(selectedCard, opponentCards.get(0));
                         } else {
-                            System.out.println("The targeted cart is already ignited");
+                            server.msgToFX("Already ignited");
                         }
                         break;
 
@@ -347,7 +349,7 @@ public class GameEngine {
     }
 
 
-    private void playerMenu() throws IOException {
+    private void playerMenu() {
         int input;
         System.out.println(
                 "------------------------------------------------- \n" +

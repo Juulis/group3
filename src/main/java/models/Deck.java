@@ -3,6 +3,7 @@ package models;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class Deck {
     /**
      * create array of deck cards with 50 cards
      */
-    public void createFullDeck() throws IOException {
+    public void createFullDeck() {
         getCardsFromJSON();
     }
 
@@ -58,8 +59,13 @@ public class Deck {
         return playerTwoDeck;
     }
 
-    public List<Card> getCardsFromJSON() throws IOException {
-        JsonReader reader = new JsonReader(new FileReader("src/main/java/json/Deck.json"));
+    public List<Card> getCardsFromJSON() {
+        JsonReader reader = null;
+        try {
+            reader = new JsonReader(new FileReader("src/main/java/json/Deck.json"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         List<CreatureCard> tempCards = Arrays.asList(new Gson().fromJson(reader, CreatureCard[].class));
 
         for (int i = 0; i < tempCards.size(); i++) {

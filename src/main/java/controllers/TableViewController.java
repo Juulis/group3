@@ -15,7 +15,6 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
 import models.*;
-//import org.w3c.dom.css.Rect;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -320,7 +319,7 @@ public class TableViewController {
         } else if (isSelectingCardToAttack(event)) {
             if (selectedOpponentCard1 == null) {
                 selectedOpponentCard1 = getCardFromId(((AnchorPane) event.getSource()).getId());
-                if (selectedCurrentCard.getSpecialAttack().equals("basic")) {
+                if (selectedCurrentCard.getSpecialAttack().equals("basic") || selectedCurrentCard.getSpecialAttack().equals("ignite")) {
                     server.msgToGameEngine("attack," + selectedCurrentCard.getId() + "," + selectedOpponentCard1.getId());
                     clearCards();
                 }
@@ -329,8 +328,6 @@ public class TableViewController {
                 server.msgToGameEngine("attack," + selectedCurrentCard.getId() + "," + selectedOpponentCard1.getId() + "," + selectedOpponentCard2.getId());
                 clearCards();
             }
-//
-
         }
     }
 
