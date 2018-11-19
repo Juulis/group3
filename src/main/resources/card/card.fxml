@@ -16,24 +16,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="cardPane" onMouseClicked="#getSelectedCard" prefHeight="178.0" prefWidth="125.0" styleClass="cardAnchor" stylesheets="@card.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TableViewController">
+<AnchorPane fx:id="cardPane" onMouseClicked="#getSelectedCard" prefHeight="178.0" prefWidth="125.0" scaleX="0.5" scaleY="0.5" styleClass="cardAnchor" stylesheets="@card.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TableViewController">
    <children>
        <StackPane id="cardType" fx:id="cardType" layoutY="111.0" prefHeight="66.0" prefWidth="125.0">
            <children>
                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="107.0" text="CardType" textAlignment="CENTER" textFill="WHITE">
                    <font>
-                       <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
+                       <Font name="Gill Sans Ultra Bold Condensed" size="10.0" />
                    </font>
                </Label>
            </children>
        </StackPane>
-       <ImageView fx:id="cardImageView" disable="true" fitHeight="175.0" fitWidth="125.0" opacity="0.76" pickOnBounds="true" preserveRatio="true">
+       <ImageView fx:id="cardImageView" disable="true" fitHeight="175.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
            <cursor>
                <Cursor fx:constant="OPEN_HAND" />
            </cursor>
-           <effect>
-               <Bloom />
-           </effect>
        </ImageView>
        <StackPane id="attackPane" fx:id="attackPane" layoutX="99.0" layoutY="-20.0" prefHeight="38.0" prefWidth="40.0">
            <children>
@@ -63,20 +60,16 @@
        </StackPane>
        <StackPane id="healthPane" fx:id="healthPane" layoutX="35.0" layoutY="149.0" prefHeight="50.0" prefWidth="50.0">
            <children>
-               <Circle fill="#e82626" opacity="0.85" radius="20.0" stroke="BLACK" strokeDashOffset="10.0">
-                   <effect>
-                       <Reflection />
-                   </effect>
-               </Circle>
+               <Circle fill="#e82626" opacity="0.85" radius="20.0" stroke="BLACK" strokeDashOffset="10.0" />
                <Label text="Hp" textAlignment="CENTER" textFill="WHITE">
                    <font>
                        <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
                    </font>
-                   <effect>
-                       <Reflection bottomOpacity="0.35" topOpacity="0.85" />
-                   </effect>
                </Label>
            </children>
        </StackPane>
    </children>
+   <cursor>
+      <Cursor fx:constant="OPEN_HAND" />
+   </cursor>
 </AnchorPane>

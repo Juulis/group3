@@ -246,8 +246,6 @@ public class TableViewController {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    playerOneHandBox.setSpacing(50);
-                    playerOneHandBox.setAlignment(Pos.CENTER);
                     cardPane.setId(String.valueOf(card.getId()));
                     ((ImageView) cardPane.getChildren().get(cardPane.getChildren()
                             .indexOf(cardPane.lookup("#cardImageView"))))
@@ -290,8 +288,6 @@ public class TableViewController {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    playerTwoHandBox.setSpacing(50);
-                    playerTwoHandBox.setAlignment(Pos.CENTER);
                     cardPane.setId(String.valueOf(card.getId()));
                     ((ImageView) cardPane.getChildren().get(cardPane.getChildren()
                             .indexOf(cardPane.lookup("#cardImageView"))))
@@ -395,13 +391,9 @@ public class TableViewController {
     private void swapPlaceHolder(Rectangle rect) {
         if (selectedPane != null && !(selectedCurrentCard.getClass().equals(MagicCard.class))) {
             if (activePlayer == 1 && playerOneTableBox.getChildren().contains(rect) && playerOneHandBox.getChildren().contains(selectedPane)) {
-                playerOneTableBox.setSpacing(20);
-                playerOneTableBox.setAlignment(Pos.CENTER);
                 playerOneTableBox.getChildren().remove(playerOneTableBox.getChildren().size() - 1);
                 playerOneTableBox.getChildren().add(0, selectedPane);
             } else if (activePlayer == 2 && playerTwoTableBox.getChildren().contains(rect) && playerTwoHandBox.getChildren().contains(selectedPane)) {
-                playerTwoTableBox.setSpacing(20);
-                playerTwoTableBox.setAlignment(Pos.CENTER);
                 playerTwoTableBox.getChildren().remove(playerTwoTableBox.getChildren().size() - 1);
                 playerTwoTableBox.getChildren().add(0, selectedPane);
             } else {
