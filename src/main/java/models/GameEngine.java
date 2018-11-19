@@ -58,9 +58,10 @@ public class GameEngine {
         return p2;
     }
 
-    public void startGame(String startArgs) throws IOException {
+    public void startGame(String startArgs) {
         System.out.println("starting game");
         if (startArgs.equals("fx")) {
+            server.msgToFX("setplayernames,"+p1.getName()+","+p2.getName());
             consoleGame = false;
         }
         initGame();
@@ -74,7 +75,7 @@ public class GameEngine {
     }
 
 
-    public void initGame() throws IOException {
+    public void initGame() {
         deck.createFullDeck();
         initPlayer();
     }
@@ -183,7 +184,9 @@ public class GameEngine {
             currentPlayer = p1;
             opponentPlayer = p2;
         }
-        currentPlayer.pickupCard();
+        if(currentPlayer.getCurrentDeck().size() != 0) {
+            currentPlayer.pickupCard();
+        }
         turn++;
         increaseIgnCounter(currentPlayer.getTableCards());
         increaseIgnCounter(opponentPlayer.getTableCards());
@@ -269,7 +272,7 @@ public class GameEngine {
                         if (opponentCards.get(0).getIgnRoundCounter() == 0) {
                             attacks.ignite(selectedCard, opponentCards.get(0));
                         } else {
-                            System.out.println("The targeted cart is already ignited");
+                            server.msgToFX("Already ignited");
                         }
                         break;
 
@@ -340,7 +343,7 @@ public class GameEngine {
     }
 
 
-    private void playerMenu() throws IOException {
+    private void playerMenu() {
         int input;
         System.out.println(
                 "------------------------------------------------- \n" +

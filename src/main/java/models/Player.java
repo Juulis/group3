@@ -2,7 +2,6 @@ package models;
 
 import app.Server;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Player {
@@ -57,10 +56,12 @@ public class Player {
         Card card = currentDeck.remove(index);
         playerHand.add(card);
 
-        String playerHandString;
+        String playerHandString = null;
         playerHandString = Server.getInstance().getStringFromList(playerHand);
+
         try {
             Server.getInstance().msgToFX("showplayerhand," + player + "," + playerHandString);
+            Server.getInstance().msgToFX("updatedeck,"+player+","+currentDeck.size());
         } catch (Exception e) {
         }
     }
@@ -75,6 +76,10 @@ public class Player {
             playerHand.remove(card);
         }
         tableCards.remove(card);
+        try {
+            Server.getInstance().msgToFX("sendtograveyard," + card.getId() + "," + player);
+        } catch (Exception e) {
+        }
     }
 
     /**

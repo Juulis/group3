@@ -17,7 +17,7 @@ public class Server {
         gameEngine = new GameEngine();
     }
 
-    public static Server getInstance()  {
+    public static Server getInstance() {
         if (instance == null) {
             instance = new Server();
         }
@@ -75,7 +75,7 @@ public class Server {
     }
 
     public void msgToFX(String msg) {
-        List<String> commands = Arrays.asList(msg.toLowerCase().split(","));
+        List<String> commands = Arrays.asList(msg.split(","));
         switch (commands.get(0)) {
             case "showplayerhand":
                 tvc.showPlayerHand(commands);
@@ -93,7 +93,7 @@ public class Server {
                 tvc.setPlayerHP(Integer.parseInt(commands.get(1)), Integer.parseInt(commands.get(2)));
                 break;
             case "sendtograveyard":
-                tvc.sendToGraveYard(Integer.parseInt(commands.get(1)));
+                tvc.sendToGraveYard(commands.get(1), commands.get(2));
                 break;
             case "attackedtosoon":
                 tvc.toSoonWarning();
@@ -104,6 +104,14 @@ public class Server {
             case "tapped":
                 tvc.isTappedWarning();
                 break;
+            case "showmessage":
+                tvc.showMessage(commands.get(1));
+                break;
+            case "updatedeck":
+                tvc.setDeckLabels(Integer.parseInt(commands.get(1)), Integer.parseInt(commands.get(2)));
+                break;
+            case "setplayernames":
+                tvc.setPlayerNames(commands.get(1),commands.get(2));
         }
     }
 
