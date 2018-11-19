@@ -347,7 +347,7 @@ public class TableViewController {
     }
 
     @FXML
-    private void getSelectedPlaceHolder(Event event) throws IOException {
+    private void getSelectedPlaceHolder(Event event) {
         //TODO: check if selectedCurrentCard != null && opponentcards == null
         Rectangle placeHolder = (Rectangle) event.getSource();
         swapPlaceHolder(placeHolder);

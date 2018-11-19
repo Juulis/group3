@@ -88,7 +88,7 @@ class GameEngineTest {
     }
 
     @Test
-    void initPlayer() throws IOException {
+    void initPlayer(){
 
         gameEngine.setP1(p1Mock);
         gameEngine.setP2(p2Mock);
@@ -108,6 +108,8 @@ class GameEngineTest {
         verify(p2Mock, times(1)).setCurrentDeck(playerTwoDeckMock);
         verify(p1Mock, times(5)).pickupCard();
         verify(p2Mock, times(5)).pickupCard();
+        verify(p1Mock,times(1)).setPlayerEnergy(2);
+        verify(p2Mock,times(1)).setPlayerEnergy(2);
     }
 
     @DisplayName("If player deck is null")
@@ -317,6 +319,7 @@ class GameEngineTest {
     void newTurnNewCard() throws IOException {
         gameEngine.getPlayerToStart(true);
         Player player1 = gameEngine.getCurrentPlayer();
+        player1.setPlayerEnergy(5);
         player1.getCurrentDeck().add(new CreatureCard(1, 1, 2, "c1", "basic", 2, 3, 2, ""));
         player1.getCurrentDeck().add(new CreatureCard(1, 2, 2, "c2", "basic", 1, 3, 3, ""));
         player1.getCurrentDeck().add(new CreatureCard(1, 2, 3, "c3", "basic", 3, 1, 2, ""));
@@ -330,6 +333,7 @@ class GameEngineTest {
 
         gameEngine.getPlayerToStart(false);
         Player player2 = gameEngine.getCurrentPlayer();
+        player2.setPlayerEnergy(5);
         player2.getCurrentDeck().add(new CreatureCard(1, 1, 2, "c1", "basic", 1, 2, 1, ""));
         player2.getCurrentDeck().add(new CreatureCard(1, 2, 2, "c2", "basic", 2, 2, 2, ""));
         player2.getCurrentDeck().add(new CreatureCard(1, 2, 3, "c3", "basic", 3, 2, 1, ""));
@@ -424,6 +428,7 @@ class GameEngineTest {
     void checkIfTapped() {
         gameEngine.getPlayerToStart(true);
         Player player1 = gameEngine.getCurrentPlayer();
+        player1.setPlayerEnergy(5);
         player1.getCurrentDeck().add(new CreatureCard(1, 1, 2, "c1", "basic", 2, 3, 2, ""));
         player1.getCurrentDeck().add(new CreatureCard(1, 2, 2, "c2", "basic", 1, 3, 3, ""));
         player1.getCurrentDeck().add(new CreatureCard(1, 2, 3, "c3", "basic", 3, 1, 2 ,""));
@@ -434,6 +439,7 @@ class GameEngineTest {
         assertEquals(2, player1.getPlayerHand().size());
         gameEngine.getPlayerToStart(false);
         Player player2 = gameEngine.getCurrentPlayer();
+        player2.setPlayerEnergy(5);
         player2.getCurrentDeck().add(new CreatureCard(1, 1, 2, "c1", "basic", 1, 2, 1, ""));
         player2.getCurrentDeck().add(new CreatureCard(1, 2, 2, "c2", "basic", 2, 2, 2, ""));
         player2.getCurrentDeck().add(new CreatureCard(1, 2, 3, "c3", "basic", 3, 2, 1, ""));
@@ -540,6 +546,16 @@ class GameEngineTest {
         p1.playCard(p1.getPlayerHand().get(p1.getPlayerHand().indexOf(magicCard)), 4);
         p1.sendToGraveyard(magicCard);
         assertEquals(0, p1.getPlayerHand().size());
+    }
+
+    @Test
+    void regeneratePlayerEnergy(){
+        int p1Energy = gameEngine.getP1().getPlayerEnergy();
+        int p2Energy = gameEngine.getP2().getPlayerEnergy();
+        gameEngine.regeneratePlayerEnergy(gameEngine.getP1());
+        assertEquals(p1Energy+2, gameEngine.getP1().getPlayerEnergy());
+        gameEngine.regeneratePlayerEnergy(gameEngine.getP2());
+        assertEquals(p2Energy+2, gameEngine.getP2().getPlayerEnergy());
     }
 
     }
