@@ -58,10 +58,21 @@ public class CreatureCard extends Card {
 
     public void tap() {
         this.tapped = true;
+        try {
+            Server.getInstance().msgToFX("tapped," + id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void unTap() {
         this.tapped = false;
+        try {
+            Server.getInstance().msgToFX("untap," + id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public int getPlayedOnRound() {
