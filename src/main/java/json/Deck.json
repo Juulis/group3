@@ -5,7 +5,7 @@
     "attack": 5,
     "defence": 1,
     "power": 2,
-    "cardEnergy": 2,
+    "cardEnergy": 3,
     "specialAttack": "dualAttack",
     "magicCard": 0,
     "imgURL": "/cardpics/Card6.png"
@@ -16,7 +16,7 @@
     "attack": 5,
     "defence": 1,
     "power": 2,
-    "cardEnergy": 2,
+    "cardEnergy": 3,
     "specialAttack": "dualAttack",
     "magicCard": 0,
     "imgURL": "/cardpics/Card6.png"
@@ -27,7 +27,7 @@
     "attack": 5,
     "defence": 1,
     "power": 2,
-    "cardEnergy": 2,
+    "cardEnergy": 3,
     "specialAttack": "dualAttack",
     "magicCard": 0,
     "imgURL": "/cardpics/Card6.png"
@@ -38,7 +38,7 @@
     "attack": 5,
     "defence": 1,
     "power": 2,
-    "cardEnergy": 2,
+    "cardEnergy": 3,
     "specialAttack": "dualAttack",
     "magicCard": 0,
     "imgURL": "/cardpics/Card6.png"
@@ -49,7 +49,7 @@
     "attack": 5,
     "defence": 1,
     "power": 2,
-    "cardEnergy": 2,
+    "cardEnergy": 3,
     "specialAttack": "dualAttack",
     "magicCard": 0,
     "imgURL": "/cardpics/Card6.png"
@@ -60,7 +60,7 @@
     "attack": 5,
     "defence": 1,
     "power": 2,
-    "cardEnergy": 2,
+    "cardEnergy": 3,
     "specialAttack": "dualAttack",
     "magicCard": 0,
     "imgURL": "/cardpics/Card6.png"
@@ -71,7 +71,7 @@
     "attack": 5,
     "defence": 1,
     "power": 2,
-    "cardEnergy": 2,
+    "cardEnergy": 3,
     "specialAttack": "dualAttack",
     "magicCard": 0,
     "imgURL": "/cardpics/Card6.png"
@@ -82,7 +82,7 @@
     "attack": 5,
     "defence": 1,
     "power": 2,
-    "cardEnergy": 2,
+    "cardEnergy": 3,
     "specialAttack": "dualAttack",
     "magicCard": 0,
     "imgURL": "/cardpics/Card6.png"
@@ -93,7 +93,7 @@
     "attack": 5,
     "defence": 1,
     "power": 2,
-    "cardEnergy": 2,
+    "cardEnergy": 3,
     "specialAttack": "dualAttack",
     "magicCard": 0,
     "imgURL": "/cardpics/Card6.png"
@@ -104,7 +104,7 @@
     "attack": 5,
     "defence": 1,
     "power": 2,
-    "cardEnergy": 2,
+    "cardEnergy": 3,
     "specialAttack": "dualAttack",
     "magicCard": 0,
     "imgURL": "/cardpics/Card6.png"
@@ -115,7 +115,7 @@
     "attack": 3,
     "defence": 2,
     "power": 0,
-    "cardEnergy": 1,
+    "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0,
     "imgURL": "/cardpics/Card7.png"
@@ -126,7 +126,7 @@
     "attack": 3,
     "defence": 2,
     "power": 0,
-    "cardEnergy": 1,
+    "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0,
     "imgURL": "/cardpics/Card7.png"
@@ -137,7 +137,7 @@
     "attack": 3,
     "defence": 2,
     "power": 0,
-    "cardEnergy": 1,
+    "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0,
     "imgURL": "/cardpics/Card7.png"
@@ -148,7 +148,7 @@
     "attack": 3,
     "defence": 2,
     "power": 0,
-    "cardEnergy": 1,
+    "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0,
     "imgURL": "/cardpics/Card7.png"
@@ -159,7 +159,7 @@
     "attack": 3,
     "defence": 2,
     "power": 0,
-    "cardEnergy": 1,
+    "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0,
     "imgURL": "/cardpics/Card7.png"
@@ -170,7 +170,7 @@
     "attack": 3,
     "defence": 2,
     "power": 0,
-    "cardEnergy": 1,
+    "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0,
     "imgURL": "/cardpics/Card7.png"
@@ -181,7 +181,7 @@
     "attack": 3,
     "defence": 2,
     "power": 0,
-    "cardEnergy": 1,
+    "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0,
     "imgURL": "/cardpics/Card7.png"
@@ -192,7 +192,7 @@
     "attack": 3,
     "defence": 2,
     "power": 0,
-    "cardEnergy": 1,
+    "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0,
     "imgURL": "/cardpics/Card7.png"
@@ -203,7 +203,7 @@
     "attack": 3,
     "defence": 2,
     "power": 0,
-    "cardEnergy": 1,
+    "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0,
     "imgURL": "/cardpics/Card7.png"
@@ -214,7 +214,7 @@
     "attack": 3,
     "defence": 2,
     "power": 0,
-    "cardEnergy": 1,
+    "cardEnergy": 2,
     "specialAttack": "basic",
     "magicCard": 0,
     "imgURL": "/cardpics/Card7.png"
