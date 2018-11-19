@@ -103,7 +103,7 @@ public class TableViewController {
     }
 
     @FXML
-    private void endTurn() throws IOException {
+    private void endTurn() {
         server.msgToGameEngine("endturn");
         clearCards();
     }
@@ -120,7 +120,6 @@ public class TableViewController {
         } else {
             System.out.println("no Player");
         }
-        showMessage(Integer.toString(activePlayer));
         update();
     }
 
@@ -401,7 +400,11 @@ public class TableViewController {
 
     @FXML
     private void swapPlaceHolder(Rectangle rect) {
-        if (selectedPane != null && !(selectedCurrentCard.getClass().equals(MagicCard.class)) && isManaEnough()) {
+        if(!isManaEnough()){
+            showMessage("Need more mana");
+            return;
+        }
+        if (selectedPane != null && !(selectedCurrentCard.getClass().equals(MagicCard.class))) {
             if (activePlayer == 1 && playerOneTableBox.getChildren().contains(rect) && playerOneHandBox.getChildren().contains(selectedPane)) {
                 playerOneTableBox.getChildren().remove(playerOneTableBox.getChildren().size() - 1);
                 playerOneTableBox.getChildren().add(0, selectedPane);
