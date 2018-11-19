@@ -12,12 +12,12 @@ public class Server {
     private static Server instance = null;
     private TableViewController tvc;
 
-    private Server() throws IOException {
+    private Server() {
         instance = this;
         gameEngine = new GameEngine();
     }
 
-    public static Server getInstance() throws IOException {
+    public static Server getInstance() {
         if (instance == null) {
             instance = new Server();
         }
@@ -43,7 +43,7 @@ public class Server {
      *            example string: "attack,4,1,2"
      *            card 4 will attack opponent cards 1 and 2
      */
-    public void msgToGameEngine(String msg) throws IOException {
+    public void msgToGameEngine(String msg) {
         List<String> commands = Arrays.asList(msg.toLowerCase().split(","));
         Card selectedCard = null;
         if (commands.size() > 1) {
@@ -75,7 +75,7 @@ public class Server {
     }
 
     public void msgToFX(String msg) {
-        List<String> commands = Arrays.asList(msg.toLowerCase().split(","));
+        List<String> commands = Arrays.asList(msg.split(","));
         switch (commands.get(0)) {
             case "showplayerhand":
                 tvc.showPlayerHand(commands);
@@ -93,7 +93,7 @@ public class Server {
                 tvc.setPlayerHP(Integer.parseInt(commands.get(1)), Integer.parseInt(commands.get(2)));
                 break;
             case "sendtograveyard":
-                tvc.sendToGraveYard(Integer.parseInt(commands.get(1)));
+                tvc.sendToGraveYard(commands.get(1), commands.get(2));
                 break;
             case "attackedtosoon":
                 tvc.toSoonWarning();
@@ -102,8 +102,18 @@ public class Server {
                 tvc.playCard(Integer.parseInt(commands.get(1)));
                 break;
             case "tapped":
-                tvc.isTappedWarning();
+                tvc.tapCard(commands.get(1));
                 break;
+            case "untap":
+                tvc.unTapCard(commands.get(1));
+            case "showmessage":
+                tvc.showMessage(commands.get(1));
+                break;
+            case "updatedeck":
+                tvc.setDeckLabels(Integer.parseInt(commands.get(1)), Integer.parseInt(commands.get(2)));
+                break;
+            case "setplayernames":
+                tvc.setPlayerNames(commands.get(1),commands.get(2));
         }
     }
 

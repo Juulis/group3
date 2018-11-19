@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Bloom?>
@@ -7,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="cardPane" onMouseClicked="#getSelectedCard" prefHeight="175.0" prefWidth="125.0" styleClass="cardAnchor" stylesheets="@card.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TableViewController">
+<AnchorPane fx:id="cardPane" onMouseClicked="#getSelectedCard" prefHeight="175.0" prefWidth="125.0" styleClass="cardAnchor" stylesheets="@card.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TableViewController">
     <children>
         <Label layoutX="10.0" layoutY="29.0" style="-fx-border-color: black;" text="KORT" textAlignment="CENTER" textFill="#ff0042">
          <font>
@@ -21,13 +28,10 @@
          <font>
             <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
          </font></Label>
-      <ImageView fx:id="cardImageView" disable="true" fitHeight="175.0" fitWidth="125.0" opacity="0.76" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="cardImageView" disable="true" fitHeight="175.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="OPEN_HAND" />
-         </cursor>
-         <effect>
-            <Bloom />
-         </effect></ImageView>
+         </cursor></ImageView>
     </children>
    <cursor>
       <Cursor fx:constant="OPEN_HAND" />
