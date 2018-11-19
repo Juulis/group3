@@ -30,6 +30,10 @@ public class TableViewController {
     private Server server;
     private static int activePlayer;
     @FXML
+    private Label p2manalabel;
+    @FXML
+    private Label p1manalabel;
+    @FXML
     private Label player1label;
     @FXML
     private Label player2label;
@@ -266,10 +270,9 @@ public class TableViewController {
                     if (!(card instanceof MagicCard)) {
                         healthPane = (StackPane) cardPane.getChildren().get(4);
                         top = (Label) healthPane.getChildren().get(1);
-                        top.setText(Integer.toString(((CreatureCard)card).getHp()));
+                        top.setText(Integer.toString(((CreatureCard) card).getHp()));
                         top.toFront();
-                    }
-                    else if (card instanceof MagicCard) {
+                    } else if (card instanceof MagicCard) {
                         healthPane = (StackPane) cardPane.getChildren().get(4);
                         top = (Label) healthPane.getChildren().get(1);
                         hpCircle = (Circle) healthPane.getChildren().get(0);
@@ -312,10 +315,9 @@ public class TableViewController {
                     if (!(card instanceof MagicCard)) {
                         healthPane = (StackPane) cardPane.getChildren().get(4);
                         top = (Label) healthPane.getChildren().get(1);
-                        top.setText(Integer.toString(((CreatureCard)card).getHp()));
+                        top.setText(Integer.toString(((CreatureCard) card).getHp()));
                         top.toFront();
-                    }
-                    else if (card instanceof MagicCard) {
+                    } else if (card instanceof MagicCard) {
                         healthPane = (StackPane) cardPane.getChildren().get(4);
                         top = (Label) healthPane.getChildren().get(1);
                         hpCircle = (Circle) healthPane.getChildren().get(0);
@@ -442,7 +444,6 @@ public class TableViewController {
 
     @FXML
     private void playerattack(MouseEvent mouseEvent) {
-        showMessage("clicked " + activePlayer);
         if (selectedCurrentCard != null && selectedCurrentCard.getSpecialAttack().equals("playerAttack") && ( //check so player dont targets it self
                 (((Circle) mouseEvent.getSource()).getId().equals("playeroneavatar") && activePlayer == 2) ||
                         (((Circle) mouseEvent.getSource()).getId().equals("playeroneavatar") && activePlayer == 1))) {
@@ -453,6 +454,17 @@ public class TableViewController {
     public void setPlayerNames(String p1, String p2) {
         player1label.setText(p1);
         player2label.setText(p2);
+    }
+
+    public void setMana(int player, int mana) {
+        if (player == 1) {
+//            playerOneMana.setProgress(mana);
+            p1manalabel.setText(Integer.toString(mana));
+        } else if (player == 2) {
+//            playerTwoMana.setProgress(mana);
+            p2manalabel.setText(Integer.toString(mana));
+        }
+        update();
     }
 
     public void setCardHP(int cardID, int hp) {

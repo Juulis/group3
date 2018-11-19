@@ -426,6 +426,10 @@ public class GameEngine {
                                 checkHealthLeft();
                             } else {
                                 System.out.println("You don't have enough energy to use this card");
+                                try {
+                                    server.msgToFX("showmessage,not enough energy");
+                                } catch (Exception e) {
+                                }
                             }
                         }
                     } else if (choice == 2) {
