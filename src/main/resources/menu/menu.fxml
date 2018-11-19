@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
@@ -9,23 +16,26 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="menuPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@menu.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
+<AnchorPane fx:id="menuPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" stylesheets="@menu.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
    <children>
        <StackPane stylesheets="@menu.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
            <children>
-           <Group stylesheets="@menu.css" StackPane.alignment="CENTER">
+           <Group scaleX="0.7" scaleY="0.7" stylesheets="@menu.css" StackPane.alignment="CENTER">
                <children>
-                   <Button fx:id="startGameBtn" layoutX="302.0" layoutY="177.0" mnemonicParsing="false" onAction="#startGame" prefHeight="70.0" prefWidth="250.0" text="START GAME" textAlignment="CENTER" />
+                   <Button fx:id="startGameBtn" layoutX="302.0" layoutY="177.0" mnemonicParsing="false" onAction="#startGame" prefHeight="69.0" prefWidth="248.0" text="START GAME" textAlignment="CENTER" />
                    <Button fx:id="highscoreBtn" layoutX="302.0" layoutY="267.0" mnemonicParsing="false" onAction="#viewHighscore" prefHeight="70.0" prefWidth="250.0" text="VIEW HIGHSCORE" textAlignment="CENTER" />
                    <Button fx:id="quitGameBtn" layoutX="302.0" layoutY="357.0" mnemonicParsing="false" onAction="#quitGame" prefHeight="70.0" prefWidth="250.0" text="QUIT" textAlignment="CENTER" />
                </children>
-           </Group>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="EPIC NO CHESS CARD GAME" textAlignment="CENTER" StackPane.alignment="TOP_CENTER">
                <StackPane.margin>
-                  <Insets top="180.0" />
+                  <Insets top="100.0" />
+               </StackPane.margin>
+           </Group>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="EPIC NO CHESS CARD GAME" textAlignment="CENTER" wrappingWidth="751.4169921875" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets top="150.0" />
                </StackPane.margin>
                <font>
-                  <Font name="Book Antiqua" size="70.0" />
+                  <Font name="Book Antiqua" size="52.0" />
                </font>
                <effect>
                   <Glow level="1.0" />
