@@ -120,6 +120,9 @@ public class Server {
             case "setplayernames":
                 tvc.setPlayerNames(commands.get(1),commands.get(2));
                 break;
+            case "cardhp":
+                tvc.setCardHP(Integer.parseInt(commands.get(1)),Integer.parseInt(commands.get(2)));
+                break;
         }
     }
 
