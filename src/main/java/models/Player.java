@@ -80,6 +80,11 @@ public class Player {
             playerHand.remove(card);
         }
         tableCards.remove(card);
+        try {
+            Server.getInstance().msgToFX("sendtograveyard," + card.getId() + "," + player);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

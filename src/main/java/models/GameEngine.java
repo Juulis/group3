@@ -187,7 +187,9 @@ public class GameEngine {
             currentPlayer = p1;
             opponentPlayer = p2;
         }
-        currentPlayer.pickupCard();
+        if(currentPlayer.getCurrentDeck().size() != 0) {
+            currentPlayer.pickupCard();
+        }
         turn++;
         increaseIgnCounter(currentPlayer.getTableCards());
         increaseIgnCounter(opponentPlayer.getTableCards());

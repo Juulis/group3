@@ -1,6 +1,7 @@
 package controllers;
 
 import app.Server;
+import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.*;
 import javafx.geometry.*;
@@ -12,9 +13,12 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
 import models.*;
+import org.w3c.dom.css.Rect;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class TableViewController {
     private static Card selectedCurrentCard;
@@ -108,7 +112,67 @@ public class TableViewController {
 
     }
 
-    public void sendToGraveYard(int cardID) {
+    public void sendToGraveYard(String cardID, String player) {
+        List<Node> nodesToRemove = new ArrayList<>();
+        System.out.println("sendToGraveYard");
+        if (deck.getCards().get(Integer.parseInt(cardID)) instanceof MagicCard) {
+            if (player.equals("1")) {
+                for (Node n : playerOneHandBox.getChildren()) {
+                    if (n.getId().equals(cardID)) {
+                        nodesToRemove.add(n);
+                    }
+                }
+                playerOneHandBox.getChildren().removeAll(nodesToRemove);
+            } else {
+                for (Node n : playerTwoHandBox.getChildren()) {
+                    if (n.getId().equals(cardID)) {
+                        nodesToRemove.add(n);
+                    }
+                }
+                playerTwoHandBox.getChildren().removeAll(nodesToRemove);
+            }
+        } else {
+            if (player.equals("1")) {
+                for (Node n : playerOneTableBox.getChildren()) {
+                    if (n.getId().equals(cardID)) {
+                        nodesToRemove.add(n);
+                    }
+                }
+                playerOneTableBox.getChildren().removeAll(nodesToRemove);
+            } else {
+                for (Node n : playerTwoTableBox.getChildren()) {
+                    if (n.getId().equals(cardID)) {
+                        nodesToRemove.add(n);
+                    }
+                }
+                playerTwoTableBox.getChildren().removeAll(nodesToRemove);
+            }
+        }
+        addNewPlaceholderForP1();
+        addNewPlaceholderForP2();
+        update();
+    }
+
+    public String randomId() {
+        Random r = new Random();
+        int randomNr = r.nextInt(1000000);
+        return String.valueOf(randomNr);
+    }
+
+    public void addNewPlaceholderForP1() {
+        Rectangle rect = new Rectangle();
+        rect.setArcHeight(500);
+        rect.setArcWidth(50);
+        rect.setId(randomId());
+        playerOneTableBox.getChildren().add(rect);
+    }
+
+    public void addNewPlaceholderForP2() {
+        Rectangle rect = new Rectangle();
+        rect.setArcHeight(500);
+        rect.setArcWidth(50);
+        rect.setId(randomId());
+        playerTwoTableBox.getChildren().add(rect);
     }
 
     public void toSoonWarning() {
@@ -148,13 +212,13 @@ public class TableViewController {
                             .setImage(new Image(card.getImgURL()));
 
 
-                    top = (Label)cardPane.getChildren().get(0);
-                    middle = (Label)cardPane.getChildren().get(1);
-                    bottom = (Label)cardPane.getChildren().get(2);
+                    top = (Label) cardPane.getChildren().get(0);
+                    middle = (Label) cardPane.getChildren().get(1);
+                    bottom = (Label) cardPane.getChildren().get(2);
                     top.setText(card.getSpecialAttack());
-                    if(card instanceof MagicCard){
+                    if (card instanceof MagicCard) {
                         middle.setText("MAGIC");
-                    }else{
+                    } else {
                         middle.setText("CREATURE");
                     }
                     bottom.setText(Integer.toString(card.getId()));
@@ -178,20 +242,19 @@ public class TableViewController {
                             .setImage(new Image(card.getImgURL()));
 
 
-                    top = (Label)cardPane.getChildren().get(0);
-                    middle = (Label)cardPane.getChildren().get(1);
-                    bottom = (Label)cardPane.getChildren().get(2);
+                    top = (Label) cardPane.getChildren().get(0);
+                    middle = (Label) cardPane.getChildren().get(1);
+                    bottom = (Label) cardPane.getChildren().get(2);
                     top.setText(card.getSpecialAttack());
-                    if(card instanceof MagicCard){
+                    if (card instanceof MagicCard) {
                         middle.setText("MAGIC");
-                    }else{
+                    } else {
                         middle.setText("CREATURE");
                     }
                     bottom.setText(Integer.toString(card.getId()));
                     top.toFront();
                     middle.toFront();
                     bottom.toFront();
-
 
 
                     playerTwoHandBox.getChildren().add(cardPane);
@@ -226,7 +289,7 @@ public class TableViewController {
 
     @FXML
     private void getSelectedCard(Event event) {
-        if (isActivePlayerSelectingHandCard(event)) {
+        if (isActivePlayerSelectingHandCard(event) || isSelectingCardToAttackWith(event)) {
             selectedCurrentCard = getCardFromId(((AnchorPane) event.getSource()).getId());
             selectedPane = (AnchorPane) event.getSource();
         } else if (isSelectingCardToAttack(event)) {
@@ -252,11 +315,6 @@ public class TableViewController {
 //
 
         }
-        if (isSelectingCardToAttackWith(event)) {
-            selectedCurrentCard = getCardFromId(((AnchorPane) event.getSource()).getId());
-        }
-
-
     }
 
     private boolean isSelectingCardToAttackWith(Event event) {

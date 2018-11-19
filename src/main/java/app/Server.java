@@ -50,6 +50,7 @@ public class Server {
             selectedCard = gameEngine.getDeck().getCards().get(Integer.parseInt(commands.get(1)));
         }
         List<CreatureCard> opponents = new ArrayList<>();
+        System.out.println(msg);
         switch (commands.get(0)) {
             case "pickcard":
                 if (commands.get(1).equals("1"))
@@ -93,7 +94,7 @@ public class Server {
                 tvc.setPlayerHP(Integer.parseInt(commands.get(1)), Integer.parseInt(commands.get(2)));
                 break;
             case "sendtograveyard":
-                tvc.sendToGraveYard(Integer.parseInt(commands.get(1)));
+                tvc.sendToGraveYard(commands.get(1), commands.get(2));
                 break;
             case "attackedtosoon":
                 tvc.toSoonWarning();
