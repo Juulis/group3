@@ -220,20 +220,26 @@ public class TableViewController {
                             .indexOf(cardPane.lookup("#cardImageView"))))
                             .setImage(new Image(card.getImgURL()));
 
+                    StackPane attackPane = (StackPane) cardPane.getChildren().get(2);
+                    bottom = (Label) attackPane.getChildren().get(1);
+                    bottom.setText(Integer.toString(card.getAttack()));
 
-                    top = (Label) cardPane.getChildren().get(0);
-                    middle = (Label) cardPane.getChildren().get(1);
-                    bottom = (Label) cardPane.getChildren().get(2);
-                    top.setText(card.getSpecialAttack());
-                    if (card instanceof MagicCard) {
-                        middle.setText("MAGIC");
-                    } else {
-                        middle.setText("CREATURE");
-                    }
-                    bottom.setText(Integer.toString(card.getId()));
+                    StackPane manaPane = (StackPane) cardPane.getChildren().get(3);
+                    middle = (Label) manaPane.getChildren().get(1);
+                    middle.setText(Integer.toString(card.getCardEnergy()));//Change To MANA!
+
+                    StackPane healthPane = (StackPane) cardPane.getChildren().get(4);
+                    top = (Label) healthPane.getChildren().get(1);
+                    top.setText(Integer.toString(((CreatureCard)card).getHp()));
+
+                    StackPane cardType = (StackPane) cardPane.getChildren().get(0);
+                    cardIdType = (Label) cardType.getChildren().get(0);
+                    cardIdType.setText(card.getSpecialAttack().toUpperCase());
+
                     top.toFront();
                     middle.toFront();
                     bottom.toFront();
+                    cardIdType.toFront();
 
                     playerOneHandBox.getChildren().add(cardPane);
                     break;
@@ -250,44 +256,21 @@ public class TableViewController {
                             .indexOf(cardPane.lookup("#cardImageView"))))
                             .setImage(new Image(card.getImgURL()));
 
-                    /*StackPane cardType = ((StackPane) cardPane.getChildren().get(cardPane.getChildren().indexOf(cardPane.lookup("#stackpane"))));
-                    cardIdType = ((Label) cardType.getChildren().get(cardType.getChildren().indexOf(cardType.lookup("#cardType"))));
-                    cardIdType.setText((card).getCardName());
-
-                    StackPane attackPane = ((StackPane) cardPane.getChildren().get(cardPane.getChildren().indexOf(cardPane.lookup("#stackpane"))));
-                    middle = ((Label) attackPane.getChildren().get(attackPane.getChildren().indexOf(attackPane.lookup("#attackPane"))));
-                    middle.setText(Integer.toString((card).getAttack()));
-
-                    StackPane manaPane = ((StackPane) cardPane.getChildren().get(cardPane.getChildren().indexOf(cardPane.lookup("#stackpane"))));
-                    bottom = ((Label) manaPane.getChildren().get(manaPane.getChildren().indexOf(manaPane.lookup("#manaPane"))));
-                    bottom.setText(Integer.toString((card).getId())); //Change To MANA!!
-
-                    StackPane healthPane = ((StackPane) cardPane.getChildren().get(cardPane.getChildren().indexOf(cardPane.lookup("#stackpane"))));
-                    top = ((Label) healthPane.getChildren().get(healthPane.getChildren().indexOf(healthPane.lookup("#healthPane"))));
-                    top.setText(Integer.toString(((CreatureCard)card).getHp()));*/
-
-                    StackPane attackPane = (StackPane) cardPane.getChildren().get(2);
+                    attackPane = (StackPane) cardPane.getChildren().get(2);
                     bottom = (Label) attackPane.getChildren().get(1);
                     bottom.setText(Integer.toString(card.getAttack()));
 
-                    StackPane manaPane = (StackPane) cardPane.getChildren().get(3);
+                    manaPane = (StackPane) cardPane.getChildren().get(3);
                     middle = (Label) manaPane.getChildren().get(1);
-                    middle.setText(Integer.toString(card.getId()));//Change To MANA!
+                    middle.setText(Integer.toString(card.getCardEnergy()));//Change To MANA!
 
-                    StackPane healthPane = (StackPane) cardPane.getChildren().get(4);
+                    healthPane = (StackPane) cardPane.getChildren().get(4);
                     top = (Label) healthPane.getChildren().get(1);
                     top.setText(Integer.toString(((CreatureCard)card).getHp()));
 
-                    StackPane cardType = (StackPane) cardPane.getChildren().get(0);
+                    cardType = (StackPane) cardPane.getChildren().get(0);
                     cardIdType = (Label) cardType.getChildren().get(0);
                     cardIdType.setText(card.getSpecialAttack().toUpperCase());
-
-                    /*top.setText(card.getSpecialAttack());
-                    if(card instanceof MagicCard){
-                        middle.setText("MAGIC");
-                    }else{
-                        middle.setText("CREATURE");
-                    }*/
 
                     top.toFront();
                     middle.toFront();
