@@ -220,6 +220,7 @@ public class TableViewController {
 
     public void showPlayerHand(List<String> commands) {
         String player = commands.get(1);
+        Circle hpCircle;
         Label top;
         Label middle;
         Label bottom;
@@ -270,6 +271,13 @@ public class TableViewController {
                         top.setText(Integer.toString(((CreatureCard)card).getHp()));
                         top.toFront();
                     }
+                    else if (card instanceof MagicCard) {
+                        healthPane = (StackPane) cardPane.getChildren().get(4);
+                        top = (Label) healthPane.getChildren().get(1);
+                        hpCircle = (Circle) healthPane.getChildren().get(0);
+                        hpCircle.setVisible(false);
+                        top.setVisible(false);
+                    }
 
                     middle.toFront();
                     bottom.toFront();
@@ -307,6 +315,13 @@ public class TableViewController {
                         top = (Label) healthPane.getChildren().get(1);
                         top.setText(Integer.toString(((CreatureCard)card).getHp()));
                         top.toFront();
+                    }
+                    else if (card instanceof MagicCard) {
+                        healthPane = (StackPane) cardPane.getChildren().get(4);
+                        top = (Label) healthPane.getChildren().get(1);
+                        hpCircle = (Circle) healthPane.getChildren().get(0);
+                        hpCircle.setVisible(false);
+                        top.setVisible(false);
                     }
 
                     middle.toFront();
