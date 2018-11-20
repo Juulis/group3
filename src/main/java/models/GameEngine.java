@@ -197,14 +197,14 @@ public class GameEngine {
         }
         if (!consoleGame)
             server.msgToFX("player" + Integer.toString(active));
-        for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
-            if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
-                opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
-            }
-        }
-        for (int i = 0; i < currentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
-            if (isCardKilled((CreatureCard) currentPlayer.getTableCards().get(i))) {
-                currentPlayer.sendToGraveyard(currentPlayer.getTableCards().get(i));
+        checkTableCardsHp(opponentPlayer);
+        checkTableCardsHp(currentPlayer);
+    }
+
+    public void checkTableCardsHp( Player p){
+        for (Card card: p.getTableCards()) { //checks all player table cards if they died by the attack
+            if (isCardKilled((CreatureCard) card)) {
+                p.sendToGraveyard(card);
             }
         }
     }
@@ -245,43 +245,49 @@ public class GameEngine {
 
     public void attack(Card selectedCard, List<CreatureCard> opponentCards) {
         //TODO: change to string instead of ENUM . works with string to since java 8
-
         if (currentPlayer.getPlayerHand().contains(selectedCard) && !(selectedCard instanceof MagicCard)) {
             return;
         }
         if (getRound() > 1) {
             if (selectedCard instanceof MagicCard) {
-                if (selectedCard.getCardEnergy() <= currentPlayer.getPlayerEnergy()) {
-                    chooseAttack(selectedCard, opponentCards);
-                    currentPlayer.sendToGraveyard(selectedCard);
-                    currentPlayer.setPlayerEnergy(currentPlayer.getPlayerEnergy() - selectedCard.getCardEnergy());
-                } else {
-                    Server.getInstance().msgToFX("showmessage,To low on mana");
-                }
+                attackWithMagicCard(selectedCard, opponentCards);
+            } else {
+                attackWithCreatureCard(selectedCard, opponentCards);
             }
-            if (selectedCard instanceof CreatureCard) {
-                if (!checkIfTapped((CreatureCard) selectedCard)) {
-                    if (isCardReadyToAttack((CreatureCard) selectedCard)) {
-                        chooseAttack(selectedCard, opponentCards);
-                        ((CreatureCard) selectedCard).tap();
-                        if (isCardKilled((CreatureCard) selectedCard)) {
-                            currentPlayer.sendToGraveyard(selectedCard);
-                        }
-                    } else {
-                        Server.getInstance().msgToFX("showmessage,Card not ready!");
-                    }
-                } else {
-                    Server.getInstance().msgToFX("showmessage, Card is tapped!");
-                }
-            }
-            for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
-                if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
-                    opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
-                }
-            }
+            checkTableCardsHp(opponentPlayer);
             checkHealthLeft();
         } else {
             Server.getInstance().msgToFX("tosoon");
+        }
+    }
+
+    public void attackWithMagicCard( Card card, List<CreatureCard> opponentCards){
+        if (card.getCardEnergy() <= currentPlayer.getPlayerEnergy()) {
+            chooseAttack(card, opponentCards);
+            currentPlayer.sendToGraveyard(card);
+            currentPlayer.setPlayerEnergy(currentPlayer.getPlayerEnergy() - card.getCardEnergy());
+        } else {
+            Server.getInstance().msgToFX("showmessage,To low on mana");
+        }
+    }
+
+    public void attackWithCreatureCard( Card card, List<CreatureCard> opponentCards){
+        if (!checkIfTapped((CreatureCard) card)) {
+            if (isCardReadyToAttack((CreatureCard) card)) {
+                chooseAttack(card, opponentCards);
+                ((CreatureCard) card).tap();
+                checkAttackingCardHp(card);
+            } else {
+                Server.getInstance().msgToFX("showmessage,Card not ready!");
+            }
+        } else {
+            Server.getInstance().msgToFX("showmessage, Card is tapped!");
+        }
+    }
+
+    public void checkAttackingCardHp( Card card){
+        if (isCardKilled((CreatureCard) card)) {
+            currentPlayer.sendToGraveyard(card);
         }
     }
 
@@ -402,85 +408,16 @@ public class GameEngine {
                 showTable();
                 break;
             case 2:
-                int playCard;
-                System.out.println("what card do you want to play out? (0 to cancel)");
-
-                playCard = getInput();
-                if (playCard == 0) {
-                    playerMenu();
-                    return;
-                }
-                Card card = currentPlayer.getPlayerHand().get(playCard - 1);
-                currentPlayer.playCard(card, getRound());
+                playCard();
+                showTable();
                 break;
             case 3:
-                if (turn > 2) {
-                    System.out.println("Attack with: 1. Magic card or 2. Creature");
-                    int choice = getInput();
-                    System.out.println("Choose a card to attack with");
-                    int cardNr = getInput();
-                    if (choice == 1) {
-                        Card magicCard = currentPlayer.getPlayerHand().get(cardNr - 1);
-                        if (!(magicCard instanceof MagicCard)) {
-                            System.out.println("Wrong card. Try again");
-                        } else {
-                            if (magicCard.getCardEnergy() <= currentPlayer.getPlayerEnergy()) {
-                                if (isOpponentTableEmpty) {
-                                    attackPlayerWhenTableEmpty(magicCard);
-                                } else {
-                                    chooseConsoleAttack(magicCard);
-                                }
-                                currentPlayer.sendToGraveyard(magicCard);
-                                currentPlayer.setPlayerEnergy(currentPlayer.getPlayerEnergy() - magicCard.getCardEnergy());
-                                currentPlayer.setPlayerEnergy(currentPlayer.getPlayerEnergy() - magicCard.getCardEnergy());
-                                for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
-                                    if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
-                                        opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
-                                    }
-                                }
-                                checkHealthLeft();
-                            } else {
-                                System.out.println("You don't have enough energy to use this card");
-                                try {
-                                    server.msgToFX("showmessage,not enough energy");
-                                } catch (Exception e) {
-                                }
-                            }
-                        }
-                    } else if (choice == 2) {
-                        CreatureCard creatureCard = (CreatureCard) currentPlayer.getTableCards().get(cardNr - 1);
-                        if (!checkIfTapped(creatureCard)) {
-                            if (isCardReadyToAttack(creatureCard)) {
-                                if (isOpponentTableEmpty) {
-                                    attackPlayerWhenTableEmpty(creatureCard);
-                                } else {
-                                    chooseConsoleAttack(creatureCard);
-                                    for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
-                                        if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
-                                            opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
-                                        }
-                                    }
-                                }
-                                if (isCardKilled(creatureCard)) {
-                                    currentPlayer.sendToGraveyard(creatureCard);
-                                } else {
-                                    creatureCard.tap();
-                                }
-                                checkHealthLeft();
-                            } else {
-                                System.out.println("Card is not ready to attack yet");
-                            }
-                        }
-                    } else {
-                        playerMenu();
-                    }
-
-                } else {
-                    System.out.println("You can't attacks the first round!");
-                }
+                attackInConsole(isOpponentTableEmpty);
+                showTable();
                 break;
             case 4:
                 endTurn();
+                showTable();
                 break;
             case 9:
                 System.out.println("Thank you for playing!");
@@ -499,7 +436,82 @@ public class GameEngine {
                 System.out.println("************************************** \n");
                 break;
         }
+    }
 
+    public void playCard(){
+        int playCard;
+        System.out.println("what card do you want to play out? (0 to cancel)");
+        playCard = getInput();
+        if (playCard == 0) {
+            playerMenu();
+        } else {
+            try {
+                Card card = currentPlayer.getPlayerHand().get(playCard - 1);
+                currentPlayer.playCard(card, getRound());
+            } catch (Exception e){
+                System.out.println("Wrong number. Try again.");
+                playCard();
+            }
+        }
+    }
+
+    public void attackInConsole(boolean isOpponentTableEmpty){
+        if (turn > 2) {
+            System.out.println("Attack with: 1. Magic card or 2. Creature");
+            int choice = getInput();
+            System.out.println("Choose a card to attack with");
+            int cardNr = getInput();
+            if (choice == 1) {
+                Card magicCard = currentPlayer.getPlayerHand().get(cardNr - 1);
+                if (!(magicCard instanceof MagicCard)) {
+                    System.out.println("Wrong card. Try again");
+                } else {
+                    attackWithMagicCardInConsole(magicCard, isOpponentTableEmpty);
+                }
+            } else if (choice == 2) {
+                CreatureCard creatureCard = (CreatureCard) currentPlayer.getTableCards().get(cardNr - 1);
+                attackWithCreatureCardInConsole(creatureCard, isOpponentTableEmpty);
+            } else {
+                attackInConsole(isOpponentTableEmpty);
+            }
+
+        } else {
+            System.out.println("You can't attack on the first round!");
+        }
+    }
+
+    public void attackWithMagicCardInConsole( Card card, boolean isOpponentTableEmpty){
+        if (card.getCardEnergy() <= currentPlayer.getPlayerEnergy()) {
+            if (isOpponentTableEmpty) {
+                attackPlayerWhenTableEmpty(card);
+            } else {
+                chooseConsoleAttack(card);
+            }
+            currentPlayer.sendToGraveyard(card);
+            currentPlayer.setPlayerEnergy(currentPlayer.getPlayerEnergy() - card.getCardEnergy());
+            checkTableCardsHp(opponentPlayer);
+            checkHealthLeft();
+        } else {
+            System.out.println("You don't have enough energy to use this card");
+        }
+    }
+
+    public void attackWithCreatureCardInConsole( CreatureCard card, boolean isOpponentTableEmpty){
+        if (!checkIfTapped(card)) {
+            if (isCardReadyToAttack(card)) {
+                if (isOpponentTableEmpty) {
+                    attackPlayerWhenTableEmpty(card);
+                } else {
+                    chooseConsoleAttack(card);
+                    checkTableCardsHp(opponentPlayer);
+                }
+                checkAttackingCardHp(card);
+                card.tap();
+                checkHealthLeft();
+            } else {
+                System.out.println("Card is not ready to attack yet");
+            }
+        }
     }
 
     public int getInput() {
