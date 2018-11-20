@@ -107,8 +107,8 @@ public class TableViewController {
     public void showWinner() {
         PauseTransition pause = makePause();
         try {
-           final AnchorPane highscorePane = FXMLLoader.load(getClass().getResource("/highscore/highscore.fxml"));
-            pause.setOnFinished(event -> tableViewPane.getChildren().setAll(highscorePane));
+           final AnchorPane menuPane = FXMLLoader.load(getClass().getResource("/menu/menu.fxml"));
+            pause.setOnFinished(event -> tableViewPane.getChildren().setAll(menuPane));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -119,16 +119,6 @@ public class TableViewController {
 
     public PauseTransition makePause() {
         return new PauseTransition(Duration.seconds(5));
-    }
-
-    public AnchorPane loadHighscorePane() {
-        AnchorPane highscorePane = null;
-        try {
-            highscorePane = FXMLLoader.load(getClass().getResource("/highscore/highscore.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return highscorePane;
     }
 
     @FXML
