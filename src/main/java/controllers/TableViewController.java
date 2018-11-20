@@ -1,6 +1,7 @@
 package controllers;
 
 import app.Server;
+import javafx.animation.PauseTransition;
 import javafx.event.Event;
 import javafx.fxml.*;
 import javafx.geometry.*;
@@ -14,6 +15,7 @@ import javafx.scene.shape.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import models.*;
 
 import java.io.IOException;
@@ -464,6 +466,9 @@ public class TableViewController {
 
     public synchronized void showMessage(String msg) {
         messagebar.setText(msg);
+        PauseTransition pause = new PauseTransition(Duration.seconds(5));
+        pause.setOnFinished(event -> messagebar.setText(null));
+        pause.play();
     }
 
     @FXML
