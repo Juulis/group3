@@ -53,6 +53,11 @@ public class CreatureCard extends Card {
     }
 
     public boolean isTapped() {
+        if(tapped){
+            Server.getInstance().msgToFX("tapped," + id);
+        } else {
+            Server.getInstance().msgToFX("untap," + id);
+        }
         return tapped;
     }
 

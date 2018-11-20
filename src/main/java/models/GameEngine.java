@@ -260,7 +260,7 @@ public class GameEngine {
                         Server.getInstance().msgToFX("showmessage,Card not ready!");
                     }
                 } else {
-                    Server.getInstance().msgToFX("tappedwarning");
+                    Server.getInstance().msgToFX("showmessage, Card is tapped!");
                 }
             }
             for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
