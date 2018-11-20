@@ -473,9 +473,9 @@ public class TableViewController {
 
     @FXML
     private void playerattack(MouseEvent mouseEvent) {
-        if (
-                selectedCurrentCard != null && (selectedCurrentCard.getSpecialAttack().equals("playerAttack") || isNoOpponentsOnTable()) && isNotAttackingSelf(mouseEvent)) {
+        if (selectedCurrentCard != null && (selectedCurrentCard.getSpecialAttack().equals("playerAttack") || isNoOpponentsOnTable()) && isNotAttackingSelf(mouseEvent)) {
             server.msgToGameEngine("attack," + selectedCurrentCard.getId());
+            clearCards();
         }
     }
 
