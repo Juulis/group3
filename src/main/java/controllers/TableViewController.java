@@ -105,8 +105,30 @@ public class TableViewController {
     private Stage stage;
 
     public void showWinner() {
+        PauseTransition pause = makePause();
+        try {
+           final AnchorPane highscorePane = FXMLLoader.load(getClass().getResource("/highscore/highscore.fxml"));
+            pause.setOnFinished(event -> tableViewPane.getChildren().setAll(highscorePane));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         winner.setVisible(true);
         update();
+        pause.play();
+    }
+
+    public PauseTransition makePause() {
+        return new PauseTransition(Duration.seconds(5));
+    }
+
+    public AnchorPane loadHighscorePane() {
+        AnchorPane highscorePane = null;
+        try {
+            highscorePane = FXMLLoader.load(getClass().getResource("/highscore/highscore.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return highscorePane;
     }
 
     @FXML
@@ -430,7 +452,7 @@ public class TableViewController {
 
     public synchronized void showMessage(String msg) {
         messagebar.setText(msg);
-        PauseTransition pause = new PauseTransition(Duration.seconds(5));
+        PauseTransition pause = makePause();
         pause.setOnFinished(event -> messagebar.setText(null));
         pause.play();
     }
