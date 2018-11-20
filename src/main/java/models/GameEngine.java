@@ -254,6 +254,7 @@ public class GameEngine {
                 if (selectedCard.getCardEnergy() <= currentPlayer.getPlayerEnergy()) {
                     chooseAttack(selectedCard, opponentCards);
                     currentPlayer.sendToGraveyard(selectedCard);
+                    currentPlayer.setPlayerEnergy(currentPlayer.getPlayerEnergy() - selectedCard.getCardEnergy());
                 } else {
                     Server.getInstance().msgToFX("showmessage,To low on mana");
                 }
@@ -430,6 +431,7 @@ public class GameEngine {
                                     chooseConsoleAttack(magicCard);
                                 }
                                 currentPlayer.sendToGraveyard(magicCard);
+                                currentPlayer.setPlayerEnergy(currentPlayer.getPlayerEnergy() - magicCard.getCardEnergy());
                                 currentPlayer.setPlayerEnergy(currentPlayer.getPlayerEnergy() - magicCard.getCardEnergy());
                                 for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
                                     if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
