@@ -52,7 +52,7 @@ class ScoreHandlerTest {
         highscores = scoreHandler.readHighscoresFromJSON();
         int newMinScore = highscores[highscores.length-1].getScore();
         assertTrue( pMock.getScore() >= newMinScore);
-        assertTrue(newMinScore > minScore);
+        assertTrue(newMinScore >= minScore);
     }
 
     @Test
