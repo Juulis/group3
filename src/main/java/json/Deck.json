@@ -228,7 +228,7 @@
     "cardEnergy": 5,
     "specialAttack": "ignite",
     "magicCard": 1,
-    "imgURL": "/cardpics/Card7.png"
+    "imgURL": "/cardpics/Card8.png"
   },
   {
     "name": "Rusthand",
@@ -239,7 +239,7 @@
     "cardEnergy": 5,
     "specialAttack": "ignite",
     "magicCard": 1,
-    "imgURL": "/cardpics/Card7.png"
+    "imgURL": "/cardpics/Card8.png"
   },
   {
     "name": "Rusthand",
@@ -250,7 +250,7 @@
     "cardEnergy": 5,
     "specialAttack": "ignite",
     "magicCard": 1,
-    "imgURL": "/cardpics/Card7.png"
+    "imgURL": "/cardpics/Card8.png"
   },
   {
     "name": "Rusthand",
@@ -261,7 +261,7 @@
     "cardEnergy": 5,
     "specialAttack": "ignite",
     "magicCard": 1,
-    "imgURL": "/cardpics/Card7.png"
+    "imgURL": "/cardpics/Card8.png"
   },
   {
     "name": "Rusthand",
@@ -272,7 +272,7 @@
     "cardEnergy": 5,
     "specialAttack": "ignite",
     "magicCard": 1,
-    "imgURL": "/cardpics/Card7.png"
+    "imgURL": "/cardpics/Card8.png"
   },
   {
     "name": "Rusthand",
@@ -283,7 +283,7 @@
     "cardEnergy": 5,
     "specialAttack": "ignite",
     "magicCard": 1,
-    "imgURL": "/cardpics/Card7.png"
+    "imgURL": "/cardpics/Card8.png"
   },
   {
     "name": "Rusthand",
@@ -294,7 +294,7 @@
     "cardEnergy": 5,
     "specialAttack": "ignite",
     "magicCard": 1,
-    "imgURL": "/cardpics/Card7.png"
+    "imgURL": "/cardpics/Card8.png"
   },
   {
     "name": "Rusthand",
@@ -305,7 +305,7 @@
     "cardEnergy": 5,
     "specialAttack": "ignite",
     "magicCard": 1,
-    "imgURL": "/cardpics/Card7.png"
+    "imgURL": "/cardpics/Card8.png"
   },
   {
     "name": "Rusthand",
@@ -316,7 +316,7 @@
     "cardEnergy": 5,
     "specialAttack": "ignite",
     "magicCard": 1,
-    "imgURL": "/cardpics/Card7.png"
+    "imgURL": "/cardpics/Card8.png"
   },
   {
     "name": "Rusthand",
@@ -327,17 +327,6 @@
     "cardEnergy": 5,
     "specialAttack": "ignite",
     "magicCard": 1,
-    "imgURL": "/cardpics/Card7.png"
-  },
-  {
-    "name": "Vilestrike",
-    "hp": 5,
-    "attack": 3,
-    "defence": 3,
-    "power": 0,
-    "cardEnergy": 1,
-    "specialAttack": "basic",
-    "magicCard": 0,
     "imgURL": "/cardpics/Card8.png"
   },
   {
@@ -349,7 +338,7 @@
     "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0,
-    "imgURL": "/cardpics/Card8.png"
+    "imgURL": "/cardpics/Card16.png"
   },
   {
     "name": "Vilestrike",
@@ -360,7 +349,7 @@
     "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0,
-    "imgURL": "/cardpics/Card8.png"
+    "imgURL": "/cardpics/Card16.png"
   },
   {
     "name": "Vilestrike",
@@ -371,7 +360,7 @@
     "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0,
-    "imgURL": "/cardpics/Card8.png"
+    "imgURL": "/cardpics/Card16.png"
   },
   {
     "name": "Vilestrike",
@@ -382,7 +371,7 @@
     "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0,
-    "imgURL": "/cardpics/Card8.png"
+    "imgURL": "/cardpics/Card16.png"
   },
   {
     "name": "Vilestrike",
@@ -393,7 +382,7 @@
     "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0,
-    "imgURL": "/cardpics/Card8.png"
+    "imgURL": "/cardpics/Card16.png"
   },
   {
     "name": "Vilestrike",
@@ -404,7 +393,7 @@
     "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0,
-    "imgURL": "/cardpics/Card8.png"
+    "imgURL": "/cardpics/Card16.png"
   },
   {
     "name": "Vilestrike",
@@ -415,7 +404,7 @@
     "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0,
-    "imgURL": "/cardpics/Card8.png"
+    "imgURL": "/cardpics/Card16.png"
   },
   {
     "name": "Vilestrike",
@@ -426,7 +415,7 @@
     "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0,
-    "imgURL": "/cardpics/Card8.png"
+    "imgURL": "/cardpics/Card16.png"
   },
   {
     "name": "Vilestrike",
@@ -437,7 +426,18 @@
     "cardEnergy": 1,
     "specialAttack": "basic",
     "magicCard": 0,
-    "imgURL": "/cardpics/Card8.png"
+    "imgURL": "/cardpics/Card16.png"
+  },
+  {
+    "name": "Vilestrike",
+    "hp": 5,
+    "attack": 3,
+    "defence": 3,
+    "power": 0,
+    "cardEnergy": 1,
+    "specialAttack": "basic",
+    "magicCard": 0,
+    "imgURL": "/cardpics/Card16.png"
   },
   {
     "name": "Frostbeing",
