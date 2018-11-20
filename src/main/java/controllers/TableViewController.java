@@ -31,6 +31,11 @@ public class TableViewController {
     private Deck deck;
     private Server server;
     private static int activePlayer;
+
+    @FXML
+    private StackPane defencePane;
+    @FXML
+    private Label deflabel;
     @FXML
     private Label p2manalabel;
     @FXML
@@ -227,16 +232,6 @@ public class TableViewController {
 
     public void showPlayerHand(List<String> commands) {
         String player = commands.get(1);
-        Circle hpCircle;
-        Label top;
-        Label middle;
-        Label bottom;
-        Label cardIdType;
-
-        StackPane attackPane;
-        StackPane manaPane;
-        StackPane cardType;
-        StackPane healthPane;
 
         if (player.equals("1"))
             playerOneHandBox.getChildren().clear();
@@ -245,103 +240,70 @@ public class TableViewController {
 
         for (int i = 2; i < commands.size(); i++) {
             Card card = deck.getCards().get(Integer.parseInt(commands.get(i)));
-            String cardURL = "/card/card.fxml";
-            switch (player) {
-                case "1":
-                    try {
-                        cardPane = FXMLLoader.load(getClass().getResource(cardURL));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    cardPane.setId(String.valueOf(card.getId()));
-                    ((ImageView) cardPane.getChildren().get(cardPane.getChildren()
-                            .indexOf(cardPane.lookup("#cardImageView"))))
-                            .setImage(new Image(card.getImgURL()));
-
-                    attackPane = (StackPane) cardPane.getChildren().get(2);
-                    bottom = (Label) attackPane.getChildren().get(1);
-                    bottom.setText(Integer.toString(card.getAttack()));
-
-                    manaPane = (StackPane) cardPane.getChildren().get(3);
-                    middle = (Label) manaPane.getChildren().get(1);
-                    middle.setText(Integer.toString(card.getCardEnergy()));
-
-                    cardType = (StackPane) cardPane.getChildren().get(0);
-                    cardIdType = (Label) cardType.getChildren().get(0);
-                    cardIdType.setText(card.getSpecialAttack().toUpperCase());
-                    if (card.getSpecialAttack().equalsIgnoreCase("dualattack")) {
-                        cardIdType.setFont(new Font("Gill Sans Ultra Bold Condensed", 15));
-                    }
-
-                    if (!(card instanceof MagicCard)) {
-                        healthPane = (StackPane) cardPane.getChildren().get(4);
-                        top = (Label) healthPane.getChildren().get(1);
-                        top.setText(Integer.toString(((CreatureCard) card).getHp()));
-                        top.toFront();
-                    } else if (card instanceof MagicCard) {
-                        healthPane = (StackPane) cardPane.getChildren().get(4);
-                        top = (Label) healthPane.getChildren().get(1);
-                        hpCircle = (Circle) healthPane.getChildren().get(0);
-                        hpCircle.setVisible(false);
-                        top.setVisible(false);
-                    }
-
-                    middle.toFront();
-                    bottom.toFront();
-                    cardIdType.toFront();
-
-                    playerOneHandBox.getChildren().add(cardPane);
-                    break;
-                case "2":
-                    try {
-                        cardPane = FXMLLoader.load(getClass().getResource(cardURL));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    cardPane.setId(String.valueOf(card.getId()));
-                    ((ImageView) cardPane.getChildren().get(cardPane.getChildren()
-                            .indexOf(cardPane.lookup("#cardImageView"))))
-                            .setImage(new Image(card.getImgURL()));
-
-                    attackPane = (StackPane) cardPane.getChildren().get(2);
-                    bottom = (Label) attackPane.getChildren().get(1);
-                    bottom.setText(Integer.toString(card.getAttack()));
-
-                    manaPane = (StackPane) cardPane.getChildren().get(3);
-                    middle = (Label) manaPane.getChildren().get(1);
-                    middle.setText(Integer.toString(card.getCardEnergy()));
-
-                    cardType = (StackPane) cardPane.getChildren().get(0);
-                    cardIdType = (Label) cardType.getChildren().get(0);
-                    cardIdType.setText(card.getSpecialAttack().toUpperCase());
-                    if (card.getSpecialAttack().equalsIgnoreCase("dualattack")) {
-                        cardIdType.setFont(new Font("Gill Sans Ultra Bold Condensed", 15));
-                    }
-
-                    if (!(card instanceof MagicCard)) {
-                        healthPane = (StackPane) cardPane.getChildren().get(4);
-                        top = (Label) healthPane.getChildren().get(1);
-                        top.setText(Integer.toString(((CreatureCard) card).getHp()));
-                        top.toFront();
-                    } else if (card instanceof MagicCard) {
-                        healthPane = (StackPane) cardPane.getChildren().get(4);
-                        top = (Label) healthPane.getChildren().get(1);
-                        hpCircle = (Circle) healthPane.getChildren().get(0);
-                        hpCircle.setVisible(false);
-                        top.setVisible(false);
-                    }
-
-                    middle.toFront();
-                    bottom.toFront();
-                    cardIdType.toFront();
-
-                    playerTwoHandBox.getChildren().add(cardPane);
-                    break;
-                default:
-                    System.out.println("No player! Something wrong with string input from gameEngine");
-                    break;
-            }
+            if (player.equals("1"))
+                setCards(playerOneHandBox, card);
+            else if (player.equals("2"))
+                setCards(playerTwoHandBox, card);
         }
+        update();
+    }
+
+    private void setCards(HBox playerHandBox, Card card) {
+        Label hplabel;
+        Label manalabel;
+        Label atklabel;
+        Label cardAtkType;
+        Label deflabel;
+
+        StackPane defPane;
+        StackPane attackPane;
+        StackPane manaPane;
+        StackPane cardType;
+        StackPane healthPane;
+        try {
+            cardPane = FXMLLoader.load(getClass().getResource("/card/card.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        cardPane.setId(String.valueOf(card.getId()));
+        ((ImageView) cardPane.getChildren().get(cardPane.getChildren()
+                .indexOf(cardPane.lookup("#cardImageView"))))
+                .setImage(new Image(card.getImgURL()));
+
+        healthPane = (StackPane) cardPane.getChildren().get(4);
+
+        defPane = (StackPane) cardPane.lookup("#defencePane");
+        deflabel = (Label) defPane.lookup("#deflabel");
+
+        attackPane = (StackPane) cardPane.getChildren().get(2);
+        atklabel = (Label) attackPane.getChildren().get(1);
+        atklabel.setText(Integer.toString(card.getAttack()));
+
+        manaPane = (StackPane) cardPane.getChildren().get(3);
+        manalabel = (Label) manaPane.getChildren().get(1);
+        manalabel.setText(Integer.toString(card.getCardEnergy()));
+
+        cardType = (StackPane) cardPane.getChildren().get(0);
+        cardAtkType = (Label) cardType.getChildren().get(0);
+        cardAtkType.setText(card.getSpecialAttack().toUpperCase());
+        if (card.getSpecialAttack().equalsIgnoreCase("dualattack")) {
+            cardAtkType.setFont(new Font("Gill Sans Ultra Bold Condensed", 15));
+        }
+        if (!(card instanceof MagicCard)) {
+            healthPane = (StackPane) cardPane.getChildren().get(4);
+            hplabel = (Label) healthPane.getChildren().get(1);
+            hplabel.setText(Integer.toString(((CreatureCard) card).getHp()));
+            hplabel.toFront();
+            deflabel.setText(Integer.toString(((CreatureCard) card).getDefence()));
+        } else {
+            healthPane.setVisible(false);
+            defPane.setVisible(false);
+        }
+        manalabel.toFront();
+        atklabel.toFront();
+        cardAtkType.toFront();
+
+        playerHandBox.getChildren().add(cardPane);
         update();
     }
 
@@ -361,7 +323,7 @@ public class TableViewController {
     @FXML
     private void getSelectedPlaceHolder(Event event) {
         //TODO: check if selectedCurrentCard != null && opponentcards == null
-        if(selectedCurrentCard != null) {
+        if (selectedCurrentCard != null) {
             Rectangle placeHolder = (Rectangle) event.getSource();
             swapPlaceHolder(placeHolder);
         }
