@@ -53,36 +53,43 @@ public class CreatureCard extends Card {
     }
 
     public boolean isTapped() {
-        if(tapped){
-            Server.getInstance().msgToFX("tapped," + id);
+        if (tapped) {
+            try {
+                Server.getInstance().msgToFX("tapped," + id);
+            } catch (Exception e) {
+            }
         } else {
-            Server.getInstance().msgToFX("untap," + id);
+            try {
+                Server.getInstance().msgToFX("untap," + id);
+            } catch (Exception e) {
+            }
         }
         return tapped;
     }
 
-    public void tap() {
-        this.tapped = true;
-        try {
-            Server.getInstance().msgToFX("tapped," + id);
-        } catch (Exception e) {
+
+        public void tap () {
+            this.tapped = true;
+            try {
+                Server.getInstance().msgToFX("tapped," + id);
+            } catch (Exception e) {
+            }
+
         }
 
-    }
+        public void unTap () {
+            this.tapped = false;
+            try {
+                Server.getInstance().msgToFX("untap," + id);
+            } catch (Exception e) {
+            }
+        }
 
-    public void unTap() {
-        this.tapped = false;
-        try {
-            Server.getInstance().msgToFX("untap," + id);
-        } catch (Exception e) {
+        public int getPlayedOnRound () {
+            return playedOnRound;
+        }
+
+        public void setPlayedOnRound ( int playedOnRound){
+            this.playedOnRound = playedOnRound;
         }
     }
-
-    public int getPlayedOnRound() {
-        return playedOnRound;
-    }
-
-    public void setPlayedOnRound(int playedOnRound) {
-        this.playedOnRound = playedOnRound;
-    }
-}
