@@ -24,7 +24,7 @@ public class Server {
         return instance;
     }
 
-    public void startGame() throws IOException {
+    public void startGame() {
         gameEngine.startGame("fx");
     }
 

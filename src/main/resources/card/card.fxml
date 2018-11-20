@@ -20,7 +20,7 @@
     <children>
         <StackPane id="cardType" fx:id="cardType" layoutY="111.0" prefHeight="66.0" prefWidth="125.0">
             <children>
-                <Label alignment="CENTER" contentDisplay="CENTER" ellipsisString="" prefHeight="25.0" prefWidth="107.0" text="CardType" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                <Label alignment="CENTER" contentDisplay="CENTER" ellipsisString="" opacity="0.59" prefHeight="25.0" prefWidth="107.0" text="CardType" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                     <font>
                         <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
                     </font>
@@ -68,6 +68,26 @@
                 </Label>
             </children>
         </StackPane>
+      <StackPane id="defencePane" fx:id="defencePane" layoutX="-1.0" layoutY="44.0" opacity="0.62" prefHeight="50.0" prefWidth="50.0">
+         <children>
+            <Circle fill="#fbff00" opacity="0.85" radius="20.0" stroke="BLACK" strokeDashOffset="10.0" />
+            <Label id="deflabel" fx:id="deflabel" text="def" textAlignment="CENTER" textFill="#4c08eb">
+               <font>
+                  <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+      <StackPane id="powerPane" fx:id="powerPane" layoutX="65.0" layoutY="46.0" opacity="0.75" prefHeight="50.0" prefWidth="50.0">
+         <children>
+            <Circle fill="#8d8d87" opacity="0.73" radius="20.0" stroke="BLACK" strokeDashOffset="10.0" />
+            <Label id="pwrlabel" fx:id="pwrlabel" text="pw" textAlignment="CENTER">
+               <font>
+                  <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
     </children>
    <cursor>
       <Cursor fx:constant="OPEN_HAND" />
