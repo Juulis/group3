@@ -254,12 +254,14 @@ public class TableViewController {
         Label atklabel;
         Label cardAtkType;
         Label deflabel;
+        Label pwrlabel;
 
         StackPane defPane;
         StackPane attackPane;
         StackPane manaPane;
         StackPane cardType;
         StackPane healthPane;
+        StackPane powerPane;
         try {
             cardPane = FXMLLoader.load(getClass().getResource("/card/card.fxml"));
         } catch (IOException e) {
@@ -271,9 +273,13 @@ public class TableViewController {
                 .setImage(new Image(card.getImgURL()));
 
         healthPane = (StackPane) cardPane.getChildren().get(4);
+        hplabel = (Label) healthPane.getChildren().get(1);
 
         defPane = (StackPane) cardPane.lookup("#defencePane");
         deflabel = (Label) defPane.lookup("#deflabel");
+
+        powerPane = (StackPane) cardPane.lookup("#powerPane");
+        pwrlabel = (Label) powerPane.lookup("#pwrlabel");
 
         attackPane = (StackPane) cardPane.getChildren().get(2);
         atklabel = (Label) attackPane.getChildren().get(1);
@@ -290,21 +296,17 @@ public class TableViewController {
             cardAtkType.setFont(new Font("Gill Sans Ultra Bold Condensed", 15));
         }
         if (!(card instanceof MagicCard)) {
-            healthPane = (StackPane) cardPane.getChildren().get(4);
-            hplabel = (Label) healthPane.getChildren().get(1);
             hplabel.setText(Integer.toString(((CreatureCard) card).getHp()));
-            hplabel.toFront();
             deflabel.setText(Integer.toString(((CreatureCard) card).getDefence()));
+            pwrlabel.setText(Integer.toString(((CreatureCard) card).getPower()));
         } else {
             healthPane.setVisible(false);
             defPane.setVisible(false);
+            powerPane.setVisible(false);
         }
-        manalabel.toFront();
-        atklabel.toFront();
-        cardAtkType.toFront();
+        cardType.toFront();
 
         playerHandBox.getChildren().add(cardPane);
-        update();
     }
 
     public void setStage(Stage primaryStage) {
