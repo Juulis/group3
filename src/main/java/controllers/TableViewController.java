@@ -337,13 +337,17 @@ public class TableViewController {
             selectedCurrentCard = getCardFromId(((AnchorPane) event.getSource()).getId());
             selectedPane = (AnchorPane) event.getSource();
         } else if (isSelectingCardToAttack(event)) {
+            boolean basicAttack=selectedCurrentCard.getSpecialAttack().equals("basic");
+            boolean igniteAttack=selectedCurrentCard.getSpecialAttack().equals("ignite");
+            boolean dualAttack=selectedCurrentCard.getSpecialAttack().equals("dualAttack");
+            
             if (selectedOpponentCard1 == null) {
                 selectedOpponentCard1 = getCardFromId(((AnchorPane) event.getSource()).getId());
-                if (selectedCurrentCard.getSpecialAttack().equals("basic") || selectedCurrentCard.getSpecialAttack().equals("ignite")) {
+                if (basicAttack || igniteAttack) {
                     server.msgToGameEngine("attack," + selectedCurrentCard.getId() + "," + selectedOpponentCard1.getId());
                     clearCards();
                 }
-            } else if (selectedCurrentCard.getSpecialAttack().equals("dualAttack")) {
+            } else if (dualAttack) {
                 selectedOpponentCard2 = getCardFromId(((AnchorPane) event.getSource()).getId());
                 server.msgToGameEngine("attack," + selectedCurrentCard.getId() + "," + selectedOpponentCard1.getId() + "," + selectedOpponentCard2.getId());
                 clearCards();
