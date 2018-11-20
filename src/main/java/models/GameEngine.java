@@ -197,6 +197,16 @@ public class GameEngine {
         }
         if (!consoleGame)
             server.msgToFX("player" + Integer.toString(active));
+        for (int i = 0; i < opponentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
+            if (isCardKilled((CreatureCard) opponentPlayer.getTableCards().get(i))) {
+                opponentPlayer.sendToGraveyard(opponentPlayer.getTableCards().get(i));
+            }
+        }
+        for (int i = 0; i < currentPlayer.getTableCards().size(); i++) { //checks all opponent table cards if they died by the attack
+            if (isCardKilled((CreatureCard) currentPlayer.getTableCards().get(i))) {
+                currentPlayer.sendToGraveyard(currentPlayer.getTableCards().get(i));
+            }
+        }
     }
 
     public void regeneratePlayerEnergy(Player p) {
