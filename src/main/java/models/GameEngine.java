@@ -358,12 +358,14 @@ public class GameEngine {
     }
 
     private void performBasicAttack(Card selectedCard) {
-        CreatureCard cardToAttack = getCardToAttackBasicOrIgnite();
+        System.out.println("Choose a card to attack");
+        CreatureCard cardToAttack = getCardToAttack();
         attacks.basicAttack(selectedCard, cardToAttack);
     }
 
     private void performIgniteAttack(Card selectedCard) {
-        CreatureCard cardToAttack = getCardToAttackBasicOrIgnite();
+        System.out.println("Choose a card to attack");
+        CreatureCard cardToAttack = getCardToAttack();
 
         if (cardToAttack.getIgnRoundCounter() == 0) {
             attacks.ignite(selectedCard, cardToAttack);
@@ -383,11 +385,6 @@ public class GameEngine {
             attacks.basicAttack(selectedCard, attackedCard);
             attacks.attackPlayer(selectedCard, opponentPlayer);
         }
-    }
-
-    private CreatureCard getCardToAttackBasicOrIgnite() {
-        System.out.println("Choose a card to attack");
-        return getCardToAttack();
     }
 
     private CreatureCard getCardToAttack() {
