@@ -326,35 +326,20 @@ public class GameEngine {
     }
 
     public void chooseConsoleAttack(Card selectedCard) {
-        CreatureCard attackedCard;
         String nameOfAttack = selectedCard.getSpecialAttack().toUpperCase();
         for (AttackNames attackName : AttackNames.values()) {
             if (attackName.name().equals(nameOfAttack)) {
                 switch (attackName) {
                     case BASIC:
-                        attackedCard = getCardToAttackBasicOrIgnite();
-                        attacks.basicAttack(selectedCard, attackedCard);
+                        performBasicAttack(selectedCard);
                         break;
+
                     case IGNITE:
-                        //ignition attack will be last for 3 turns, every turn ignited card will takes damage by 2 points
-                        attackedCard = getCardToAttackBasicOrIgnite();
-                        if (attackedCard.getIgnRoundCounter() == 0) {
-                            attacks.ignite(selectedCard, attackedCard);
-                        } else {
-                            System.out.println("The targeted cart is already ignited");
-                        }
+                        performIgniteAttack(selectedCard);
                         break;
 
                     case DUALATTACK:
-                        System.out.println("Choose two cards to attack");
-                        attackedCard = getCardToAttack();
-                        if (opponentPlayer.getTableCards().size() >= 2) {
-                            CreatureCard attackedCard2 = getCardToAttack();
-                            attacks.dualAttack((CreatureCard) selectedCard, attackedCard, attackedCard2);
-                        } else {
-                            attacks.basicAttack(selectedCard, attackedCard);
-                            attacks.attackPlayer(selectedCard, opponentPlayer);
-                        }
+                        performDualAttack(selectedCard);
                         break;
 
                     case PLAYERATTACK:
@@ -369,6 +354,34 @@ public class GameEngine {
                         break;
                 }
             }
+        }
+    }
+
+    private void performBasicAttack(Card selectedCard) {
+        CreatureCard cardToAttack = getCardToAttackBasicOrIgnite();
+        attacks.basicAttack(selectedCard, cardToAttack);
+    }
+
+    private void performIgniteAttack(Card selectedCard) {
+        CreatureCard cardToAttack = getCardToAttackBasicOrIgnite();
+
+        if (cardToAttack.getIgnRoundCounter() == 0) {
+            attacks.ignite(selectedCard, cardToAttack);
+        } else {
+            System.out.println("The targeted cart is already ignited");
+        }
+    }
+
+    private void performDualAttack(Card selectedCard) {
+        System.out.println("Choose two cards to attack");
+        CreatureCard attackedCard = getCardToAttack();
+
+        if (opponentPlayer.getTableCards().size() >= 2) {
+            CreatureCard attackedCard2 = getCardToAttack();
+            attacks.dualAttack((CreatureCard) selectedCard, attackedCard, attackedCard2);
+        } else {
+            attacks.basicAttack(selectedCard, attackedCard);
+            attacks.attackPlayer(selectedCard, opponentPlayer);
         }
     }
 
