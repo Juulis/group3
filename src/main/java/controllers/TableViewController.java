@@ -177,20 +177,22 @@ public class TableViewController {
     }
 
     public void addNewPlaceholderForP1() {
-        Rectangle rect = new Rectangle();
-        rect.setArcHeight(500);
-        rect.setArcWidth(50);
-        rect.setId(randomId());
-        playerOneTableBox.getChildren().add(rect);
+
+        playerOneTableBox.getChildren().add(createRectangle());
     }
 
     public void addNewPlaceholderForP2() {
-        Rectangle rect = new Rectangle();
+
+        playerTwoTableBox.getChildren().add(createRectangle());
+    }
+    public Rectangle createRectangle(){
+        Rectangle rect=new Rectangle();
         rect.setArcHeight(500);
         rect.setArcWidth(50);
         rect.setId(randomId());
-        playerTwoTableBox.getChildren().add(rect);
+        return rect;
     }
+
 
     public void toSoonWarning() {
     }
