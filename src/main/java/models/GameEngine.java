@@ -3,7 +3,6 @@ package models;
 import app.Server;
 import utilities.ScoreHandler;
 
-import java.io.IOException;
 import java.util.*;
 
 public class GameEngine {
@@ -327,21 +326,18 @@ public class GameEngine {
     }
 
     public void chooseConsoleAttack(Card selectedCard) {
+        CreatureCard attackedCard;
         String nameOfAttack = selectedCard.getSpecialAttack().toUpperCase();
         for (AttackNames attackName : AttackNames.values()) {
             if (attackName.name().equals(nameOfAttack)) {
                 switch (attackName) {
                     case BASIC:
-                        System.out.println("Choose a card to attack");
-                        int attackedCardNr = getInput();
-                        CreatureCard attackedCard = (CreatureCard) opponentPlayer.getTableCards().get(attackedCardNr - 1);
+                        attackedCard = getCardToAttackBasicOrIgnite();
                         attacks.basicAttack(selectedCard, attackedCard);
                         break;
                     case IGNITE:
                         //ignition attack will be last for 3 turns, every turn ignited card will takes damage by 2 points
-                        System.out.println("Choose a card to attack");
-                        attackedCardNr = getInput();
-                        attackedCard = (CreatureCard) opponentPlayer.getTableCards().get(attackedCardNr - 1);
+                        attackedCard = getCardToAttackBasicOrIgnite();
                         if (attackedCard.getIgnRoundCounter() == 0) {
                             attacks.ignite(selectedCard, attackedCard);
                         } else {
@@ -351,11 +347,9 @@ public class GameEngine {
 
                     case DUALATTACK:
                         System.out.println("Choose two cards to attack");
-                        attackedCardNr = getInput();
-                        attackedCard = (CreatureCard) opponentPlayer.getTableCards().get(attackedCardNr - 1);
+                        attackedCard = getCardToAttack();
                         if (opponentPlayer.getTableCards().size() >= 2) {
-                            attackedCardNr = getInput();
-                            CreatureCard attackedCard2 = (CreatureCard) opponentPlayer.getTableCards().get(attackedCardNr - 1);
+                            CreatureCard attackedCard2 = getCardToAttack();
                             attacks.dualAttack((CreatureCard) selectedCard, attackedCard, attackedCard2);
                         } else {
                             attacks.basicAttack(selectedCard, attackedCard);
@@ -378,6 +372,15 @@ public class GameEngine {
         }
     }
 
+    private CreatureCard getCardToAttackBasicOrIgnite() {
+        System.out.println("Choose a card to attack");
+        return getCardToAttack();
+    }
+
+    private CreatureCard getCardToAttack() {
+        int attackedCardNr = getInput();
+        return (CreatureCard) opponentPlayer.getTableCards().get(attackedCardNr - 1);
+    }
 
     private void playerMenu() {
         int input;
