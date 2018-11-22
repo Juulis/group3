@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
@@ -284,13 +286,11 @@
             </Rectangle>
          </children>
       </HBox>
-        <Circle fill="#000000b8" layoutX="857.0" layoutY="556.0" opacity="0.77" radius="30.0" stroke="WHITE" strokeType="INSIDE" />
         <ImageView id="PlayerOneTurn" fx:id="playerOneTurn" fitHeight="122.0" fitWidth="60.0" layoutX="827.0" layoutY="484.0" pickOnBounds="true" preserveRatio="true" visible="false">
             <image>
                 <Image url="@Fire_GIF.gif" />
             </image>
         </ImageView>
-        <Circle fill="#00000080" layoutX="857.0" layoutY="212.0" opacity="0.82" radius="28.0" stroke="WHITE" strokeType="INSIDE" />
       <Label fx:id="messagebar" ellipsisString=".." layoutX="123.0" layoutY="323.0" prefHeight="74.0" prefWidth="56.0" textFill="RED" wrapText="true">
          <font>
             <Font size="10.0" />
@@ -342,5 +342,36 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </Label>
+      <Button fx:id="restartButton" layoutX="419.0" layoutY="601.0" mnemonicParsing="false" onMouseClicked="#restartGame" prefHeight="57.0" prefWidth="176.0" styleClass="restartButton" stylesheets="@tableview.css" text="MAIN MENU" visible="false" />
+        <Circle fill="#38ff05" layoutX="16.0" layoutY="150.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#ebebe9" layoutX="17.0" layoutY="270.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#0c05ff" layoutX="16.0" layoutY="180.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#ff0303" layoutX="17.0" layoutY="210.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#fffb00" layoutX="17.0" layoutY="240.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <TextField editable="false" layoutX="25.0" layoutY="138.0" prefHeight="25.0" prefWidth="49.0" style="-fx-background-color: transparent; -fx-text-inner-color: white;" text="Attack">
+         <font>
+            <Font name="Calibri Bold Italic" size="12.0" />
+         </font>
+      </TextField>
+      <TextField editable="false" layoutX="25.0" layoutY="167.0" prefHeight="25.0" prefWidth="49.0" style="-fx-background-color: transparent; -fx-text-inner-color: white;" text="Mana">
+         <font>
+            <Font name="Calibri Bold Italic" size="12.0" />
+         </font>
+      </TextField>
+      <TextField editable="false" layoutX="25.0" layoutY="197.0" prefHeight="25.0" prefWidth="49.0" style="-fx-background-color: transparent; -fx-text-inner-color: white;" text="Health">
+         <font>
+            <Font name="Calibri Bold Italic" size="12.0" />
+         </font>
+      </TextField>
+      <TextField editable="false" layoutX="25.0" layoutY="227.0" prefHeight="25.0" prefWidth="57.0" style="-fx-background-color: transparent; -fx-text-inner-color: white;" text="Defence">
+         <font>
+            <Font name="Calibri Bold Italic" size="12.0" />
+         </font>
+      </TextField>
+      <TextField editable="false" layoutX="25.0" layoutY="259.0" prefHeight="25.0" prefWidth="49.0" style="-fx-background-color: transparent; -fx-text-inner-color: white;" text="Power">
+         <font>
+            <Font name="Calibri Bold Italic" size="12.0" />
+         </font>
+      </TextField>
     </children>
 </Pane>

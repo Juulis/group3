@@ -33,11 +33,7 @@ public class CreatureCard extends Card {
 
     public void removeHp(int dmg) {
         this.hp -= dmg;
-
-        try {
-            Server.getInstance().msgToFX("cardhp," + id + "," + hp);
-        } catch (Exception e) {
-        }
+        tryCatchForRemoveHp("cardhp");
     }
 
     public void increaseIgnRoundCounter() {
@@ -54,42 +50,42 @@ public class CreatureCard extends Card {
 
     public boolean isTapped() {
         if (tapped) {
-            try {
-                Server.getInstance().msgToFX("tapped," + id);
-            } catch (Exception e) {
-            }
+            tryCatchForTapped("tapped");
         } else {
-            try {
-                Server.getInstance().msgToFX("untap," + id);
-            } catch (Exception e) {
-            }
+            tryCatchForTapped("untap");
         }
         return tapped;
     }
 
+    public void tap() {
+        this.tapped = true;
+        tryCatchForTapped("tapped");
+    }
 
-        public void tap () {
-            this.tapped = true;
-            try {
-                Server.getInstance().msgToFX("tapped," + id);
-            } catch (Exception e) {
-            }
+    public void unTap() {
+        this.tapped = false;
+        tryCatchForTapped("untap");
+    }
 
-        }
+    public int getPlayedOnRound() {
+        return playedOnRound;
+    }
 
-        public void unTap () {
-            this.tapped = false;
-            try {
-                Server.getInstance().msgToFX("untap," + id);
-            } catch (Exception e) {
-            }
-        }
+    public void setPlayedOnRound(int playedOnRound) {
+        this.playedOnRound = playedOnRound;
+    }
 
-        public int getPlayedOnRound () {
-            return playedOnRound;
-        }
-
-        public void setPlayedOnRound ( int playedOnRound){
-            this.playedOnRound = playedOnRound;
+    public void tryCatchForTapped(String msg) {
+        try {
+            Server.getInstance().msgToFX(msg + "," + id);
+        } catch (Exception e) {
         }
     }
+
+    public void tryCatchForRemoveHp(String msg) {
+        try {
+            Server.getInstance().msgToFX(msg + "," + id + "," + hp);
+        } catch (Exception e) {
+        }
+    }
+}

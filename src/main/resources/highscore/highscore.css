@@ -31,3 +31,8 @@
     -fx-alignment: CENTER
 
 }
+
+AnchorPane {
+    -fx-background-image: url("/menu/background-menu.jpg");
+    -fx-background-size: stretch;
+}
