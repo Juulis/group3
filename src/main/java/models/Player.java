@@ -139,6 +139,7 @@ public class Player {
 
 
 /////////////////////////////////////// GETTERS AND SETTERS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
     public String getName() {
         return name;
     }
