@@ -207,34 +207,41 @@ public class TableViewController {
 
     public void tapCard(String cardID) {
         for (Node n : playerOneTableBox.getChildren()) {
-            if (n.getId().equals(cardID)) {
-                n.lookup("#cardImageView").setEffect(new GaussianBlur());
-                n.setCursor(Cursor.CLOSED_HAND);
+            if (tap(n,cardID)) {
             } else {
                 for (Node o : playerTwoTableBox.getChildren()) {
-                    if (o.getId().equals(cardID)) {
-                        o.lookup("#cardImageView").setEffect(new GaussianBlur());
-                        o.setCursor(Cursor.CLOSED_HAND);
-                    }
+                   tap(o,cardID);
                 }
             }
         }
     }
 
+    public boolean tap(Node node,String cardID){
+        if (node.getId().equals(cardID)){
+            node.lookup("#cardImageView").setEffect(new GaussianBlur());
+            node.setCursor(Cursor.CLOSED_HAND);
+            return true;
+        }else
+            return false;
+    }
+
     public void unTapCard(String cardID) {
         for (Node n : playerOneTableBox.getChildren()) {
-            if (n.getId().equals(cardID)) {
-                n.lookup("#cardImageView").setEffect(null);
-                n.setCursor(Cursor.OPEN_HAND);
+            if (unTap(n,cardID)) {
             } else {
                 for (Node o : playerTwoTableBox.getChildren()) {
-                    if (o.getId().equals(cardID)) {
-                        o.lookup("#cardImageView").setEffect(null);
-                        o.setCursor(Cursor.OPEN_HAND);
-                    }
+                    unTap(o,cardID);
                 }
             }
         }
+    }
+    public boolean unTap(Node node,String cardID){
+            if (node.getId().equals(cardID)){
+                node.lookup("#cardImageView").setEffect(null);
+                node.setCursor(Cursor.OPEN_HAND);
+                return true;
+            }else
+                return false;
     }
 
     public void showPlayerHand(List<String> commands) {
