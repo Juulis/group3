@@ -30,6 +30,7 @@ public class Player {
 
 
 ////////////////////////////////////// METHODS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
     /**
      * takes one card from players deck and
      * puts it in players hand
@@ -104,14 +105,9 @@ public class Player {
      */
     public void removeHp(int healthToRemove) {
         this.health -= healthToRemove;
-      tryCatchRemoveHp("playerhp");
+      tryCatchRemoveHp("playerhp,");
     }
 
-    public void setPlayerEnergy(int playerEnergy) {
-        this.playerEnergy = playerEnergy;
-
-        tryCatchPlayerEnergy("updatemana,");
-    }
 
 
 ///////////////////////////////////// TRY CATCH METHODS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -166,6 +162,12 @@ public class Player {
     public int getPlayerEnergy() {
         return playerEnergy;
     }
+
+    public void setPlayerEnergy(int playerEnergy) {
+        this.playerEnergy = playerEnergy;
+
+        tryCatchPlayerEnergy("updatemana,");
+    }
     public int getHealth() {
         return health;
     }
@@ -188,4 +190,7 @@ public class Player {
 
         return tableCards;
     }
+
+
+
 }
