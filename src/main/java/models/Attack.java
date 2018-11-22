@@ -10,7 +10,11 @@ public class Attack {
 
     public void basicAttack(Card currentPlayerCard, CreatureCard opponentCard) {
         int giveDmg = currentPlayerCard.getAttack()-opponentCard.getDefence();
+        if(giveDmg < 0)
+            giveDmg = 0;
         int takeDmg = opponentCard.getAttack();
+        if(takeDmg < 0)
+            takeDmg = 0;
         opponentCard.removeHp(giveDmg);
         if(currentPlayerCard.getClass() == CreatureCard.class){
             ((CreatureCard)currentPlayerCard).removeHp(takeDmg-((CreatureCard) currentPlayerCard).getDefence());
