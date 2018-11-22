@@ -342,5 +342,6 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </Label>
+      <Button fx:id="restartButton" layoutX="419.0" layoutY="601.0" mnemonicParsing="false" onMouseClicked="#restartGame" prefHeight="57.0" prefWidth="176.0" styleClass="restartButton" stylesheets="@tableview.css" text="MAIN MENU" visible="false" />
     </children>
 </Pane>
