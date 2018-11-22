@@ -78,8 +78,8 @@ class GameEngineTest {
         magicCard = new MagicCard(1, 5, 2, "TROLL", "playerAttack", "");
         magicCard2 = new MagicCard(1, 3, 1, "FISK", "basic", "");
         currentCardDualAttack = new CreatureCard(1, 3, 2, "c6", "dualAttack", 6, 3, 2, "");
-        opponentCardOne = new CreatureCard(1, 2, 2, "c7", "basic", 2, 3, 1, "");
-        opponentCardTwo = new CreatureCard(1, 2, 2, "c8", "basic", 2, 3, 1, "");
+        opponentCardOne = new CreatureCard(1, 2, 2, "c7", "basic", 2, 1, 1, "");
+        opponentCardTwo = new CreatureCard(1, 2, 2, "c8", "basic", 2, 1, 1, "");
         p1 = new Player();
         p2 = new Player();
         spyCreature = spy(opponentCard);
@@ -293,8 +293,8 @@ class GameEngineTest {
         assertTrue(gameEngine.isCardKilled(opponentCardTwo));
 
         // Test where currentCardDualAttack is killed during dualAttack()...
-        currentCardDualAttack = new CreatureCard(1, 3, 2, "c6", "dualAttack", 2, 3, 2, "");
-        opponentCardOne = new CreatureCard(1, 2, 2, "c7", "basic", 2, 3, 1, "");
+        currentCardDualAttack = new CreatureCard(1, 5, 2, "c6", "dualAttack", 2, 3, 2, "");
+        opponentCardOne = new CreatureCard(1, 5, 2, "c7", "basic", 2, 3, 1, "");
         opponentCardTwo = new CreatureCard(1, 12, 2, "c8", "basic", 2, 3, 1, "");
 
         attack.dualAttack(currentCardDualAttack, opponentCardOne, opponentCardTwo);
