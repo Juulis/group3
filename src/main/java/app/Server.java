@@ -28,6 +28,9 @@ public class Server {
         gameEngine.startGame("fx");
     }
 
+    public void stopGame() {
+        instance = null;
+    }
     public void setTvc(TableViewController tvc, Stage stage) {
         this.tvc = tvc;
         tvc.setStage(stage);

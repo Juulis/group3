@@ -342,6 +342,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </Label>
+      <Button fx:id="restartButton" layoutX="419.0" layoutY="601.0" mnemonicParsing="false" onMouseClicked="#restartGame" prefHeight="57.0" prefWidth="176.0" styleClass="restartButton" stylesheets="@tableview.css" text="MAIN MENU" visible="false" />
         <Circle fill="#38ff05" layoutX="16.0" layoutY="150.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fill="#ebebe9" layoutX="17.0" layoutY="270.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fill="#0c05ff" layoutX="16.0" layoutY="180.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
