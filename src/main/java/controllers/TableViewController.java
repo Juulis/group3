@@ -107,8 +107,20 @@ public class TableViewController {
     private Stage stage;
 
     public void showWinner() {
+        PauseTransition pause = makePause();
+        try {
+           final AnchorPane menuPane = FXMLLoader.load(getClass().getResource("/menu/menu.fxml"));
+            pause.setOnFinished(event -> tableViewPane.getChildren().setAll(menuPane));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         winner.setVisible(true);
         update();
+        pause.play();
+    }
+
+    public PauseTransition makePause() {
+        return new PauseTransition(Duration.seconds(5));
     }
 
     @FXML
@@ -427,7 +439,7 @@ public class TableViewController {
 
     public synchronized void showMessage(String msg) {
         messagebar.setText(msg);
-        PauseTransition pause = new PauseTransition(Duration.seconds(5));
+        PauseTransition pause = makePause();
         pause.setOnFinished(event -> messagebar.setText(null));
         pause.play();
     }
