@@ -200,10 +200,10 @@ public class GameEngine {
         checkTableCardsHp(currentPlayer);
     }
 
-    public void checkTableCardsHp( Player p){
-        for (Card card: p.getTableCards()) { //checks all player table cards if they died by the attack
-            if (isCardKilled((CreatureCard) card)) {
-                p.sendToGraveyard(card);
+    public void checkTableCardsHp(Player p) {
+        for (int i = 0; i < p.getTableCards().size(); i++) {
+            if (isCardKilled((CreatureCard) p.getTableCards().get(i))) {
+                p.sendToGraveyard(p.getTableCards().get(i));
             }
         }
     }
@@ -260,7 +260,7 @@ public class GameEngine {
         }
     }
 
-    public void attackWithMagicCard( Card card, List<CreatureCard> opponentCards){
+    public void attackWithMagicCard(Card card, List<CreatureCard> opponentCards) {
         if (card.getCardEnergy() <= currentPlayer.getPlayerEnergy()) {
             chooseAttack(card, opponentCards);
             currentPlayer.sendToGraveyard(card);
@@ -270,7 +270,7 @@ public class GameEngine {
         }
     }
 
-    public void attackWithCreatureCard( Card card, List<CreatureCard> opponentCards){
+    public void attackWithCreatureCard(Card card, List<CreatureCard> opponentCards) {
         if (!checkIfTapped((CreatureCard) card)) {
             if (isCardReadyToAttack((CreatureCard) card)) {
                 chooseAttack(card, opponentCards);
@@ -284,7 +284,7 @@ public class GameEngine {
         }
     }
 
-    public void checkAttackingCardHp( Card card){
+    public void checkAttackingCardHp(Card card) {
         if (isCardKilled((CreatureCard) card)) {
             currentPlayer.sendToGraveyard(card);
         }
@@ -437,7 +437,7 @@ public class GameEngine {
         }
     }
 
-    public void playCard(){
+    public void playCard() {
         int playCard;
         Card card;
         System.out.println("what card do you want to play out? (0 to cancel)");
@@ -446,7 +446,7 @@ public class GameEngine {
             playerMenu();
         } else {
             card = getACardFromList(playCard, currentPlayer.getPlayerHand());
-            if(card == null){
+            if (card == null) {
                 playCard();
                 return;
             }
@@ -454,7 +454,7 @@ public class GameEngine {
         }
     }
 
-    public void attackInConsole(boolean isOpponentTableEmpty){
+    public void attackInConsole(boolean isOpponentTableEmpty) {
         if (turn > 2) {
             System.out.println("Choose a card to attack with");
             int cardNr = getInput();
@@ -463,7 +463,7 @@ public class GameEngine {
             Card card;
             if (choice == 1) {
                 card = getACardFromList(cardNr, currentPlayer.getPlayerHand());
-                if(card == null){
+                if (card == null) {
                     attackInConsole(isOpponentTableEmpty);
                     return;
                 }
@@ -475,8 +475,8 @@ public class GameEngine {
                     attackWithMagicCardInConsole(card, isOpponentTableEmpty);
                 }
             } else if (choice == 2) {
-                card = getACardFromList( cardNr, currentPlayer.getTableCards());
-                if(card == null){
+                card = getACardFromList(cardNr, currentPlayer.getTableCards());
+                if (card == null) {
                     attackInConsole(isOpponentTableEmpty);
                     return;
                 }
@@ -489,7 +489,7 @@ public class GameEngine {
         }
     }
 
-    public void attackWithMagicCardInConsole( Card card, boolean isOpponentTableEmpty){
+    public void attackWithMagicCardInConsole(Card card, boolean isOpponentTableEmpty) {
         if (card.getCardEnergy() <= currentPlayer.getPlayerEnergy()) {
             if (isOpponentTableEmpty) {
                 attackPlayerWhenTableEmpty(card);
@@ -505,7 +505,7 @@ public class GameEngine {
         }
     }
 
-    public void attackWithCreatureCardInConsole( CreatureCard card, boolean isOpponentTableEmpty){
+    public void attackWithCreatureCardInConsole(CreatureCard card, boolean isOpponentTableEmpty) {
         if (!checkIfTapped(card)) {
             if (isCardReadyToAttack(card)) {
                 if (isOpponentTableEmpty) {
@@ -523,11 +523,11 @@ public class GameEngine {
         }
     }
 
-    public Card getACardFromList(int cardNr, List<Card> cardList){
+    public Card getACardFromList(int cardNr, List<Card> cardList) {
         Card card = null;
         try {
             card = cardList.get(cardNr - 1);
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("That card doesn't exist. Try again.");
         }
         return card;
