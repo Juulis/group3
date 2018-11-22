@@ -283,6 +283,9 @@ public class GameEngine {
             Server.getInstance().msgToFX("tosoon");
         }
     }
+// *********************************************************************************************************************
+//    Why 2 attack methods that almost do the same thing. Combine perhaps?
+// *********************************************************************************************************************
 
     public void chooseAttack(Card selectedCard, List<CreatureCard> opponentCards) {
         String nameOfAttack = selectedCard.getSpecialAttack().toUpperCase();
@@ -356,6 +359,8 @@ public class GameEngine {
             }
         }
     }
+// *********************************************************************************************************************
+// *********************************************************************************************************************
 
     private void performBasicAttack(Card selectedCard) {
         System.out.println("Choose a card to attack");
