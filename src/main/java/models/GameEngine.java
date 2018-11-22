@@ -3,7 +3,6 @@ package models;
 import app.Server;
 import utilities.ScoreHandler;
 
-import java.io.IOException;
 import java.util.*;
 
 public class GameEngine {
@@ -440,41 +439,51 @@ public class GameEngine {
 
     public void playCard(){
         int playCard;
+        Card card;
         System.out.println("what card do you want to play out? (0 to cancel)");
         playCard = getInput();
         if (playCard == 0) {
             playerMenu();
         } else {
-            try {
-                Card card = currentPlayer.getPlayerHand().get(playCard - 1);
-                currentPlayer.playCard(card, getRound());
-            } catch (Exception e){
-                System.out.println("Wrong number. Try again.");
+            card = getACardFromList(playCard, currentPlayer.getPlayerHand());
+            if(card == null){
                 playCard();
+                return;
             }
+            currentPlayer.playCard(card, getRound());
         }
     }
 
     public void attackInConsole(boolean isOpponentTableEmpty){
         if (turn > 2) {
-            System.out.println("Attack with: 1. Magic card or 2. Creature");
-            int choice = getInput();
             System.out.println("Choose a card to attack with");
             int cardNr = getInput();
+            System.out.println("Attack with: 1. Magic card or 2. Creature");
+            int choice = getInput();
+            Card card;
             if (choice == 1) {
-                Card magicCard = currentPlayer.getPlayerHand().get(cardNr - 1);
-                if (!(magicCard instanceof MagicCard)) {
+                card = getACardFromList(cardNr, currentPlayer.getPlayerHand());
+                if(card == null){
+                    attackInConsole(isOpponentTableEmpty);
+                    return;
+                }
+                if (!(card instanceof MagicCard)) {
                     System.out.println("Wrong card. Try again");
+                    attackInConsole(isOpponentTableEmpty);
+                    return;
                 } else {
-                    attackWithMagicCardInConsole(magicCard, isOpponentTableEmpty);
+                    attackWithMagicCardInConsole(card, isOpponentTableEmpty);
                 }
             } else if (choice == 2) {
-                CreatureCard creatureCard = (CreatureCard) currentPlayer.getTableCards().get(cardNr - 1);
-                attackWithCreatureCardInConsole(creatureCard, isOpponentTableEmpty);
+                card = getACardFromList( cardNr, currentPlayer.getTableCards());
+                if(card == null){
+                    attackInConsole(isOpponentTableEmpty);
+                    return;
+                }
+                attackWithCreatureCardInConsole((CreatureCard) card, isOpponentTableEmpty);
             } else {
                 attackInConsole(isOpponentTableEmpty);
             }
-
         } else {
             System.out.println("You can't attack on the first round!");
         }
@@ -512,6 +521,16 @@ public class GameEngine {
                 System.out.println("Card is not ready to attack yet");
             }
         }
+    }
+
+    public Card getACardFromList(int cardNr, List<Card> cardList){
+        Card card = null;
+        try {
+            card = cardList.get(cardNr - 1);
+        } catch (Exception e){
+            System.out.println("That card doesn't exist. Try again.");
+        }
+        return card;
     }
 
     public int getInput() {
