@@ -259,9 +259,6 @@ public class GameEngine {
             Server.getInstance().msgToFX("tosoon");
         }
     }
-// *********************************************************************************************************************
-//    Why 2 attack methods that almost do the same thing. Combine perhaps?
-// *********************************************************************************************************************
 
     public void attackWithMagicCard(Card card, List<CreatureCard> opponentCards) {
         if (card.getCardEnergy() <= currentPlayer.getPlayerEnergy()) {
@@ -293,6 +290,9 @@ public class GameEngine {
         }
     }
 
+// *********************************************************************************************************************
+//    Why 2 attack methods that almost do the same thing. Combine perhaps?
+// *********************************************************************************************************************
     public void chooseAttack(Card selectedCard, List<CreatureCard> opponentCards) {
         String nameOfAttack = selectedCard.getSpecialAttack().toUpperCase();
         for (AttackNames attackName : AttackNames.values()) {
@@ -311,7 +311,6 @@ public class GameEngine {
                             server.msgToFX("Already ignited");
                         }
                         break;
-
                     case DUALATTACK:
                         try {
                             attacks.dualAttack((CreatureCard) selectedCard, opponentCards.get(0), opponentCards.get(1));
@@ -322,17 +321,18 @@ public class GameEngine {
                     case ATTACKALL:
                         attacks.attackAll(selectedCard, opponentPlayer.getTableCards());
                         break;
-
                     case PLAYERATTACK:
                         attacks.attackPlayer(selectedCard, opponentPlayer);
                         break;
-
                     default:
                         break;
                 }
             }
         }
     }
+
+    //TODO: Refactor chooseConsoleAttack and chooseAttack into 1 method...
+    //TODO: Add extra parameter that is passed in as null if called in console else opponentCard...
 
     public void chooseConsoleAttack(Card selectedCard) {
         String nameOfAttack = selectedCard.getSpecialAttack().toUpperCase();
@@ -342,23 +342,18 @@ public class GameEngine {
                     case BASIC:
                         performBasicAttack(selectedCard);
                         break;
-
                     case IGNITE:
                         performIgniteAttack(selectedCard);
                         break;
-
                     case DUALATTACK:
                         performDualAttack(selectedCard);
                         break;
-
                     case PLAYERATTACK:
                         attacks.attackPlayer(selectedCard, opponentPlayer);
                         break;
-
                     case ATTACKALL:
                         attacks.attackAll(selectedCard, opponentPlayer.getTableCards());
                         break;
-
                     default:
                         break;
                 }
@@ -367,7 +362,17 @@ public class GameEngine {
     }
 // *********************************************************************************************************************
 // *********************************************************************************************************************
-
+    // POSSIBLE SOLUTION!!!!
+//    private void performBasicAttack(Card selectedCard, CreatureCard creatureCard) {
+//        CreatureCard cardToAttack;
+//        if (creatureCard == null) {
+//            System.out.println("Choose a card to attack");
+//            cardToAttack = getCardToAttack();
+//        } else {
+//            cardToAttack = creatureCard;
+//        }
+//        attacks.basicAttack(selectedCard, cardToAttack);
+//    }
     private void performBasicAttack(Card selectedCard) {
         System.out.println("Choose a card to attack");
         CreatureCard cardToAttack = getCardToAttack();
