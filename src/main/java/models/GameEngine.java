@@ -4,6 +4,8 @@ import app.Server;
 import utilities.ScoreHandler;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class GameEngine {
 
@@ -291,39 +293,41 @@ public class GameEngine {
     }
 
     public void chooseAttack(Card selectedCard, List<CreatureCard> opponentCards) {
-        String nameOfAttack = selectedCard.getSpecialAttack().toUpperCase();
+        final String nameOfAttack = selectedCard.getSpecialAttack().toUpperCase();
+        boolean opponentTableEmpty = opponentPlayer.getTableCards().isEmpty();
+        System.out.println("OpponentTableEmpty: " + opponentTableEmpty);
         CreatureCard opponentCardOne = opponentCards == null || opponentCards.isEmpty() ? null : opponentCards.get(0);
         CreatureCard opponentCardTwo = opponentCards == null || opponentCards.size() < 2 ? null : opponentCards.get(1);
 
-        for (AttackNames attackName : AttackNames.values()) {
-            if (attackName.name().equals(nameOfAttack)) {
-                if (opponentPlayer.getTableCards().isEmpty())
-                    attackName = AttackNames.PLAYERATTACK;
-                switch (attackName) {
-                    case BASIC:
-                        performBasicAttack(selectedCard, opponentCardOne);
-                        break;
-                    case IGNITE:
-                        performIgniteAttack(selectedCard, opponentCardOne);
-                        break;
-                    case DUALATTACK:
-                        try {
-                            performDualAttack(selectedCard, opponentCardOne, opponentCardTwo);
-                        } catch (Exception e) {
-                            nameOfAttack = "playerattack";
-                        }
-                        break;
-                    case ATTACKALL:
-                        attacks.attackAll(selectedCard, opponentPlayer.getTableCards());
-                        break;
-                    case PLAYERATTACK:
-                        attacks.attackPlayer(selectedCard, opponentPlayer);
-                        break;
-                    default:
-                        break;
+        AttackNames attackName = opponentTableEmpty ? AttackNames.PLAYERATTACK : getAttackName(nameOfAttack);
+
+        switch (attackName) {
+            case BASIC:
+                performBasicAttack(selectedCard, opponentCardOne);
+                break;
+            case IGNITE:
+                performIgniteAttack(selectedCard, opponentCardOne);
+                break;
+            case DUALATTACK:
+                if (opponentPlayer.getTableCards().isEmpty()) {
+                    performPlayerAttack(selectedCard, opponentPlayer);
+                } else {
+                    performDualAttack(selectedCard, opponentCardOne, opponentCardTwo);
                 }
-            }
+                break;
+            case ATTACKALL:
+                attacks.attackAll(selectedCard, opponentPlayer.getTableCards());
+                break;
+            case PLAYERATTACK:
+                performPlayerAttack(selectedCard, opponentPlayer);
+                break;
+            default:
+                break;
         }
+    }
+
+    private AttackNames getAttackName(String nameOfAttack) {
+        return Stream.of(AttackNames.values()).filter(attack -> attack.name().equals(nameOfAttack)).findFirst().get();
     }
 
     private void performBasicAttack(Card selectedCard, CreatureCard creatureCard) {
@@ -338,6 +342,7 @@ public class GameEngine {
     }
 
     private void performIgniteAttack(Card selectedCard, CreatureCard creatureCard) {
+
         if (creatureCard == null) {
             performConsoleIgniteAttack(selectedCard);
         } else {
@@ -390,6 +395,10 @@ public class GameEngine {
 
     private void performFxDualAttack(Card selectedCard, CreatureCard cardToAttackOne, CreatureCard cardToAttackTwo) {
         attacks.dualAttack((CreatureCard) selectedCard, cardToAttackOne, cardToAttackTwo);
+    }
+
+    private void performPlayerAttack(Card selectedCard, Player opponentPlayer) {
+        attacks.attackPlayer(selectedCard, opponentPlayer);
     }
 
     private CreatureCard getCardToAttackConsole() {
