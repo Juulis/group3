@@ -290,30 +290,25 @@ public class GameEngine {
         }
     }
 
-// *********************************************************************************************************************
-//    Why 2 attack methods that almost do the same thing. Combine perhaps?
-// *********************************************************************************************************************
     public void chooseAttack(Card selectedCard, List<CreatureCard> opponentCards) {
         String nameOfAttack = selectedCard.getSpecialAttack().toUpperCase();
+        CreatureCard opponentCardOne = opponentCards == null || opponentCards.isEmpty() ? null : opponentCards.get(0);
+        CreatureCard opponentCardTwo = opponentCards == null || opponentCards.size() < 2 ? null : opponentCards.get(1);
+
         for (AttackNames attackName : AttackNames.values()) {
             if (attackName.name().equals(nameOfAttack)) {
                 if (opponentPlayer.getTableCards().isEmpty())
                     attackName = AttackNames.PLAYERATTACK;
                 switch (attackName) {
                     case BASIC:
-                        attacks.basicAttack(selectedCard, opponentCards.get(0));
+                        performBasicAttack(selectedCard, opponentCardOne);
                         break;
                     case IGNITE:
-                        //ignition attack will be last for 3 turns, every turn ignited card will takes damage by 2 points
-                        if (opponentCards.get(0).getIgnRoundCounter() == 0) {
-                            attacks.ignite(selectedCard, opponentCards.get(0));
-                        } else {
-                            server.msgToFX("Already ignited");
-                        }
+                        performIgniteAttack(selectedCard, opponentCardOne);
                         break;
                     case DUALATTACK:
                         try {
-                            attacks.dualAttack((CreatureCard) selectedCard, opponentCards.get(0), opponentCards.get(1));
+                            performDualAttack(selectedCard, opponentCardOne, opponentCardTwo);
                         } catch (Exception e) {
                             nameOfAttack = "playerattack";
                         }
@@ -331,76 +326,75 @@ public class GameEngine {
         }
     }
 
-    //TODO: Refactor chooseConsoleAttack and chooseAttack into 1 method...
-    //TODO: Add extra parameter that is passed in as null if called in console else opponentCard...
+    private void performBasicAttack(Card selectedCard, CreatureCard creatureCard) {
+        CreatureCard cardToAttack;
 
-    public void chooseConsoleAttack(Card selectedCard) {
-        String nameOfAttack = selectedCard.getSpecialAttack().toUpperCase();
-        for (AttackNames attackName : AttackNames.values()) {
-            if (attackName.name().equals(nameOfAttack)) {
-                switch (attackName) {
-                    case BASIC:
-                        performBasicAttack(selectedCard);
-                        break;
-                    case IGNITE:
-                        performIgniteAttack(selectedCard);
-                        break;
-                    case DUALATTACK:
-                        performDualAttack(selectedCard);
-                        break;
-                    case PLAYERATTACK:
-                        attacks.attackPlayer(selectedCard, opponentPlayer);
-                        break;
-                    case ATTACKALL:
-                        attacks.attackAll(selectedCard, opponentPlayer.getTableCards());
-                        break;
-                    default:
-                        break;
-                }
-            }
+        if (creatureCard == null) {
+            cardToAttack = getCardToAttackConsole();
+        } else {
+            cardToAttack = creatureCard;
         }
-    }
-// *********************************************************************************************************************
-// *********************************************************************************************************************
-    // POSSIBLE SOLUTION!!!!
-//    private void performBasicAttack(Card selectedCard, CreatureCard creatureCard) {
-//        CreatureCard cardToAttack;
-//        if (creatureCard == null) {
-//            System.out.println("Choose a card to attack");
-//            cardToAttack = getCardToAttack();
-//        } else {
-//            cardToAttack = creatureCard;
-//        }
-//        attacks.basicAttack(selectedCard, cardToAttack);
-//    }
-    private void performBasicAttack(Card selectedCard) {
-        System.out.println("Choose a card to attack");
-        CreatureCard cardToAttack = getCardToAttack();
         attacks.basicAttack(selectedCard, cardToAttack);
     }
 
-    private void performIgniteAttack(Card selectedCard) {
-        System.out.println("Choose a card to attack");
-        CreatureCard cardToAttack = getCardToAttack();
+    private void performIgniteAttack(Card selectedCard, CreatureCard creatureCard) {
+        if (creatureCard == null) {
+            performConsoleIgniteAttack(selectedCard);
+        } else {
+            performFxIgniteAttack(selectedCard, creatureCard);
+        }
+    }
 
-        if (cardToAttack.getIgnRoundCounter() == 0) {
+    private void performConsoleIgniteAttack(Card selectedCard) {
+        CreatureCard cardToAttack = getCardToAttackConsole();
+        boolean cardNotIgnited = cardToAttack.getIgnRoundCounter() == 0;
+
+        if (cardNotIgnited) {
             attacks.ignite(selectedCard, cardToAttack);
         } else {
             System.out.println("The targeted cart is already ignited");
         }
     }
 
-    private void performDualAttack(Card selectedCard) {
-        System.out.println("Choose two cards to attack");
-        CreatureCard attackedCard = getCardToAttack();
+    private void performFxIgniteAttack(Card selectedCard, CreatureCard cardToAttack) {
+        boolean cardNotIgnited = cardToAttack.getIgnRoundCounter() == 0;
 
-        if (opponentPlayer.getTableCards().size() >= 2) {
-            CreatureCard attackedCard2 = getCardToAttack();
-            attacks.dualAttack((CreatureCard) selectedCard, attackedCard, attackedCard2);
+        if (cardNotIgnited) {
+            attacks.ignite(selectedCard, cardToAttack);
         } else {
-            attacks.basicAttack(selectedCard, attackedCard);
+            server.msgToFX("Already ignited");
+        }
+    }
+
+    private void performDualAttack(Card selectedCard, CreatureCard cardToAttackOne, CreatureCard cardToAttackTwo) {
+        if (cardToAttackOne == null || cardToAttackTwo == null) {
+            performConsoleDualAttack(selectedCard);
+        } else {
+            performFxDualAttack(selectedCard, cardToAttackOne, cardToAttackTwo);
+        }
+    }
+
+    private void performConsoleDualAttack(Card selectedCard) {
+        System.out.println("Choose two cards to attack");
+        CreatureCard attackedCardOne = getCardToAttack();
+        boolean opponentTableHasTwoCards = opponentPlayer.getTableCards().size() >= 2;
+
+        if (opponentTableHasTwoCards) {
+            CreatureCard attackedCardTwo = getCardToAttack();
+            attacks.dualAttack((CreatureCard) selectedCard, attackedCardOne, attackedCardTwo);
+        } else {
+            attacks.basicAttack(selectedCard, attackedCardOne);
             attacks.attackPlayer(selectedCard, opponentPlayer);
         }
+    }
+
+    private void performFxDualAttack(Card selectedCard, CreatureCard cardToAttackOne, CreatureCard cardToAttackTwo) {
+        attacks.dualAttack((CreatureCard) selectedCard, cardToAttackOne, cardToAttackTwo);
+    }
+
+    private CreatureCard getCardToAttackConsole() {
+        System.out.println("Choose a card to attack");
+        return getCardToAttack();
     }
 
     private CreatureCard getCardToAttack() {
@@ -480,10 +474,10 @@ public class GameEngine {
 
     public void attackInConsole(boolean isOpponentTableEmpty) {
         if (turn > 2) {
-            System.out.println("Choose a card to attack with");
-            int cardNr = getInput();
             System.out.println("Attack with: 1. Magic card or 2. Creature");
             int choice = getInput();
+            System.out.println("Choose a card to attack with");
+            int cardNr = getInput();
             Card card;
             if (choice == 1) {
                 card = getACardFromList(cardNr, currentPlayer.getPlayerHand());
@@ -518,7 +512,7 @@ public class GameEngine {
             if (isOpponentTableEmpty) {
                 attackPlayerWhenTableEmpty(card);
             } else {
-                chooseConsoleAttack(card);
+                chooseAttack(card, null);
             }
             currentPlayer.sendToGraveyard(card);
             currentPlayer.setPlayerEnergy(currentPlayer.getPlayerEnergy() - card.getCardEnergy());
@@ -535,7 +529,7 @@ public class GameEngine {
                 if (isOpponentTableEmpty) {
                     attackPlayerWhenTableEmpty(card);
                 } else {
-                    chooseConsoleAttack(card);
+                    chooseAttack(card, null);
                     checkTableCardsHp(opponentPlayer);
                 }
                 checkAttackingCardHp(card);
