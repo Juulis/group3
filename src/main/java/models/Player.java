@@ -16,35 +16,20 @@ public class Player {
     private ArrayList<Card> playerHand;
     private ArrayList<Card> tableCards;
 
-    public Player() {
+
+
+//////////////////////////////////// CONSTRUCTOR \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+        public Player() {
         this.health = 20;
         this.currentDeck = new ArrayList<Card>();
         this.playerHand = new ArrayList<Card>();
         this.tableCards = new ArrayList<Card>();
     }
 
-    public int getHealth() {
-        return health;
-    }
 
-    public void setCurrentDeck(ArrayList<Card> gameCards) {
-        this.currentDeck = gameCards;
-    }
-
-    public ArrayList<Card> getCurrentDeck() {
-
-        return currentDeck;
-    }
-
-    public ArrayList<Card> getPlayerHand() {
-
-        return playerHand;
-    }
-
-    public ArrayList<Card> getTableCards() {
-
-        return tableCards;
-    }
+////////////////////////////////////// METHODS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
     /**
      * takes one card from players deck and
@@ -56,7 +41,6 @@ public class Player {
         int index = currentDeck.size() - 1;
         Card card = currentDeck.remove(index);
         playerHand.add(card);
-
         String playerHandString = null;
         playerHandString = Server.getInstance().getStringFromList(playerHand);
 
@@ -92,6 +76,7 @@ public class Player {
     public void playCard(Card card, int round) {
         if (tableCards.size() >= 7)
             return;
+
         try {
             if (card instanceof CreatureCard) {
                 if (card.getCardEnergy() <= playerEnergy) {
@@ -102,10 +87,8 @@ public class Player {
                     setPlayerEnergy(playerEnergy - card.getCardEnergy());
                 } else {
                     System.out.println("You don't have enough energy to play this card");
-                    try {
-                        Server.getInstance().msgToFX("showmessage,not enough energy");
-                    } catch (Exception e) {
-                    }
+
+                    tryCatchNotEnoughEnergy("showmessage not enough energy");
                 }
             } else {
                 System.out.println("magic card cant be played");
@@ -122,12 +105,41 @@ public class Player {
      */
     public void removeHp(int healthToRemove) {
         this.health -= healthToRemove;
+      tryCatchRemoveHp("playerhp,");
+    }
+
+
+
+///////////////////////////////////// TRY CATCH METHODS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+    public void tryCatchPlayerEnergy(String msg){
         try {
-            Server.getInstance().msgToFX("playerhp," + player + "," + Integer.toString(health));
-        } catch (Exception e) {
+            Server.getInstance().msgToFX(msg + player+"," + playerEnergy);
+        }catch (Exception e){
+
+        }
+    }
+    public void tryCatchRemoveHp(String msg){
+        try {
+            Server.getInstance().msgToFX(msg + player + "," + Integer.toString(health));
+        }catch (Exception e){
+
         }
     }
 
+    public void tryCatchNotEnoughEnergy(String msg){
+        try {
+            Server.getInstance().msgToFX(msg);
+        }catch (Exception e){
+
+        }
+    }
+
+
+
+/////////////////////////////////////// GETTERS AND SETTERS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
     public String getName() {
         return name;
     }
@@ -154,9 +166,32 @@ public class Player {
 
     public void setPlayerEnergy(int playerEnergy) {
         this.playerEnergy = playerEnergy;
-        try {
-            Server.getInstance().msgToFX("updatemana," + player + "," + playerEnergy);
-        } catch (Exception e) {
-        }
+
+        tryCatchPlayerEnergy("updatemana,");
     }
+    public int getHealth() {
+        return health;
+    }
+
+    public void setCurrentDeck(ArrayList<Card> gameCards) {
+        this.currentDeck = gameCards;
+    }
+
+    public ArrayList<Card> getCurrentDeck() {
+
+        return currentDeck;
+    }
+
+    public ArrayList<Card> getPlayerHand() {
+
+        return playerHand;
+    }
+
+    public ArrayList<Card> getTableCards() {
+
+        return tableCards;
+    }
+
+
+
 }
