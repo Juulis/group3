@@ -33,7 +33,7 @@ public class CreatureCard extends Card {
 
     public void removeHp(int dmg) {
         this.hp -= dmg;
-        tryCatchForRemoveHp("cardhp");
+        msgToFx("cardhp," + id + "," + hp);
     }
 
     public void increaseIgnRoundCounter() {
@@ -50,21 +50,21 @@ public class CreatureCard extends Card {
 
     public boolean isTapped() {
         if (tapped) {
-            tryCatchForTapped("tapped");
+            msgToFx("tapped," + id);
         } else {
-            tryCatchForTapped("untap");
+            msgToFx("untap," + id);
         }
         return tapped;
     }
 
     public void tap() {
         this.tapped = true;
-        tryCatchForTapped("tapped");
+        msgToFx("tapped," + id);
     }
 
     public void unTap() {
         this.tapped = false;
-        tryCatchForTapped("untap");
+        msgToFx("untap," + id);
     }
 
     public int getPlayedOnRound() {
@@ -75,17 +75,11 @@ public class CreatureCard extends Card {
         this.playedOnRound = playedOnRound;
     }
 
-    public void tryCatchForTapped(String msg) {
+    public void msgToFx(String msg) {
         try {
-            Server.getInstance().msgToFX(msg + "," + id);
-        } catch (Exception e) {
-        }
-    }
-
-    public void tryCatchForRemoveHp(String msg) {
-        try {
-            Server.getInstance().msgToFX(msg + "," + id + "," + hp);
+            Server.getInstance().msgToFX(msg);
         } catch (Exception e) {
         }
     }
 }
+
