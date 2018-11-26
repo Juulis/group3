@@ -12,12 +12,12 @@ public class Attack {
         int giveDmg = currentPlayerCard.getAttack()-opponentCard.getDefence();
         if(giveDmg < 0)
             giveDmg = 0;
-        int takeDmg = opponentCard.getAttack();
-        if(takeDmg < 0)
-            takeDmg = 0;
         opponentCard.removeHp(giveDmg);
         if(currentPlayerCard.getClass() == CreatureCard.class){
-            ((CreatureCard)currentPlayerCard).removeHp(takeDmg-((CreatureCard) currentPlayerCard).getDefence());
+            int takeDmg = opponentCard.getAttack() - ((CreatureCard) currentPlayerCard).getDefence();
+            if(takeDmg < 0)
+                takeDmg = 0;
+            ((CreatureCard)currentPlayerCard).removeHp(takeDmg);
         }
     }
 
