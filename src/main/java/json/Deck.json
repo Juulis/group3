@@ -376,7 +376,7 @@
   {
     "name": "Vilestrike",
     "hp": 5,
-    "attack": 3,
+    "attack": 4,
     "defence": 3,
     "power": 0,
     "cardEnergy": 1,
@@ -387,7 +387,7 @@
   {
     "name": "Vilestrike",
     "hp": 5,
-    "attack": 3,
+    "attack": 4,
     "defence": 3,
     "power": 0,
     "cardEnergy": 1,
@@ -398,7 +398,7 @@
   {
     "name": "Vilestrike",
     "hp": 5,
-    "attack": 3,
+    "attack": 4,
     "defence": 3,
     "power": 0,
     "cardEnergy": 1,
@@ -409,7 +409,7 @@
   {
     "name": "Vilestrike",
     "hp": 5,
-    "attack": 3,
+    "attack": 4,
     "defence": 3,
     "power": 0,
     "cardEnergy": 1,
@@ -420,7 +420,7 @@
   {
     "name": "Vilestrike",
     "hp": 5,
-    "attack": 3,
+    "attack": 4,
     "defence": 3,
     "power": 0,
     "cardEnergy": 1,
@@ -431,7 +431,7 @@
   {
     "name": "Vilestrike",
     "hp": 5,
-    "attack": 3,
+    "attack": 4,
     "defence": 3,
     "power": 0,
     "cardEnergy": 1,
@@ -442,7 +442,7 @@
   {
     "name": "Vilestrike",
     "hp": 5,
-    "attack": 3,
+    "attack": 4,
     "defence": 3,
     "power": 0,
     "cardEnergy": 1,
@@ -453,7 +453,7 @@
   {
     "name": "Vilestrike",
     "hp": 5,
-    "attack": 3,
+    "attack": 4,
     "defence": 3,
     "power": 0,
     "cardEnergy": 1,
@@ -464,10 +464,10 @@
   {
     "name": "Frostbeing",
     "hp": 6,
-    "attack": 4,
+    "attack": 6,
     "defence": 4,
     "power": 1,
-    "cardEnergy": 2,
+    "cardEnergy": 3,
     "specialAttack": "basic",
     "magicCard": 0,
     "imgURL": "/cardpics/Card9.png"
@@ -475,10 +475,10 @@
   {
     "name": "Frostbeing",
     "hp": 6,
-    "attack": 4,
+    "attack": 6,
     "defence": 4,
     "power": 1,
-    "cardEnergy": 2,
+    "cardEnergy": 3,
     "specialAttack": "basic",
     "magicCard": 0,
     "imgURL": "/cardpics/Card9.png"
@@ -486,10 +486,10 @@
   {
     "name": "Frostbeing",
     "hp": 6,
-    "attack": 4,
+    "attack": 6,
     "defence": 4,
     "power": 1,
-    "cardEnergy": 2,
+    "cardEnergy": 3,
     "specialAttack": "basic",
     "magicCard": 0,
     "imgURL": "/cardpics/Card9.png"
@@ -497,10 +497,10 @@
   {
     "name": "Frostbeing",
     "hp": 6,
-    "attack": 4,
+    "attack": 6,
     "defence": 4,
     "power": 1,
-    "cardEnergy": 2,
+    "cardEnergy": 3,
     "specialAttack": "basic",
     "magicCard": 0,
     "imgURL": "/cardpics/Card9.png"
@@ -508,10 +508,10 @@
   {
     "name": "Frostbeing",
     "hp": 6,
-    "attack": 4,
+    "attack": 6,
     "defence": 4,
     "power": 1,
-    "cardEnergy": 2,
+    "cardEnergy": 3,
     "specialAttack": "basic",
     "magicCard": 0,
     "imgURL": "/cardpics/Card9.png"
@@ -519,10 +519,10 @@
   {
     "name": "Frostbeing",
     "hp": 6,
-    "attack": 4,
+    "attack": 6,
     "defence": 4,
     "power": 1,
-    "cardEnergy": 2,
+    "cardEnergy": 3,
     "specialAttack": "basic",
     "magicCard": 0,
     "imgURL": "/cardpics/Card9.png"
@@ -530,10 +530,10 @@
   {
     "name": "Frostbeing",
     "hp": 6,
-    "attack": 4,
+    "attack": 6,
     "defence": 4,
     "power": 1,
-    "cardEnergy": 2,
+    "cardEnergy": 3,
     "specialAttack": "basic",
     "magicCard": 0,
     "imgURL": "/cardpics/Card9.png"
@@ -541,10 +541,10 @@
   {
     "name": "Frostbeing",
     "hp": 6,
-    "attack": 4,
+    "attack": 6,
     "defence": 4,
     "power": 1,
-    "cardEnergy": 2,
+    "cardEnergy": 3,
     "specialAttack": "basic",
     "magicCard": 0,
     "imgURL": "/cardpics/Card9.png"
