@@ -47,7 +47,7 @@ class ScoreHandlerTest {
         Highscore[] highscores = scoreHandler.readHighscoresFromJSON();
         int minScore = highscores[highscores.length-1].getScore();
         when(pMock.getName()).thenReturn("Peter");
-        when(pMock.getScore()).thenReturn(165);
+        when(pMock.getScore()).thenReturn(minScore + 1);
         scoreHandler.saveHighscore(pMock);
         highscores = scoreHandler.readHighscoresFromJSON();
         int newMinScore = highscores[highscores.length-1].getScore();
