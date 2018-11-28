@@ -33,15 +33,7 @@ public class Main extends Application {
         Server.getInstance().setTvc(tvc,primaryStage);
     }
 
-    public static void main(String[] args) throws IOException {
-        System.out.println("1. for FX\n2. for Console");
-        Scanner sc = new Scanner(System.in);
-        int choice = sc.nextInt();
-        if (choice == 1) {
+    public static void main(String[] args) {
             launch(args);
-        } else if (choice == 2) {
-            GameEngine game = new GameEngine();
-            game.startGame("console");
-        }
     }
 }
